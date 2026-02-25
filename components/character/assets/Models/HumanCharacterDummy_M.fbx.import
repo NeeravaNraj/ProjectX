@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://bwwx5vrb3wfjh"
-path="res://.godot/imported/HumanCharacterDummy_M.fbx-c7086c5b84f9022dd21263be4ca43ab6.scn"
+path="res://.godot/imported/HumanCharacterDummy_M.fbx-6a66de3f84faa5eed7d528f86e54318d.scn"
 
 [deps]
 
-source_file="res://assets/character/Models/HumanCharacterDummy_M.fbx"
-dest_files=["res://.godot/imported/HumanCharacterDummy_M.fbx-c7086c5b84f9022dd21263be4ca43ab6.scn"]
+source_file="res://components/character/assets/Models/HumanCharacterDummy_M.fbx"
+dest_files=["res://.godot/imported/HumanCharacterDummy_M.fbx-6a66de3f84faa5eed7d528f86e54318d.scn"]
 
 [params]
 

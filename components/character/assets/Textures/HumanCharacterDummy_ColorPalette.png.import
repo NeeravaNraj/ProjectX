@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bpjrwv4eq4mto"
-path="res://.godot/imported/HumanCharacterDummy_ColorPalette.png-03278a23a51d74ff4c552af368fcf422.ctex"
+path="res://.godot/imported/HumanCharacterDummy_ColorPalette.png-d9db84eaf45b3e41e4b7803f1f9279a6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/character/Textures/HumanCharacterDummy_ColorPalette.png"
-dest_files=["res://.godot/imported/HumanCharacterDummy_ColorPalette.png-03278a23a51d74ff4c552af368fcf422.ctex"]
+source_file="res://components/character/assets/Textures/HumanCharacterDummy_ColorPalette.png"
+dest_files=["res://.godot/imported/HumanCharacterDummy_ColorPalette.png-d9db84eaf45b3e41e4b7803f1f9279a6.ctex"]
 
 [params]
 

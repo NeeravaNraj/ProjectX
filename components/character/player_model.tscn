@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://m5f1a0cea6rd"]
+
+[ext_resource type="PackedScene" uid="uid://bwwx5vrb3wfjh" path="res://components/character/assets/Models/HumanCharacterDummy_M.fbx" id="1_0ljky"]
+
+[node name="HumanCharacterDummy_M" unique_id=1260302797 instance=ExtResource("1_0ljky")]
