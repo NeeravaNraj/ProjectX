@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://dil3ijsq5pmlq"]
+
+[ext_resource type="Script" uid="uid://ctctxwt2fa2di" path="res://components/primitives/movement/velocity.gd" id="1_b3n28"]
+
+[node name="Velocity" type="Node" unique_id=1034921754]
+script = ExtResource("1_b3n28")
+max_speed = 0.0

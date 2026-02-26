@@ -1,6 +1,8 @@
 [gd_scene format=3 uid="uid://chnlwpgv4jjbn"]
 
 [ext_resource type="Script" uid="uid://d1gc3n43os8em" path="res://components/character/player.gd" id="1_knl4b"]
+[ext_resource type="PackedScene" uid="uid://dil3ijsq5pmlq" path="res://components/primitives/movement/velocity.tscn" id="2_b1s2y"]
+[ext_resource type="PackedScene" uid="uid://id84t5a0ya2y" path="res://components/primitives/movement/player_control.tscn" id="3_eti3u"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_pgqh4"]
 radius = 0.3
@@ -25,3 +27,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6944885, 0)
 
 [node name="Camera" type="Camera3D" parent="CameraPivot" unique_id=777665774]
 unique_name_in_owner = true
+
+[node name="Velocity" parent="." unique_id=1034921754 instance=ExtResource("2_b1s2y")]
+unique_name_in_owner = true
+max_speed = 8.0
+acceleration_coef = 15.0
+
+[node name="PlayerControl" parent="Velocity" unique_id=514334726 instance=ExtResource("3_eti3u")]

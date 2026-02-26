@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="WeaponSystem"
+config/name="ProjectX"
 run/main_scene="uid://gq8s3rdkgjx5"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"

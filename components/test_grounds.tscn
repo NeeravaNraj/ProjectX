@@ -46,6 +46,17 @@ mesh = SubResource("BoxMesh_pnrv2")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.146235, 6.852412)
 shape = SubResource("BoxShape3D_1u13v")
 
+[node name="StaticBody3D3" type="StaticBody3D" parent="." unique_id=1709403856]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.233376, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D3" unique_id=747359105]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.146235, 6.852412)
+mesh = SubResource("BoxMesh_pnrv2")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D3" unique_id=1771310159]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.146235, 6.852412)
+shape = SubResource("BoxShape3D_1u13v")
+
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=939228365]
 transform = Transform3D(1, 0, 0, 0, 0.6640828, 0.747659, 0, -0.747659, 0.6640828, 0, 19.48669, 28.69703)
 light_energy = 0.852

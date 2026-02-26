@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://id84t5a0ya2y"]
+
+[ext_resource type="Script" uid="uid://cyumrg1fjsnir" path="res://components/primitives/movement/player_control.gd" id="1_sfstu"]
+
+[node name="PlayerControl" type="Node" unique_id=514334726]
+script = ExtResource("1_sfstu")
