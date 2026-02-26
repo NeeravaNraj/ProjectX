@@ -11,9 +11,13 @@ config_version=5
 [application]
 
 config/name="ProjectX"
-run/main_scene="uid://gq8s3rdkgjx5"
+run/main_scene="uid://cqkdv40k1wg62"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
+
+[display]
+
+window/vsync/vsync_mode=0
 
 [input]
 

@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://gq8s3rdkgjx5"]
 
-[ext_resource type="PackedScene" uid="uid://chnlwpgv4jjbn" path="res://components/character/player.tscn" id="1_4bp7h"]
-[ext_resource type="PackedScene" uid="uid://81vfh6cx30ni" path="res://components/enemy/enemy.tscn" id="2_pnrv2"]
+[ext_resource type="PackedScene" uid="uid://chnlwpgv4jjbn" path="res://components/character/player.tscn" id="1_5b623"]
+[ext_resource type="PackedScene" uid="uid://81vfh6cx30ni" path="res://components/enemy/enemy.tscn" id="2_h5kbx"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_pnrv2"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_5b623"]
 size = Vector3(30, 1, 30)
 
 [sub_resource type="BoxMesh" id="BoxMesh_1pwvt"]
@@ -19,20 +19,20 @@ material = SubResource("StandardMaterial3D_4bp7h")
 
 [node name="TestGrounds" type="Node3D" unique_id=914008392]
 
-[node name="Player" parent="." unique_id=1186516781 instance=ExtResource("1_4bp7h")]
+[node name="Player" parent="." unique_id=1186516781 instance=ExtResource("1_5b623")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5160117, 0)
 
-[node name="Enemy" parent="." unique_id=281801696 node_paths=PackedStringArray("world") instance=ExtResource("2_pnrv2")]
+[node name="Enemy" parent="." unique_id=281801696 node_paths=PackedStringArray("world") instance=ExtResource("2_h5kbx")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.646647, 1.506925, 0)
 world = NodePath("..")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1897176082]
+[node name="Floor" type="StaticBody3D" parent="." unique_id=1897176082]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=1768413376]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor" unique_id=1768413376]
 transform = Transform3D(1.0000001, 0, 0, 0, 1, 0, 0, 0, 1.0000001, 0, 0, 0)
-shape = SubResource("BoxShape3D_pnrv2")
+shape = SubResource("BoxShape3D_5b623")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D" unique_id=1588583536]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor" unique_id=1588583536]
 transform = Transform3D(1.0000001, 0, 0, 0, 1, 0, 0, 0, 1.0000001, 0, 0, 0)
 mesh = SubResource("BoxMesh_1pwvt")
 

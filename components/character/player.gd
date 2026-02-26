@@ -1,7 +1,7 @@
 extends CharacterBody3D
 
 @export_group("Camera")
-@export_range(0.0, 1.0) var mouse_sens := 0.25
+@export_range(0.0, 1.0) var mouse_sens := 0.75
 
 @export_group("Movement")
 @export var jump_power := 8.0

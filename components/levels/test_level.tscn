@@ -1,0 +1,87 @@
+[gd_scene format=3 uid="uid://cqkdv40k1wg62"]
+
+[ext_resource type="PackedScene" uid="uid://chnlwpgv4jjbn" path="res://components/character/player.tscn" id="1_1mtom"]
+
+[sub_resource type="Environment" id="Environment_1mtom"]
+background_energy_multiplier = 2.1
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_jkjpr"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1mtom"]
+
+[node name="TestLevel" type="Node3D" unique_id=379384066]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=592416932]
+environment = SubResource("Environment_1mtom")
+
+[node name="EnemyNavigationRegion" type="NavigationRegion3D" parent="." unique_id=168509107]
+navigation_mesh = SubResource("NavigationMesh_jkjpr")
+
+[node name="CSGBoxes" type="Node3D" parent="." unique_id=1200559265]
+
+[node name="Wall1" type="CSGBox3D" parent="CSGBoxes" unique_id=1969706077]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -12, 2, -10)
+use_collision = true
+size = Vector3(5, 4, 1)
+material = SubResource("StandardMaterial3D_1mtom")
+
+[node name="Wall2" type="CSGBox3D" parent="CSGBoxes" unique_id=2105813452]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 2, 0)
+use_collision = true
+size = Vector3(5, 4, 1)
+material = SubResource("StandardMaterial3D_1mtom")
+
+[node name="Wall3" type="CSGBox3D" parent="CSGBoxes" unique_id=2028626983]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 2, 5)
+use_collision = true
+size = Vector3(5, 4, 1)
+material = SubResource("StandardMaterial3D_1mtom")
+
+[node name="Wall4" type="CSGBox3D" parent="CSGBoxes" unique_id=325116983]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 2, -5)
+use_collision = true
+size = Vector3(5, 4, 1)
+material = SubResource("StandardMaterial3D_1mtom")
+
+[node name="Wall5" type="CSGBox3D" parent="CSGBoxes" unique_id=1958253140]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 2, -10)
+use_collision = true
+size = Vector3(5, 4, 1)
+material = SubResource("StandardMaterial3D_1mtom")
+
+[node name="Wall6" type="CSGBox3D" parent="CSGBoxes" unique_id=1315331011]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -12, 2, -5)
+use_collision = true
+size = Vector3(5, 4, 1)
+material = SubResource("StandardMaterial3D_1mtom")
+
+[node name="Wall7" type="CSGBox3D" parent="CSGBoxes" unique_id=73528098]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -12, 2, 0)
+use_collision = true
+size = Vector3(5, 4, 1)
+material = SubResource("StandardMaterial3D_1mtom")
+
+[node name="Wall8" type="CSGBox3D" parent="CSGBoxes" unique_id=591553558]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -12, 2, 5)
+use_collision = true
+size = Vector3(5, 4, 1)
+material = SubResource("StandardMaterial3D_1mtom")
+
+[node name="Wall9" type="CSGBox3D" parent="CSGBoxes" unique_id=1371188483]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -12, 2, 10)
+use_collision = true
+size = Vector3(5, 4, 1)
+material = SubResource("StandardMaterial3D_1mtom")
+
+[node name="Floor" type="CSGBox3D" parent="CSGBoxes" unique_id=1176804906]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+use_collision = true
+size = Vector3(25, 1, 25)
+material = SubResource("StandardMaterial3D_1mtom")
+
+[node name="Player" parent="." unique_id=1186516781 instance=ExtResource("1_1mtom")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 1, -10)
+
+[node name="Sun" type="DirectionalLight3D" parent="." unique_id=554838910]
+transform = Transform3D(0.70710677, 0.3535534, 0.6123724, 0, -0.8660254, 0.50000006, 0.70710677, -0.3535534, -0.6123724, 0, 7, 0)
+shadow_enabled = true
