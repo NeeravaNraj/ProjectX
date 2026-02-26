@@ -30,7 +30,8 @@ unique_name_in_owner = true
 
 [node name="Velocity" parent="." unique_id=1034921754 instance=ExtResource("2_b1s2y")]
 unique_name_in_owner = true
-max_speed = 8.0
+max_speed = 6.0
 acceleration_coef = 15.0
+deceleration_coef = 30.0
 
 [node name="PlayerControl" parent="Velocity" unique_id=514334726 instance=ExtResource("3_eti3u")]
