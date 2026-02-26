@@ -2,24 +2,27 @@
 
 [ext_resource type="Script" uid="uid://d1gc3n43os8em" path="res://components/character/player.gd" id="1_knl4b"]
 [ext_resource type="PackedScene" uid="uid://dil3ijsq5pmlq" path="res://components/primitives/movement/velocity.tscn" id="2_b1s2y"]
+[ext_resource type="PackedScene" uid="uid://dgm4u8srpwll1" path="res://components/weapon/katana.tscn" id="2_gie0d"]
 [ext_resource type="PackedScene" uid="uid://id84t5a0ya2y" path="res://components/primitives/movement/player_control.tscn" id="3_eti3u"]
 
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_pgqh4"]
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_knl4b"]
 radius = 0.3
 height = 1.9
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_knl4b"]
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_pgqh4"]
 radius = 0.3
 height = 1.9
 
 [node name="Player" type="CharacterBody3D" unique_id=1186516781]
 script = ExtResource("1_knl4b")
 
-[node name="Body" type="MeshInstance3D" parent="." unique_id=2057104036]
-mesh = SubResource("CapsuleMesh_pgqh4")
-
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1348553797]
 shape = SubResource("CapsuleShape3D_knl4b")
+
+[node name="Model" type="Node3D" parent="." unique_id=247778809]
+
+[node name="Body" type="MeshInstance3D" parent="Model" unique_id=2057104036]
+mesh = SubResource("CapsuleMesh_pgqh4")
 
 [node name="CameraPivot" type="Node3D" parent="." unique_id=1361904912]
 unique_name_in_owner = true
@@ -28,9 +31,15 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6944885, 0)
 [node name="Camera" type="Camera3D" parent="CameraPivot" unique_id=777665774]
 unique_name_in_owner = true
 
+[node name="Weaponary" type="Node3D" parent="." unique_id=1708920944]
+
+[node name="Katana" parent="Weaponary" unique_id=1156992332 instance=ExtResource("2_gie0d")]
+transform = Transform3D(-0.09646627, -0.9636583, -0.2491126, 0.83487564, 0.0579276, -0.547382, 0.54191965, -0.2607819, 0.79894686, 0.6049503, 0.48512423, -0.98595005)
+
 [node name="Velocity" parent="." unique_id=1034921754 instance=ExtResource("2_b1s2y")]
 unique_name_in_owner = true
-max_speed = 8.0
+max_speed = 6.0
 acceleration_coef = 15.0
+deceleration_coef = 30.0
 
 [node name="PlayerControl" parent="Velocity" unique_id=514334726 instance=ExtResource("3_eti3u")]

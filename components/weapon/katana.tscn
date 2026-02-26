@@ -1,0 +1,41 @@
+[gd_scene format=3 uid="uid://dgm4u8srpwll1"]
+
+[ext_resource type="Script" uid="uid://wfqsuwq6q4ld" path="res://components/weapon/katana.gd" id="1_jm7iv"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_plcji"]
+metallic = 0.9
+roughness = 0.1
+
+[sub_resource type="BoxMesh" id="BoxMesh_7b0v6"]
+material = SubResource("StandardMaterial3D_plcji")
+size = Vector3(0.05, 0.02, 0.8)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qph5t"]
+albedo_color = Color(1, 1, 0.39215687, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_4kd7w"]
+material = SubResource("StandardMaterial3D_qph5t")
+size = Vector3(0.1, 0.05, 0.02)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mkt37"]
+albedo_color = Color(0.15, 0.15, 0.15, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ld5tu"]
+material = SubResource("StandardMaterial3D_mkt37")
+size = Vector3(0.05, 0.02, 0.2)
+
+[node name="Katana" type="Node3D" unique_id=1156992332]
+script = ExtResource("1_jm7iv")
+
+[node name="Model" type="Node3D" parent="." unique_id=1794460968]
+
+[node name="Blade" type="MeshInstance3D" parent="Model" unique_id=15180814]
+mesh = SubResource("BoxMesh_7b0v6")
+
+[node name="Hilt" type="MeshInstance3D" parent="Model" unique_id=1678912546]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.41214007)
+mesh = SubResource("BoxMesh_4kd7w")
+
+[node name="Handle" type="MeshInstance3D" parent="Model" unique_id=352267174]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.5034061)
+mesh = SubResource("BoxMesh_ld5tu")

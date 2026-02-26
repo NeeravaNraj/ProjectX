@@ -4,13 +4,12 @@ extends CharacterBody3D
 @export_range(0.0, 1.0) var mouse_sens := 0.75
 
 @export_group("Movement")
-@export var jump_power := 8.0
+@export var jump_power := 10.0
 
 @onready var _camera: Camera3D = %Camera
 @onready var _camera_pivot: Node3D = %CameraPivot
 @onready var _velocity: VelocityComponent = %Velocity
 
-var _gravity := -30.0
 var _camera_input_direction := Vector2.ZERO
 var _last_movement_direction := Vector3.BACK
 
