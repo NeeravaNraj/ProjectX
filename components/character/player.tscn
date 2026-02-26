@@ -13,6 +13,8 @@ height = 1.9
 radius = 0.3
 height = 1.9
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_gie0d"]
+
 [node name="Player" type="CharacterBody3D" unique_id=1186516781]
 script = ExtResource("1_knl4b")
 
@@ -33,8 +35,10 @@ unique_name_in_owner = true
 
 [node name="Weaponary" type="Node3D" parent="." unique_id=1708920944]
 
-[node name="Katana" parent="Weaponary" unique_id=1156992332 instance=ExtResource("2_gie0d")]
+[node name="Katana" parent="Weaponary" unique_id=1156992332 node_paths=PackedStringArray("attack_area", "attack_area_shape") instance=ExtResource("2_gie0d")]
 transform = Transform3D(-0.09646627, -0.9636583, -0.2491126, 0.83487564, 0.0579276, -0.547382, 0.54191965, -0.2607819, 0.79894686, 0.6049503, 0.48512423, -0.98595005)
+attack_area = NodePath("../../Area3D")
+attack_area_shape = NodePath("../../Area3D/CollisionShape3D")
 
 [node name="Velocity" parent="." unique_id=1034921754 instance=ExtResource("2_b1s2y")]
 unique_name_in_owner = true
@@ -43,3 +47,9 @@ acceleration_coef = 15.0
 deceleration_coef = 30.0
 
 [node name="PlayerControl" parent="Velocity" unique_id=514334726 instance=ExtResource("3_eti3u")]
+
+[node name="Area3D" type="Area3D" parent="." unique_id=1011444992]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.32253122, -1.3072433)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=1166820792]
+shape = SubResource("BoxShape3D_gie0d")
