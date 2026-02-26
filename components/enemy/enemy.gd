@@ -1,4 +1,4 @@
-extends RigidBody3D
+class_name Enemy extends CharacterBody3D
 
 
 @export var world: Node3D
@@ -6,7 +6,7 @@ extends RigidBody3D
 
 
 func _ready() -> void:
-	pass # Replace with function body.
+	pass
 
 func _process(delta: float) -> void:
 	var player_pos = _get_player_position()

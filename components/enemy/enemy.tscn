@@ -14,7 +14,7 @@ height = 1.8
 radius = 0.4
 height = 1.8
 
-[node name="Enemy" type="RigidBody3D" unique_id=281801696]
+[node name="Enemy" type="CharacterBody3D" unique_id=968669852]
 script = ExtResource("1_q6usr")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1925729111]
