@@ -1,13 +1,15 @@
 [gd_scene format=3 uid="uid://cqkdv40k1wg62"]
 
 [ext_resource type="PackedScene" uid="uid://chnlwpgv4jjbn" path="res://components/character/player.tscn" id="1_1mtom"]
+[ext_resource type="Texture2D" uid="uid://45ps2ymypjoe" path="res://assets/kenney_prototype-textures/PNG/Red/texture_09.png" id="1_f0lhf"]
 
 [sub_resource type="Environment" id="Environment_1mtom"]
-background_energy_multiplier = 2.1
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_jkjpr"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1mtom"]
+albedo_texture = ExtResource("1_f0lhf")
+roughness = 0.8
 
 [node name="TestLevel" type="Node3D" unique_id=379384066]
 
@@ -84,4 +86,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 1, -10)
 
 [node name="Sun" type="DirectionalLight3D" parent="." unique_id=554838910]
 transform = Transform3D(0.70710677, 0.3535534, 0.6123724, 0, -0.8660254, 0.50000006, 0.70710677, -0.3535534, -0.6123724, 0, 7, 0)
+light_energy = 0.7
 shadow_enabled = true
