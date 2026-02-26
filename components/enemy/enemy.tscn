@@ -1,6 +1,8 @@
 [gd_scene format=3 uid="uid://81vfh6cx30ni"]
 
 [ext_resource type="Script" uid="uid://crrhu2aidppwn" path="res://components/enemy/enemy.gd" id="1_q6usr"]
+[ext_resource type="PackedScene" uid="uid://by4md02ke1buj" path="res://components/primitives/health/hurt_box.tscn" id="2_8ajy2"]
+[ext_resource type="PackedScene" uid="uid://b8xoyf57pebhr" path="res://components/primitives/health/health.tscn" id="2_mdji8"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8ajy2"]
 albedo_color = Color(1, 0.43, 0.43, 1)
@@ -14,7 +16,12 @@ height = 1.8
 radius = 0.4
 height = 1.8
 
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_mdji8"]
+radius = 0.4
+height = 1.8
+
 [node name="Enemy" type="CharacterBody3D" unique_id=968669852]
+collision_layer = 2
 script = ExtResource("1_q6usr")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1925729111]
@@ -22,3 +29,15 @@ mesh = SubResource("CapsuleMesh_mdji8")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=168668276]
 shape = SubResource("CapsuleShape3D_xlq87")
+
+[node name="Health" parent="." unique_id=1496712029 instance=ExtResource("2_mdji8")]
+health = 100
+
+[node name="HurtBox" parent="." unique_id=1716786986 node_paths=PackedStringArray("health_component") instance=ExtResource("2_8ajy2")]
+collision_layer = 2
+health_component = NodePath("../Health")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HurtBox" unique_id=1675923040]
+shape = SubResource("CapsuleShape3D_mdji8")
+
+[connection signal="damaged" from="Health" to="." method="_on_health_damaged"]

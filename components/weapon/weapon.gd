@@ -9,8 +9,20 @@ class_name Weapon extends Node
 
 var _can_attack := true
 
+# TODO: temporary
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("left_click"):
+		attack()
+
 func attack():
 	if not _can_attack: return
+	
+	for body in attack_area.get_overlapping_bodies():
+		# TODO: hurt box shit
+		print(body)
+		pass
+	
+	start_timer()
 	
 func start_timer():
 	_can_attack = false

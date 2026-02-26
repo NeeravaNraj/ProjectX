@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://etn615pvnkve"]
+
+[ext_resource type="Script" uid="uid://bey1gqjrdoeo1" path="res://components/primitives/health/hitbox.gd" id="1_xyqpr"]
+
+[node name="HitBox" type="Area3D" unique_id=764278289]
+script = ExtResource("1_xyqpr")
+
+[connection signal="area_entered" from="." to="." method="_on_hurtbox_entered"]
