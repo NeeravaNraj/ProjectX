@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://cjk8sauqxur5r"]
+
+[ext_resource type="Texture2D" uid="uid://bxf752abl0xdv" path="res://assets/grapple_point.png" id="1_i28ss"]
+[ext_resource type="Script" uid="uid://b2nkuuevfkq2v" path="res://components/grapplepoint/grapple_point.gd" id="1_v4q3x"]
+
+[node name="GrapplePoint" type="Node3D" unique_id=1641084151]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)
+script = ExtResource("1_v4q3x")
+
+[node name="Sprite3D" type="Sprite3D" parent="." unique_id=1081653402]
+modulate = Color(0, 0, 0, 1)
+texture = ExtResource("1_i28ss")

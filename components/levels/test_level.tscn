@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://r2tuqss83luh" path="res://assets/Skyboxes/kloppenheim_02_puresky_2k.hdr" id="1_6oe7a"]
 [ext_resource type="Texture2D" uid="uid://dqvbwrlhcyx4m" path="res://assets/kenney_prototype-textures/PNG/Purple/texture_09.png" id="1_vljbo"]
 [ext_resource type="PackedScene" uid="uid://81vfh6cx30ni" path="res://components/enemy/enemy.tscn" id="2_vljbo"]
+[ext_resource type="PackedScene" uid="uid://cjk8sauqxur5r" path="res://components/grapplepoint/grapple_point.tscn" id="4_6oe7a"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_g05yx"]
 panorama = ExtResource("1_6oe7a")
@@ -129,3 +130,6 @@ transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0
 transform = Transform3D(-0.86602557, -0.25000003, -0.43301266, 0, -0.8660254, 0.50000006, -0.5, 0.4330128, 0.75000006, 0, 7, 0)
 light_energy = 0.5
 shadow_enabled = true
+
+[node name="GrapplePoint" parent="." unique_id=1478053447 instance=ExtResource("4_6oe7a")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0.88690495, 3.9670472, -7.1700735)
