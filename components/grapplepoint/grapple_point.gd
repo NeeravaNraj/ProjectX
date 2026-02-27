@@ -1,1 +1,1 @@
-extends Node3D
+class_name GrapplePoint extends Node3D

@@ -132,4 +132,4 @@ light_energy = 0.5
 shadow_enabled = true
 
 [node name="GrapplePoint" parent="." unique_id=1478053447 instance=ExtResource("4_6oe7a")]
-transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0.88690495, 3.9670472, -7.1700735)
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 31.508057, 0.46521926, 14.994997)
