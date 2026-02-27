@@ -18,9 +18,10 @@ func attack():
 	if not _can_attack: return
 	
 	for body in attack_area.get_overlapping_bodies():
-		# TODO: hurt box shit
-		print(body)
-		pass
+		var hurtbox = body.get("hurtbox") as HurtBox
+		
+		if hurtbox:
+			hurtbox.damage(attack_damage)
 	
 	start_timer()
 	

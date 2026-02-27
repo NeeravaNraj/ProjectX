@@ -4,6 +4,7 @@ class_name Enemy extends CharacterBody3D
 @export var world: Node3D
 @export var vision_radius := 10
 
+@onready var hurtbox = $HurtBox
 
 func _ready() -> void:
 	pass
@@ -24,3 +25,7 @@ func _get_player_position():
 
 func _on_health_damaged(amount: int) -> void:
 	print("Enemy DAMANGED ", amount)
+
+
+func _on_health_death() -> void:
+	print("Enemy DIEDED!")
