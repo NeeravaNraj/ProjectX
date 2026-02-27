@@ -19,12 +19,7 @@ func _input(event: InputEvent) -> void:
 	
 	if event.is_action_pressed("ui_cancel"):
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-
-	if event is InputEventMouseMotion:
-		_camera_pivot.rotation.x += -event.relative.y * mouse_sens
-		_camera_pivot.rotation.x = clamp(_camera_pivot.rotation.x, deg_to_rad(-80), deg_to_rad(90))
-		rotation.y -= event.relative.x * mouse_sens
-
+		
 func _unhandled_input(event: InputEvent) -> void:
 	var is_camera_motion := (
 		event is InputEventMouseMotion and 
@@ -32,8 +27,9 @@ func _unhandled_input(event: InputEvent) -> void:
 	)
 
 	if is_camera_motion:
-		_camera_input_direction = event.screen_relative * mouse_sens
-
+		rotation.y -= event.relative.x * mouse_sens
+		_camera_pivot.rotation.x += -event.relative.y * mouse_sens
+		_camera_pivot.rotation.x = clamp(_camera_pivot.rotation.x, deg_to_rad(-80), deg_to_rad(90))
 
 func _physics_process(delta: float) -> void:
 	var is_starting_jump := Input.is_action_just_pressed("jump") and is_on_floor()

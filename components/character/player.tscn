@@ -55,7 +55,7 @@ attack_area_shape = NodePath("../../HitBox/AttackShape")
 [node name="Velocity" parent="." unique_id=1034921754 instance=ExtResource("2_b1s2y")]
 unique_name_in_owner = true
 max_speed = 6.0
-acceleration_coef = 20.0
+gravity = -35.0
 
 [node name="PlayerControl" parent="Velocity" unique_id=514334726 instance=ExtResource("3_eti3u")]
 
