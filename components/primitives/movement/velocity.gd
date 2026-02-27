@@ -2,7 +2,6 @@ class_name VelocityComponent extends Node
 
 @export_range(0.0, 1000.0, 0.01, "or_greater", "hide_control") var max_speed: float = 10.0
 @export var acceleration_coef: float = 50.0
-@export var deceleration_coef: float = 50.0
 @export var gravity := -30.0
 
 var target: CharacterBody3D
