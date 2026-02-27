@@ -41,3 +41,4 @@ health_component = NodePath("../Health")
 shape = SubResource("CapsuleShape3D_mdji8")
 
 [connection signal="damaged" from="Health" to="." method="_on_health_damaged"]
+[connection signal="death" from="Health" to="." method="_on_health_death"]

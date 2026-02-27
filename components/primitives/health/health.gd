@@ -1,6 +1,10 @@
 class_name Health extends Node
 
-@export var health: int = 50
+@export_range(0, 100, 1, "or_greater", "hide_control") var max_health: int = 100
+
+var health := max_health:
+	set(health_):
+		health = clamp(health_, 0.0, max_health)
 
 signal changed(health: int)
 signal healed(amount: int)
@@ -19,13 +23,12 @@ func heal(amount: int):
 func damage(amount: int):
 	if _is_dead(): return
 	
-	if (health - amount) < 0:
-		health = 0
+	if (health - amount) <= 0:
 		death.emit()
 	else:
-		health -= amount
 		damaged.emit(amount)
-
+	
+	health -= amount
 	changed.emit(health)
 	
 func _is_dead():
