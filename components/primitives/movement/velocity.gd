@@ -35,7 +35,7 @@ func _physics_process(delta: float) -> void:
 	
 	var final_speed = speed + speed_modifier
 	var g_acceleration = acceleration_coef * delta
-	var a_acceleration = acceleration_coef * delta * 0.18
+	var a_acceleration = acceleration_coef * delta * 0.14
 	var deceleration = deceleration_coef * delta
 	
 	var acceleration = g_acceleration if target.is_on_floor() else a_acceleration
