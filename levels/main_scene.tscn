@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://c0awyk0mfv5ro"]
+
+[ext_resource type="PackedScene" uid="uid://cqkdv40k1wg62" path="res://levels/prototyping/prototyping.tscn" id="1_1c6al"]
+
+[node name="MainScene" type="Node" unique_id=26098458]
+
+[node name="Managers" type="Node" parent="." unique_id=1820562953]
+
+[node name="GamerManagers" type="Node" parent="Managers" unique_id=364710908]
+
+[node name="CurrentLevel" type="Node3D" parent="." unique_id=1709952521]
+
+[node name="PrototypeLevel" parent="CurrentLevel" unique_id=379384066 instance=ExtResource("1_1c6al")]
+
+[node name="UserInterface" type="CanvasLayer" parent="." unique_id=637554007]

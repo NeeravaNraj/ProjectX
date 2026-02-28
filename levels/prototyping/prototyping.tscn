@@ -1,13 +1,14 @@
 [gd_scene format=3 uid="uid://cqkdv40k1wg62"]
 
-[ext_resource type="Texture2D" uid="uid://r2tuqss83luh" path="res://assets/Skyboxes/kloppenheim_02_puresky_2k.hdr" id="1_o6mel"]
-[ext_resource type="Texture2D" uid="uid://dqvbwrlhcyx4m" path="res://assets/kenney_prototype-textures/PNG/Purple/texture_09.png" id="2_e7anx"]
-[ext_resource type="PackedScene" uid="uid://81vfh6cx30ni" path="res://components/enemy/enemy.tscn" id="3_ur00s"]
-[ext_resource type="PackedScene" uid="uid://chnlwpgv4jjbn" path="res://components/character/player.tscn" id="4_wndkh"]
-[ext_resource type="PackedScene" uid="uid://cjk8sauqxur5r" path="res://components/grapplepoint/grapple_point.tscn" id="5_ly3hx"]
+[ext_resource type="Script" uid="uid://bipvsvl5mnuqm" path="res://levels/prototyping/prototyping.gd" id="1_82110"]
+[ext_resource type="Texture2D" uid="uid://r2tuqss83luh" path="res://assets/Skyboxes/kloppenheim_02_puresky_2k.hdr" id="2_rm5dk"]
+[ext_resource type="Texture2D" uid="uid://dqvbwrlhcyx4m" path="res://assets/kenney_prototype-textures/PNG/Purple/texture_09.png" id="3_0qmt2"]
+[ext_resource type="PackedScene" uid="uid://81vfh6cx30ni" path="res://components/enemy/enemy.tscn" id="4_yokfk"]
+[ext_resource type="PackedScene" uid="uid://cjk8sauqxur5r" path="res://components/grapplepoint/grapple_point.tscn" id="5_dkjbd"]
+[ext_resource type="PackedScene" uid="uid://chnlwpgv4jjbn" path="res://components/character/player.tscn" id="6_mlcm4"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_g05yx"]
-panorama = ExtResource("1_o6mel")
+panorama = ExtResource("2_rm5dk")
 energy_multiplier = 0.1
 
 [sub_resource type="Sky" id="Sky_xgefu"]
@@ -20,16 +21,23 @@ sky = SubResource("Sky_xgefu")
 [sub_resource type="NavigationMesh" id="NavigationMesh_jkjpr"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6oe7a"]
-albedo_texture = ExtResource("2_e7anx")
+albedo_texture = ExtResource("3_0qmt2")
 uv1_triplanar = true
 
-[node name="TestLevel" type="Node3D" unique_id=379384066]
+[node name="PrototypeLevel" type="Node3D" unique_id=379384066 node_paths=PackedStringArray("spawn_point")]
+script = ExtResource("1_82110")
+spawn_point = NodePath("SpawnPoint")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=592416932]
 environment = SubResource("Environment_1mtom")
 
 [node name="EnemyNavigationRegion" type="NavigationRegion3D" parent="." unique_id=168509107]
 navigation_mesh = SubResource("NavigationMesh_jkjpr")
+
+[node name="SpawnPoint" type="Node3D" parent="." unique_id=333766659]
+
+[node name="Player" parent="." unique_id=1186516781 instance=ExtResource("6_mlcm4")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0.95, 0)
 
 [node name="CSGBoxes" type="Node3D" parent="." unique_id=1200559265]
 
@@ -115,10 +123,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.012859, 2.0637512)
 light_energy = 2.826
 omni_range = 12.0
 
-[node name="Enemy" parent="CSGBoxes/Room1" unique_id=911576498 instance=ExtResource("3_ur00s")]
+[node name="Enemy" parent="CSGBoxes/Room1" unique_id=911576498 instance=ExtResource("4_yokfk")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -3.9908476, 5.9, -4.6106644)
 
-[node name="Enemy2" parent="CSGBoxes/Room1" unique_id=1075629358 instance=ExtResource("3_ur00s")]
+[node name="Enemy2" parent="CSGBoxes/Room1" unique_id=1075629358 instance=ExtResource("4_yokfk")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 4.0091505, 5.9, -4.6106644)
 
 [node name="Arena" type="Node3D" parent="CSGBoxes" unique_id=1478586698]
@@ -172,13 +180,13 @@ use_collision = true
 size = Vector3(50, 20, 1)
 material = SubResource("StandardMaterial3D_6oe7a")
 
-[node name="Enemy" parent="CSGBoxes/Arena" unique_id=1787612840 instance=ExtResource("3_ur00s")]
+[node name="Enemy" parent="CSGBoxes/Arena" unique_id=1787612840 instance=ExtResource("4_yokfk")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0.009000003, 6.9, -18.5)
 
-[node name="Enemy2" parent="CSGBoxes/Arena" unique_id=1796691235 instance=ExtResource("3_ur00s")]
+[node name="Enemy2" parent="CSGBoxes/Arena" unique_id=1796691235 instance=ExtResource("4_yokfk")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 20.008997, 6.9, -37.5)
 
-[node name="Enemy3" parent="CSGBoxes/Arena" unique_id=340979250 instance=ExtResource("3_ur00s")]
+[node name="Enemy3" parent="CSGBoxes/Arena" unique_id=340979250 instance=ExtResource("4_yokfk")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -19.991003, 6.9, -37.5)
 
 [node name="Light1" type="OmniLight3D" parent="CSGBoxes/Arena" unique_id=1381116474]
@@ -193,13 +201,14 @@ light_color = Color(0.6424139, 0.43863684, 0.9296966, 1)
 light_energy = 3.0
 omni_range = 30.0
 
-[node name="Player" parent="." unique_id=1186516781 instance=ExtResource("4_wndkh")]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0.9500001, 0)
+[node name="Lights" type="Node3D" parent="." unique_id=2023466760]
 
-[node name="Sun" type="DirectionalLight3D" parent="." unique_id=554838910]
-transform = Transform3D(-0.86602557, -0.25000003, -0.43301266, 0, -0.8660254, 0.50000006, -0.5, 0.4330128, 0.75000006, 0, 7, 0)
+[node name="Sun" type="DirectionalLight3D" parent="Lights" unique_id=554838910]
+transform = Transform3D(-0.86602545, -0.25000003, -0.4330126, 0, -0.8660254, 0.5000001, -0.49999994, 0.4330128, 0.75000006, 0, 7, 0)
 light_energy = 0.5
 shadow_enabled = true
 
-[node name="GrapplePoint" parent="." unique_id=1478053447 instance=ExtResource("5_ly3hx")]
+[node name="GrapplePoints" type="Node3D" parent="." unique_id=1460720263]
+
+[node name="GrapplePoint" parent="GrapplePoints" unique_id=1478053447 instance=ExtResource("5_dkjbd")]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 31.508057, 0.46521926, 14.994997)
