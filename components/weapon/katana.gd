@@ -7,3 +7,6 @@ func _ready() -> void:
 	assert(box, "Expected BoxShape3D for attack area in Katana")
 	
 	box.size = Vector3(2.5, 1, 2)
+
+func animate_attack():
+	$AnimationPlayer.play(&"Attack")

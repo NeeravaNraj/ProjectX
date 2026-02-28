@@ -22,10 +22,12 @@ func attack():
 		
 		if hurtbox:
 			hurtbox.damage(attack_damage)
-	
+	animate_attack()
 	start_timer()
 	
 func start_timer():
 	_can_attack = false
 	await get_tree().create_timer(attack_speed).timeout
 	_can_attack = true
+
+func animate_attack(): pass
