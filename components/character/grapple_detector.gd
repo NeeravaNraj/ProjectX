@@ -10,9 +10,13 @@ func _on_area_entered(area: Area3D) -> void:
 func _on_area_exited(area: Area3D) -> void:
 	interactibles_in_range.erase(area)
 
+func _process(delta: float) -> void:
+	for d in interactibles_in_range:
+		var value = _get_lookat_value(d)
+		d.get_parent().illuminate(value)
+
 func get_closest_grapple_point():
-	var forward = player.basis.z
-	forward.y = player._camera_pivot.basis.z.y
+	var forward = player.get_forward()
 
 	var closest = 0
 	var best: Vector3 = Vector3.ZERO
@@ -21,7 +25,6 @@ func get_closest_grapple_point():
 		var player_looking_at = forward.dot(direction)
 		
 		if player_looking_at > 0.5 and player_looking_at > closest:
-			print("height ", player.get_height())
 			var grapple_position = Vector3(d.global_position)
 			grapple_position.y += player.get_height()
 			
@@ -32,3 +35,8 @@ func get_closest_grapple_point():
 	
 	if best and closest > 0.95 and closest < 1.1:
 		return best
+
+func _get_lookat_value(d: Node3D):
+	var forward = player.get_forward()
+	var direction = (player.global_position - d.global_position).normalized()
+	return forward.dot(direction)

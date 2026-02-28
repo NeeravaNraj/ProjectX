@@ -10,7 +10,7 @@ radius = 1.0
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)
 script = ExtResource("1_v4q3x")
 
-[node name="Sprite3D" type="Sprite3D" parent="." unique_id=1081653402]
+[node name="Billboard" type="Sprite3D" parent="." unique_id=1081653402]
 transform = Transform3D(1.5359997, 0, 0, 0, 1.5359997, 0, 0, 0, 1.5359997, 0, 0, 0)
 billboard = 1
 texture = ExtResource("1_i28ss")
