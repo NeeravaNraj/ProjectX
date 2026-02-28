@@ -212,3 +212,6 @@ shadow_enabled = true
 
 [node name="GrapplePoint" parent="GrapplePoints" unique_id=1478053447 instance=ExtResource("5_dkjbd")]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 31.508057, 0.46521926, 14.994997)
+
+[node name="GrapplePoint2" parent="GrapplePoints" unique_id=1641084151 instance=ExtResource("5_dkjbd")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -0.009254456, 1.3429024, 44.554882)
