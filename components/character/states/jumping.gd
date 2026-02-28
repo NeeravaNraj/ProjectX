@@ -3,7 +3,6 @@ extends PlayerState
 @onready var jump_timer: Timer = $JumpTimer 
 
 
-
 func _on_jumping_state_entered() -> void:
 	if jump_timer.is_stopped(): jump_timer.stop()
 	jump_timer.start()

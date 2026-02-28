@@ -3,11 +3,21 @@
 [ext_resource type="Texture2D" uid="uid://bxf752abl0xdv" path="res://assets/grapple_point.png" id="1_i28ss"]
 [ext_resource type="Script" uid="uid://b2nkuuevfkq2v" path="res://components/grapplepoint/grapple_point.gd" id="1_v4q3x"]
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_v4q3x"]
+radius = 1.0
+
 [node name="GrapplePoint" type="Node3D" unique_id=1641084151]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)
 script = ExtResource("1_v4q3x")
 
 [node name="Sprite3D" type="Sprite3D" parent="." unique_id=1081653402]
-modulate = Color(0, 0, 0, 1)
+transform = Transform3D(1.5359997, 0, 0, 0, 1.5359997, 0, 0, 0, 1.5359997, 0, 0, 0)
 billboard = 1
 texture = ExtResource("1_i28ss")
+
+[node name="Detector" type="Area3D" parent="." unique_id=1245277636]
+collision_layer = 4
+monitoring = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Detector" unique_id=294936145]
+shape = SubResource("SphereShape3D_v4q3x")
