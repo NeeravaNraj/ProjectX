@@ -19,6 +19,7 @@
 [ext_resource type="Script" uid="uid://dddx4hgxxjf8k" path="res://components/character/states/walking_state.gd" id="14_mfj52"]
 [ext_resource type="Script" uid="uid://bmjsknduokcs5" path="res://components/character/states/sprinting_state.gd" id="16_lxhmo"]
 [ext_resource type="Script" uid="uid://pd7klsrgk65n" path="res://components/character/states/airborne.gd" id="18_5gql3"]
+[ext_resource type="Script" uid="uid://64433uu4jg86" path="res://components/character/states/jumping.gd" id="20_mq1ei"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_gie0d"]
 radius = 0.225
@@ -188,6 +189,13 @@ event = &"onGround"
 delay_in_seconds = "0.0"
 metadata/_custom_type_script = "uid://cf1nsco3w0mf6"
 
+[node name="OnFalling" type="Node" parent="StateChart/Root/Movement/Airborne" unique_id=1318634778]
+script = ExtResource("10_2ve8e")
+to = NodePath("../Falling")
+event = &"onFalling"
+delay_in_seconds = "0.0"
+metadata/_custom_type_script = "uid://cf1nsco3w0mf6"
+
 [node name="StateActors" type="Node" parent="." unique_id=1782869980 node_paths=PackedStringArray("player")]
 unique_name_in_owner = true
 script = ExtResource("11_lxhmo")
@@ -213,9 +221,18 @@ script = ExtResource("16_lxhmo")
 [node name="AirborneState" type="Node" parent="StateActors/MovementState" unique_id=1718041435]
 script = ExtResource("18_5gql3")
 
+[node name="Jumping" type="Node" parent="StateActors/MovementState/AirborneState" unique_id=740987990]
+script = ExtResource("20_mq1ei")
+
+[node name="JumpTimer" type="Timer" parent="StateActors/MovementState/AirborneState/Jumping" unique_id=1660687209]
+one_shot = true
+
 [connection signal="state_physics_processing" from="StateChart/Root/Movement/Grounded" to="StateActors/MovementState/GroundedState" method="_on_grounded_state_physics_processing"]
 [connection signal="state_physics_processing" from="StateChart/Root/Movement/Grounded/Idle" to="StateActors/MovementState/GroundedState/IdleState" method="_on_idle_state_physics_processing"]
 [connection signal="state_physics_processing" from="StateChart/Root/Movement/Grounded/Moving" to="StateActors/MovementState/GroundedState/MovingState" method="_on_moving_state_physics_processing"]
 [connection signal="state_physics_processing" from="StateChart/Root/Movement/Grounded/Moving/Walking" to="StateActors/MovementState/GroundedState/MovingState/WalkingState" method="_on_walking_state_physics_processing"]
 [connection signal="state_physics_processing" from="StateChart/Root/Movement/Grounded/Moving/Sprinting" to="StateActors/MovementState/GroundedState/MovingState/SprintingState" method="_on_sprinting_state_physics_processing"]
 [connection signal="state_physics_processing" from="StateChart/Root/Movement/Airborne" to="StateActors/MovementState/AirborneState" method="_on_airborne_state_physics_processing"]
+[connection signal="state_entered" from="StateChart/Root/Movement/Airborne/Jumping" to="StateActors/MovementState/AirborneState/Jumping" method="_on_jumping_state_entered"]
+[connection signal="state_exited" from="StateChart/Root/Movement/Airborne/Jumping" to="StateActors/MovementState/AirborneState/Jumping" method="_on_jumping_state_exited"]
+[connection signal="timeout" from="StateActors/MovementState/AirborneState/Jumping/JumpTimer" to="StateActors/MovementState/AirborneState/Jumping" method="_on_jump_timer_timeout"]
