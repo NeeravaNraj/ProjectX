@@ -21,7 +21,14 @@ func jump():
 	_velocity.add_impulse(Vector3.UP, player_stats.jump_velocity)
 
 func grapple(direction: Vector3):
+	velocity = Vector3.ZERO
 	_velocity.add_impulse(direction, player_stats.grapple_velocity)
+
+func get_forward():
+	var forward = basis.z
+	forward.y = _camera_pivot.basis.z.y
+	
+	return forward
 
 func get_height():
 	var shape = $Shape.shape as CapsuleShape3D
@@ -43,8 +50,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		
 func _try_grapple():
 	var grapple_point = _grapple_detector.get_closest_grapple_point()
-	
-	print(grapple_point)
+
 	if grapple_point:
 		grapple(grapple_point)
 		_state_chart.send_event(&"onGrapple")

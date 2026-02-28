@@ -36,6 +36,67 @@ height = 1.9
 radius = 0.3
 height = 1.9
 
+[sub_resource type="Animation" id="Animation_lbmrp"]
+resource_name = "Attack"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Model:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.23333333, 0.4),
+"transitions": PackedFloat32Array(1, 1, 0.5358867, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(-0.04116893, 1.0162444, 0.35963404), Vector3(-0.04116893, 1.0162444, 0.35963404), Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Model:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.23333333, 0.4),
+"transitions": PackedFloat32Array(1, 1, 0.5358867, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0.7464579, 1.0469389, -0.8218265), Vector3(0.7464579, 1.0469389, -0.8218265), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_2p11o"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Model:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Model:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6p5bk"]
+_data = {
+&"Attack": SubResource("Animation_lbmrp"),
+&"RESET": SubResource("Animation_2p11o")
+}
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_gie0d"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_bmx6v"]
@@ -82,6 +143,15 @@ unique_name_in_owner = true
 transform = Transform3D(-0.09646627, -0.9636583, -0.2491126, 0.83487564, 0.0579276, -0.547382, 0.54191965, -0.2607819, 0.79894686, 0.6049503, 0.48512423, -0.98595005)
 attack_area = NodePath("../../HitBox")
 attack_area_shape = NodePath("../../HitBox/AttackShape")
+
+[node name="Model" parent="Weaponary/Katana" index="0" unique_id=1794460968]
+transform = Transform3D(1, 0, 0, 0, 1.0000001, 0, 0, 0, 0.99999994, 0, 0, 0)
+
+[node name="Handle" parent="Weaponary/Katana/Model" index="2" unique_id=352267174]
+transform = Transform3D(0.9998301, 0.017492488, 0.005824983, -0.017560542, 0.99977577, 0.0118379295, -0.005616635, -0.011938259, 0.99991304, 1.4901161e-08, -2.9802322e-08, 0.5034061)
+
+[node name="AnimationPlayer" parent="Weaponary/Katana" index="1" unique_id=939599132]
+libraries/ = SubResource("AnimationLibrary_6p5bk")
 
 [node name="Health" parent="." unique_id=1496712029 instance=ExtResource("5_6npmc")]
 
@@ -275,3 +345,5 @@ script = ExtResource("23_lbmrp")
 [connection signal="state_exited" from="StateChart/Root/Movement/Airborne/Grappling" to="StateActors/MovementState/AirborneState/Grappling" method="_on_grappling_state_exited"]
 [connection signal="timeout" from="StateActors/MovementState/AirborneState/Jumping/JumpTimer" to="StateActors/MovementState/AirborneState/Jumping" method="_on_jump_timer_timeout"]
 [connection signal="timeout" from="StateActors/MovementState/AirborneState/Grappling/GrappleTimer" to="StateActors/MovementState/AirborneState/Grappling" method="_on_grapple_timer_timeout"]
+
+[editable path="Weaponary/Katana"]
