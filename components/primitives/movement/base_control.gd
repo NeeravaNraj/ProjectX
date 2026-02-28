@@ -12,6 +12,9 @@ const DEFAULT_ACTION_LEFT := &"move_left"
 ## The default input action for right movement.
 const DEFAULT_ACTION_RIGHT := &"move_right"
 
+## The default input action for sprint.
+const DEFAULT_ACTION_SPRINT := &"sprint"
+
 var velocity_component: VelocityComponent
 
 func _ready() -> void:

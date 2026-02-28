@@ -12,6 +12,9 @@ class_name PlayerControl extends BaseControl
 ## The input action to move right.
 @export var input_action_right: InputEventAction
 
+## The input action to move right.
+@export var input_action_sprint: InputEventAction
+
 func _ready() -> void:
 	super()
 	
@@ -26,6 +29,9 @@ func _ready() -> void:
 
 	if null == input_action_right:
 		reset_action_right()
+		
+	if null == input_action_sprint:
+		reset_action_sprint()
 
 func _process(_delta: float) -> void:
 	velocity_component.raw_direction = Input.get_vector(
@@ -50,3 +56,7 @@ func reset_action_left() -> void:
 func reset_action_right() -> void:
 	input_action_right = InputEventAction.new()
 	input_action_right.action = DEFAULT_ACTION_RIGHT
+	
+func reset_action_sprint() -> void:
+	input_action_sprint = InputEventAction.new()
+	input_action_sprint.action = DEFAULT_ACTION_SPRINT

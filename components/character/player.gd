@@ -1,14 +1,16 @@
-extends CharacterBody3D
+class_name Player extends CharacterBody3D
 
 @export_group("Camera")
 @export_range(0.0, 1.0) var mouse_sens := 0.0025
 
 @export_group("Movement")
+@export var sprint_speed := 4
 @export var jump_power := 10.0
 
 @onready var _camera: Camera3D = %Camera
 @onready var _camera_pivot: Node3D = %CameraPivot
 @onready var _velocity: VelocityComponent = %Velocity
+@onready var _state_chart: StateChart = %StateChart
 
 var _camera_input_direction := Vector2.ZERO
 var _last_movement_direction := Vector3.BACK
@@ -31,12 +33,15 @@ func _unhandled_input(event: InputEvent) -> void:
 		_camera_pivot.rotation.x += -event.relative.y * mouse_sens
 		_camera_pivot.rotation.x = clamp(_camera_pivot.rotation.x, deg_to_rad(-80), deg_to_rad(90))
 
-func _physics_process(delta: float) -> void:
-	var is_starting_jump := Input.is_action_just_pressed("jump") and is_on_floor()
-	if is_starting_jump:
-		_velocity.add_impulse(Vector3.UP, jump_power)
-	move_and_slide()
-	
+func walk():
+	_velocity.set_speed_modifier(0)
+
+func sprint():
+	_velocity.set_speed_modifier(sprint_speed)
+
+func jump():
+	_velocity.add_impulse(Vector3.UP, jump_power)
+
 	
 	
 	

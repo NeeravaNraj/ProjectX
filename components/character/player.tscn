@@ -3,8 +3,21 @@
 [ext_resource type="Script" uid="uid://d1gc3n43os8em" path="res://components/character/player.gd" id="1_knl4b"]
 [ext_resource type="PackedScene" uid="uid://dil3ijsq5pmlq" path="res://components/primitives/movement/velocity.tscn" id="2_b1s2y"]
 [ext_resource type="PackedScene" uid="uid://dgm4u8srpwll1" path="res://components/weapon/katana.tscn" id="2_gie0d"]
+[ext_resource type="PackedScene" uid="uid://bcwkugn6v3oy7" path="res://addons/godot_state_charts/utilities/state_chart_debugger.tscn" id="2_mk48o"]
 [ext_resource type="PackedScene" uid="uid://id84t5a0ya2y" path="res://components/primitives/movement/player_control.tscn" id="3_eti3u"]
 [ext_resource type="PackedScene" uid="uid://b8xoyf57pebhr" path="res://components/primitives/health/health.tscn" id="5_6npmc"]
+[ext_resource type="Script" uid="uid://couw105c3bde4" path="res://addons/godot_state_charts/state_chart.gd" id="6_cgsss"]
+[ext_resource type="Script" uid="uid://c1vp0ojjvaby1" path="res://addons/godot_state_charts/parallel_state.gd" id="7_qb6gd"]
+[ext_resource type="Script" uid="uid://jk2jm1g6q853" path="res://addons/godot_state_charts/compound_state.gd" id="8_mk48o"]
+[ext_resource type="Script" uid="uid://cytafq8i1y8qm" path="res://addons/godot_state_charts/atomic_state.gd" id="9_mfj52"]
+[ext_resource type="Script" uid="uid://cf1nsco3w0mf6" path="res://addons/godot_state_charts/transition.gd" id="10_2ve8e"]
+[ext_resource type="Script" uid="uid://cf87v0krvbqgd" path="res://components/character/states/state_actors.gd" id="11_lxhmo"]
+[ext_resource type="Script" uid="uid://bprfdfuxsvgcf" path="res://components/character/states/idle_state.gd" id="12_qb6gd"]
+[ext_resource type="Script" uid="uid://62je6vn55ygo" path="res://components/character/states/grounded_state.gd" id="13_0v6yc"]
+[ext_resource type="Script" uid="uid://bupolwf85pte3" path="res://components/character/states/moving_state.gd" id="14_2ve8e"]
+[ext_resource type="Script" uid="uid://dddx4hgxxjf8k" path="res://components/character/states/walking_state.gd" id="14_mfj52"]
+[ext_resource type="Script" uid="uid://bmjsknduokcs5" path="res://components/character/states/sprinting_state.gd" id="16_lxhmo"]
+[ext_resource type="Script" uid="uid://pd7klsrgk65n" path="res://components/character/states/airborne.gd" id="18_5gql3"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_gie0d"]
 radius = 0.225
@@ -22,6 +35,16 @@ height = 1.9
 
 [node name="Player" type="CharacterBody3D" unique_id=1186516781]
 script = ExtResource("1_knl4b")
+
+[node name="StateChartDebugger" parent="." unique_id=1760072062 instance=ExtResource("2_mk48o")]
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_right = 361.0
+offset_bottom = 310.0
+grow_horizontal = 1
+grow_vertical = 1
+initial_node_to_watch = NodePath("../StateChart")
 
 [node name="ReferenceSphere" type="MeshInstance3D" parent="." unique_id=966743990]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -2)
@@ -54,7 +77,6 @@ attack_area_shape = NodePath("../../HitBox/AttackShape")
 
 [node name="Velocity" parent="." unique_id=1034921754 instance=ExtResource("2_b1s2y")]
 unique_name_in_owner = true
-max_speed = 6.0
 gravity = -35.0
 
 [node name="PlayerControl" parent="Velocity" unique_id=514334726 instance=ExtResource("3_eti3u")]
@@ -65,3 +87,122 @@ collision_mask = 2
 [node name="AttackShape" type="CollisionShape3D" parent="HitBox" unique_id=1166820792]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.32253122, -1.3072433)
 shape = SubResource("BoxShape3D_gie0d")
+
+[node name="StateChart" type="Node" parent="." unique_id=565694313]
+unique_name_in_owner = true
+script = ExtResource("6_cgsss")
+metadata/_custom_type_script = "uid://couw105c3bde4"
+
+[node name="Root" type="Node" parent="StateChart" unique_id=1582283804]
+script = ExtResource("7_qb6gd")
+metadata/_custom_type_script = "uid://c1vp0ojjvaby1"
+
+[node name="Movement" type="Node" parent="StateChart/Root" unique_id=241863195]
+script = ExtResource("8_mk48o")
+initial_state = NodePath("Grounded")
+metadata/_custom_type_script = "uid://jk2jm1g6q853"
+
+[node name="Grounded" type="Node" parent="StateChart/Root/Movement" unique_id=2072027960]
+script = ExtResource("8_mk48o")
+initial_state = NodePath("Idle")
+metadata/_custom_type_script = "uid://jk2jm1g6q853"
+
+[node name="OnAirborne" type="Node" parent="StateChart/Root/Movement/Grounded" unique_id=1660312768]
+script = ExtResource("10_2ve8e")
+to = NodePath("../../Airborne")
+event = &"onAirborne"
+delay_in_seconds = "0.0"
+metadata/_custom_type_script = "uid://cf1nsco3w0mf6"
+
+[node name="Idle" type="Node" parent="StateChart/Root/Movement/Grounded" unique_id=98389378]
+script = ExtResource("9_mfj52")
+metadata/_custom_type_script = "uid://cytafq8i1y8qm"
+
+[node name="OnMoving" type="Node" parent="StateChart/Root/Movement/Grounded/Idle" unique_id=46673262]
+script = ExtResource("10_2ve8e")
+to = NodePath("../../Moving")
+event = &"onMoving"
+delay_in_seconds = "0.0"
+metadata/_custom_type_script = "uid://cf1nsco3w0mf6"
+
+[node name="Moving" type="Node" parent="StateChart/Root/Movement/Grounded" unique_id=412453979]
+script = ExtResource("8_mk48o")
+initial_state = NodePath("Walking")
+metadata/_custom_type_script = "uid://jk2jm1g6q853"
+
+[node name="Walking" type="Node" parent="StateChart/Root/Movement/Grounded/Moving" unique_id=1015817340]
+script = ExtResource("9_mfj52")
+metadata/_custom_type_script = "uid://cytafq8i1y8qm"
+
+[node name="Sprinting" type="Node" parent="StateChart/Root/Movement/Grounded/Moving" unique_id=767903468]
+script = ExtResource("9_mfj52")
+metadata/_custom_type_script = "uid://cytafq8i1y8qm"
+
+[node name="OnIdle" type="Node" parent="StateChart/Root/Movement/Grounded/Moving" unique_id=7857515]
+script = ExtResource("10_2ve8e")
+to = NodePath("../../Idle")
+event = &"onIdle"
+delay_in_seconds = "0.0"
+metadata/_custom_type_script = "uid://cf1nsco3w0mf6"
+
+[node name="OnWalking" type="Node" parent="StateChart/Root/Movement/Grounded/Moving" unique_id=1612267461]
+script = ExtResource("10_2ve8e")
+to = NodePath("../Walking")
+event = &"onWalking"
+delay_in_seconds = "0.0"
+metadata/_custom_type_script = "uid://cf1nsco3w0mf6"
+
+[node name="OnSprinting" type="Node" parent="StateChart/Root/Movement/Grounded/Moving" unique_id=1554223873]
+script = ExtResource("10_2ve8e")
+to = NodePath("../Sprinting")
+event = &"onSprinting"
+delay_in_seconds = "0.0"
+metadata/_custom_type_script = "uid://cf1nsco3w0mf6"
+
+[node name="Airborne" type="Node" parent="StateChart/Root/Movement" unique_id=2085311132]
+script = ExtResource("8_mk48o")
+initial_state = NodePath("Falling")
+metadata/_custom_type_script = "uid://jk2jm1g6q853"
+
+[node name="Falling" type="Node" parent="StateChart/Root/Movement/Airborne" unique_id=1875540128]
+script = ExtResource("9_mfj52")
+metadata/_custom_type_script = "uid://cytafq8i1y8qm"
+
+[node name="OnGround" type="Node" parent="StateChart/Root/Movement/Airborne" unique_id=1851205606]
+script = ExtResource("10_2ve8e")
+to = NodePath("../../Grounded")
+event = &"onGround"
+delay_in_seconds = "0.0"
+metadata/_custom_type_script = "uid://cf1nsco3w0mf6"
+
+[node name="StateActors" type="Node" parent="." unique_id=1782869980 node_paths=PackedStringArray("player")]
+unique_name_in_owner = true
+script = ExtResource("11_lxhmo")
+player = NodePath("..")
+
+[node name="MovementState" type="Node" parent="StateActors" unique_id=1411103208]
+
+[node name="GroundedState" type="Node" parent="StateActors/MovementState" unique_id=1864570480]
+script = ExtResource("13_0v6yc")
+
+[node name="IdleState" type="Node" parent="StateActors/MovementState/GroundedState" unique_id=1861336342]
+script = ExtResource("12_qb6gd")
+
+[node name="MovingState" type="Node" parent="StateActors/MovementState/GroundedState" unique_id=1273122125]
+script = ExtResource("14_2ve8e")
+
+[node name="WalkingState" type="Node" parent="StateActors/MovementState/GroundedState/MovingState" unique_id=1963113913]
+script = ExtResource("14_mfj52")
+
+[node name="SprintingState" type="Node" parent="StateActors/MovementState/GroundedState/MovingState" unique_id=1712382834]
+script = ExtResource("16_lxhmo")
+
+[node name="Airborne" type="Node" parent="StateActors/MovementState" unique_id=1718041435]
+script = ExtResource("18_5gql3")
+
+[connection signal="state_physics_processing" from="StateChart/Root/Movement/Grounded" to="StateActors/MovementState/GroundedState" method="_on_grounded_state_physics_processing"]
+[connection signal="state_physics_processing" from="StateChart/Root/Movement/Grounded/Idle" to="StateActors/MovementState/GroundedState/IdleState" method="_on_idle_state_physics_processing"]
+[connection signal="state_physics_processing" from="StateChart/Root/Movement/Grounded/Moving" to="StateActors/MovementState/GroundedState/MovingState" method="_on_moving_state_physics_processing"]
+[connection signal="state_physics_processing" from="StateChart/Root/Movement/Grounded/Moving/Walking" to="StateActors/MovementState/GroundedState/MovingState/WalkingState" method="_on_walking_state_physics_processing"]
+[connection signal="state_physics_processing" from="StateChart/Root/Movement/Grounded/Moving/Sprinting" to="StateActors/MovementState/GroundedState/MovingState/SprintingState" method="_on_sprinting_state_physics_processing"]
+[connection signal="state_physics_processing" from="StateChart/Root/Movement/Airborne" to="StateActors/MovementState/Airborne" method="_on_airborne_state_physics_processing"]
