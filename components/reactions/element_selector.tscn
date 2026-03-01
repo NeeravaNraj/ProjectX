@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://ctn4ndv16n1wo"]
+
+[ext_resource type="Script" uid="uid://b23pyd3lexfef" path="res://components/reactions/element_selector.gd" id="1_r6quh"]
+
+[node name="ElementSelector" type="Node" unique_id=562223786]
+script = ExtResource("1_r6quh")

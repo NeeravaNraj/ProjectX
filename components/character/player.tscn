@@ -24,6 +24,7 @@
 [ext_resource type="Script" uid="uid://pd7klsrgk65n" path="res://components/character/states/airborne.gd" id="18_5gql3"]
 [ext_resource type="Script" uid="uid://64433uu4jg86" path="res://components/character/states/jumping.gd" id="20_mq1ei"]
 [ext_resource type="Script" uid="uid://mjyk1l66mn35" path="res://components/character/states/grappling.gd" id="23_lbmrp"]
+[ext_resource type="PackedScene" uid="uid://ctn4ndv16n1wo" path="res://components/reactions/element_selector.tscn" id="25_6p5bk"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_gie0d"]
 radius = 0.225
@@ -145,9 +146,11 @@ unique_name_in_owner = true
 [node name="Weaponary" type="Node3D" parent="." unique_id=1708920944]
 script = ExtResource("5_2p11o")
 
-[node name="Katana" parent="Weaponary" unique_id=1156992332 node_paths=PackedStringArray("attack_area", "attack_area_shape") instance=ExtResource("2_gie0d")]
+[node name="Katana" parent="Weaponary" unique_id=1156992332 node_paths=PackedStringArray("attack_area", "element_selector", "attack_area_shape") instance=ExtResource("2_gie0d")]
 transform = Transform3D(-0.09646627, -0.9636583, -0.2491126, 0.83487564, 0.0579276, -0.547382, 0.54191965, -0.2607819, 0.79894686, 0.6049503, 0.48512423, -0.98595005)
+attack_damage = 10
 attack_area = NodePath("../../HitBox")
+element_selector = NodePath("../../ElementSelector")
 attack_area_shape = NodePath("../../HitBox/AttackShape")
 
 [node name="Model" parent="Weaponary/Katana" index="0" unique_id=1794460968]
@@ -334,6 +337,8 @@ one_shot = true
 script = ExtResource("23_lbmrp")
 
 [node name="GrappleTimer" type="Timer" parent="StateActors/MovementState/AirborneState/Grappling" unique_id=1437606915]
+
+[node name="ElementSelector" parent="." unique_id=562223786 instance=ExtResource("25_6p5bk")]
 
 [connection signal="area_entered" from="GrappleDetector" to="GrappleDetector" method="_on_area_entered"]
 [connection signal="area_exited" from="GrappleDetector" to="GrappleDetector" method="_on_area_exited"]

@@ -14,8 +14,10 @@ func _resolve_damage_packet(packet: DamagePacket):
 	var amount = packet.flat_damage
 	var reaction = reaction_handler.apply_element_state(packet.element)
 	
+	print("Attack on enemy:")
+	print("  Attack Element - %s" % [Element.get_element_name(packet.element)])
 	if reaction != null:
 		packet.consolidate_conditional_multipliers(reaction.elements)
 		amount *= packet.base_reaction_multiplier * (1.0 + packet.reaction_multiplier)
-	
+		print("  Reaction - %s" % [Reaction.get_reaction_name(reaction.reaction)])
 	return amount

@@ -17,7 +17,7 @@ enum ReactionKind {
 	Oblivion, # Ether - anything
 }
 
-var REACTION_MAP := {
+static var REACTION_MAP := {
 	# Fire combinations
 	_make_key(ElementKind.Fire, ElementKind.Water): ReactionKind.Vaporize,
 	_make_key(ElementKind.Fire, ElementKind.Wind): ReactionKind.FireStorm,
@@ -44,11 +44,11 @@ var REACTION_MAP := {
 	_make_key(ElementKind.Ether, ElementKind.Fire): ReactionKind.Oblivion,
 }
 
-var reaction_keys = ReactionKind.keys()
+static var reaction_keys = ReactionKind.keys()
 
-func get_reaction(a: ElementKind, b: ElementKind) -> ReactionKind:
+static func get_reaction(a: ElementKind, b: ElementKind) -> ReactionKind:
 	var key = _make_key(a, b)
-	return REACTION_MAP.get(key, null)
+	return REACTION_MAP.get(key)
 
-func get_reaction_name(r: ReactionKind):
+static func get_reaction_name(r: ReactionKind):
 	return reaction_keys[r]

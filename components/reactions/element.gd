@@ -9,12 +9,13 @@ enum ElementKind {
 	Ether,
 }
 
-var element_keys = ElementKind.keys()
+static var element_keys = ElementKind.keys()
+static var element_values = ElementKind.values()
 
-static func _make_key(a: int, b: int) -> PackedInt32Array:
+static func _make_key(a: int, b: int):
 	if a < b:
-		return PackedInt32Array([a, b])
-	return PackedInt32Array([b, a])
+		return Vector2i(a, b)
+	return Vector2i(b, a)
 
-func get_element_name(e: ElementKind):
+static func get_element_name(e: ElementKind):
 	return element_keys[e]
