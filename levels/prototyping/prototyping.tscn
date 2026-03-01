@@ -24,6 +24,9 @@ sky = SubResource("Sky_xgefu")
 albedo_texture = ExtResource("3_0qmt2")
 uv1_triplanar = true
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_82110"]
+albedo_texture = ExtResource("3_0qmt2")
+
 [node name="PrototypeLevel" type="Node3D" unique_id=379384066 node_paths=PackedStringArray("spawn_point")]
 script = ExtResource("1_82110")
 spawn_point = NodePath("SpawnPoint")
@@ -200,6 +203,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.999996, 13, -39)
 light_color = Color(0.6424139, 0.43863684, 0.9296966, 1)
 light_energy = 3.0
 omni_range = 30.0
+
+[node name="JitterTestBox" type="CSGBox3D" parent="CSGBoxes" unique_id=287792181]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 15)
+use_collision = true
+material = SubResource("StandardMaterial3D_82110")
 
 [node name="Lights" type="Node3D" parent="." unique_id=2023466760]
 

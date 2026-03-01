@@ -10,6 +10,7 @@ class_name Player extends CharacterBody3D
 @onready var _state_chart: StateChart = %StateChart
 @onready var _velocity: VelocityComponent = %Velocity
 @onready var _grapple_detector = %GrappleDetector
+@onready var _camera_anchor = $CameraControlAnchor
 
 func walk():
 	_velocity.set_speed_modifier(0)

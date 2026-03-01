@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://bcwkugn6v3oy7" path="res://addons/godot_state_charts/utilities/state_chart_debugger.tscn" id="2_mk48o"]
 [ext_resource type="Script" uid="uid://bhs7nx5n8p50x" path="res://components/character/camera_pivot.gd" id="3_4akdr"]
 [ext_resource type="PackedScene" uid="uid://id84t5a0ya2y" path="res://components/primitives/movement/player_control.tscn" id="3_eti3u"]
+[ext_resource type="Script" uid="uid://ctrqgap4ctxuv" path="res://components/character/weaponary.gd" id="5_2p11o"]
 [ext_resource type="PackedScene" uid="uid://b8xoyf57pebhr" path="res://components/primitives/health/health.tscn" id="5_6npmc"]
 [ext_resource type="Script" uid="uid://couw105c3bde4" path="res://addons/godot_state_charts/state_chart.gd" id="6_cgsss"]
 [ext_resource type="Script" uid="uid://c1vp0ojjvaby1" path="res://addons/godot_state_charts/parallel_state.gd" id="7_qb6gd"]
@@ -116,6 +117,9 @@ grow_horizontal = 1
 grow_vertical = 1
 initial_node_to_watch = NodePath("../StateChart")
 
+[node name="CameraControlAnchor" type="Marker3D" parent="." unique_id=1135788692]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
+
 [node name="ReferenceSphere" type="MeshInstance3D" parent="." unique_id=966743990]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -2)
 visible = false
@@ -131,13 +135,15 @@ mesh = SubResource("CapsuleMesh_pgqh4")
 
 [node name="CameraPivot" type="Node3D" parent="." unique_id=1361904912]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6944885, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
+top_level = true
 script = ExtResource("3_4akdr")
 
 [node name="Camera" type="Camera3D" parent="CameraPivot" unique_id=777665774]
 unique_name_in_owner = true
 
 [node name="Weaponary" type="Node3D" parent="." unique_id=1708920944]
+script = ExtResource("5_2p11o")
 
 [node name="Katana" parent="Weaponary" unique_id=1156992332 node_paths=PackedStringArray("attack_area", "attack_area_shape") instance=ExtResource("2_gie0d")]
 transform = Transform3D(-0.09646627, -0.9636583, -0.2491126, 0.83487564, 0.0579276, -0.547382, 0.54191965, -0.2607819, 0.79894686, 0.6049503, 0.48512423, -0.98595005)
