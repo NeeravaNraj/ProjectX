@@ -165,6 +165,18 @@ use_collision = true
 size = Vector3(10, 1, 10)
 material = SubResource("StandardMaterial3D_6oe7a")
 
+[node name="SwingBar" type="CSGBox3D" parent="CSGBoxes/Arena" unique_id=1707168768]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.592802e-06, 12.5, 5.634712)
+use_collision = true
+size = Vector3(10, 1, 1)
+material = SubResource("StandardMaterial3D_6oe7a")
+
+[node name="SwingBar2" type="CSGBox3D" parent="CSGBoxes/Arena" unique_id=1761848846]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.592802e-06, 12.5, 5.634712)
+use_collision = true
+size = Vector3(10, 1, 1)
+material = SubResource("StandardMaterial3D_6oe7a")
+
 [node name="Wall1" type="CSGBox3D" parent="CSGBoxes/Arena" unique_id=1841556111]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.976988e-06, 10, -43)
 use_collision = true
@@ -206,7 +218,7 @@ omni_range = 30.0
 
 [node name="JitterTestBox" type="CSGBox3D" parent="CSGBoxes" unique_id=287792181]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 15)
-use_collision = true
+visible = false
 material = SubResource("StandardMaterial3D_82110")
 
 [node name="Lights" type="Node3D" parent="." unique_id=2023466760]
@@ -223,3 +235,17 @@ transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 31.508057, 0.46521926, 
 
 [node name="GrapplePoint2" parent="GrapplePoints" unique_id=1641084151 instance=ExtResource("5_dkjbd")]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -0.009254456, 1.3429024, 44.554882)
+
+[node name="GrapplePoint5" parent="GrapplePoints" unique_id=1094358281 instance=ExtResource("5_dkjbd")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 13.730912, 1.3429024, 64.44771)
+
+[node name="GrapplePoint6" parent="GrapplePoints" unique_id=1944415842 instance=ExtResource("5_dkjbd")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -13.269088, 1.3429024, 64.44771)
+
+[node name="GrapplePoint3" parent="GrapplePoints" unique_id=1123671119 instance=ExtResource("5_dkjbd")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -0.009254456, 6.7879515, 26.492828)
+land_on_top = false
+
+[node name="GrapplePoint4" parent="GrapplePoints" unique_id=1949115554 instance=ExtResource("5_dkjbd")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -0.009254456, 6.7879515, 26.492828)
+land_on_top = false
