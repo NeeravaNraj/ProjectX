@@ -55,8 +55,12 @@ func _try_grapple():
 	
 	var direction = data[0]
 	var distance = data[1]
-	var speed = clampf(distance / player_stats.grapple_time, 25.0, 35.0)
-
+	var speed = clampf(
+		distance / player_stats.grapple_time,
+		player_stats.min_grapple_speed,
+		player_stats.max_grapple_speed
+	)
+	
 	if direction:
 		grapple(direction, speed)
 		_state_chart.send_event(&"onGrapple")
