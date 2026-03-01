@@ -21,9 +21,9 @@ func sprint():
 func jump():
 	_velocity.add_impulse(Vector3.UP, player_stats.jump_velocity)
 
-func grapple(direction: Vector3):
+func grapple(direction: Vector3, speed: float):
 	velocity = Vector3.ZERO
-	_velocity.add_impulse(direction, player_stats.grapple_velocity)
+	_velocity.add_impulse(direction, speed)
 
 func get_forward():
 	var forward = basis.z
@@ -50,8 +50,13 @@ func _unhandled_input(event: InputEvent) -> void:
 		_try_grapple()
 		
 func _try_grapple():
-	var grapple_point = _grapple_detector.get_closest_grapple_point()
+	var data = _grapple_detector.get_closest_grapple_point()
+	if not data: return
+	
+	var direction = data[0]
+	var distance = data[1]
+	var speed = clampf(distance / player_stats.grapple_time, 25.0, 35.0)
 
-	if grapple_point:
-		grapple(grapple_point)
+	if direction:
+		grapple(direction, speed)
 		_state_chart.send_event(&"onGrapple")

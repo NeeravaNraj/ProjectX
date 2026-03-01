@@ -15,4 +15,4 @@ class_name PlayerStats extends Resource
 	get:
 		return jump_velocity + jump_velocity_modifier
 
-@export var grapple_velocity: float = 35.0
+@export var grapple_time: float = 0.32
