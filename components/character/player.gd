@@ -38,7 +38,7 @@ func get_height():
 func _ready() -> void:
 	assert(player_stats, "Cannot instantiate Player without PlayerStats resource.")
 	_velocity.speed = player_stats.move_speed
-
+	
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed(&"left_click"):
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
