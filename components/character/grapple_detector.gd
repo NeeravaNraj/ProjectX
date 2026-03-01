@@ -24,17 +24,19 @@ func get_closest_grapple_point():
 	var grapple_point_distance: float = 1.0
 	
 	for d in interactibles_in_range:
+		var gp: GrapplePoint = d.get_parent()
 		var direction: Vector3 = (player.global_position - d.global_position).normalized()
 		var angle = rad_to_deg(direction.angle_to(forward))
 		
 		if angle < 25 and angle < closest:
 			var grapple_position = Vector3(d.global_position)
-			grapple_position.y += player.get_height()
+			var grapple_direction = direction
 			
-			var height_adjusted_direction = (player.global_position - grapple_position).normalized()
+			if gp.land_on_top:
+				grapple_direction = _get_height_adjusted_direction(d)
 			
 			closest = angle
-			best = -height_adjusted_direction
+			best = -grapple_direction
 			grapple_point_distance = (grapple_position - player.global_position).length()
 	
 	if best and closest < 25:
@@ -45,3 +47,9 @@ func _get_lookat_value(d: Node3D):
 	var direction: Vector3 = (player.global_position - d.global_position).normalized()	
 	var angle = rad_to_deg(direction.angle_to(forward))
 	return angle
+
+func _get_height_adjusted_direction(d: Node3D):
+	var grapple_position = Vector3(d.global_position)
+	grapple_position.y += player.get_height() * 1.5
+			
+	return (player.global_position - grapple_position).normalized()

@@ -1,5 +1,6 @@
 class_name GrapplePoint extends Node3D
 
+@export var land_on_top := true
 @onready var detector := $Detector
 
 func _ready() -> void:
