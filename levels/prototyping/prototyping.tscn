@@ -218,6 +218,7 @@ omni_range = 30.0
 
 [node name="JitterTestBox" type="CSGBox3D" parent="CSGBoxes" unique_id=287792181]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 15)
+visible = false
 material = SubResource("StandardMaterial3D_82110")
 
 [node name="Lights" type="Node3D" parent="." unique_id=2023466760]
