@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://crrhu2aidppwn" path="res://components/enemy/enemy.gd" id="1_q6usr"]
 [ext_resource type="PackedScene" uid="uid://by4md02ke1buj" path="res://components/primitives/health/hurt_box.tscn" id="2_8ajy2"]
 [ext_resource type="PackedScene" uid="uid://b8xoyf57pebhr" path="res://components/primitives/health/health.tscn" id="2_mdji8"]
+[ext_resource type="PackedScene" uid="uid://bivh5h6rk1uer" path="res://components/reactions/reaction_handler.tscn" id="4_xlq87"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8ajy2"]
 albedo_color = Color(1, 0.43, 0.43, 1)
@@ -31,14 +32,16 @@ mesh = SubResource("CapsuleMesh_mdji8")
 shape = SubResource("CapsuleShape3D_xlq87")
 
 [node name="Health" parent="." unique_id=1496712029 instance=ExtResource("2_mdji8")]
-health = 100
 
-[node name="HurtBox" parent="." unique_id=1716786986 node_paths=PackedStringArray("health_component") instance=ExtResource("2_8ajy2")]
+[node name="HurtBox" parent="." unique_id=1716786986 node_paths=PackedStringArray("health_component", "reaction_handler") instance=ExtResource("2_8ajy2")]
 collision_layer = 2
 health_component = NodePath("../Health")
+reaction_handler = NodePath("../ReactionHandler")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HurtBox" unique_id=1675923040]
 shape = SubResource("CapsuleShape3D_mdji8")
+
+[node name="ReactionHandler" parent="." unique_id=1660804477 instance=ExtResource("4_xlq87")]
 
 [connection signal="damaged" from="Health" to="." method="_on_health_damaged"]
 [connection signal="death" from="Health" to="." method="_on_health_death"]
