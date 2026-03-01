@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://bivh5h6rk1uer"]
+
+[ext_resource type="Script" uid="uid://c286b2y76wo20" path="res://components/reactions/reaction_handler.gd" id="1_rs7ed"]
+
+[node name="ReactionHandler" type="Node" unique_id=1660804477]
+script = ExtResource("1_rs7ed")
