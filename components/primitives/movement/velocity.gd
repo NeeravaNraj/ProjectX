@@ -12,6 +12,10 @@ var raw_direction := Vector2.ZERO
 var move_velocity := Vector3.ZERO
 var last_moved_direction := Vector3.ZERO
 
+func set_velocity(velocity: Vector3):
+	target.velocity = velocity
+	move_velocity = velocity
+
 func add_impulse(direction: Vector3, power: float):
 	target.velocity += direction.normalized() * power
 	move_velocity = target.velocity

@@ -4,7 +4,6 @@
 [ext_resource type="PackedScene" uid="uid://by4md02ke1buj" path="res://components/primitives/health/hurt_box.tscn" id="2_8ajy2"]
 [ext_resource type="PackedScene" uid="uid://b8xoyf57pebhr" path="res://components/primitives/health/health.tscn" id="2_mdji8"]
 [ext_resource type="Script" uid="uid://bxhdwvc7scbta" path="res://resources/character/enemy_stats.gd" id="2_ynkbq"]
-[ext_resource type="PackedScene" uid="uid://dil3ijsq5pmlq" path="res://components/primitives/movement/velocity.tscn" id="4_0ck2y"]
 [ext_resource type="PackedScene" uid="uid://bivh5h6rk1uer" path="res://components/reactions/reaction_handler.tscn" id="4_xlq87"]
 [ext_resource type="Script" uid="uid://couw105c3bde4" path="res://addons/godot_state_charts/state_chart.gd" id="5_3igal"]
 [ext_resource type="Script" uid="uid://jk2jm1g6q853" path="res://addons/godot_state_charts/compound_state.gd" id="6_xxtfg"]
@@ -69,8 +68,6 @@ mesh = SubResource("CapsuleMesh_mdji8")
 shape = SubResource("CapsuleShape3D_xlq87")
 
 [node name="Health" parent="." unique_id=1496712029 instance=ExtResource("2_mdji8")]
-
-[node name="Velocity" parent="." unique_id=1034921754 instance=ExtResource("4_0ck2y")]
 
 [node name="ReactionHandler" parent="." unique_id=1660804477 instance=ExtResource("4_xlq87")]
 

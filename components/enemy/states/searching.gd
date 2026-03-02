@@ -21,4 +21,4 @@ func _on_searching_state_physics_processing(_delta: float) -> void:
 	if enemy.get_player_distance() < enemy.get_vistion_radius():
 		enemy.state_chart.send_event(&"onAggravated")
 	
-	enemy.move_towards_target(enemy.enemy_stats.search_speed)
+	enemy.speed = enemy.enemy_stats.search_speed

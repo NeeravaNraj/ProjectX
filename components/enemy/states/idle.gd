@@ -9,4 +9,4 @@ func _on_idle_state_physics_processing(delta: float) -> void:
 			enemy.player = body
 			enemy.state_chart.send_event(&"onAggravated")
 	
-	enemy.move_towards_target(enemy.enemy_stats.move_speed)
+	enemy.speed = enemy.enemy_stats.move_speed
