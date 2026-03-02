@@ -26,10 +26,7 @@ func grapple(direction: Vector3, speed: float):
 	_velocity.add_impulse(direction, speed)
 
 func get_forward():
-	var forward = basis.z
-	forward.y = _camera_pivot.basis.z.y
-	
-	return forward
+	return _camera.global_transform.basis.z.normalized()
 
 func get_height():
 	var shape = $Shape.shape as CapsuleShape3D

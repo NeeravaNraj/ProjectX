@@ -28,6 +28,7 @@ func get_closest_grapple_point():
 		var direction: Vector3 = (player.global_position - d.global_position).normalized()
 		var angle = rad_to_deg(direction.angle_to(forward))
 		
+		
 		if angle < 25 and angle < closest:
 			var grapple_position = Vector3(d.global_position)
 			var grapple_direction = direction
@@ -44,8 +45,10 @@ func get_closest_grapple_point():
 
 func _get_lookat_value(d: Node3D):
 	var forward: Vector3 = player.get_forward()
-	var direction: Vector3 = (player.global_position - d.global_position).normalized()	
-	var angle = rad_to_deg(direction.angle_to(forward))
+	var head_position = player._camera_anchor.global_position
+	var direction: Vector3 = (head_position - d.global_position).normalized()	
+	var angle = rad_to_deg(forward.angle_to(direction))
+
 	return angle
 
 func _get_height_adjusted_direction(d: Node3D):

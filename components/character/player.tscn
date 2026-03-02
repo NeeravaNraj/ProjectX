@@ -111,7 +111,7 @@ player_stats = ExtResource("2_bmx6v")
 anchors_preset = 0
 anchor_right = 0.0
 anchor_bottom = 0.0
-offset_right = 361.0
+offset_right = 574.0
 offset_bottom = 310.0
 grow_horizontal = 1
 grow_vertical = 1
@@ -238,6 +238,7 @@ metadata/_custom_type_script = "uid://cf1nsco3w0mf6"
 
 [node name="Moving" type="Node" parent="StateChart/Root/Movement/Grounded" unique_id=412453979]
 script = ExtResource("8_mk48o")
+initial_state = NodePath("Sprinting")
 metadata/_custom_type_script = "uid://jk2jm1g6q853"
 
 [node name="Sprinting" type="Node" parent="StateChart/Root/Movement/Grounded/Moving" unique_id=767903468]
