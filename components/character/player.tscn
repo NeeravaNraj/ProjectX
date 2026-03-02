@@ -19,7 +19,6 @@
 [ext_resource type="Script" uid="uid://bprfdfuxsvgcf" path="res://components/character/states/idle_state.gd" id="12_qb6gd"]
 [ext_resource type="Script" uid="uid://62je6vn55ygo" path="res://components/character/states/grounded_state.gd" id="13_0v6yc"]
 [ext_resource type="Script" uid="uid://bupolwf85pte3" path="res://components/character/states/moving_state.gd" id="14_2ve8e"]
-[ext_resource type="Script" uid="uid://dddx4hgxxjf8k" path="res://components/character/states/walking_state.gd" id="14_mfj52"]
 [ext_resource type="Script" uid="uid://bmjsknduokcs5" path="res://components/character/states/sprinting_state.gd" id="16_lxhmo"]
 [ext_resource type="Script" uid="uid://pd7klsrgk65n" path="res://components/character/states/airborne.gd" id="18_5gql3"]
 [ext_resource type="Script" uid="uid://64433uu4jg86" path="res://components/character/states/jumping.gd" id="20_mq1ei"]
@@ -239,12 +238,7 @@ metadata/_custom_type_script = "uid://cf1nsco3w0mf6"
 
 [node name="Moving" type="Node" parent="StateChart/Root/Movement/Grounded" unique_id=412453979]
 script = ExtResource("8_mk48o")
-initial_state = NodePath("Walking")
 metadata/_custom_type_script = "uid://jk2jm1g6q853"
-
-[node name="Walking" type="Node" parent="StateChart/Root/Movement/Grounded/Moving" unique_id=1015817340]
-script = ExtResource("9_mfj52")
-metadata/_custom_type_script = "uid://cytafq8i1y8qm"
 
 [node name="Sprinting" type="Node" parent="StateChart/Root/Movement/Grounded/Moving" unique_id=767903468]
 script = ExtResource("9_mfj52")
@@ -254,13 +248,6 @@ metadata/_custom_type_script = "uid://cytafq8i1y8qm"
 script = ExtResource("10_2ve8e")
 to = NodePath("../../Idle")
 event = &"onIdle"
-delay_in_seconds = "0.0"
-metadata/_custom_type_script = "uid://cf1nsco3w0mf6"
-
-[node name="OnWalking" type="Node" parent="StateChart/Root/Movement/Grounded/Moving" unique_id=1612267461]
-script = ExtResource("10_2ve8e")
-to = NodePath("../Walking")
-event = &"onWalking"
 delay_in_seconds = "0.0"
 metadata/_custom_type_script = "uid://cf1nsco3w0mf6"
 
@@ -318,9 +305,6 @@ script = ExtResource("12_qb6gd")
 [node name="MovingState" type="Node" parent="StateActors/MovementState/GroundedState" unique_id=1273122125]
 script = ExtResource("14_2ve8e")
 
-[node name="WalkingState" type="Node" parent="StateActors/MovementState/GroundedState/MovingState" unique_id=1963113913]
-script = ExtResource("14_mfj52")
-
 [node name="SprintingState" type="Node" parent="StateActors/MovementState/GroundedState/MovingState" unique_id=1712382834]
 script = ExtResource("16_lxhmo")
 
@@ -347,7 +331,6 @@ script = ExtResource("23_lbmrp")
 [connection signal="state_physics_processing" from="StateChart/Root/Movement/Grounded/Idle" to="StateActors/MovementState/GroundedState/IdleState" method="_on_idle_state_physics_processing"]
 [connection signal="state_physics_processing" from="StateChart/Root/Movement/Grounded/Moving" to="StateActors/MovementState/GroundedState/MovingState" method="_on_moving_state_physics_processing"]
 [connection signal="state_unhandled_input" from="StateChart/Root/Movement/Grounded/Moving" to="StateActors/MovementState/GroundedState/MovingState" method="_on_moving_state_unhandled_input"]
-[connection signal="state_physics_processing" from="StateChart/Root/Movement/Grounded/Moving/Walking" to="StateActors/MovementState/GroundedState/MovingState/WalkingState" method="_on_walking_state_physics_processing"]
 [connection signal="state_physics_processing" from="StateChart/Root/Movement/Grounded/Moving/Sprinting" to="StateActors/MovementState/GroundedState/MovingState/SprintingState" method="_on_sprinting_state_physics_processing"]
 [connection signal="state_physics_processing" from="StateChart/Root/Movement/Airborne" to="StateActors/MovementState/AirborneState" method="_on_airborne_state_physics_processing"]
 [connection signal="state_entered" from="StateChart/Root/Movement/Airborne/Jumping" to="StateActors/MovementState/AirborneState/Jumping" method="_on_jumping_state_entered"]
