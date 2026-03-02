@@ -17,4 +17,4 @@ class_name PlayerStats extends Resource
 
 @export var grapple_time: float = 0.32
 @export var max_grapple_speed: float = 38.0
-@export var min_grapple_speed: float = 25.0 
+@export var min_grapple_speed: float = 30.0 
