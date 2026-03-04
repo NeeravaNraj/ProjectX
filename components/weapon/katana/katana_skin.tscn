@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://bivhck4dd0bg7"]
+
+[ext_resource type="PackedScene" uid="uid://b5xgehtqtnacd" path="res://components/weapon/katana/assets/cyberpunk_enigma_-_katana.glb" id="1_7fure"]
+
+[node name="KatanaSkin" unique_id=233431355 instance=ExtResource("1_7fure")]
+
+[node name="Sketchfab_model" parent="." index="0" unique_id=264790839]
+transform = Transform3D(1, 0, 0, 0, -4.3711385e-08, -0.99999994, 0, 0.99999994, -4.3711385e-08, 0, 0, 0)
+
+[node name="Collada visual scene group" parent="Sketchfab_model" index="0" unique_id=71192218]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="lp_001" parent="Sketchfab_model/Collada visual scene group" index="0" unique_id=1977176663]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)

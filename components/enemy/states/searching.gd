@@ -6,7 +6,10 @@ extends EnemyState
 func _on_searching_state_entered() -> void:
 	if not search_timer.is_stopped(): search_timer.stop()
 	search_timer.start()
-
+	
+func _on_search_timer_timeout() -> void:
+	print("TIMEOUT")
+	enemy.state_chart.send_event(&"onIdle")
 
 func _on_searching_state_exited() -> void:
 	search_timer.stop()
@@ -22,3 +25,4 @@ func _on_searching_state_physics_processing(_delta: float) -> void:
 		enemy.state_chart.send_event(&"onAggravated")
 	
 	enemy.speed = enemy.enemy_stats.search_speed
+	enemy.move_towards_target()

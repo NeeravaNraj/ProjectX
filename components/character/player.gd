@@ -11,6 +11,8 @@ class_name Player extends CharacterBody3D
 @onready var _velocity: VelocityComponent = %Velocity
 @onready var _grapple_detector = %GrappleDetector
 @onready var _camera_anchor = $CameraControlAnchor
+@onready var _skin: PlayerSkin = $PlayerSkin
+
 
 func walk():
 	_velocity.set_speed_modifier(0)
@@ -19,6 +21,7 @@ func sprint():
 	_velocity.set_speed_modifier(player_stats.move_speed_sprint)
 
 func jump():
+	_skin.jump()
 	_velocity.add_impulse(Vector3.UP, player_stats.jump_velocity)
 
 func grapple(direction: Vector3, speed: float):
@@ -35,6 +38,7 @@ func get_height():
 func _ready() -> void:
 	assert(player_stats, "Cannot instantiate Player without PlayerStats resource.")
 	_velocity.speed = player_stats.move_speed
+	_skin.toggle_head_hide(false)
 	
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed(&"left_click"):
@@ -46,6 +50,10 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed(&"interact"):
 		_try_grapple()
 
+#func _physics_process(delta: float):
+	#_camera_anchor.global_position = _skin.get_head().origin
+	#_camera_anchor.global_position -= get_forward() * 0.5
+	
 func _try_grapple():
 	var data = _grapple_detector.get_closest_grapple_point()
 	if not data: return

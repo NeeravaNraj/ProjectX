@@ -165,3 +165,4 @@ one_shot = true
 [connection signal="state_entered" from="StateChart/Root/InCombat/Searching" to="StateActors/InCombat/Searching" method="_on_searching_state_entered"]
 [connection signal="state_exited" from="StateChart/Root/InCombat/Searching" to="StateActors/InCombat/Searching" method="_on_searching_state_exited"]
 [connection signal="state_physics_processing" from="StateChart/Root/InCombat/Searching" to="StateActors/InCombat/Searching" method="_on_searching_state_physics_processing"]
+[connection signal="timeout" from="StateActors/InCombat/Searching/SearchTimer" to="StateActors/InCombat/Searching" method="_on_search_timer_timeout"]

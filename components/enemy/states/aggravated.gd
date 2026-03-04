@@ -16,3 +16,4 @@ func _on_aggravated_state_physics_processing(delta: float) -> void:
 		enemy.navigation_agent.set_target_position(enemy.player.global_position)
 	
 	enemy.speed = enemy.enemy_stats.move_speed
+	enemy.move_towards_target()

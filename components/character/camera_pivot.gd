@@ -18,17 +18,14 @@ func _unhandled_input(event: InputEvent) -> void:
 		mouse_input += event.screen_relative * player.mouse_sens
 
 	
-func  _process(_delta: float):
+func  _physics_process(_delta: float):
 	current_rotation.x = clamp(current_rotation.x - mouse_input.y, deg_to_rad(-80), deg_to_rad(90))
 	current_rotation.y -= mouse_input.x
 	
-	var camera_anchor = player._camera_anchor
 	var pitch = Vector3(current_rotation.x, 0.0, 0.0)
 	var yaw = Vector3(0.0, current_rotation.y, 0.0)
 	
-	rotation = pitch + yaw
+	rotation = pitch
 	player.global_transform.basis = Basis.from_euler(yaw)
-	
-	global_position = camera_anchor.get_global_transform_interpolated().origin
 	
 	mouse_input = Vector2.ZERO

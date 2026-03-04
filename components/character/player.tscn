@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://d1gc3n43os8em" path="res://components/character/player.gd" id="1_knl4b"]
 [ext_resource type="PackedScene" uid="uid://dil3ijsq5pmlq" path="res://components/primitives/movement/velocity.tscn" id="2_b1s2y"]
 [ext_resource type="Resource" uid="uid://by477s548hrfi" path="res://resources/character/player_stats.tres" id="2_bmx6v"]
-[ext_resource type="PackedScene" uid="uid://dgm4u8srpwll1" path="res://components/weapon/katana.tscn" id="2_gie0d"]
+[ext_resource type="PackedScene" uid="uid://dgm4u8srpwll1" path="res://components/weapon/katana/katana.tscn" id="2_gie0d"]
 [ext_resource type="PackedScene" uid="uid://bcwkugn6v3oy7" path="res://addons/godot_state_charts/utilities/state_chart_debugger.tscn" id="2_mk48o"]
 [ext_resource type="Script" uid="uid://bhs7nx5n8p50x" path="res://components/character/camera_pivot.gd" id="3_4akdr"]
 [ext_resource type="PackedScene" uid="uid://id84t5a0ya2y" path="res://components/primitives/movement/player_control.tscn" id="3_eti3u"]
@@ -24,6 +24,7 @@
 [ext_resource type="Script" uid="uid://64433uu4jg86" path="res://components/character/states/jumping.gd" id="20_mq1ei"]
 [ext_resource type="Script" uid="uid://mjyk1l66mn35" path="res://components/character/states/grappling.gd" id="23_lbmrp"]
 [ext_resource type="PackedScene" uid="uid://ctn4ndv16n1wo" path="res://components/reactions/element_selector.tscn" id="25_6p5bk"]
+[ext_resource type="PackedScene" uid="uid://djaqb8wfs0o1e" path="res://components/character/player_skin.tscn" id="25_ukpso"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_gie0d"]
 radius = 0.225
@@ -107,6 +108,11 @@ radius = 12.0
 script = ExtResource("1_knl4b")
 player_stats = ExtResource("2_bmx6v")
 
+[node name="PlayerSkin" parent="." unique_id=787749731 node_paths=PackedStringArray("player", "weapon") instance=ExtResource("25_ukpso")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, -1, 0.25)
+player = NodePath("..")
+weapon = NodePath("../Weaponry/Katana")
+
 [node name="StateChartDebugger" parent="." unique_id=1760072062 instance=ExtResource("2_mk48o")]
 anchors_preset = 0
 anchor_right = 0.0
@@ -118,7 +124,7 @@ grow_vertical = 1
 initial_node_to_watch = NodePath("../StateChart")
 
 [node name="CameraControlAnchor" type="Marker3D" parent="." unique_id=1135788692]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.648, -0.2995802)
 
 [node name="ReferenceSphere" type="MeshInstance3D" parent="." unique_id=966743990]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -2)
@@ -129,6 +135,7 @@ mesh = SubResource("SphereMesh_gie0d")
 shape = SubResource("CapsuleShape3D_knl4b")
 
 [node name="Model" type="Node3D" parent="." unique_id=247778809]
+visible = false
 
 [node name="Body" type="MeshInstance3D" parent="Model" unique_id=2057104036]
 mesh = SubResource("CapsuleMesh_pgqh4")
@@ -136,29 +143,29 @@ mesh = SubResource("CapsuleMesh_pgqh4")
 [node name="CameraPivot" type="Node3D" parent="." unique_id=1361904912]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
-top_level = true
 script = ExtResource("3_4akdr")
 
 [node name="Camera" type="Camera3D" parent="CameraPivot" unique_id=777665774]
 unique_name_in_owner = true
 
-[node name="Weaponary" type="Node3D" parent="." unique_id=1708920944]
+[node name="Weaponry" type="Node3D" parent="." unique_id=1708920944]
 script = ExtResource("5_2p11o")
 
-[node name="Katana" parent="Weaponary" unique_id=1156992332 node_paths=PackedStringArray("attack_area", "element_selector", "attack_area_shape") instance=ExtResource("2_gie0d")]
+[node name="Katana" parent="Weaponry" unique_id=1156992332 node_paths=PackedStringArray("attack_area", "element_selector", "attack_area_shape") instance=ExtResource("2_gie0d")]
 transform = Transform3D(-0.09646627, -0.9636583, -0.2491126, 0.83487564, 0.0579276, -0.547382, 0.54191965, -0.2607819, 0.79894686, 0.6049503, 0.48512423, -0.98595005)
+visible = false
 attack_damage = 10
 attack_area = NodePath("../../HitBox")
 element_selector = NodePath("../../ElementSelector")
 attack_area_shape = NodePath("../../HitBox/AttackShape")
 
-[node name="Model" parent="Weaponary/Katana" index="0" unique_id=1794460968]
+[node name="Model" parent="Weaponry/Katana" index="0" unique_id=1794460968]
 transform = Transform3D(1, 0, 0, 0, 1.0000001, 0, 0, 0, 0.99999994, 0, 0, 0)
 
-[node name="Handle" parent="Weaponary/Katana/Model" index="2" unique_id=352267174]
+[node name="Handle" parent="Weaponry/Katana/Model" index="2" unique_id=352267174]
 transform = Transform3D(0.9998301, 0.017492488, 0.005824983, -0.017560542, 0.99977577, 0.0118379295, -0.005616635, -0.011938259, 0.99991304, 1.4901161e-08, -2.9802322e-08, 0.5034061)
 
-[node name="AnimationPlayer" parent="Weaponary/Katana" index="1" unique_id=939599132]
+[node name="AnimationPlayer" parent="Weaponry/Katana" index="1" unique_id=939599132]
 libraries/ = SubResource("AnimationLibrary_6p5bk")
 
 [node name="Health" parent="." unique_id=1496712029 instance=ExtResource("5_6npmc")]
@@ -341,4 +348,4 @@ script = ExtResource("23_lbmrp")
 [connection signal="timeout" from="StateActors/MovementState/AirborneState/Jumping/JumpTimer" to="StateActors/MovementState/AirborneState/Jumping" method="_on_jump_timer_timeout"]
 [connection signal="timeout" from="StateActors/MovementState/AirborneState/Grappling/GrappleTimer" to="StateActors/MovementState/AirborneState/Grappling" method="_on_grapple_timer_timeout"]
 
-[editable path="Weaponary/Katana"]
+[editable path="Weaponry/Katana"]
