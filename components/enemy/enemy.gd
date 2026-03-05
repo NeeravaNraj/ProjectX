@@ -28,6 +28,7 @@ func get_player_distance():
 
 func _ready() -> void:
 	starting_position = global_position
+	state_chart.send_event(&"onIdle")
 
 func move_towards_target():
 	if navigation_agent.is_navigation_finished(): return

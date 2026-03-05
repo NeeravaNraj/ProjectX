@@ -8,7 +8,6 @@ func _on_searching_state_entered() -> void:
 	search_timer.start()
 	
 func _on_search_timer_timeout() -> void:
-	print("TIMEOUT")
 	enemy.state_chart.send_event(&"onIdle")
 
 func _on_searching_state_exited() -> void:

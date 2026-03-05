@@ -98,7 +98,7 @@ size = Vector3(10, 1, 10)
 material = SubResource("StandardMaterial3D_6oe7a")
 
 [node name="Room1 Ramp" type="CSGBox3D" parent="LevelNavigationRegion/LevelGeometry/Router Platform" unique_id=1103348997]
-transform = Transform3D(0.9659263, 0.25881916, 0, -0.25881916, 0.9659263, 0, 0, 0, 1, 14.206165, -3.0316176, 0)
+transform = Transform3D(0.9659263, 0.25881916, 0, -0.25881916, 0.9659263, 0, 0, 0, 1, 14.206165, -2.9710498, 0)
 use_collision = true
 size = Vector3(19.5, 1, 10)
 material = SubResource("StandardMaterial3D_6oe7a")

@@ -85,10 +85,21 @@ metadata/_custom_type_script = "uid://jk2jm1g6q853"
 script = ExtResource("7_8lvoy")
 metadata/_custom_type_script = "uid://cytafq8i1y8qm"
 
+[node name="Searching" type="Node" parent="StateChart/Root" unique_id=721284004]
+script = ExtResource("7_8lvoy")
+metadata/_custom_type_script = "uid://cytafq8i1y8qm"
+
 [node name="OnAggravated" type="Node" parent="StateChart/Root" unique_id=12636995]
 script = ExtResource("8_0ck2y")
 to = NodePath("../InCombat/Aggravated")
 event = &"onAggravated"
+delay_in_seconds = "0.0"
+metadata/_custom_type_script = "uid://cf1nsco3w0mf6"
+
+[node name="OnIdle" type="Node" parent="StateChart/Root" unique_id=46294130]
+script = ExtResource("8_0ck2y")
+to = NodePath("../Idle")
+event = &"onIdle"
 delay_in_seconds = "0.0"
 metadata/_custom_type_script = "uid://cf1nsco3w0mf6"
 
@@ -102,10 +113,6 @@ script = ExtResource("7_8lvoy")
 metadata/_custom_type_script = "uid://cytafq8i1y8qm"
 
 [node name="Attacking" type="Node" parent="StateChart/Root/InCombat" unique_id=1499949445]
-script = ExtResource("7_8lvoy")
-metadata/_custom_type_script = "uid://cytafq8i1y8qm"
-
-[node name="Searching" type="Node" parent="StateChart/Root/InCombat" unique_id=721284004]
 script = ExtResource("7_8lvoy")
 metadata/_custom_type_script = "uid://cytafq8i1y8qm"
 
@@ -125,7 +132,7 @@ metadata/_custom_type_script = "uid://cf1nsco3w0mf6"
 
 [node name="OnSearching" type="Node" parent="StateChart/Root/InCombat" unique_id=363330704]
 script = ExtResource("8_0ck2y")
-to = NodePath("../Searching")
+to = NodePath("../../Searching")
 event = &"onSearching"
 delay_in_seconds = "0.0"
 metadata/_custom_type_script = "uid://cf1nsco3w0mf6"
@@ -138,6 +145,13 @@ enemy = NodePath("..")
 [node name="Idle" type="Node" parent="StateActors" unique_id=1432225665]
 script = ExtResource("9_xxtfg")
 
+[node name="Searching" type="Node" parent="StateActors" unique_id=2054365419]
+script = ExtResource("14_td40n")
+
+[node name="SearchTimer" type="Timer" parent="StateActors/Searching" unique_id=1634647124]
+wait_time = 5.0
+one_shot = true
+
 [node name="InCombat" type="Node" parent="StateActors" unique_id=800716252]
 script = ExtResource("13_td40n")
 
@@ -147,22 +161,15 @@ script = ExtResource("12_mmy8y")
 [node name="Attacking" type="Node" parent="StateActors/InCombat" unique_id=390464894]
 script = ExtResource("13_ynkbq")
 
-[node name="Searching" type="Node" parent="StateActors/InCombat" unique_id=2054365419]
-script = ExtResource("14_td40n")
-
-[node name="SearchTimer" type="Timer" parent="StateActors/InCombat/Searching" unique_id=1634647124]
-wait_time = 5.0
-one_shot = true
-
 [connection signal="damaged" from="Health" to="." method="_on_health_damaged"]
 [connection signal="death" from="Health" to="." method="_on_health_death"]
 [connection signal="state_physics_processing" from="StateChart/Root" to="StateActors" method="_on_root_state_physics_processing"]
 [connection signal="state_physics_processing" from="StateChart/Root/Idle" to="StateActors/Idle" method="_on_idle_state_physics_processing"]
+[connection signal="state_entered" from="StateChart/Root/Searching" to="StateActors/Searching" method="_on_searching_state_entered"]
+[connection signal="state_exited" from="StateChart/Root/Searching" to="StateActors/Searching" method="_on_searching_state_exited"]
+[connection signal="state_physics_processing" from="StateChart/Root/Searching" to="StateActors/Searching" method="_on_searching_state_physics_processing"]
 [connection signal="state_physics_processing" from="StateChart/Root/InCombat" to="StateActors/InCombat" method="_on_in_combat_state_physics_processing"]
 [connection signal="state_entered" from="StateChart/Root/InCombat/Aggravated" to="StateActors/InCombat/Aggravated" method="_on_aggravated_state_entered"]
 [connection signal="state_physics_processing" from="StateChart/Root/InCombat/Aggravated" to="StateActors/InCombat/Aggravated" method="_on_aggravated_state_physics_processing"]
 [connection signal="state_physics_processing" from="StateChart/Root/InCombat/Attacking" to="StateActors/InCombat/Attacking" method="_on_attacking_state_physics_processing"]
-[connection signal="state_entered" from="StateChart/Root/InCombat/Searching" to="StateActors/InCombat/Searching" method="_on_searching_state_entered"]
-[connection signal="state_exited" from="StateChart/Root/InCombat/Searching" to="StateActors/InCombat/Searching" method="_on_searching_state_exited"]
-[connection signal="state_physics_processing" from="StateChart/Root/InCombat/Searching" to="StateActors/InCombat/Searching" method="_on_searching_state_physics_processing"]
-[connection signal="timeout" from="StateActors/InCombat/Searching/SearchTimer" to="StateActors/InCombat/Searching" method="_on_search_timer_timeout"]
+[connection signal="timeout" from="StateActors/Searching/SearchTimer" to="StateActors/Searching" method="_on_search_timer_timeout"]

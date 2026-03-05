@@ -3,7 +3,6 @@ extends EnemyState
 
 func _on_aggravated_state_entered() -> void:
 	if not enemy or not enemy.player: return
-	print("agrooo")
 	enemy.alert.emit(enemy.global_position, enemy.player.global_position)
 	enemy.navigation_agent.set_target_position(enemy.player.global_position)
 
