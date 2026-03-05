@@ -108,7 +108,7 @@ radius = 12.0
 script = ExtResource("1_knl4b")
 player_stats = ExtResource("2_bmx6v")
 
-[node name="PlayerSkin" parent="." unique_id=1829396104 node_paths=PackedStringArray("player", "weapon") instance=ExtResource("25_ukpso")]
+[node name="PlayerSkin" parent="." unique_id=1850179714 node_paths=PackedStringArray("player", "weapon") instance=ExtResource("25_ukpso")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, -1, 0.25)
 player = NodePath("..")
 weapon = NodePath("../Weaponry/Katana")
@@ -124,7 +124,7 @@ grow_vertical = 1
 initial_node_to_watch = NodePath("../StateChart")
 
 [node name="CameraControlAnchor" type="Marker3D" parent="." unique_id=1135788692]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.648, -0.2995802)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.60824907, 0.07481673)
 
 [node name="ReferenceSphere" type="MeshInstance3D" parent="." unique_id=966743990]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -2)
@@ -168,16 +168,10 @@ transform = Transform3D(0.9998301, 0.017492488, 0.005824983, -0.017560542, 0.999
 [node name="AnimationPlayer" parent="Weaponry/Katana" index="1" unique_id=939599132]
 libraries/ = SubResource("AnimationLibrary_6p5bk")
 
-[node name="Health" parent="." unique_id=1496712029 instance=ExtResource("5_6npmc")]
-
-[node name="Velocity" parent="." unique_id=1034921754 instance=ExtResource("2_b1s2y")]
-unique_name_in_owner = true
-gravity = -35.0
-
-[node name="PlayerControl" parent="Velocity" unique_id=514334726 instance=ExtResource("3_eti3u")]
-
 [node name="HitBox" type="Area3D" parent="." unique_id=1832605776]
+collision_layer = 0
 collision_mask = 2
+monitorable = false
 
 [node name="AttackShape" type="CollisionShape3D" parent="HitBox" unique_id=1166820792]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.32253122, -1.3072433)
@@ -186,6 +180,7 @@ shape = SubResource("BoxShape3D_gie0d")
 [node name="GrappleDetector" type="Area3D" parent="." unique_id=1849131499]
 unique_name_in_owner = true
 collision_mask = 4
+monitorable = false
 script = ExtResource("9_jqkmc")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="GrappleDetector" unique_id=242064432]
@@ -329,6 +324,14 @@ one_shot = true
 script = ExtResource("23_lbmrp")
 
 [node name="GrappleTimer" type="Timer" parent="StateActors/MovementState/AirborneState/Grappling" unique_id=1437606915]
+
+[node name="Health" parent="." unique_id=1496712029 instance=ExtResource("5_6npmc")]
+
+[node name="Velocity" parent="." unique_id=1034921754 instance=ExtResource("2_b1s2y")]
+unique_name_in_owner = true
+gravity = -35.0
+
+[node name="PlayerControl" parent="Velocity" unique_id=514334726 instance=ExtResource("3_eti3u")]
 
 [node name="ElementSelector" parent="." unique_id=562223786 instance=ExtResource("25_6p5bk")]
 

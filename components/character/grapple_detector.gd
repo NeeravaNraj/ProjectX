@@ -20,12 +20,14 @@ func get_closest_grapple_point():
 	var forward = player.get_forward()
 
 	var closest = INF
+	var can_grapple = false
 	var best: Vector3 = Vector3.ZERO
 	var grapple_point_distance: float = 1.0
 	
 	for d in interactibles_in_range:
 		var gp: GrapplePoint = d.get_parent()
-		var direction: Vector3 = (player.global_position - d.global_position).normalized()
+		var head = player._camera_anchor.global_position
+		var direction: Vector3 = (head - d.global_position).normalized()
 		var angle = rad_to_deg(direction.angle_to(forward))
 		
 		
@@ -38,21 +40,30 @@ func get_closest_grapple_point():
 			
 			closest = angle
 			best = -grapple_direction
+			can_grapple = _raycast_to_grapple(head, d.global_position) == d
 			grapple_point_distance = (grapple_position - player.global_position).length()
 	
-	if best and closest < 25:
+	if can_grapple and best and closest < 25:
 		return [best, grapple_point_distance]
 
 func _get_lookat_value(d: Node3D):
 	var forward: Vector3 = player.get_forward()
 	var head_position = player._camera_anchor.global_position
-	var direction: Vector3 = (head_position - d.global_position).normalized()	
+	var direction: Vector3 = (head_position - d.global_position).normalized()
 	var angle = rad_to_deg(forward.angle_to(direction))
-
 	return angle
 
 func _get_height_adjusted_direction(d: Node3D):
 	var grapple_position = Vector3(d.global_position)
 	grapple_position.y += player.get_height() * 1.5
-			
+	
 	return (player.global_position - grapple_position).normalized()
+
+func _raycast_to_grapple(from: Vector3, to: Vector3):
+	var raycast_query = PhysicsRayQueryParameters3D.create(from, to)
+	raycast_query.collide_with_areas = true
+	
+	var result = player.space_state.intersect_ray(raycast_query)
+	var collider = result.get("collider") as Area3D
+	
+	return collider

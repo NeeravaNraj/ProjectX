@@ -238,9 +238,5 @@ transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 13.730912, 1.3429024, 6
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -13.269088, 1.3429024, 64.44771)
 
 [node name="GrapplePoint3" parent="GrapplePoints" unique_id=1123671119 instance=ExtResource("5_dkjbd")]
-transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -0.009254456, 6.7879515, 26.492828)
-land_on_top = false
-
-[node name="GrapplePoint4" parent="GrapplePoints" unique_id=1949115554 instance=ExtResource("5_dkjbd")]
-transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -0.009254456, 6.7879515, 26.492828)
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -0.009254456, 6.463083, 26.492828)
 land_on_top = false

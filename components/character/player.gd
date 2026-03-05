@@ -13,6 +13,7 @@ class_name Player extends CharacterBody3D
 @onready var _camera_anchor = $CameraControlAnchor
 @onready var _skin: PlayerSkin = $PlayerSkin
 
+var space_state: PhysicsDirectSpaceState3D
 
 func walk():
 	_velocity.set_speed_modifier(0)
@@ -37,6 +38,7 @@ func get_height():
 
 func _ready() -> void:
 	assert(player_stats, "Cannot instantiate Player without PlayerStats resource.")
+	space_state = get_world_3d().direct_space_state
 	_velocity.speed = player_stats.move_speed
 	_skin.toggle_head_hide(false)
 	
@@ -49,10 +51,6 @@ func _unhandled_input(event: InputEvent) -> void:
 	
 	if event.is_action_pressed(&"interact"):
 		_try_grapple()
-
-#func _physics_process(delta: float):
-	#_camera_anchor.global_position = _skin.get_head().origin
-	#_camera_anchor.global_position -= get_forward() * 0.5
 	
 func _try_grapple():
 	var data = _grapple_detector.get_closest_grapple_point()
@@ -66,6 +64,6 @@ func _try_grapple():
 		player_stats.max_grapple_speed
 	)
 	
-	if direction:
+	if direction and distance >= 5:
 		grapple(direction, speed)
 		_state_chart.send_event(&"onGrapple")
