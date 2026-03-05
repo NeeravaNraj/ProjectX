@@ -1,9 +1,9 @@
 class_name Player extends CharacterBody3D
 
+@export var player_stats: PlayerStats
+
 @export_group("Camera")
 @export_range(0.0, 1.0) var mouse_sens := 0.0025
-
-@export var player_stats: PlayerStats
 
 @onready var _camera: Camera3D = %Camera
 @onready var _camera_pivot: Node3D = %CameraPivot
