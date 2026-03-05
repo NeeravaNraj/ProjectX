@@ -12,3 +12,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="lp_001" parent="Sketchfab_model/Collada visual scene group" index="0" unique_id=1977176663]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="defaultMaterial" parent="Sketchfab_model/Collada visual scene group/lp_001" index="0" unique_id=1985313921]
+cast_shadow = 0
