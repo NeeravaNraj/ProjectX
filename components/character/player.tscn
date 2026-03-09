@@ -24,7 +24,6 @@
 [ext_resource type="Script" uid="uid://64433uu4jg86" path="res://components/character/states/jumping.gd" id="20_mq1ei"]
 [ext_resource type="Script" uid="uid://mjyk1l66mn35" path="res://components/character/states/grappling.gd" id="23_lbmrp"]
 [ext_resource type="PackedScene" uid="uid://ctn4ndv16n1wo" path="res://components/reactions/element_selector.tscn" id="25_6p5bk"]
-[ext_resource type="PackedScene" uid="uid://djaqb8wfs0o1e" path="res://components/character/player_skin.tscn" id="25_ukpso"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_gie0d"]
 radius = 0.225
@@ -107,21 +106,6 @@ radius = 12.0
 [node name="Player" type="CharacterBody3D" unique_id=1186516781]
 script = ExtResource("1_knl4b")
 player_stats = ExtResource("2_bmx6v")
-
-[node name="PlayerSkin" parent="." unique_id=1850179714 node_paths=PackedStringArray("player", "weapon") instance=ExtResource("25_ukpso")]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, -1, 0.25)
-player = NodePath("..")
-weapon = NodePath("../Weaponry/Katana")
-
-[node name="StateChartDebugger" parent="." unique_id=1760072062 instance=ExtResource("2_mk48o")]
-anchors_preset = 0
-anchor_right = 0.0
-anchor_bottom = 0.0
-offset_right = 574.0
-offset_bottom = 310.0
-grow_horizontal = 1
-grow_vertical = 1
-initial_node_to_watch = NodePath("../StateChart")
 
 [node name="CameraControlAnchor" type="Marker3D" parent="." unique_id=1135788692]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.60824907, 0.07481673)
@@ -292,6 +276,13 @@ event = &"onFalling"
 delay_in_seconds = "0.0"
 metadata/_custom_type_script = "uid://cf1nsco3w0mf6"
 
+[node name="OnGrappling" type="Node" parent="StateChart/Root/Movement/Airborne" unique_id=258435677]
+script = ExtResource("10_2ve8e")
+to = NodePath("../../Airborne/Grappling")
+event = &"onGrapple"
+delay_in_seconds = "0.0"
+metadata/_custom_type_script = "uid://cf1nsco3w0mf6"
+
 [node name="StateActors" type="Node" parent="." unique_id=1782869980 node_paths=PackedStringArray("player")]
 unique_name_in_owner = true
 script = ExtResource("11_lxhmo")
@@ -335,6 +326,21 @@ gravity = -35.0
 
 [node name="ElementSelector" parent="." unique_id=562223786 instance=ExtResource("25_6p5bk")]
 
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1160315500]
+layer = 2
+
+[node name="StateChartDebugger" parent="CanvasLayer" unique_id=874067376 instance=ExtResource("2_mk48o")]
+anchors_preset = -1
+anchor_right = 0.27
+anchor_bottom = 0.377
+offset_right = -3.0517578e-05
+offset_bottom = -0.3000183
+grow_horizontal = 1
+grow_vertical = 1
+initial_node_to_watch = NodePath("../../StateChart")
+
+[connection signal="grappled" from="." to="StateActors/MovementState/AirborneState/Jumping" method="_on_player_grappled"]
+[connection signal="grappled" from="." to="StateActors/MovementState/AirborneState/Grappling" method="_on_player_grappled"]
 [connection signal="area_entered" from="GrappleDetector" to="GrappleDetector" method="_on_area_entered"]
 [connection signal="area_exited" from="GrappleDetector" to="GrappleDetector" method="_on_area_exited"]
 [connection signal="state_physics_processing" from="StateChart/Root/Movement/Grounded" to="StateActors/MovementState/GroundedState" method="_on_grounded_state_physics_processing"]
