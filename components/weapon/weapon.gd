@@ -14,6 +14,7 @@ var _can_attack := true
 
 # TODO: temporary
 func _unhandled_input(event: InputEvent) -> void:
+	if Input.mouse_mode != Input.MOUSE_MODE_CAPTURED: return
 	if event.is_action_pressed("left_click"):
 		_attack()
 

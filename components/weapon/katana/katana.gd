@@ -11,4 +11,4 @@ func _ready() -> void:
 	box.size = Vector3(2.5, 1, 2)
 
 func animate_attack():
-	player._skin.attack()
+	pass
