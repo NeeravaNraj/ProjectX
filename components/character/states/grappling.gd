@@ -13,3 +13,7 @@ func _on_grapple_timer_timeout() -> void:
 
 func _on_grappling_state_exited() -> void:
 	grapple_timer.stop()
+
+func _on_player_grappled() -> void:
+	grapple_timer.stop()
+	grapple_timer.start()

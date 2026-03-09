@@ -11,9 +11,11 @@ class_name Player extends CharacterBody3D
 @onready var _velocity: VelocityComponent = %Velocity
 @onready var _grapple_detector = %GrappleDetector
 @onready var _camera_anchor = $CameraControlAnchor
-@onready var _skin: PlayerSkin = $PlayerSkin
+@onready var _debug_gui = $CanvasLayer/StateChartDebugger
 
 var space_state: PhysicsDirectSpaceState3D
+
+signal grappled()
 
 func walk():
 	_velocity.set_speed_modifier(0)
@@ -22,7 +24,6 @@ func sprint():
 	_velocity.set_speed_modifier(player_stats.move_speed_sprint)
 
 func jump():
-	_skin.jump()
 	_velocity.add_impulse(Vector3.UP, player_stats.jump_velocity)
 
 func grapple(direction: Vector3, speed: float):
@@ -40,7 +41,7 @@ func _ready() -> void:
 	assert(player_stats, "Cannot instantiate Player without PlayerStats resource.")
 	space_state = get_world_3d().direct_space_state
 	_velocity.speed = player_stats.move_speed
-	_skin.toggle_head_hide(false)
+	_debug_gui.move_to_front()
 	
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed(&"left_click"):
@@ -66,4 +67,6 @@ func _try_grapple():
 	
 	if direction and distance >= 5:
 		grapple(direction, speed)
-		_state_chart.send_event(&"onGrapple")
+		await get_tree().create_timer(0.015).timeout
+		grappled.emit()
+		_state_chart.send_event.call_deferred(&"onGrapple")
