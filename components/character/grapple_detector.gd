@@ -11,7 +11,7 @@ func _on_area_exited(area: Area3D) -> void:
 	area.get_parent().illuminate(300)
 	interactibles_in_range.erase(area)
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	for d in interactibles_in_range:
 		var value = _get_lookat_value(d)
 		d.get_parent().illuminate(value)
@@ -26,7 +26,7 @@ func get_closest_grapple_point():
 	
 	for d in interactibles_in_range:
 		var gp: GrapplePoint = d.get_parent()
-		var head = player._camera_anchor.global_position
+		var head = player.camera_anchor.global_position
 		var direction: Vector3 = (head - d.global_position).normalized()
 		var angle = rad_to_deg(direction.angle_to(forward))
 		
@@ -48,7 +48,7 @@ func get_closest_grapple_point():
 
 func _get_lookat_value(d: Node3D):
 	var forward: Vector3 = player.get_forward()
-	var head_position = player._camera_anchor.global_position
+	var head_position = player.camera_anchor.global_position
 	var direction: Vector3 = (head_position - d.global_position).normalized()
 	var angle = rad_to_deg(forward.angle_to(direction))
 	return angle

@@ -5,14 +5,15 @@ class_name Player extends CharacterBody3D
 @export_group("Camera")
 @export_range(0.0, 1.0) var mouse_sens := 0.0025
 
-@onready var _camera: Camera3D = %Camera
-@onready var _camera_pivot: Node3D = %CameraPivot
-@onready var _state_chart: StateChart = %StateChart
+@onready var camera: Camera3D = %Camera
+@onready var camera_pivot: Node3D = %CameraPivot
+@onready var grapple_detector = %GrappleDetector
+@onready var camera_anchor = $CameraControlAnchor
+@onready var fp_rig = $CameraPivot/FirstPersonRig
+@onready var state_chart: StateChart = %StateChart
+@onready var debug_gui = $CanvasLayer/StateChartDebugger
+
 @onready var _velocity: VelocityComponent = %Velocity
-@onready var _grapple_detector = %GrappleDetector
-@onready var _camera_anchor = $CameraControlAnchor
-@onready var _debug_gui = $CanvasLayer/StateChartDebugger
-@onready var _fp_rig = $CameraPivot/FirstPersonRig
 
 var space_state: PhysicsDirectSpaceState3D
 
@@ -32,7 +33,7 @@ func grapple(direction: Vector3, speed: float):
 	_velocity.add_impulse(direction, speed)
 
 func get_forward():
-	return _camera.global_transform.basis.z.normalized()
+	return camera.global_transform.basis.z.normalized()
 
 func get_height():
 	var shape = $Shape.shape as CapsuleShape3D
@@ -42,7 +43,6 @@ func _ready() -> void:
 	assert(player_stats, "Cannot instantiate Player without PlayerStats resource.")
 	space_state = get_world_3d().direct_space_state
 	_velocity.speed = player_stats.move_speed
-	_debug_gui.move_to_front()
 	
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed(&"left_click"):
@@ -55,7 +55,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		_try_grapple()
 	
 func _try_grapple():
-	var data = _grapple_detector.get_closest_grapple_point()
+	var data = grapple_detector.get_closest_grapple_point()
 	if not data: return
 	
 	var direction = data[0]
@@ -70,4 +70,4 @@ func _try_grapple():
 		grapple(direction, speed)
 		await get_tree().create_timer(0.015).timeout
 		grappled.emit()
-		_state_chart.send_event.call_deferred(&"onGrapple")
+		state_chart.send_event.call_deferred(&"onGrapple")

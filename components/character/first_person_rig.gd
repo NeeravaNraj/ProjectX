@@ -30,3 +30,8 @@ func _unhandled_input(event: InputEvent) -> void:
 		var value = randi_range(0, 1)
 		animation_tree.set("parameters/attack_blend/blend_amount", value)
 		animation_tree.set("parameters/attack_oneshot/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
+		await _play_return_animation()
+
+func _play_return_animation():
+	await get_tree().create_timer(0.3).timeout
+	animation_tree.set("parameters/return_oneshot/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
