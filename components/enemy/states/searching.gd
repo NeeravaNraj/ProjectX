@@ -8,13 +8,13 @@ func _on_searching_state_entered() -> void:
 	search_timer.start()
 	
 func _on_search_timer_timeout() -> void:
+	enemy.player = null
+	enemy.last_player_position = null
+	enemy.navigation_agent.set_target_position(enemy.starting_position)
 	enemy.state_chart.send_event(&"onIdle")
 
 func _on_searching_state_exited() -> void:
 	search_timer.stop()
-	enemy.player = null
-	enemy.last_player_position = null
-	enemy.navigation_agent.set_target_position(enemy.starting_position)
 
 
 func _on_searching_state_physics_processing(_delta: float) -> void:

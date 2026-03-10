@@ -7,7 +7,6 @@ class_name Enemy extends CharacterBody3D
 @onready var detection_area: Area3D = $DetectionArea
 @onready var detection_shape: CollisionShape3D = $DetectionArea/CollisionShape3D
 @onready var navigation_agent: NavigationAgent3D = $NavigationAgent3D
-# @onready var _velocity: VelocityComponent = $Velocity
 
 var starting_position: Vector3
 var speed: float
