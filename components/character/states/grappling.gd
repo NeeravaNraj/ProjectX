@@ -6,6 +6,7 @@ extends PlayerState
 func _on_grappling_state_entered() -> void:
 	if grapple_timer.is_stopped(): grapple_timer.stop()
 	grapple_timer.start()
+	player._fp_rig.transition_movement(PlayerFirstPersonRig.MovementStates.Falling)
 
 func _on_grapple_timer_timeout() -> void:
 	if not player: return

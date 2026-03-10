@@ -8,8 +8,9 @@ func _on_jumping_state_entered() -> void:
 	jump_timer.start()
 
 func _on_jump_timer_timeout() -> void:
-	if not player: return
+	if not player: return 
 	player._state_chart.send_event(&"onFalling")
 
 func _on_jumping_state_exited() -> void:
 	jump_timer.stop()
+	player._fp_rig.abort_jump()

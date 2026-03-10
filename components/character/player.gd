@@ -12,6 +12,7 @@ class_name Player extends CharacterBody3D
 @onready var _grapple_detector = %GrappleDetector
 @onready var _camera_anchor = $CameraControlAnchor
 @onready var _debug_gui = $CanvasLayer/StateChartDebugger
+@onready var _fp_rig = $CameraPivot/FirstPersonRig
 
 var space_state: PhysicsDirectSpaceState3D
 
