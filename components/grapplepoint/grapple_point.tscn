@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cjk8sauqxur5r"]
 
-[ext_resource type="Texture2D" uid="uid://bxf752abl0xdv" path="res://assets/grapple_point.png" id="1_i28ss"]
+[ext_resource type="Texture2D" uid="uid://bxf752abl0xdv" path="res://components/grapplepoint/assets/grapple_point.png" id="1_i28ss"]
 [ext_resource type="Script" uid="uid://b2nkuuevfkq2v" path="res://components/grapplepoint/grapple_point.gd" id="1_v4q3x"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_v4q3x"]

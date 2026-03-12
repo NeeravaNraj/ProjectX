@@ -1,0 +1,46 @@
+[gd_scene format=3 uid="uid://chf24tgxexqiw"]
+
+[ext_resource type="Script" uid="uid://c1ahi7ursvy26" path="res://components/shuriken/shuriken.gd" id="1_0wpa8"]
+[ext_resource type="Texture2D" uid="uid://r1cgakugr4at" path="res://components/shuriken/assets/shuriken.png" id="2_tahbu"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_0wpa8"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sfwy1"]
+albedo_color = Color(0.30980393, 0.3019608, 0.3137255, 1)
+
+[sub_resource type="PrismMesh" id="PrismMesh_sfwy1"]
+material = SubResource("StandardMaterial3D_sfwy1")
+size = Vector3(0.25, 0.25, 0.02)
+
+[node name="Shuriken" type="Node3D" unique_id=1412902364]
+script = ExtResource("1_0wpa8")
+
+[node name="ShurikenBody" type="RigidBody3D" parent="." unique_id=1711941631]
+collision_layer = 5
+collision_mask = 3
+physics_material_override = SubResource("PhysicsMaterial_0wpa8")
+gravity_scale = 0.5
+continuous_cd = true
+contact_monitor = true
+max_contacts_reported = 1
+
+[node name="CollisionPolygon3D" type="CollisionPolygon3D" parent="ShurikenBody" unique_id=247054077]
+depth = 0.02
+polygon = PackedVector2Array(0.12756409, -0.1268962, -0.12556045, -0.1268962, -0.00066787086, 0.12422469)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="ShurikenBody" unique_id=1710032987]
+mesh = SubResource("PrismMesh_sfwy1")
+
+[node name="Sprite3D" type="Sprite3D" parent="." unique_id=138306016]
+transform = Transform3D(0.40176973, 0, 0, 0, 0.40176973, 0, 0, 0, 0.40176973, 0, 0, 0)
+visible = false
+billboard = 1
+no_depth_test = true
+texture = ExtResource("2_tahbu")
+
+[node name="DespawnTimer" type="Timer" parent="." unique_id=298186611]
+wait_time = 5.0
+one_shot = true
+
+[connection signal="body_entered" from="ShurikenBody" to="." method="_on_body_entered"]
+[connection signal="timeout" from="DespawnTimer" to="." method="_on_despawn_timer_timeout"]

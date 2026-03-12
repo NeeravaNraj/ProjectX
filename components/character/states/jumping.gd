@@ -13,4 +13,3 @@ func _on_jump_timer_timeout() -> void:
 
 func _on_jumping_state_exited() -> void:
 	jump_timer.stop()
-	player.fp_rig.abort_jump()

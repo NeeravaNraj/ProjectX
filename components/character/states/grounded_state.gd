@@ -1,5 +1,7 @@
 extends PlayerState
 
+func _on_grounded_child_state_entered() -> void:
+	player.fp_rig.abort_jump()
 
 func _on_grounded_state_physics_processing(_delta: float) -> void:
 	if not player: return

@@ -26,6 +26,7 @@ func get_player_distance():
 	return global_position.distance_to(player_position)
 
 func _ready() -> void:
+	add_to_group(&"enemy")
 	starting_position = global_position
 	state_chart.send_event(&"onIdle")
 

@@ -12,10 +12,12 @@ class_name Player extends CharacterBody3D
 @onready var fp_rig = $CameraPivot/FirstPersonRig
 @onready var state_chart: StateChart = %StateChart
 @onready var debug_gui = $CanvasLayer/StateChartDebugger
+@onready var shuriken_ctrl = $ShurikenCtrl
 
 @onready var _velocity: VelocityComponent = %Velocity
 
 var space_state: PhysicsDirectSpaceState3D
+var shuriken_scene = preload("res://components/shuriken/shuriken.tscn")
 
 signal grappled()
 
@@ -39,6 +41,9 @@ func get_height():
 	var shape = $Shape.shape as CapsuleShape3D
 	return shape.height + shape.radius * 2.0
 
+func add_item(node: Node3D):
+	shuriken_ctrl.pickup_shuriken(node as Shuriken)
+
 func _ready() -> void:
 	assert(player_stats, "Cannot instantiate Player without PlayerStats resource.")
 	space_state = get_world_3d().direct_space_state
@@ -51,11 +56,18 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed(&"ui_cancel"):
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	
+	if event.is_action_pressed(&"shuriken"):
+		shuriken_ctrl.throw_shuriken()
+	
 	if event.is_action_pressed(&"interact"):
 		_try_grapple()
-	
+
 func _try_grapple():
-	var data = grapple_detector.get_closest_grapple_point()
+	var data = shuriken_ctrl.get_grapple_location()
+	
+	if not data:
+		data = grapple_detector.get_closest_grapple_point()
+	
 	if not data: return
 	
 	var direction = data[0]

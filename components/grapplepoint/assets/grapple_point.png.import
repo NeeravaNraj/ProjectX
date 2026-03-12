@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bxf752abl0xdv"
-path.s3tc="res://.godot/imported/grapple_point.png-2cac856d3ea118dd47a085b8dc8f86df.s3tc.ctex"
+path.s3tc="res://.godot/imported/grapple_point.png-7bdc8e7529d0cc008806cf1347435564.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://assets/grapple_point.png"
-dest_files=["res://.godot/imported/grapple_point.png-2cac856d3ea118dd47a085b8dc8f86df.s3tc.ctex"]
+source_file="res://components/grapplepoint/assets/grapple_point.png"
+dest_files=["res://.godot/imported/grapple_point.png-7bdc8e7529d0cc008806cf1347435564.s3tc.ctex"]
 
 [params]
 
