@@ -4,7 +4,7 @@ class_name Shuriken extends Node3D
 @onready var grapple_sprite = $Sprite3D
 @onready var despawn_timer = $DespawnTimer
 
-var max_speed: float = 60
+var max_speed: float = 90
 var rotation_speed: float = 20
 
 var attached_to = null
