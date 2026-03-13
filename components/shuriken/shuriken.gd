@@ -26,7 +26,7 @@ func illuminate(angle: float):
 	else:
 		tween.tween_property(grapple_sprite, "modulate", Color(1, 1, 1), 0.3)
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if attached_to == null: return
 	global_position = attached_to.to_global(attached_location)
 	body.global_position = attached_to.to_global(attached_location)

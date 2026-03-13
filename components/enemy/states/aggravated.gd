@@ -6,7 +6,7 @@ func _on_aggravated_state_entered() -> void:
 	enemy.alert.emit(enemy.global_position, enemy.player.global_position)
 	enemy.navigation_agent.set_target_position(enemy.player.global_position)
 
-func _on_aggravated_state_physics_processing(delta: float) -> void:
+func _on_aggravated_state_physics_processing(_delta: float) -> void:
 	if not enemy or not enemy.player: return
 	
 	if enemy.get_player_distance() < enemy.enemy_stats.attack_range:

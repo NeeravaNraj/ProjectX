@@ -1,7 +1,7 @@
 extends EnemyState
 
 
-func _on_idle_state_physics_processing(delta: float) -> void:
+func _on_idle_state_physics_processing(_delta: float) -> void:
 	if not enemy: return
 
 	for body in enemy.detection_area.get_overlapping_bodies():

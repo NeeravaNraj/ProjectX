@@ -36,8 +36,8 @@ func _init(
 	flat_damage_modifier = p_flat_damage_modifier
 
 func consolidate_conditional_multipliers(elements: Array[Element.ElementKind]):
-	for element in elements:
-		var multiplier = reaction_conditional_multipliers.get(element, null)
+	for el in elements:
+		var multiplier = reaction_conditional_multipliers.get(el, null)
 		
 		if multiplier:
 			reaction_multiplier += multiplier
