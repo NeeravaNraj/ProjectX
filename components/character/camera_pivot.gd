@@ -2,6 +2,8 @@ extends Node3D
 
 @onready var player = $".."
 
+const MAX_TILT_ANGLE := deg_to_rad(5.0)
+
 var mouse_input = Vector2.ZERO
 var current_rotation = Vector3.ZERO
 
@@ -29,3 +31,14 @@ func  _physics_process(_delta: float):
 	player.global_transform.basis = Basis.from_euler(yaw)
 	
 	mouse_input = Vector2.ZERO
+	
+	_tilt_camera()
+	
+func _tilt_camera():
+	var move_direction = player._velocity.raw_direction
+	var side = Vector3.FORWARD * (MAX_TILT_ANGLE * move_direction.x)
+	var forward = Vector3.RIGHT * ((MAX_TILT_ANGLE / 2.0) * move_direction.y)
+	var rot = forward + side
+	
+	var tween = create_tween()
+	tween.tween_property(player.camera, "rotation", rot, 0.3)
