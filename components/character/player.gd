@@ -63,10 +63,15 @@ func _unhandled_input(event: InputEvent) -> void:
 		_try_grapple()
 
 func _try_grapple():
+	var override_max = INF
+	var override_min = 0
+	
 	var data = shuriken_ctrl.get_grapple_location()
 	
 	if not data:
 		data = grapple_detector.get_closest_grapple_point()
+		override_max = player_stats.max_grapple_speed
+		override_min = player_stats.min_grapple_speed
 	
 	if not data: return
 	
@@ -74,8 +79,8 @@ func _try_grapple():
 	var distance = data[1]
 	var speed = clampf(
 		distance / player_stats.grapple_time,
-		player_stats.min_grapple_speed,
-		player_stats.max_grapple_speed
+		override_min,
+		override_max,
 	)
 	
 	if direction and distance >= 5:

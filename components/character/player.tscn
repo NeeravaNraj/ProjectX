@@ -141,7 +141,7 @@ script = ExtResource("3_4akdr")
 [node name="Camera" type="Camera3D" parent="CameraPivot" unique_id=777665774]
 unique_name_in_owner = true
 
-[node name="FirstPersonRig" parent="CameraPivot" unique_id=757329912 node_paths=PackedStringArray("player") instance=ExtResource("4_6p5bk")]
+[node name="FirstPersonRig" parent="CameraPivot" unique_id=1334421815 node_paths=PackedStringArray("player") instance=ExtResource("4_6p5bk")]
 transform = Transform3D(-1.5, 0, -1.3113416e-07, 0, 1.5, 0, 1.3113416e-07, 0, -1.5, 0, -0.045, 0.05)
 player = NodePath("../..")
 
