@@ -26,7 +26,9 @@
 [ext_resource type="Script" uid="uid://drj4fdryh4j1l" path="res://components/character/states/falling.gd" id="21_ukpso"]
 [ext_resource type="Script" uid="uid://mjyk1l66mn35" path="res://components/character/states/grappling.gd" id="23_lbmrp"]
 [ext_resource type="PackedScene" uid="uid://ctn4ndv16n1wo" path="res://components/reactions/element_selector.tscn" id="25_6p5bk"]
+[ext_resource type="Script" uid="uid://72nbdu28o8fj" path="res://components/character/states/combat.gd" id="26_3lhvt"]
 [ext_resource type="Script" uid="uid://62pxrj7wpjoa" path="res://components/character/pickup_region.gd" id="26_qrg3i"]
+[ext_resource type="Script" uid="uid://c5f0q202nfv3f" path="res://components/character/states/parrying.gd" id="27_vgukn"]
 [ext_resource type="Script" uid="uid://b56wb38xrpyi8" path="res://components/pool/pool.gd" id="28_ib6g5"]
 [ext_resource type="Script" uid="uid://boeog2x252egl" path="res://components/character/shuriken_ctrl.gd" id="28_jr262"]
 [ext_resource type="PackedScene" uid="uid://chf24tgxexqiw" path="res://components/shuriken/shuriken.tscn" id="28_t3sxj"]
@@ -141,7 +143,7 @@ script = ExtResource("3_4akdr")
 [node name="Camera" type="Camera3D" parent="CameraPivot" unique_id=777665774]
 unique_name_in_owner = true
 
-[node name="FirstPersonRig" parent="CameraPivot" unique_id=1334421815 node_paths=PackedStringArray("player") instance=ExtResource("4_6p5bk")]
+[node name="FirstPersonRig" parent="CameraPivot" unique_id=1024674692 node_paths=PackedStringArray("player") instance=ExtResource("4_6p5bk")]
 transform = Transform3D(-1.5, 0, -1.3113416e-07, 0, 1.5, 0, 1.3113416e-07, 0, -1.5, 0, -0.045, 0.05)
 player = NodePath("../..")
 
@@ -230,16 +232,16 @@ event = &"onGrapple"
 delay_in_seconds = "0.0"
 metadata/_custom_type_script = "uid://cf1nsco3w0mf6"
 
-[node name="Idle" type="Node" parent="States/StateChart/Root/Movement/Grounded" unique_id=98389378]
-script = ExtResource("9_mfj52")
-metadata/_custom_type_script = "uid://cytafq8i1y8qm"
-
-[node name="OnMoving" type="Node" parent="States/StateChart/Root/Movement/Grounded/Idle" unique_id=46673262]
+[node name="OnMoving" type="Node" parent="States/StateChart/Root/Movement/Grounded" unique_id=46673262]
 script = ExtResource("10_2ve8e")
-to = NodePath("../../Moving")
+to = NodePath("../Moving")
 event = &"onMoving"
 delay_in_seconds = "0.0"
 metadata/_custom_type_script = "uid://cf1nsco3w0mf6"
+
+[node name="Idle" type="Node" parent="States/StateChart/Root/Movement/Grounded" unique_id=98389378]
+script = ExtResource("9_mfj52")
+metadata/_custom_type_script = "uid://cytafq8i1y8qm"
 
 [node name="Moving" type="Node" parent="States/StateChart/Root/Movement/Grounded" unique_id=412453979]
 script = ExtResource("8_mk48o")
@@ -302,6 +304,33 @@ event = &"onGrapple"
 delay_in_seconds = "0.0"
 metadata/_custom_type_script = "uid://cf1nsco3w0mf6"
 
+[node name="Combat" type="Node" parent="States/StateChart/Root" unique_id=1941216319]
+script = ExtResource("8_mk48o")
+initial_state = NodePath("Normal")
+metadata/_custom_type_script = "uid://jk2jm1g6q853"
+
+[node name="OnParry" type="Node" parent="States/StateChart/Root/Combat" unique_id=1057947346]
+script = ExtResource("10_2ve8e")
+to = NodePath("../Parrying")
+event = &"onParry"
+delay_in_seconds = "0.0"
+metadata/_custom_type_script = "uid://cf1nsco3w0mf6"
+
+[node name="OnNormal" type="Node" parent="States/StateChart/Root/Combat" unique_id=1228515553]
+script = ExtResource("10_2ve8e")
+to = NodePath("../Normal")
+event = &"onNormal"
+delay_in_seconds = "0.0"
+metadata/_custom_type_script = "uid://cf1nsco3w0mf6"
+
+[node name="Normal" type="Node" parent="States/StateChart/Root/Combat" unique_id=1964651928]
+script = ExtResource("9_mfj52")
+metadata/_custom_type_script = "uid://cytafq8i1y8qm"
+
+[node name="Parrying" type="Node" parent="States/StateChart/Root/Combat" unique_id=1880557988]
+script = ExtResource("9_mfj52")
+metadata/_custom_type_script = "uid://cytafq8i1y8qm"
+
 [node name="StateActors" type="Node" parent="States" unique_id=1782869980 node_paths=PackedStringArray("player")]
 unique_name_in_owner = true
 script = ExtResource("11_lxhmo")
@@ -337,6 +366,12 @@ script = ExtResource("23_lbmrp")
 
 [node name="Falling" type="Node" parent="States/StateActors/MovementState/AirborneState" unique_id=1094579960]
 script = ExtResource("21_ukpso")
+
+[node name="Combat" type="Node" parent="States/StateActors" unique_id=417591260]
+script = ExtResource("26_3lhvt")
+
+[node name="Parrying" type="Node" parent="States/StateActors/Combat" unique_id=1694245225]
+script = ExtResource("27_vgukn")
 
 [node name="Areas" type="Node3D" parent="." unique_id=1172554725]
 
@@ -399,6 +434,9 @@ one_shot = true
 [connection signal="state_exited" from="States/StateChart/Root/Movement/Airborne/Jumping" to="States/StateActors/MovementState/AirborneState/Jumping" method="_on_jumping_state_exited"]
 [connection signal="state_entered" from="States/StateChart/Root/Movement/Airborne/Grappling" to="States/StateActors/MovementState/AirborneState/Grappling" method="_on_grappling_state_entered"]
 [connection signal="state_exited" from="States/StateChart/Root/Movement/Airborne/Grappling" to="States/StateActors/MovementState/AirborneState/Grappling" method="_on_grappling_state_exited"]
+[connection signal="state_unhandled_input" from="States/StateChart/Root/Combat" to="States/StateActors/Combat" method="_on_combat_state_unhandled_input"]
+[connection signal="state_entered" from="States/StateChart/Root/Combat/Parrying" to="States/StateActors/Combat/Parrying" method="_on_parrying_state_entered"]
+[connection signal="state_exited" from="States/StateChart/Root/Combat/Parrying" to="States/StateActors/Combat/Parrying" method="_on_parrying_state_exited"]
 [connection signal="timeout" from="States/StateActors/MovementState/AirborneState/Jumping/JumpTimer" to="States/StateActors/MovementState/AirborneState/Jumping" method="_on_jump_timer_timeout"]
 [connection signal="timeout" from="States/StateActors/MovementState/AirborneState/Grappling/GrappleTimer" to="States/StateActors/MovementState/AirborneState/Grappling" method="_on_grapple_timer_timeout"]
 [connection signal="body_entered" from="Areas/PickupRegion" to="Areas/PickupRegion" method="_on_body_entered"]
