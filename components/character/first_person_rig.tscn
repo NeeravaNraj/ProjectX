@@ -15,13 +15,29 @@ animation = &"Attack_2"
 [sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_q133k"]
 
 [sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_biiua"]
+filter_enabled = true
+filters = ["", "rig/Skeleton3D:ForeArm.L", "rig/Skeleton3D:ForeArm.R", "rig/Skeleton3D:Hand.Ctrl.L", "rig/Skeleton3D:Hand.Ctrl.R", "rig/Skeleton3D:Hand.L", "rig/Skeleton3D:Hand.R", "rig/Skeleton3D:Index.001.L", "rig/Skeleton3D:Index.001.R", "rig/Skeleton3D:Index.002.L", "rig/Skeleton3D:Index.002.R", "rig/Skeleton3D:Index.Ctrl.L", "rig/Skeleton3D:Index.Ctrl.R", "rig/Skeleton3D:Index.L", "rig/Skeleton3D:Index.R", "rig/Skeleton3D:Little.Ctrl.L", "rig/Skeleton3D:Little.Ctrl.R", "rig/Skeleton3D:Little.L", "rig/Skeleton3D:Little.L.001", "rig/Skeleton3D:Little.L.002", "rig/Skeleton3D:Little.R", "rig/Skeleton3D:Little.R.001", "rig/Skeleton3D:Little.R.002", "rig/Skeleton3D:Middle.001.L", "rig/Skeleton3D:Middle.001.R", "rig/Skeleton3D:Middle.002.L.001", "rig/Skeleton3D:Middle.002.R.001", "rig/Skeleton3D:Middle.Ctrl.L", "rig/Skeleton3D:Middle.Ctrl.R", "rig/Skeleton3D:Middle.L", "rig/Skeleton3D:Middle.R", "rig/Skeleton3D:Pole.L", "rig/Skeleton3D:Pole.R", "rig/Skeleton3D:Ring.001.L", "rig/Skeleton3D:Ring.001.R", "rig/Skeleton3D:Ring.002.L", "rig/Skeleton3D:Ring.002.R", "rig/Skeleton3D:Ring.Ctrl.L", "rig/Skeleton3D:Ring.Ctrl.R", "rig/Skeleton3D:Ring.L", "rig/Skeleton3D:Ring.R", "rig/Skeleton3D:SwordBone", "rig/Skeleton3D:Thumb.Ctrl.L", "rig/Skeleton3D:Thumb.Ctrl.R", "rig/Skeleton3D:Thumb.L", "rig/Skeleton3D:Thumb.L.001", "rig/Skeleton3D:Thumb.L.002", "rig/Skeleton3D:Thumb.R", "rig/Skeleton3D:Thumb.R.001", "rig/Skeleton3D:Thumb.R.002", "rig/Skeleton3D:UpperArm.Ctrl.L", "rig/Skeleton3D:UpperArm.Ctrl.R", "rig/Skeleton3D:UpperArm.L", "rig/Skeleton3D:UpperArm.R"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_fv6y6"]
 animation = &"FingerTwidle"
 
+[sub_resource type="Curve" id="Curve_8lle2"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.9825174, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
 [sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_0w612"]
 filter_enabled = true
 filters = ["rig/Skeleton3D:Index.001.R", "rig/Skeleton3D:Index.002.R", "rig/Skeleton3D:Index.R", "rig/Skeleton3D:Little.R", "rig/Skeleton3D:Little.R.001", "rig/Skeleton3D:Little.R.002", "rig/Skeleton3D:Middle.001.R", "rig/Skeleton3D:Middle.002.R.001", "rig/Skeleton3D:Middle.R", "rig/Skeleton3D:Ring.001.R", "rig/Skeleton3D:Ring.002.R", "rig/Skeleton3D:Ring.R"]
+fadeout_curve = SubResource("Curve_8lle2")
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_0w612"]
+animation = &"Inspect"
+
+[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_s7mia"]
+filter_enabled = true
+filters = ["", "rig/Skeleton3D:ForeArm.L", "rig/Skeleton3D:ForeArm.R", "rig/Skeleton3D:Hand.Ctrl.L", "rig/Skeleton3D:Hand.Ctrl.R", "rig/Skeleton3D:Hand.L", "rig/Skeleton3D:Hand.R", "rig/Skeleton3D:Index.001.L", "rig/Skeleton3D:Index.001.R", "rig/Skeleton3D:Index.002.L", "rig/Skeleton3D:Index.002.R", "rig/Skeleton3D:Index.Ctrl.L", "rig/Skeleton3D:Index.Ctrl.R", "rig/Skeleton3D:Index.L", "rig/Skeleton3D:Index.R", "rig/Skeleton3D:Little.Ctrl.L", "rig/Skeleton3D:Little.Ctrl.R", "rig/Skeleton3D:Little.L", "rig/Skeleton3D:Little.L.001", "rig/Skeleton3D:Little.L.002", "rig/Skeleton3D:Little.R", "rig/Skeleton3D:Little.R.001", "rig/Skeleton3D:Little.R.002", "rig/Skeleton3D:Middle.001.L", "rig/Skeleton3D:Middle.001.R", "rig/Skeleton3D:Middle.002.L.001", "rig/Skeleton3D:Middle.002.R.001", "rig/Skeleton3D:Middle.Ctrl.L", "rig/Skeleton3D:Middle.Ctrl.R", "rig/Skeleton3D:Middle.L", "rig/Skeleton3D:Middle.R", "rig/Skeleton3D:Pole.L", "rig/Skeleton3D:Pole.R", "rig/Skeleton3D:Ring.001.L", "rig/Skeleton3D:Ring.001.R", "rig/Skeleton3D:Ring.002.L", "rig/Skeleton3D:Ring.002.R", "rig/Skeleton3D:Ring.Ctrl.L", "rig/Skeleton3D:Ring.Ctrl.R", "rig/Skeleton3D:Ring.L", "rig/Skeleton3D:Ring.R", "rig/Skeleton3D:SwordBone", "rig/Skeleton3D:Thumb.Ctrl.L", "rig/Skeleton3D:Thumb.Ctrl.R", "rig/Skeleton3D:Thumb.L", "rig/Skeleton3D:Thumb.L.001", "rig/Skeleton3D:Thumb.L.002", "rig/Skeleton3D:Thumb.R", "rig/Skeleton3D:Thumb.R.001", "rig/Skeleton3D:Thumb.R.002", "rig/Skeleton3D:UpperArm.Ctrl.L", "rig/Skeleton3D:UpperArm.Ctrl.R", "rig/Skeleton3D:UpperArm.L", "rig/Skeleton3D:UpperArm.R"]
+fadein_time = 0.2
+fadeout_time = 0.3
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_qp1u3"]
 animation = &"BladeSpin"
@@ -29,6 +45,8 @@ animation = &"BladeSpin"
 [sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_px1gt"]
 
 [sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_px1gt"]
+filter_enabled = true
+filters = ["", "rig/Skeleton3D:ForeArm.L", "rig/Skeleton3D:ForeArm.R", "rig/Skeleton3D:Hand.Ctrl.L", "rig/Skeleton3D:Hand.Ctrl.R", "rig/Skeleton3D:Hand.L", "rig/Skeleton3D:Hand.R", "rig/Skeleton3D:Index.001.L", "rig/Skeleton3D:Index.001.R", "rig/Skeleton3D:Index.002.L", "rig/Skeleton3D:Index.002.R", "rig/Skeleton3D:Index.Ctrl.L", "rig/Skeleton3D:Index.Ctrl.R", "rig/Skeleton3D:Index.L", "rig/Skeleton3D:Index.R", "rig/Skeleton3D:Little.Ctrl.L", "rig/Skeleton3D:Little.Ctrl.R", "rig/Skeleton3D:Little.L", "rig/Skeleton3D:Little.L.001", "rig/Skeleton3D:Little.L.002", "rig/Skeleton3D:Little.R", "rig/Skeleton3D:Little.R.001", "rig/Skeleton3D:Little.R.002", "rig/Skeleton3D:Middle.001.L", "rig/Skeleton3D:Middle.001.R", "rig/Skeleton3D:Middle.002.L.001", "rig/Skeleton3D:Middle.002.R.001", "rig/Skeleton3D:Middle.Ctrl.L", "rig/Skeleton3D:Middle.Ctrl.R", "rig/Skeleton3D:Middle.L", "rig/Skeleton3D:Middle.R", "rig/Skeleton3D:Pole.L", "rig/Skeleton3D:Pole.R", "rig/Skeleton3D:Ring.001.L", "rig/Skeleton3D:Ring.001.R", "rig/Skeleton3D:Ring.002.L", "rig/Skeleton3D:Ring.002.R", "rig/Skeleton3D:Ring.Ctrl.L", "rig/Skeleton3D:Ring.Ctrl.R", "rig/Skeleton3D:Ring.L", "rig/Skeleton3D:Ring.R", "rig/Skeleton3D:SwordBone", "rig/Skeleton3D:Thumb.Ctrl.L", "rig/Skeleton3D:Thumb.Ctrl.R", "rig/Skeleton3D:Thumb.L", "rig/Skeleton3D:Thumb.L.001", "rig/Skeleton3D:Thumb.L.002", "rig/Skeleton3D:Thumb.R", "rig/Skeleton3D:Thumb.R.001", "rig/Skeleton3D:Thumb.R.002", "rig/Skeleton3D:UpperArm.Ctrl.L", "rig/Skeleton3D:UpperArm.Ctrl.R", "rig/Skeleton3D:UpperArm.L", "rig/Skeleton3D:UpperArm.R"]
 fadein_time = 0.2
 fadeout_time = 0.2
 
@@ -56,14 +74,16 @@ blend_point_2/pos = 1.0
 animation = &"ReturnToIdle"
 
 [sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_qp1u3"]
+filter_enabled = true
+filters = ["", "rig/Skeleton3D:ForeArm.L", "rig/Skeleton3D:ForeArm.R", "rig/Skeleton3D:Hand.Ctrl.L", "rig/Skeleton3D:Hand.Ctrl.R", "rig/Skeleton3D:Hand.L", "rig/Skeleton3D:Hand.R", "rig/Skeleton3D:Index.001.L", "rig/Skeleton3D:Index.001.R", "rig/Skeleton3D:Index.002.L", "rig/Skeleton3D:Index.002.R", "rig/Skeleton3D:Index.Ctrl.L", "rig/Skeleton3D:Index.Ctrl.R", "rig/Skeleton3D:Index.L", "rig/Skeleton3D:Index.R", "rig/Skeleton3D:Little.Ctrl.L", "rig/Skeleton3D:Little.Ctrl.R", "rig/Skeleton3D:Little.L", "rig/Skeleton3D:Little.L.001", "rig/Skeleton3D:Little.L.002", "rig/Skeleton3D:Little.R", "rig/Skeleton3D:Little.R.001", "rig/Skeleton3D:Little.R.002", "rig/Skeleton3D:Middle.001.L", "rig/Skeleton3D:Middle.001.R", "rig/Skeleton3D:Middle.002.L.001", "rig/Skeleton3D:Middle.002.R.001", "rig/Skeleton3D:Middle.Ctrl.L", "rig/Skeleton3D:Middle.Ctrl.R", "rig/Skeleton3D:Middle.L", "rig/Skeleton3D:Middle.R", "rig/Skeleton3D:Pole.L", "rig/Skeleton3D:Pole.R", "rig/Skeleton3D:Ring.001.L", "rig/Skeleton3D:Ring.001.R", "rig/Skeleton3D:Ring.002.L", "rig/Skeleton3D:Ring.002.R", "rig/Skeleton3D:Ring.Ctrl.L", "rig/Skeleton3D:Ring.Ctrl.R", "rig/Skeleton3D:Ring.L", "rig/Skeleton3D:Ring.R", "rig/Skeleton3D:SwordBone", "rig/Skeleton3D:Thumb.Ctrl.L", "rig/Skeleton3D:Thumb.Ctrl.R", "rig/Skeleton3D:Thumb.L", "rig/Skeleton3D:Thumb.L.001", "rig/Skeleton3D:Thumb.L.002", "rig/Skeleton3D:Thumb.R", "rig/Skeleton3D:Thumb.R.001", "rig/Skeleton3D:Thumb.R.002", "rig/Skeleton3D:UpperArm.Ctrl.L", "rig/Skeleton3D:UpperArm.Ctrl.R", "rig/Skeleton3D:UpperArm.L", "rig/Skeleton3D:UpperArm.R"]
 fadein_time = 0.1
 fadeout_time = 0.2
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_0w612"]
-graph_offset = Vector2(-107.82544, 87.8952)
+graph_offset = Vector2(-694.50946, -217.13632)
 nodes/output/position = Vector2(1620, 200)
 nodes/locomotion/node = SubResource("AnimationNodeBlendSpace1D_fv6y6")
-nodes/locomotion/position = Vector2(-240, -200)
+nodes/locomotion/position = Vector2(-500, -700)
 nodes/attack_oneshot/node = SubResource("AnimationNodeOneShot_biiua")
 nodes/attack_oneshot/position = Vector2(980, 360)
 nodes/attack1/node = SubResource("AnimationNodeAnimation_ttqsm")
@@ -73,33 +93,37 @@ nodes/attack_blend/position = Vector2(760, 520)
 nodes/attack2/node = SubResource("AnimationNodeAnimation_8lle2")
 nodes/attack2/position = Vector2(580, 720)
 nodes/jump_oneshot/node = SubResource("AnimationNodeOneShot_px1gt")
-nodes/jump_oneshot/position = Vector2(620, 140)
+nodes/jump_oneshot/position = Vector2(240, -360)
 nodes/jump_blade_spin/node = SubResource("AnimationNodeAnimation_qp1u3")
-nodes/jump_blade_spin/position = Vector2(-140, 340)
+nodes/jump_blade_spin/position = Vector2(-560, -20)
 nodes/jump_blend/node = SubResource("AnimationNodeBlend2_px1gt")
-nodes/jump_blend/position = Vector2(320, 380)
+nodes/jump_blend/position = Vector2(-100, 20)
 nodes/jumping/node = SubResource("AnimationNodeAnimation_biiua")
-nodes/jumping/position = Vector2(80, 580)
+nodes/jumping/position = Vector2(-340, 220)
 nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_8lle2")
-nodes/TimeScale/position = Vector2(120, 320)
+nodes/TimeScale/position = Vector2(-300, -40)
 nodes/return_oneshot/node = SubResource("AnimationNodeOneShot_qp1u3")
 nodes/return_oneshot/position = Vector2(1360, 380)
 nodes/return/node = SubResource("AnimationNodeAnimation_px1gt")
 nodes/return/position = Vector2(1137.1399, 710.428)
 nodes/finger_twidle_onshot/node = SubResource("AnimationNodeOneShot_0w612")
-nodes/finger_twidle_onshot/position = Vector2(120, -40)
+nodes/finger_twidle_onshot/position = Vector2(-140, -540)
 nodes/finger_twidle/node = SubResource("AnimationNodeAnimation_fv6y6")
-nodes/finger_twidle/position = Vector2(-240, 60)
-node_connections = [&"output", 0, &"return_oneshot", &"attack_oneshot", 0, &"jump_oneshot", &"attack_oneshot", 1, &"attack_blend", &"attack_blend", 0, &"attack1", &"attack_blend", 1, &"attack2", &"jump_oneshot", 0, &"finger_twidle_onshot", &"jump_oneshot", 1, &"jump_blend", &"jump_blend", 0, &"TimeScale", &"jump_blend", 1, &"jumping", &"TimeScale", 0, &"jump_blade_spin", &"return_oneshot", 0, &"attack_oneshot", &"return_oneshot", 1, &"return", &"finger_twidle_onshot", 0, &"locomotion", &"finger_twidle_onshot", 1, &"finger_twidle"]
+nodes/finger_twidle/position = Vector2(-500, -340)
+nodes/inspect_oneshot/node = SubResource("AnimationNodeOneShot_s7mia")
+nodes/inspect_oneshot/position = Vector2(520, -40)
+nodes/inspect/node = SubResource("AnimationNodeAnimation_0w612")
+nodes/inspect/position = Vector2(-100, 480)
+node_connections = [&"output", 0, &"return_oneshot", &"attack_oneshot", 0, &"inspect_oneshot", &"attack_oneshot", 1, &"attack_blend", &"attack_blend", 0, &"attack1", &"attack_blend", 1, &"attack2", &"jump_oneshot", 0, &"finger_twidle_onshot", &"jump_oneshot", 1, &"jump_blend", &"jump_blend", 0, &"TimeScale", &"jump_blend", 1, &"jumping", &"TimeScale", 0, &"jump_blade_spin", &"return_oneshot", 0, &"attack_oneshot", &"return_oneshot", 1, &"return", &"finger_twidle_onshot", 0, &"locomotion", &"finger_twidle_onshot", 1, &"finger_twidle", &"inspect_oneshot", 0, &"jump_oneshot", &"inspect_oneshot", 1, &"inspect"]
 
-[node name="FirstPersonRig" unique_id=1334421815 instance=ExtResource("1_7voo0")]
+[node name="FirstPersonRig" unique_id=1024674692 instance=ExtResource("1_7voo0")]
 script = ExtResource("2_8lle2")
 
-[node name="Skeleton3D" parent="rig" parent_id_path=PackedInt32Array(1821329961) index="0" unique_id=142867153]
+[node name="Skeleton3D" parent="rig" parent_id_path=PackedInt32Array(275680431) index="0" unique_id=1888909072]
 bones/1/position = Vector3(-2.0007217e-08, -2.9801749e-08, 0.20327337)
-bones/1/rotation = Quaternion(0.94863814, -0.26467872, -0.15843852, 0.0702016)
-bones/2/rotation = Quaternion(0.7119171, -4.2922335e-07, 0.19335912, 0.67511946)
-bones/3/rotation = Quaternion(-0.28940237, 0.3061967, 0.42493504, 0.8011991)
+bones/1/rotation = Quaternion(0.9486474, -0.26005524, -0.16164726, 0.0794343)
+bones/2/rotation = Quaternion(0.71176887, -4.287577e-07, 0.19331887, 0.6752873)
+bones/3/rotation = Quaternion(-0.28124556, 0.30119312, 0.4304145, 0.8030735)
 bones/4/rotation = Quaternion(0.0018767709, -0.00016982622, -0.4902692, 0.871569)
 bones/5/rotation = Quaternion(-9.442216e-08, 1.6281908e-07, -0.49015293, 0.87163645)
 bones/6/rotation = Quaternion(1.2147499e-08, -1.054652e-08, -0.490153, 0.8716365)
@@ -125,15 +149,15 @@ bones/22/position = Vector3(-4.550179e-05, 0.12913318, -0.015535858)
 bones/22/rotation = Quaternion(0.0018768028, -0.00016979394, -0.49026915, 0.8715691)
 bones/23/position = Vector3(-4.613252e-05, 0.12923804, -0.04092713)
 bones/23/rotation = Quaternion(0.0018769267, -0.00016950864, -0.49026915, 0.8715691)
-bones/24/position = Vector3(-0.28165695, -0.19696607, 0.01823827)
-bones/24/rotation = Quaternion(0.45172215, -0.8637152, -0.12031412, -0.18832915)
+bones/24/position = Vector3(-0.28165695, -0.20275418, 0.024271691)
+bones/24/rotation = Quaternion(0.45189518, -0.8635285, -0.12050521, -0.1886477)
 bones/25/position = Vector3(-2.0007214e-08, -2.9801749e-08, 0.20327337)
 bones/25/rotation = Quaternion(-0.040848777, -0.704098, -0.7086231, -0.020755854)
 bones/26/position = Vector3(0.0011527886, 0.29426274, -0.12759317)
 bones/27/position = Vector3(2.7416295e-08, -2.5759622e-08, -0.27426028)
-bones/27/rotation = Quaternion(0.48711452, -0.07525633, -0.8699144, -0.017463785)
-bones/28/rotation = Quaternion(0.7826968, 4.6554487e-07, -0.21258186, 0.58497417)
-bones/29/rotation = Quaternion(0.047165144, 0.5555701, -0.073564485, 0.82686496)
+bones/27/rotation = Quaternion(0.48150566, -0.077323064, -0.8729264, -0.013147701)
+bones/28/rotation = Quaternion(0.7775686, 4.535541e-07, -0.21118909, 0.59227216)
+bones/29/rotation = Quaternion(0.058711752, 0.5509865, -0.07318059, 0.82922333)
 bones/30/rotation = Quaternion(-1.3105885e-07, 3.37619e-07, 0.49372905, 0.8696159)
 bones/31/rotation = Quaternion(-8.166839e-08, -1.521456e-07, 0.49372908, 0.86961585)
 bones/32/rotation = Quaternion(2.4956545e-08, -2.2189328e-09, 0.4937291, 0.8696158)
@@ -159,22 +183,22 @@ bones/48/position = Vector3(3.1674695e-05, 0.1290834, -0.015544964)
 bones/48/rotation = Quaternion(-1.4794749e-07, 2.8161037e-07, 0.49372908, 0.86961573)
 bones/49/position = Vector3(6.851503e-06, 0.12909819, -0.040952876)
 bones/49/rotation = Quaternion(1.4333534e-09, -1.2550309e-08, 0.49695066, 0.8677788)
-bones/50/position = Vector3(-0.28375196, -0.15759465, -0.1762727)
-bones/50/rotation = Quaternion(-0.49281317, 0.847572, 0.11535364, 0.15953182)
+bones/50/position = Vector3(-0.28375196, -0.16284412, -0.17023928)
+bones/50/rotation = Quaternion(-0.4927251, 0.847655, 0.11534927, 0.15936624)
 bones/51/position = Vector3(2.7416295e-08, -2.5759622e-08, -0.27426028)
 bones/51/rotation = Quaternion(0.6963328, 0.14248872, -0.69260174, -0.12296534)
 bones/52/position = Vector3(-0.0013339747, 0.29353005, -0.12695031)
-bones/53/position = Vector3(-0.39471295, -0.1622446, 0.0139412135)
-bones/53/rotation = Quaternion(-0.5419854, -0.2110109, 0.047149908, 0.812098)
+bones/53/position = Vector3(-0.39471295, -0.16754296, 0.02002492)
+bones/53/rotation = Quaternion(-0.54211515, -0.21100236, 0.047245733, 0.8120081)
 
-[node name="arms" parent="rig/Skeleton3D" index="0" unique_id=20953279]
+[node name="arms" parent="rig/Skeleton3D" index="0" unique_id=16362992]
 cast_shadow = 0
 
-[node name="MockSword" parent="rig/Skeleton3D" index="1" unique_id=841665076]
+[node name="MockSword" parent="rig/Skeleton3D" index="1" unique_id=1265080808]
 visible = false
 
 [node name="BoneAttachment3D" type="BoneAttachment3D" parent="rig/Skeleton3D" index="2" unique_id=33886125]
-transform = Transform3D(0.2916138, -0.9001887, 0.3234525, 0.3053103, 0.4080574, 0.8603921, -0.9065026, -0.1521488, 0.3938321, 0.01394097, -0.16224459, 0.39471292)
+transform = Transform3D(0.29144582, -0.9003416, 0.32317838, 0.30550295, 0.40775794, 0.8604657, -0.9064917, -0.15204717, 0.3938964, 0.020024676, -0.16754295, 0.39471292)
 bone_name = "SwordBone"
 bone_idx = 53
 
@@ -200,6 +224,9 @@ parameters/return_oneshot/request = 0
 parameters/finger_twidle_onshot/active = false
 parameters/finger_twidle_onshot/internal_active = false
 parameters/finger_twidle_onshot/request = 0
+parameters/inspect_oneshot/active = false
+parameters/inspect_oneshot/internal_active = false
+parameters/inspect_oneshot/request = 0
 
 [node name="FingerTwidleTimer" type="Timer" parent="." index="3" unique_id=1490275272]
 one_shot = true

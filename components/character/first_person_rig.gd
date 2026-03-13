@@ -31,6 +31,9 @@ func _unhandled_input(event: InputEvent) -> void:
 		var value = randi_range(0, 1)
 		animation_tree.set("parameters/attack_blend/blend_amount", 0)
 		animation_tree.set("parameters/attack_oneshot/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
+	
+	if event.is_action_pressed(&"inspect"):
+		animation_tree.set("parameters/inspect_oneshot/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 
 func _physics_process(_delta: float) -> void:
 	_play_finger_twidle()
