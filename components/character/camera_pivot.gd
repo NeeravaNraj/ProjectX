@@ -2,7 +2,7 @@ extends Node3D
 
 @onready var player = $".."
 
-const MAX_TILT_ANGLE := deg_to_rad(5.0)
+const MAX_TILT_ANGLE := deg_to_rad(2.5)
 
 var mouse_input = Vector2.ZERO
 var current_rotation = Vector3.ZERO
