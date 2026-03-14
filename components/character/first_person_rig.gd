@@ -15,14 +15,15 @@ func transition_movement(state: MovementStates):
 	tween.tween_property(animation_tree, "parameters/StateMachine/Locomotion/blend_position", float(state), 0.3)
 
 func abort_jump():
-	_fade_out_oneshot("parameters/jump_oneshot/request")
+	if animation_playback.get_current_node() == &"Parry": return
+	animation_tree.set("parameters/StateMachine/conditions/leave_jump", true)
+	animation_playback.travel(&"Locomotion")
 
 func parry(value: bool):
 	if value:
 		animation_tree.set("parameters/StateMachine/conditions/leave_parry", false)
 		animation_playback.travel(&"Parry")
 	else:
-		animation_tree.set("parameters/StateMachine/conditions/leave_parry", true)
 		animation_playback.travel(&"Locomotion")
 	
 func _unhandled_input(event: InputEvent) -> void:
@@ -58,7 +59,8 @@ func _jump():
 	if value >= 8:
 		animation_playback.travel(&"BladeSpin")
 	else:
-		_fire_oneshot("parameters/jump_oneshot/request")
+		animation_tree.set("parameters/StateMachine/conditions/leave_jump", false)
+		animation_playback.travel(&"Jumping")
 
 func _inspect():
 	animation_playback.travel(&"Inspect")
