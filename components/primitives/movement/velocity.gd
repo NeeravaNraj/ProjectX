@@ -20,6 +20,11 @@ func add_impulse(direction: Vector3, power: float):
 	target.velocity += direction.normalized() * power
 	move_velocity = target.velocity
 
+func add_impuse_in_move_direction(power: float):
+	var direction = target.transform.basis * Vector3(raw_direction.x, 0.0, raw_direction.y)
+	target.velocity += direction * power
+	move_velocity = target.velocity
+
 func set_speed(value: float):
 	speed = clampf(value, -1e7, 1e7)
 	
