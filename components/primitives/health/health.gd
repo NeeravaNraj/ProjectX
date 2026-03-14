@@ -13,23 +13,23 @@ signal death()
 
 func heal(amount: int):
 	if _is_dead(): return
-	
+
 	var old_health = health
 	health += amount
-	
+
 	healed.emit(health - old_health)
 	changed.emit(health)
 
 func damage(amount: int):
 	if _is_dead(): return
-	
+
 	if (health - amount) <= 0:
 		death.emit()
 	else:
 		damaged.emit(amount)
-	
+
 	health -= amount
 	changed.emit(health)
-	
+
 func _is_dead():
 	return health <= 0

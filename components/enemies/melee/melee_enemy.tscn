@@ -1,0 +1,172 @@
+[gd_scene format=3 uid="uid://c7aau4proecem"]
+
+[ext_resource type="Script" uid="uid://csbdrlm7xxxea" path="res://components/enemies/melee/melee_enemy.gd" id="1_y6ryl"]
+[ext_resource type="Script" uid="uid://bx4tjgr464fxd" path="res://components/primitives/health/hurtbox.gd" id="2_bev4u"]
+[ext_resource type="Script" uid="uid://bxhdwvc7scbta" path="res://resources/character/enemy_stats.gd" id="2_hat2d"]
+[ext_resource type="Script" uid="uid://cmqhxkdolaasw" path="res://components/primitives/health/health.gd" id="3_dfup6"]
+[ext_resource type="Script" uid="uid://couw105c3bde4" path="res://addons/godot_state_charts/state_chart.gd" id="4_fkggj"]
+[ext_resource type="Script" uid="uid://jk2jm1g6q853" path="res://addons/godot_state_charts/compound_state.gd" id="5_fg5ev"]
+[ext_resource type="Script" uid="uid://cytafq8i1y8qm" path="res://addons/godot_state_charts/atomic_state.gd" id="6_caay7"]
+[ext_resource type="Script" uid="uid://cf1nsco3w0mf6" path="res://addons/godot_state_charts/transition.gd" id="7_kp2sm"]
+[ext_resource type="Script" uid="uid://tvcrp6flvmnv" path="res://components/enemies/melee/states/state_actor.gd" id="8_hf46n"]
+[ext_resource type="Script" uid="uid://bhqmahqgn1d8g" path="res://components/enemies/melee/states/idle.gd" id="9_hf46n"]
+[ext_resource type="Script" uid="uid://7xbymm0klxdq" path="res://components/enemies/melee/states/searching.gd" id="10_hat2d"]
+[ext_resource type="Script" uid="uid://cslbvlerg8thi" path="res://components/enemies/melee/states/in_combat.gd" id="11_6mpdf"]
+[ext_resource type="Script" uid="uid://bjwwy7stkqlrs" path="res://components/enemies/melee/states/aggravated.gd" id="12_8g4u5"]
+[ext_resource type="Script" uid="uid://wybduwehgkul" path="res://components/enemies/melee/states/attacking.gd" id="13_goyg5"]
+
+[sub_resource type="Resource" id="Resource_6mpdf"]
+script = ExtResource("2_hat2d")
+metadata/_custom_type_script = "uid://bxhdwvc7scbta"
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_y6ryl"]
+radius = 0.4
+height = 1.8
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hf46n"]
+albedo_color = Color(0.8473353, 0.045018718, 0.377861, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_hf46n"]
+material = SubResource("StandardMaterial3D_hf46n")
+radius = 0.4
+height = 1.8
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_bev4u"]
+radius = 0.4
+height = 1.8
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_hf46n"]
+radius = 10.0
+
+[node name="MeleeEnemy" type="CharacterBody3D" unique_id=597327788]
+collision_layer = 2
+script = ExtResource("1_y6ryl")
+enemy_stats = SubResource("Resource_6mpdf")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=1292600841]
+
+[node name="PhysicsCollider" type="CollisionShape3D" parent="." unique_id=1638057920]
+shape = SubResource("CapsuleShape3D_y6ryl")
+
+[node name="VisualMesh" type="MeshInstance3D" parent="." unique_id=267729829]
+mesh = SubResource("CapsuleMesh_hf46n")
+
+[node name="HurtBox" type="Area3D" parent="." unique_id=1795298973 node_paths=PackedStringArray("health_component")]
+collision_layer = 2
+script = ExtResource("2_bev4u")
+health_component = NodePath("../Health")
+metadata/_custom_type_script = "uid://bx4tjgr464fxd"
+
+[node name="HurtboxCollider" type="CollisionShape3D" parent="HurtBox" unique_id=47547571]
+shape = SubResource("CapsuleShape3D_bev4u")
+
+[node name="PlayerDetectionArea" type="Area3D" parent="." unique_id=1815554461]
+collision_layer = 0
+monitorable = false
+
+[node name="PlayerDetectionShape" type="CollisionShape3D" parent="PlayerDetectionArea" unique_id=1834470356]
+shape = SubResource("SphereShape3D_hf46n")
+
+[node name="Health" type="Node" parent="." unique_id=1173554137]
+script = ExtResource("3_dfup6")
+metadata/_custom_type_script = "uid://cmqhxkdolaasw"
+
+[node name="StateChart" type="Node" parent="." unique_id=2028321784]
+unique_name_in_owner = true
+script = ExtResource("4_fkggj")
+metadata/_custom_type_script = "uid://couw105c3bde4"
+
+[node name="Root" type="Node" parent="StateChart" unique_id=833360526]
+script = ExtResource("5_fg5ev")
+initial_state = NodePath("Idle")
+metadata/_custom_type_script = "uid://jk2jm1g6q853"
+
+[node name="Idle" type="Node" parent="StateChart/Root" unique_id=2044979495]
+script = ExtResource("6_caay7")
+metadata/_custom_type_script = "uid://cytafq8i1y8qm"
+
+[node name="Searching" type="Node" parent="StateChart/Root" unique_id=1820443932]
+script = ExtResource("6_caay7")
+metadata/_custom_type_script = "uid://cytafq8i1y8qm"
+
+[node name="OnAggravated" type="Node" parent="StateChart/Root" unique_id=1127020799]
+script = ExtResource("7_kp2sm")
+to = NodePath("../InCombat/Aggravated")
+event = &"onAggravated"
+delay_in_seconds = "0.0"
+metadata/_custom_type_script = "uid://cf1nsco3w0mf6"
+
+[node name="OnIdle" type="Node" parent="StateChart/Root" unique_id=18328487]
+script = ExtResource("7_kp2sm")
+to = NodePath("../Idle")
+event = &"onIdle"
+delay_in_seconds = "0.0"
+metadata/_custom_type_script = "uid://cf1nsco3w0mf6"
+
+[node name="InCombat" type="Node" parent="StateChart/Root" unique_id=1055655555]
+script = ExtResource("5_fg5ev")
+initial_state = NodePath("Aggravated")
+metadata/_custom_type_script = "uid://jk2jm1g6q853"
+
+[node name="Aggravated" type="Node" parent="StateChart/Root/InCombat" unique_id=615613644]
+script = ExtResource("6_caay7")
+metadata/_custom_type_script = "uid://cytafq8i1y8qm"
+
+[node name="Attacking" type="Node" parent="StateChart/Root/InCombat" unique_id=1017335811]
+script = ExtResource("6_caay7")
+metadata/_custom_type_script = "uid://cytafq8i1y8qm"
+
+[node name="OnIdle" type="Node" parent="StateChart/Root/InCombat" unique_id=843593195]
+script = ExtResource("7_kp2sm")
+to = NodePath("../../Idle")
+event = &"onIdle"
+delay_in_seconds = "0.0"
+metadata/_custom_type_script = "uid://cf1nsco3w0mf6"
+
+[node name="OnAttacking" type="Node" parent="StateChart/Root/InCombat" unique_id=2103004280]
+script = ExtResource("7_kp2sm")
+to = NodePath("../Attacking")
+event = &"onAttacking"
+delay_in_seconds = "0.0"
+metadata/_custom_type_script = "uid://cf1nsco3w0mf6"
+
+[node name="OnSearching" type="Node" parent="StateChart/Root/InCombat" unique_id=1720394961]
+script = ExtResource("7_kp2sm")
+to = NodePath("../../Searching")
+event = &"onSearching"
+delay_in_seconds = "0.0"
+metadata/_custom_type_script = "uid://cf1nsco3w0mf6"
+
+[node name="StateActors" type="Node" parent="." unique_id=1459447087 node_paths=PackedStringArray("melee_enemy")]
+unique_name_in_owner = true
+script = ExtResource("8_hf46n")
+melee_enemy = NodePath("..")
+
+[node name="Idle" type="Node" parent="StateActors" unique_id=1950895088]
+script = ExtResource("9_hf46n")
+
+[node name="Searching" type="Node" parent="StateActors" unique_id=544935906]
+script = ExtResource("10_hat2d")
+
+[node name="SearchTimer" type="Timer" parent="StateActors/Searching" unique_id=936735279]
+wait_time = 5.0
+one_shot = true
+
+[node name="InCombat" type="Node" parent="StateActors" unique_id=1683166852]
+script = ExtResource("11_6mpdf")
+
+[node name="Aggravated" type="Node" parent="StateActors/InCombat" unique_id=2114953160]
+script = ExtResource("12_8g4u5")
+
+[node name="Attacking" type="Node" parent="StateActors/InCombat" unique_id=1430372863]
+script = ExtResource("13_goyg5")
+
+[connection signal="state_physics_processing" from="StateChart/Root/Idle" to="StateActors/Idle" method="_on_idle_state_physics_processing"]
+[connection signal="state_entered" from="StateChart/Root/Searching" to="StateActors/Searching" method="_on_searching_state_entered"]
+[connection signal="state_exited" from="StateChart/Root/Searching" to="StateActors/Searching" method="_on_searching_state_exited"]
+[connection signal="state_physics_processing" from="StateChart/Root/Searching" to="StateActors/Searching" method="_on_searching_state_physics_processing"]
+[connection signal="state_physics_processing" from="StateChart/Root/InCombat" to="StateActors/InCombat" method="_on_in_combat_state_physics_processing"]
+[connection signal="state_entered" from="StateChart/Root/InCombat/Aggravated" to="StateActors/InCombat/Aggravated" method="_on_aggravated_state_entered"]
+[connection signal="state_physics_processing" from="StateChart/Root/InCombat/Aggravated" to="StateActors/InCombat/Aggravated" method="_on_aggravated_state_physics_processing"]
+[connection signal="state_physics_processing" from="StateChart/Root/InCombat/Attacking" to="StateActors/InCombat/Attacking" method="_on_attacking_state_physics_processing"]
+[connection signal="timeout" from="StateActors/Searching/SearchTimer" to="StateActors/Searching" method="_on_search_timer_timeout"]

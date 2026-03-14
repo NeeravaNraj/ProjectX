@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://bipvsvl5mnuqm" path="res://levels/prototyping/prototyping.gd" id="1_82110"]
 [ext_resource type="Texture2D" uid="uid://r2tuqss83luh" path="res://assets/Skyboxes/kloppenheim_02_puresky_2k.hdr" id="2_rm5dk"]
 [ext_resource type="Texture2D" uid="uid://dqvbwrlhcyx4m" path="res://assets/kenney_prototype-textures/PNG/Purple/texture_09.png" id="3_0qmt2"]
-[ext_resource type="PackedScene" uid="uid://81vfh6cx30ni" path="res://components/enemy/enemy.tscn" id="4_yokfk"]
+[ext_resource type="PackedScene" uid="uid://c7aau4proecem" path="res://components/enemies/melee/melee_enemy.tscn" id="4_82110"]
 [ext_resource type="PackedScene" uid="uid://cjk8sauqxur5r" path="res://components/grapplepoint/grapple_point.tscn" id="5_dkjbd"]
 [ext_resource type="PackedScene" uid="uid://chnlwpgv4jjbn" path="res://components/character/player.tscn" id="6_mlcm4"]
 
@@ -42,20 +42,20 @@ transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0
 
 [node name="Enemies" type="Node3D" parent="." unique_id=1333544584]
 
-[node name="Enemy1" parent="Enemies" unique_id=968669852 instance=ExtResource("4_yokfk")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 1.8999999, 50)
+[node name="Enemy1" parent="Enemies" unique_id=597327788 instance=ExtResource("4_82110")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 35, 0.9, 11)
 
-[node name="Enemy2" parent="Enemies" unique_id=1014896141 instance=ExtResource("4_yokfk")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -20, 1.9000001, 70)
+[node name="Enemy2" parent="Enemies" unique_id=357254306 instance=ExtResource("4_82110")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 35, 0.9, 20)
 
-[node name="Enemy3" parent="Enemies" unique_id=909010695 instance=ExtResource("4_yokfk")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 20, 1.9000001, 70)
+[node name="Enemy3" parent="Enemies" unique_id=805087617 instance=ExtResource("4_82110")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.9, 50)
 
-[node name="Enemy4" parent="Enemies" unique_id=1428269008 instance=ExtResource("4_yokfk")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 35, 0.9, 11)
+[node name="Enemy4" parent="Enemies" unique_id=1978500468 instance=ExtResource("4_82110")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 1.9, 70)
 
-[node name="Enemy5" parent="Enemies" unique_id=1453898268 instance=ExtResource("4_yokfk")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 35, 0.9, 19)
+[node name="Enemy5" parent="Enemies" unique_id=2107820763 instance=ExtResource("4_82110")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 1.9, 70)
 
 [node name="LevelNavigationRegion" type="NavigationRegion3D" parent="." unique_id=168509107]
 navigation_mesh = SubResource("NavigationMesh_82110")

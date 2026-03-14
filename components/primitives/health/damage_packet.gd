@@ -31,13 +31,13 @@ func _init(
 	element = p_element
 	style_multiplier = p_style_multiplier
 	reaction_multiplier = p_reaction_multiplier
-	
+
 	knockback_modifier = p_knockback_modifier
 	flat_damage_modifier = p_flat_damage_modifier
 
 func consolidate_conditional_multipliers(elements: Array[Element.ElementKind]):
 	for element in elements:
 		var multiplier = reaction_conditional_multipliers.get(element, null)
-		
+
 		if multiplier:
 			reaction_multiplier += multiplier
