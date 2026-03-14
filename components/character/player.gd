@@ -25,7 +25,10 @@ func walk():
 	_velocity.set_speed_modifier(0)
 
 func sprint():
-	_velocity.set_speed_modifier(player_stats.move_speed_sprint)
+	_velocity.set_speed_modifier(player_stats.move_speed)
+
+func dash():
+	_velocity.add_impuse_in_move_direction(player_stats.move_speed_dash)
 
 func jump():
 	_velocity.add_impulse(Vector3.UP, player_stats.jump_velocity)

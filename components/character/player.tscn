@@ -143,7 +143,7 @@ script = ExtResource("3_4akdr")
 [node name="Camera" type="Camera3D" parent="CameraPivot" unique_id=777665774]
 unique_name_in_owner = true
 
-[node name="FirstPersonRig" parent="CameraPivot" unique_id=1024674692 node_paths=PackedStringArray("player") instance=ExtResource("4_6p5bk")]
+[node name="FirstPersonRig" parent="CameraPivot" unique_id=85344706 node_paths=PackedStringArray("player") instance=ExtResource("4_6p5bk")]
 transform = Transform3D(-1.5, 0, -1.3113416e-07, 0, 1.5, 0, 1.3113416e-07, 0, -1.5, 0, -0.045, 0.05)
 player = NodePath("../..")
 
@@ -239,6 +239,13 @@ event = &"onMoving"
 delay_in_seconds = "0.0"
 metadata/_custom_type_script = "uid://cf1nsco3w0mf6"
 
+[node name="OnDashing" type="Node" parent="States/StateChart/Root/Movement/Grounded" unique_id=2089068834]
+script = ExtResource("10_2ve8e")
+to = NodePath("../Moving/Dashing")
+event = &"onDashing"
+delay_in_seconds = "0.0"
+metadata/_custom_type_script = "uid://cf1nsco3w0mf6"
+
 [node name="Idle" type="Node" parent="States/StateChart/Root/Movement/Grounded" unique_id=98389378]
 script = ExtResource("9_mfj52")
 metadata/_custom_type_script = "uid://cytafq8i1y8qm"
@@ -249,6 +256,10 @@ initial_state = NodePath("Sprinting")
 metadata/_custom_type_script = "uid://jk2jm1g6q853"
 
 [node name="Sprinting" type="Node" parent="States/StateChart/Root/Movement/Grounded/Moving" unique_id=767903468]
+script = ExtResource("9_mfj52")
+metadata/_custom_type_script = "uid://cytafq8i1y8qm"
+
+[node name="Dashing" type="Node" parent="States/StateChart/Root/Movement/Grounded/Moving" unique_id=870877239]
 script = ExtResource("9_mfj52")
 metadata/_custom_type_script = "uid://cytafq8i1y8qm"
 
