@@ -63,7 +63,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		_try_grapple()
 
 func _try_grapple():
-	var override_max = INF
+	var override_max = 50
 	var override_min = 0
 	
 	var data = shuriken_ctrl.get_grapple_location()
