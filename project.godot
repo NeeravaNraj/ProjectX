@@ -29,6 +29,10 @@ window/vsync/vsync_mode=0
 
 enabled=PackedStringArray("res://addons/godot_state_charts/plugin.cfg")
 
+[global_group]
+
+enemy="any entity in the game that can be considered: smart, hostile towards the player and killable / damageable."
+
 [input]
 
 left_click={

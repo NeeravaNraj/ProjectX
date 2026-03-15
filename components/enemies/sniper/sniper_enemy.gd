@@ -1,6 +1,4 @@
-class_name MeleeEnemy extends CharacterBody3D
-
-@export var enemy_stats: EnemyStats
+class_name SniperEnemy extends CharacterBody3D
 
 @onready var hurtbox: HurtBox = $HurtBox
 @onready var state_chart: StateChart = %StateChart
@@ -26,6 +24,7 @@ func get_player_distance():
 	return global_position.distance_to(player_position)
 
 func _ready() -> void:
+	add_to_group(&"enemy")
 	starting_position = global_position
 	state_chart.send_event(&"onIdle")
 

@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://dqvbwrlhcyx4m" path="res://assets/kenney_prototype-textures/PNG/Purple/texture_09.png" id="3_0qmt2"]
 [ext_resource type="PackedScene" uid="uid://c7aau4proecem" path="res://components/enemies/melee/melee_enemy.tscn" id="4_82110"]
 [ext_resource type="PackedScene" uid="uid://cjk8sauqxur5r" path="res://components/grapplepoint/grapple_point.tscn" id="5_dkjbd"]
+[ext_resource type="PackedScene" uid="uid://2u2nxx2wm0wj" path="res://components/enemies/sniper/sniper_enemy.tscn" id="5_rm5dk"]
 [ext_resource type="PackedScene" uid="uid://chnlwpgv4jjbn" path="res://components/character/player.tscn" id="6_mlcm4"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_g05yx"]
@@ -48,8 +49,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 35, 0.9, 11)
 [node name="Enemy2" parent="Enemies" unique_id=357254306 instance=ExtResource("4_82110")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 35, 0.9, 20)
 
-[node name="Enemy3" parent="Enemies" unique_id=805087617 instance=ExtResource("4_82110")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.9, 50)
+[node name="Enemy3" parent="Enemies" unique_id=537915013 instance=ExtResource("5_rm5dk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8999996, 50)
 
 [node name="Enemy4" parent="Enemies" unique_id=1978500468 instance=ExtResource("4_82110")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 1.9, 70)

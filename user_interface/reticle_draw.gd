@@ -17,18 +17,18 @@ func draw_circle_crosshair():
 		[PI, 3 * PI / 2],
 		[3 * PI / 2, 2 * PI]
 	]
-	
+
 	for arc in arc_segments:
 		var start_angle = arc[0]
 		var end_angle = arc[1]
-		
+
 		var points = []
 		var step_size = (end_angle - start_angle) / segments
-		
+
 		for i in range(segments + 1):
 			var angle = start_angle + i * step_size
 			var point = Vector2(radius * cos(angle), radius * sin(angle))
 			points.append(point)
-		
+
 		if points.size() > 1:
 			draw_polyline(points, color, thickness, true)

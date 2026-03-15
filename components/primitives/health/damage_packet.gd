@@ -38,6 +38,6 @@ func _init(
 func consolidate_conditional_multipliers(elements: Array[Element.ElementKind]):
 	for el in elements:
 		var multiplier = reaction_conditional_multipliers.get(el, null)
-		
+
 		if multiplier:
 			reaction_multiplier += multiplier

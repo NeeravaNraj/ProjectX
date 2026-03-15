@@ -1,0 +1,105 @@
+[gd_scene format=3 uid="uid://2u2nxx2wm0wj"]
+
+[ext_resource type="Script" uid="uid://bfn8dvmbqvesb" path="res://components/enemies/sniper/sniper_enemy.gd" id="1_o4u82"]
+[ext_resource type="Script" uid="uid://bx4tjgr464fxd" path="res://components/primitives/health/hurtbox.gd" id="3_cto5j"]
+[ext_resource type="Script" uid="uid://cmqhxkdolaasw" path="res://components/primitives/health/health.gd" id="4_sqjrg"]
+[ext_resource type="Script" uid="uid://couw105c3bde4" path="res://addons/godot_state_charts/state_chart.gd" id="5_3kovv"]
+[ext_resource type="Script" uid="uid://jk2jm1g6q853" path="res://addons/godot_state_charts/compound_state.gd" id="6_3efmf"]
+[ext_resource type="Script" uid="uid://cytafq8i1y8qm" path="res://addons/godot_state_charts/atomic_state.gd" id="7_hucxu"]
+[ext_resource type="Script" uid="uid://cf1nsco3w0mf6" path="res://addons/godot_state_charts/transition.gd" id="8_ea1do"]
+[ext_resource type="Script" uid="uid://devsh755wnxka" path="res://components/enemies/sniper/states/state_actor.gd" id="9_4jtqw"]
+[ext_resource type="Script" uid="uid://p4anfw6takgj" path="res://components/enemies/sniper/states/idle.gd" id="10_hh63w"]
+[ext_resource type="Script" uid="uid://s863oohqdey3" path="res://components/enemies/sniper/states/in_combat.gd" id="12_6fl41"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_y6ryl"]
+radius = 0.4
+height = 1.8
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hf46n"]
+albedo_color = Color(0.51228756, 0.24657705, 1, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_hf46n"]
+material = SubResource("StandardMaterial3D_hf46n")
+radius = 0.4
+height = 1.8
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_bev4u"]
+radius = 0.4
+height = 1.8
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_hf46n"]
+radius = 20.0
+
+[node name="SniperEnemy" type="CharacterBody3D" unique_id=597327788 groups=["enemy"]]
+collision_layer = 2
+script = ExtResource("1_o4u82")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=1292600841]
+
+[node name="PhysicsCollider" type="CollisionShape3D" parent="." unique_id=1638057920]
+shape = SubResource("CapsuleShape3D_y6ryl")
+
+[node name="VisualMesh" type="MeshInstance3D" parent="." unique_id=267729829]
+mesh = SubResource("CapsuleMesh_hf46n")
+
+[node name="HurtBox" type="Area3D" parent="." unique_id=1795298973 node_paths=PackedStringArray("health_component")]
+collision_layer = 2
+script = ExtResource("3_cto5j")
+health_component = NodePath("../Health")
+metadata/_custom_type_script = "uid://bx4tjgr464fxd"
+
+[node name="HurtboxCollider" type="CollisionShape3D" parent="HurtBox" unique_id=47547571]
+shape = SubResource("CapsuleShape3D_bev4u")
+
+[node name="PlayerDetectionArea" type="Area3D" parent="." unique_id=1815554461]
+collision_layer = 0
+monitorable = false
+
+[node name="PlayerDetectionShape" type="CollisionShape3D" parent="PlayerDetectionArea" unique_id=1834470356]
+shape = SubResource("SphereShape3D_hf46n")
+
+[node name="Health" type="Node" parent="." unique_id=1173554137]
+script = ExtResource("4_sqjrg")
+metadata/_custom_type_script = "uid://cmqhxkdolaasw"
+
+[node name="StateChart" type="Node" parent="." unique_id=2028321784]
+unique_name_in_owner = true
+script = ExtResource("5_3kovv")
+metadata/_custom_type_script = "uid://couw105c3bde4"
+
+[node name="Root" type="Node" parent="StateChart" unique_id=833360526]
+script = ExtResource("6_3efmf")
+initial_state = NodePath("Idle")
+metadata/_custom_type_script = "uid://jk2jm1g6q853"
+
+[node name="Idle" type="Node" parent="StateChart/Root" unique_id=2044979495]
+script = ExtResource("7_hucxu")
+metadata/_custom_type_script = "uid://cytafq8i1y8qm"
+
+[node name="Sniping" type="Node" parent="StateChart/Root" unique_id=1820443932]
+script = ExtResource("7_hucxu")
+metadata/_custom_type_script = "uid://cytafq8i1y8qm"
+
+[node name="OnIdle" type="Node" parent="StateChart/Root" unique_id=18328487]
+script = ExtResource("8_ea1do")
+to = NodePath("../Idle")
+event = &"onIdle"
+delay_in_seconds = "0.0"
+metadata/_custom_type_script = "uid://cf1nsco3w0mf6"
+
+[node name="OnSniping" type="Node" parent="StateChart/Root" unique_id=843593195]
+script = ExtResource("8_ea1do")
+to = NodePath("../Sniping")
+event = &"onSniping"
+delay_in_seconds = "0.0"
+metadata/_custom_type_script = "uid://cf1nsco3w0mf6"
+
+[node name="StateActors" type="Node" parent="." unique_id=1459447087]
+unique_name_in_owner = true
+script = ExtResource("9_4jtqw")
+
+[node name="Idle" type="Node" parent="StateActors" unique_id=1950895088]
+script = ExtResource("10_hh63w")
+
+[node name="Sniping" type="Node" parent="StateActors" unique_id=1683166852]
+script = ExtResource("12_6fl41")

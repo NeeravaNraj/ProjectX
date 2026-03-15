@@ -38,7 +38,7 @@ height = 1.8
 [sub_resource type="SphereShape3D" id="SphereShape3D_hf46n"]
 radius = 10.0
 
-[node name="MeleeEnemy" type="CharacterBody3D" unique_id=597327788]
+[node name="MeleeEnemy" type="CharacterBody3D" unique_id=597327788 groups=["enemy"]]
 collision_layer = 2
 script = ExtResource("1_y6ryl")
 enemy_stats = SubResource("Resource_6mpdf")
