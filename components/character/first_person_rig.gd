@@ -56,7 +56,7 @@ func _attack():
 func _jump():
 	if animation_playback.get_current_node() == &"Parry": return
 	var value = randi_range(0, 10)
-	if value >= 8:
+	if value >= 9:
 		animation_playback.travel(&"BladeSpin")
 	else:
 		animation_tree.set("parameters/StateMachine/conditions/leave_jump", false)
