@@ -156,7 +156,8 @@ script = ExtResource("12_6fl41")
 script = ExtResource("12_7kt4n")
 
 [node name="AimTimer" type="Timer" parent="StateActors/Aggravated/Aiming" unique_id=1538320166]
-wait_time = 15.0
+wait_time = 3.0
+one_shot = true
 
 [node name="Shooting" type="Node" parent="StateActors/Aggravated" unique_id=913949075]
 script = ExtResource("13_ykail")
@@ -164,11 +165,17 @@ script = ExtResource("13_ykail")
 [node name="Repositioning" type="Node" parent="StateActors/Aggravated" unique_id=485342660]
 script = ExtResource("11_gmg34")
 
+[node name="DummyTimer" type="Timer" parent="StateActors/Aggravated/Repositioning" unique_id=724805317]
+wait_time = 5.0
+one_shot = true
+
 [connection signal="state_physics_processing" from="StateChart/Root/Idle" to="StateActors/Idle" method="_on_idle_state_physics_processing"]
 [connection signal="state_entered" from="StateChart/Root/Aggravated/Aiming" to="StateActors/Aggravated/Aiming" method="_on_aiming_state_entered"]
 [connection signal="state_exited" from="StateChart/Root/Aggravated/Aiming" to="StateActors/Aggravated/Aiming" method="_on_aiming_state_exited"]
 [connection signal="state_physics_processing" from="StateChart/Root/Aggravated/Aiming" to="StateActors/Aggravated/Aiming" method="_on_aiming_state_physics_processing"]
+[connection signal="state_entered" from="StateChart/Root/Aggravated/Shooting" to="StateActors/Aggravated/Shooting" method="_on_shooting_state_entered"]
 [connection signal="state_entered" from="StateChart/Root/Aggravated/Repositioning" to="StateActors/Aggravated/Repositioning" method="_on_repositioning_state_entered"]
 [connection signal="state_exited" from="StateChart/Root/Aggravated/Repositioning" to="StateActors/Aggravated/Repositioning" method="_on_repositioning_state_exited"]
 [connection signal="state_physics_processing" from="StateChart/Root/Aggravated/Repositioning" to="StateActors/Aggravated/Repositioning" method="_on_repositioning_state_physics_processing"]
 [connection signal="timeout" from="StateActors/Aggravated/Aiming/AimTimer" to="StateActors/Aggravated/Aiming" method="_on_aim_timer_timeout"]
+[connection signal="timeout" from="StateActors/Aggravated/Repositioning/DummyTimer" to="StateActors/Aggravated/Repositioning" method="_on_dummy_timer_timeout"]
