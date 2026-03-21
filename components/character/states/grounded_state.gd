@@ -9,7 +9,6 @@ func _on_grounded_state_physics_processing(_delta: float) -> void:
 	if not player.is_on_floor():
 		player.state_chart.send_event(&"onAirborne")
 	
-	
 
 
 func _on_grounded_state_unhandled_input(event: InputEvent) -> void:
