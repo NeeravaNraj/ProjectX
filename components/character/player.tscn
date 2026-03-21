@@ -10,7 +10,9 @@
 [ext_resource type="PackedScene" uid="uid://gbwtsbjngig6" path="res://components/character/first_person_rig.tscn" id="4_6p5bk"]
 [ext_resource type="Script" uid="uid://ctrqgap4ctxuv" path="res://components/character/weaponary.gd" id="5_2p11o"]
 [ext_resource type="PackedScene" uid="uid://b8xoyf57pebhr" path="res://components/primitives/health/health.tscn" id="5_6npmc"]
+[ext_resource type="Script" uid="uid://roreq6jw47ec" path="res://components/character/fp_viewport.gd" id="5_1054b"]
 [ext_resource type="Script" uid="uid://couw105c3bde4" path="res://addons/godot_state_charts/state_chart.gd" id="6_cgsss"]
+[ext_resource type="Script" uid="uid://hme71heqco1x" path="res://components/character/arms_camera.gd" id="6_raigf"]
 [ext_resource type="Script" uid="uid://c1vp0ojjvaby1" path="res://addons/godot_state_charts/parallel_state.gd" id="7_qb6gd"]
 [ext_resource type="Script" uid="uid://jk2jm1g6q853" path="res://addons/godot_state_charts/compound_state.gd" id="8_mk48o"]
 [ext_resource type="Script" uid="uid://bv6jsy7s0fyxv" path="res://components/character/grapple_detector.gd" id="9_jqkmc"]
@@ -119,7 +121,6 @@ radius = 12.0
 [node name="Player" type="CharacterBody3D" unique_id=1186516781]
 script = ExtResource("1_knl4b")
 player_stats = ExtResource("2_bmx6v")
-mouse_sens = null
 
 [node name="CameraControlAnchor" type="Marker3D" parent="." unique_id=1135788692]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.60824907, 0.07481673)
@@ -145,10 +146,28 @@ script = ExtResource("3_4akdr")
 
 [node name="Camera" type="Camera3D" parent="CameraPivot" unique_id=777665774]
 unique_name_in_owner = true
+current = true
 
 [node name="FirstPersonRig" parent="CameraPivot/Camera" unique_id=85344706 node_paths=PackedStringArray("player") instance=ExtResource("4_6p5bk")]
 transform = Transform3D(-1.5, 0, -1.3113416e-07, 0, 1.5, 0, 1.3113416e-07, 0, -1.5, 0, -0.045000017, 0.05)
 player = NodePath("../../..")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="CameraPivot" unique_id=631891545]
+visible = false
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="SubViewport" type="SubViewport" parent="CameraPivot/SubViewportContainer" unique_id=21792404]
+transparent_bg = true
+handle_input_locally = false
+render_target_update_mode = 0
+script = ExtResource("5_1054b")
+
+[node name="ArmsCamera" type="Camera3D" parent="CameraPivot/SubViewportContainer/SubViewport" unique_id=1418506376]
+visible = false
+cull_mask = 2
+current = true
+script = ExtResource("6_raigf")
 
 [node name="Weaponry" type="Node3D" parent="." unique_id=1708920944]
 script = ExtResource("5_2p11o")
