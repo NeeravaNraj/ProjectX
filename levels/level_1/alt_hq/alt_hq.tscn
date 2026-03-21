@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://buethsfp5i0br"]
+
+[ext_resource type="Texture2D" uid="uid://r2tuqss83luh" path="res://assets/Skyboxes/kloppenheim_02_puresky_2k.hdr" id="1_7068t"]
+[ext_resource type="PackedScene" uid="uid://chnlwpgv4jjbn" path="res://components/character/player.tscn" id="3_5kpj0"]
+[ext_resource type="PackedScene" uid="uid://df48r72bb0sup" path="res://levels/level_1/alt_hq/alt_hq_model.tscn" id="3_e4p7v"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_sul3t"]
+panorama = ExtResource("1_7068t")
+energy_multiplier = 0.05
+
+[sub_resource type="Sky" id="Sky_nhodu"]
+sky_material = SubResource("PanoramaSkyMaterial_sul3t")
+
+[sub_resource type="Environment" id="Environment_e4p7v"]
+background_mode = 2
+sky = SubResource("Sky_nhodu")
+ambient_light_color = Color(0.30323282, 0.30323282, 0.30323282, 1)
+fog_light_color = Color(0.14017183, 0.15623155, 0.18122098, 1)
+
+[node name="AtlHq" type="Node3D" unique_id=1257890428]
+
+[node name="AltHqEnvironment" type="WorldEnvironment" parent="." unique_id=670702848]
+environment = SubResource("Environment_e4p7v")
+
+[node name="Player" parent="." unique_id=1186516781 instance=ExtResource("3_5kpj0")]
+transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 67.19364, 9.880718, -62.61961)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=818159925]
+transform = Transform3D(1, 0, 0, 0, 0.107964605, 0.9941547, 0, -0.9941547, 0.107964605, 0, 106.32683, 0)
+light_energy = 0.5
+
+[node name="AltHqModel" parent="." unique_id=1930544047 instance=ExtResource("3_e4p7v")]
