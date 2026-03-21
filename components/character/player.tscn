@@ -26,7 +26,7 @@
 [ext_resource type="Script" uid="uid://drj4fdryh4j1l" path="res://components/character/states/falling.gd" id="21_ukpso"]
 [ext_resource type="Script" uid="uid://mjyk1l66mn35" path="res://components/character/states/grappling.gd" id="23_lbmrp"]
 [ext_resource type="PackedScene" uid="uid://ctn4ndv16n1wo" path="res://components/reactions/element_selector.tscn" id="25_6p5bk"]
-[ext_resource type="Script" uid="uid://72nbdu28o8fj" path="res://components/character/states/combat.gd" id="26_3lhvt"]
+[ext_resource type="Script" path="res://components/character/states/combat.gd" id="26_3lhvt"]
 [ext_resource type="Script" uid="uid://62pxrj7wpjoa" path="res://components/character/pickup_region.gd" id="26_qrg3i"]
 [ext_resource type="Script" uid="uid://c5f0q202nfv3f" path="res://components/character/states/parrying.gd" id="27_vgukn"]
 [ext_resource type="Script" uid="uid://b56wb38xrpyi8" path="res://components/pool/pool.gd" id="28_ib6g5"]
@@ -114,7 +114,7 @@ radius = 12.0
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_gie0d"]
 
-[node name="Player" type="CharacterBody3D" unique_id=1186516781]
+[node name="Player" type="CharacterBody3D" unique_id=1186516781 groups=["player"]]
 script = ExtResource("1_knl4b")
 player_stats = ExtResource("2_bmx6v")
 

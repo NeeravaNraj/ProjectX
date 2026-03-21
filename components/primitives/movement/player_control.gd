@@ -5,7 +5,7 @@ class_name PlayerControl extends BaseControl
 
 ## The input action to move down.
 @export var input_action_down: InputEventAction
-	
+
 ## The input action to move left.
 @export var input_action_left: InputEventAction
 
@@ -17,19 +17,19 @@ class_name PlayerControl extends BaseControl
 
 func _ready() -> void:
 	super()
-	
+
 	if null == input_action_up:
 		reset_action_up()
 
 	if null == input_action_down:
 		reset_action_down()
-	
+
 	if null == input_action_left:
 		reset_action_left()
 
 	if null == input_action_right:
 		reset_action_right()
-		
+
 	if null == input_action_sprint:
 		reset_action_sprint()
 
@@ -56,7 +56,7 @@ func reset_action_left() -> void:
 func reset_action_right() -> void:
 	input_action_right = InputEventAction.new()
 	input_action_right.action = DEFAULT_ACTION_RIGHT
-	
+
 func reset_action_sprint() -> void:
 	input_action_sprint = InputEventAction.new()
 	input_action_sprint.action = DEFAULT_ACTION_SPRINT

@@ -27,35 +27,35 @@ func add_impuse_in_move_direction(power: float):
 
 func set_speed(value: float):
 	speed = clampf(value, -1e7, 1e7)
-	
+
 func set_speed_modifier(value: float):
 	speed_modifier = clampf(value, -1e7, 1e7)
 
 func _ready() -> void:
 	target = get_parent() as CharacterBody3D
 	assert(target, "Expected VelocityComponent to be child of CharacterBody3D - %s" % [str(get_path())])
-	
+
 func _physics_process(delta: float) -> void:
 	if not target.is_on_floor():
 		target.velocity.y += gravity * delta
-	
+
 	var current_velocity = Vector2(move_velocity.x, move_velocity.z)
 	var direction = (target.transform.basis * Vector3(raw_direction.x, 0, raw_direction.y)).normalized()
-	
+
 	var final_speed = speed + speed_modifier
 	var g_acceleration = acceleration_coef * delta
 	var a_acceleration = acceleration_coef * delta * 0.14
 	var deceleration = deceleration_coef * delta
-	
+
 	var acceleration = g_acceleration if target.is_on_floor() else a_acceleration
-	
+
 	if direction:
 		var speed_scaled_direction = Vector2(direction.x, direction.z) * final_speed
 		current_velocity = lerp(current_velocity, speed_scaled_direction, acceleration)
 	else:
 		current_velocity = current_velocity.move_toward(Vector2.ZERO, deceleration)
-	
+
 	move_velocity = Vector3(current_velocity.x, target.velocity.y, current_velocity.y)
 	target.velocity = move_velocity
-	
+
 	target.move_and_slide()

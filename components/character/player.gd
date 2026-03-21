@@ -51,33 +51,33 @@ func _ready() -> void:
 	assert(player_stats, "Cannot instantiate Player without PlayerStats resource.")
 	space_state = get_world_3d().direct_space_state
 	_velocity.speed = player_stats.move_speed
-	
+
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed(&"left_click"):
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-	
+
 	if event.is_action_pressed(&"ui_cancel"):
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-	
+
 	if event.is_action_pressed(&"shuriken"):
 		shuriken_ctrl.throw_shuriken()
-	
+
 	if event.is_action_pressed(&"interact"):
 		_try_grapple()
 
 func _try_grapple():
 	var override_max = 50
 	var override_min = 0
-	
+
 	var data = shuriken_ctrl.get_grapple_location()
-	
+
 	if not data:
 		data = grapple_detector.get_closest_grapple_point()
 		override_max = player_stats.max_grapple_speed
 		override_min = player_stats.min_grapple_speed
-	
+
 	if not data: return
-	
+
 	var direction = data[0]
 	var distance = data[1]
 	var speed = clampf(
@@ -85,7 +85,7 @@ func _try_grapple():
 		override_min,
 		override_max,
 	)
-	
+
 	if direction and distance >= 5:
 		grapple(direction, speed)
 		await get_tree().create_timer(0.015).timeout
