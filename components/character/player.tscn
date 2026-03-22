@@ -10,9 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://gbwtsbjngig6" path="res://components/character/first_person_rig.tscn" id="4_6p5bk"]
 [ext_resource type="Script" uid="uid://ctrqgap4ctxuv" path="res://components/character/weaponary.gd" id="5_2p11o"]
 [ext_resource type="PackedScene" uid="uid://b8xoyf57pebhr" path="res://components/primitives/health/health.tscn" id="5_6npmc"]
-[ext_resource type="Script" uid="uid://roreq6jw47ec" path="res://components/character/fp_viewport.gd" id="5_1054b"]
 [ext_resource type="Script" uid="uid://couw105c3bde4" path="res://addons/godot_state_charts/state_chart.gd" id="6_cgsss"]
-[ext_resource type="Script" uid="uid://hme71heqco1x" path="res://components/character/arms_camera.gd" id="6_raigf"]
 [ext_resource type="Script" uid="uid://c1vp0ojjvaby1" path="res://addons/godot_state_charts/parallel_state.gd" id="7_qb6gd"]
 [ext_resource type="Script" uid="uid://jk2jm1g6q853" path="res://addons/godot_state_charts/compound_state.gd" id="8_mk48o"]
 [ext_resource type="Script" uid="uid://bv6jsy7s0fyxv" path="res://components/character/grapple_detector.gd" id="9_jqkmc"]
@@ -48,67 +46,6 @@ height = 1.9
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_pgqh4"]
 radius = 0.3
 height = 1.9
-
-[sub_resource type="Animation" id="Animation_lbmrp"]
-resource_name = "Attack"
-length = 0.4
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Model:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.23333333, 0.4),
-"transitions": PackedFloat32Array(1, 1, 0.5358867, 1),
-"update": 0,
-"values": [Vector3(0, 0, 0), Vector3(-0.04116893, 1.0162444, 0.35963404), Vector3(-0.04116893, 1.0162444, 0.35963404), Vector3(0, 0, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Model:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.23333333, 0.4),
-"transitions": PackedFloat32Array(1, 1, 0.5358867, 1),
-"update": 0,
-"values": [Vector3(0, 0, 0), Vector3(0.7464579, 1.0469389, -0.8218265), Vector3(0.7464579, 1.0469389, -0.8218265), Vector3(0, 0, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_2p11o"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Model:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0, 0, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Model:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0, 0, 0)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_6p5bk"]
-_data = {
-&"Attack": SubResource("Animation_lbmrp"),
-&"RESET": SubResource("Animation_2p11o")
-}
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_ukpso"]
 radius = 2.0
@@ -152,42 +89,15 @@ current = true
 transform = Transform3D(-1.5, 0, -1.3113416e-07, 0, 1.5, 0, 1.3113416e-07, 0, -1.5, 0, -0.045000017, 0.05)
 player = NodePath("../../..")
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="CameraPivot" unique_id=631891545]
-visible = false
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="SubViewport" type="SubViewport" parent="CameraPivot/SubViewportContainer" unique_id=21792404]
-transparent_bg = true
-handle_input_locally = false
-render_target_update_mode = 0
-script = ExtResource("5_1054b")
-
-[node name="ArmsCamera" type="Camera3D" parent="CameraPivot/SubViewportContainer/SubViewport" unique_id=1418506376]
-visible = false
-cull_mask = 2
-current = true
-script = ExtResource("6_raigf")
-
 [node name="Weaponry" type="Node3D" parent="." unique_id=1708920944]
 script = ExtResource("5_2p11o")
 
 [node name="Katana" parent="Weaponry" unique_id=1156992332 node_paths=PackedStringArray("attack_area", "element_selector", "attack_area_shape") instance=ExtResource("2_gie0d")]
 transform = Transform3D(-0.09646627, -0.9636583, -0.2491126, 0.83487564, 0.0579276, -0.547382, 0.54191965, -0.2607819, 0.79894686, 0.6049503, 0.48512423, -0.98595005)
 visible = false
-attack_damage = 10
 attack_area = NodePath("../../Areas/HitBox")
 element_selector = NodePath("../../ElementSelector")
 attack_area_shape = NodePath("../../Areas/HitBox/AttackShape")
-
-[node name="Model" parent="Weaponry/Katana" index="0" unique_id=1794460968]
-transform = Transform3D(1, 0, 0, 0, 1.0000001, 0, 0, 0, 0.99999994, 0, 0, 0)
-
-[node name="Handle" parent="Weaponry/Katana/Model" index="2" unique_id=352267174]
-transform = Transform3D(0.9998301, 0.017492488, 0.005824983, -0.017560542, 0.99977577, 0.0118379295, -0.005616635, -0.011938259, 0.99991304, 1.4901161e-08, -2.9802322e-08, 0.5034061)
-
-[node name="AnimationPlayer" parent="Weaponry/Katana" index="1" unique_id=939599132]
-libraries/ = SubResource("AnimationLibrary_6p5bk")
 
 [node name="Health" parent="." unique_id=1496712029 instance=ExtResource("5_6npmc")]
 

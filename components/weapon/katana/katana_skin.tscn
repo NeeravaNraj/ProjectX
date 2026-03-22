@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://07msekimmsd7"]
 
-[ext_resource type="ArrayMesh" uid="uid://702jnb4ypa6h" path="res://components/weapon/katana/assets/katana.tres" id="1_uab1j"]
+[ext_resource type="ArrayMesh" uid="uid://b0mxywm3abwq3" path="res://components/weapon/katana/assets/katana.tres" id="1_uab1j"]
 
 [node name="KatanaSkin" type="Node3D" unique_id=1190208438]
 
