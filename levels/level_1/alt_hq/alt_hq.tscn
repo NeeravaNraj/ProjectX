@@ -23,10 +23,10 @@ fog_light_color = Color(0.14017183, 0.15623155, 0.18122098, 1)
 environment = SubResource("Environment_e4p7v")
 
 [node name="Player" parent="." unique_id=1186516781 instance=ExtResource("3_5kpj0")]
-transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 67.19364, 9.880718, -62.61961)
+transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 36.42732, 8.835726, -40.57137)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=818159925]
 transform = Transform3D(1, 0, 0, 0, 0.107964605, 0.9941547, 0, -0.9941547, 0.107964605, 0, 106.32683, 0)
 light_energy = 0.5
 
-[node name="AltHqModel" parent="." unique_id=1930544047 instance=ExtResource("3_e4p7v")]
+[node name="AltHqModel" parent="." unique_id=286963825 instance=ExtResource("3_e4p7v")]
