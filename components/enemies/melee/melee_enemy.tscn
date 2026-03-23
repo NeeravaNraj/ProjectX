@@ -5,6 +5,7 @@
 [ext_resource type="Script" uid="uid://bxhdwvc7scbta" path="res://resources/character/enemy_stats.gd" id="2_hat2d"]
 [ext_resource type="Script" uid="uid://cmqhxkdolaasw" path="res://components/primitives/health/health.gd" id="3_dfup6"]
 [ext_resource type="Script" uid="uid://couw105c3bde4" path="res://addons/godot_state_charts/state_chart.gd" id="4_fkggj"]
+[ext_resource type="PackedScene" uid="uid://n2v3i1umc6q8" path="res://components/primitives/health/health_bar.tscn" id="5_6mpdf"]
 [ext_resource type="Script" uid="uid://jk2jm1g6q853" path="res://addons/godot_state_charts/compound_state.gd" id="5_fg5ev"]
 [ext_resource type="Script" uid="uid://cytafq8i1y8qm" path="res://addons/godot_state_charts/atomic_state.gd" id="6_caay7"]
 [ext_resource type="Script" uid="uid://cf1nsco3w0mf6" path="res://addons/godot_state_charts/transition.gd" id="7_kp2sm"]
@@ -70,6 +71,10 @@ shape = SubResource("SphereShape3D_hf46n")
 [node name="Health" type="Node" parent="." unique_id=1173554137]
 script = ExtResource("3_dfup6")
 metadata/_custom_type_script = "uid://cmqhxkdolaasw"
+
+[node name="HealthBar" parent="." unique_id=1489255575 node_paths=PackedStringArray("health_component") instance=ExtResource("5_6mpdf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2179699, 0)
+health_component = NodePath("../Health")
 
 [node name="StateChart" type="Node" parent="." unique_id=2028321784]
 unique_name_in_owner = true
@@ -161,6 +166,7 @@ script = ExtResource("12_8g4u5")
 [node name="Attacking" type="Node" parent="StateActors/InCombat" unique_id=1430372863]
 script = ExtResource("13_goyg5")
 
+[connection signal="death" from="Health" to="." method="_on_health_death"]
 [connection signal="state_physics_processing" from="StateChart/Root/Idle" to="StateActors/Idle" method="_on_idle_state_physics_processing"]
 [connection signal="state_entered" from="StateChart/Root/Searching" to="StateActors/Searching" method="_on_searching_state_entered"]
 [connection signal="state_exited" from="StateChart/Root/Searching" to="StateActors/Searching" method="_on_searching_state_exited"]

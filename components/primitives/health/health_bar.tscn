@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://n2v3i1umc6q8"]
+
+[ext_resource type="Texture2D" uid="uid://b0e3am6822ahk" path="res://components/primitives/health/assets/healthbar_under.png" id="1_1h2ck"]
+[ext_resource type="Script" uid="uid://bc53wmbd2qbj0" path="res://components/primitives/health/health_bar.gd" id="1_vlxne"]
+[ext_resource type="Texture2D" uid="uid://4dyjsvbv4v0t" path="res://components/primitives/health/assets/healthbar_over.png" id="2_vlxne"]
+[ext_resource type="Texture2D" uid="uid://fr7t1cmgap6n" path="res://components/primitives/health/assets/healthbar_progress.png" id="3_xq704"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_1h2ck"]
+viewport_path = NodePath("SubViewport")
+
+[node name="HealthBar" type="Node3D" unique_id=1489255575]
+script = ExtResource("1_vlxne")
+
+[node name="Sprite3D" type="Sprite3D" parent="." unique_id=1866627054]
+transform = Transform3D(1.5, 0, 0, 0, 0.75, 0, 0, 0, 1, 0, 0, 0)
+billboard = 1
+texture_filter = 2
+texture = SubResource("ViewportTexture_1h2ck")
+
+[node name="SubViewport" type="SubViewport" parent="." unique_id=1511551214]
+transparent_bg = true
+canvas_item_default_texture_filter = 3
+size = Vector2i(128, 16)
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="SubViewport" unique_id=1818244442]
+texture_filter = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+localize_numeral_system = false
+value = 50.0
+texture_under = ExtResource("1_1h2ck")
+texture_over = ExtResource("2_vlxne")
+texture_progress = ExtResource("3_xq704")
+texture_progress_offset = Vector2(5, 1)

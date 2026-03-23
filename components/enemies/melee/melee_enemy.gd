@@ -43,4 +43,5 @@ func _on_health_damaged(amount: int) -> void:
 
 
 func _on_health_death() -> void:
+	queue_free()
 	print("Enemy DIEDED!")
