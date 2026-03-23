@@ -26,7 +26,7 @@
 [ext_resource type="Script" uid="uid://drj4fdryh4j1l" path="res://components/character/states/falling.gd" id="21_ukpso"]
 [ext_resource type="Script" uid="uid://mjyk1l66mn35" path="res://components/character/states/grappling.gd" id="23_lbmrp"]
 [ext_resource type="PackedScene" uid="uid://ctn4ndv16n1wo" path="res://components/reactions/element_selector.tscn" id="25_6p5bk"]
-[ext_resource type="Script" path="res://components/character/states/combat.gd" id="26_3lhvt"]
+[ext_resource type="Script" uid="uid://72nbdu28o8fj" path="res://components/character/states/combat.gd" id="26_3lhvt"]
 [ext_resource type="Script" uid="uid://62pxrj7wpjoa" path="res://components/character/pickup_region.gd" id="26_qrg3i"]
 [ext_resource type="Script" uid="uid://c5f0q202nfv3f" path="res://components/character/states/parrying.gd" id="27_vgukn"]
 [ext_resource type="Script" uid="uid://b56wb38xrpyi8" path="res://components/pool/pool.gd" id="28_ib6g5"]
@@ -176,19 +176,6 @@ gravity = -35.0
 [node name="PlayerControl" parent="Velocity" unique_id=514334726 instance=ExtResource("3_eti3u")]
 
 [node name="ElementSelector" parent="." unique_id=562223786 instance=ExtResource("25_6p5bk")]
-
-[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1160315500]
-layer = 2
-
-[node name="StateChartDebugger" parent="CanvasLayer" unique_id=874067376 instance=ExtResource("2_mk48o")]
-anchors_preset = -1
-anchor_right = 0.27
-anchor_bottom = 0.377
-offset_right = -3.0517578e-05
-offset_bottom = -0.3000183
-grow_horizontal = 1
-grow_vertical = 1
-initial_node_to_watch = NodePath("../../States/StateChart")
 
 [node name="States" type="Node" parent="." unique_id=156588293]
 
@@ -427,6 +414,19 @@ metadata/_custom_type_script = "uid://b56wb38xrpyi8"
 [node name="ShurikenTimer" type="Timer" parent="ShurikenCtrl" unique_id=877231574]
 wait_time = 5.0
 one_shot = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1160315500]
+layer = 2
+
+[node name="StateChartDebugger" parent="CanvasLayer" unique_id=874067376 instance=ExtResource("2_mk48o")]
+anchors_preset = -1
+anchor_right = 0.27
+anchor_bottom = 0.377
+offset_right = -3.0517578e-05
+offset_bottom = -0.3000183
+grow_horizontal = 1
+grow_vertical = 1
+initial_node_to_watch = NodePath("../../States/StateChart")
 
 [connection signal="child_state_entered" from="States/StateChart/Root/Movement/Grounded" to="States/StateActors/MovementState/GroundedState" method="_on_grounded_child_state_entered"]
 [connection signal="state_physics_processing" from="States/StateChart/Root/Movement/Grounded" to="States/StateActors/MovementState/GroundedState" method="_on_grounded_state_physics_processing"]
