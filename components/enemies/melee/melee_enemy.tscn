@@ -73,7 +73,7 @@ script = ExtResource("3_dfup6")
 metadata/_custom_type_script = "uid://cmqhxkdolaasw"
 
 [node name="HealthBar" parent="." unique_id=1489255575 node_paths=PackedStringArray("health_component") instance=ExtResource("5_6mpdf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2179699, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
 health_component = NodePath("../Health")
 
 [node name="StateChart" type="Node" parent="." unique_id=2028321784]

@@ -40,4 +40,4 @@ func _on_health_damaged(amount: int) -> void:
 
 
 func _on_health_death() -> void:
-	print("Enemy DIEDED!")
+	self.queue_free()
