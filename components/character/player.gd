@@ -9,7 +9,7 @@ class_name Player extends CharacterBody3D
 @onready var camera_pivot: Node3D = %CameraPivot
 @onready var grapple_detector = %GrappleDetector
 @onready var camera_anchor = $CameraControlAnchor
-@onready var fp_rig = $CameraPivot/FirstPersonRig
+@onready var fp_rig = $CameraPivot/Camera/FirstPersonRig
 @onready var state_chart: StateChart = %StateChart
 @onready var debug_gui = $CanvasLayer/StateChartDebugger
 @onready var shuriken_ctrl = $ShurikenCtrl
@@ -20,9 +20,6 @@ var space_state: PhysicsDirectSpaceState3D
 var shuriken_scene = preload("res://components/shuriken/shuriken.tscn")
 
 signal grappled()
-
-func walk():
-	_velocity.set_speed_modifier(0)
 
 func sprint():
 	_velocity.set_speed_modifier(player_stats.move_speed)

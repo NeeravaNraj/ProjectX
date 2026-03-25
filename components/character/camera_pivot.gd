@@ -7,6 +7,12 @@ const MAX_TILT_ANGLE := deg_to_rad(2.5)
 var mouse_input = Vector2.ZERO
 var current_rotation = Vector3.ZERO
 
+var target_camera_tilt := 0.0
+var block_movement_tilt = false
+
+func get_pitch():
+	return rad_to_deg(current_rotation.x)
+
 func _ready():
 	current_rotation = player.rotation
 
@@ -32,9 +38,13 @@ func  _physics_process(delta: float):
 	
 	mouse_input = Vector2.ZERO
 	
-	_tilt_camera(delta)
+	if block_movement_tilt:
+		player.camera.rotation.z = lerp(player.camera.rotation.z, target_camera_tilt, delta * 12.0)
 	
-func _tilt_camera(delta: float):
+	_tilt_camera_from_movement(delta)
+	
+func _tilt_camera_from_movement(delta: float):
+	if block_movement_tilt: return
 	var move_direction = player._velocity.raw_direction
 	var side = Vector3.FORWARD * (MAX_TILT_ANGLE * move_direction.x)
 	var forward = Vector3.RIGHT * ((MAX_TILT_ANGLE / 2.0) * move_direction.y)

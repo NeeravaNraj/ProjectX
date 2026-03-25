@@ -1,17 +1,10 @@
-[gd_scene format=3 uid="uid://bivhck4dd0bg7"]
+[gd_scene format=3 uid="uid://07msekimmsd7"]
 
-[ext_resource type="PackedScene" uid="uid://b5xgehtqtnacd" path="res://components/weapon/katana/assets/cyberpunk_enigma_-_katana.glb" id="1_7fure"]
+[ext_resource type="ArrayMesh" uid="uid://b0mxywm3abwq3" path="res://components/weapon/katana/assets/katana.tres" id="1_uab1j"]
 
-[node name="KatanaSkin" unique_id=233431355 instance=ExtResource("1_7fure")]
+[node name="KatanaSkin" type="Node3D" unique_id=1190208438]
 
-[node name="Sketchfab_model" parent="." index="0" unique_id=264790839]
-transform = Transform3D(1, 0, 0, 0, -4.3711385e-08, -0.99999994, 0, 0.99999994, -4.3711385e-08, 0, 0, 0)
-
-[node name="Collada visual scene group" parent="Sketchfab_model" index="0" unique_id=71192218]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
-
-[node name="lp_001" parent="Sketchfab_model/Collada visual scene group" index="0" unique_id=1977176663]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
-
-[node name="defaultMaterial" parent="Sketchfab_model/Collada visual scene group/lp_001" index="0" unique_id=1985313921]
+[node name="Model" type="MeshInstance3D" parent="." unique_id=987647103]
+transform = Transform3D(0.01, 0, 0, 0, 0.01, 0, 0, 0, 0.01, 0, 0, 0)
 cast_shadow = 0
+mesh = ExtResource("1_uab1j")
