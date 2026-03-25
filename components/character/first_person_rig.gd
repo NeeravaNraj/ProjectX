@@ -25,16 +25,16 @@ func parry(value: bool):
 		animation_playback.travel(&"Parry")
 	else:
 		animation_playback.travel(&"Locomotion")
-	
+
 func _unhandled_input(event: InputEvent) -> void:
 	if Input.mouse_mode != Input.MOUSE_MODE_CAPTURED: return
-	
+
 	if event.is_action_pressed(&"jump"):
 		_jump()
-		
+
 	if event.is_action_pressed(&"left_click"):
-		_attack()	
-	
+		_attack()
+
 	if event.is_action_pressed(&"inspect"):
 		_inspect()
 
@@ -64,7 +64,7 @@ func _jump():
 
 func _inspect():
 	animation_playback.travel(&"Inspect")
-	
+
 func _fire_oneshot(path: String):
 	animation_tree.set(path, AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 

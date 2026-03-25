@@ -16,7 +16,7 @@ func _handle_key(event: InputEventKey):
 	if event.is_released(): return
 	var value = event.keycode - KEY_0 - 1
 	var values = Element.element_values
-	
+
 	if value >= 0 and value < values.size() - 1:
 		current_element = value as Element.ElementKind
 		print("Setting current element to: %s" % [Element.element_keys[value]])
