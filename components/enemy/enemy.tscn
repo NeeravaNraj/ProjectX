@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://bxhdwvc7scbta" path="res://resources/character/enemy_stats.gd" id="2_ynkbq"]
 [ext_resource type="PackedScene" uid="uid://bivh5h6rk1uer" path="res://components/reactions/reaction_handler.tscn" id="4_xlq87"]
 [ext_resource type="Script" uid="uid://couw105c3bde4" path="res://addons/godot_state_charts/state_chart.gd" id="5_3igal"]
+[ext_resource type="Script" uid="uid://ctctxwt2fa2di" path="res://components/primitives/movement/velocity.gd" id="6_welq4"]
 [ext_resource type="Script" uid="uid://jk2jm1g6q853" path="res://addons/godot_state_charts/compound_state.gd" id="6_xxtfg"]
 [ext_resource type="Script" uid="uid://cytafq8i1y8qm" path="res://addons/godot_state_charts/atomic_state.gd" id="7_8lvoy"]
 [ext_resource type="Script" uid="uid://cf1nsco3w0mf6" path="res://addons/godot_state_charts/transition.gd" id="8_0ck2y"]
@@ -15,6 +16,7 @@
 [ext_resource type="Script" uid="uid://cslbvlerg8thi" path="res://components/enemy/states/in_combat.gd" id="13_td40n"]
 [ext_resource type="Script" uid="uid://wybduwehgkul" path="res://components/enemy/states/attacking.gd" id="13_ynkbq"]
 [ext_resource type="Script" uid="uid://7xbymm0klxdq" path="res://components/enemy/states/searching.gd" id="14_td40n"]
+[ext_resource type="Script" uid="uid://bp1sqbc1ouk44" path="res://components/enemy/states/damaged.gd" id="16_td40n"]
 
 [sub_resource type="Resource" id="Resource_td40n"]
 script = ExtResource("2_ynkbq")
@@ -71,6 +73,10 @@ reaction_handler = NodePath("../ReactionHandler")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HurtBox" unique_id=1675923040]
 shape = SubResource("CapsuleShape3D_mdji8")
 
+[node name="VelocityComponent" type="Node" parent="." unique_id=1542857649]
+script = ExtResource("6_welq4")
+metadata/_custom_type_script = "uid://ctctxwt2fa2di"
+
 [node name="StateChart" type="Node" parent="." unique_id=1114294325]
 unique_name_in_owner = true
 script = ExtResource("5_3igal")
@@ -103,6 +109,13 @@ event = &"onIdle"
 delay_in_seconds = "0.0"
 metadata/_custom_type_script = "uid://cf1nsco3w0mf6"
 
+[node name="OnDamaged" type="Node" parent="StateChart/Root" unique_id=114175508]
+script = ExtResource("8_0ck2y")
+to = NodePath("../InCombat/Damaged")
+event = &"onDamaged"
+delay_in_seconds = "0.0"
+metadata/_custom_type_script = "uid://cf1nsco3w0mf6"
+
 [node name="InCombat" type="Node" parent="StateChart/Root" unique_id=1425134261]
 script = ExtResource("6_xxtfg")
 initial_state = NodePath("Aggravated")
@@ -116,10 +129,21 @@ metadata/_custom_type_script = "uid://cytafq8i1y8qm"
 script = ExtResource("7_8lvoy")
 metadata/_custom_type_script = "uid://cytafq8i1y8qm"
 
+[node name="Damaged" type="Node" parent="StateChart/Root/InCombat" unique_id=1409191900]
+script = ExtResource("7_8lvoy")
+metadata/_custom_type_script = "uid://cytafq8i1y8qm"
+
 [node name="OnIdle" type="Node" parent="StateChart/Root/InCombat" unique_id=1717891529]
 script = ExtResource("8_0ck2y")
 to = NodePath("../../Idle")
 event = &"onIdle"
+delay_in_seconds = "0.0"
+metadata/_custom_type_script = "uid://cf1nsco3w0mf6"
+
+[node name="OnDamaged" type="Node" parent="StateChart/Root/InCombat" unique_id=1568284271]
+script = ExtResource("8_0ck2y")
+to = NodePath("../Damaged")
+event = &"onDamaged"
 delay_in_seconds = "0.0"
 metadata/_custom_type_script = "uid://cf1nsco3w0mf6"
 
@@ -161,8 +185,19 @@ script = ExtResource("12_mmy8y")
 [node name="Attacking" type="Node" parent="StateActors/InCombat" unique_id=390464894]
 script = ExtResource("13_ynkbq")
 
+[node name="AttackTimer" type="Timer" parent="StateActors/InCombat/Attacking" unique_id=1688012649]
+wait_time = 0.5
+one_shot = true
+
+[node name="Damaged" type="Node" parent="StateActors/InCombat" unique_id=919004075]
+script = ExtResource("16_td40n")
+
+[node name="DamageTimer" type="Timer" parent="StateActors/InCombat/Damaged" unique_id=1968924356]
+wait_time = 0.4
+
 [connection signal="damaged" from="Health" to="." method="_on_health_damaged"]
 [connection signal="death" from="Health" to="." method="_on_health_death"]
+[connection signal="hit" from="HurtBox" to="." method="_on_hurt_box_hit"]
 [connection signal="state_physics_processing" from="StateChart/Root" to="StateActors" method="_on_root_state_physics_processing"]
 [connection signal="state_physics_processing" from="StateChart/Root/Idle" to="StateActors/Idle" method="_on_idle_state_physics_processing"]
 [connection signal="state_entered" from="StateChart/Root/Searching" to="StateActors/Searching" method="_on_searching_state_entered"]
@@ -172,4 +207,6 @@ script = ExtResource("13_ynkbq")
 [connection signal="state_entered" from="StateChart/Root/InCombat/Aggravated" to="StateActors/InCombat/Aggravated" method="_on_aggravated_state_entered"]
 [connection signal="state_physics_processing" from="StateChart/Root/InCombat/Aggravated" to="StateActors/InCombat/Aggravated" method="_on_aggravated_state_physics_processing"]
 [connection signal="state_physics_processing" from="StateChart/Root/InCombat/Attacking" to="StateActors/InCombat/Attacking" method="_on_attacking_state_physics_processing"]
+[connection signal="state_entered" from="StateChart/Root/InCombat/Damaged" to="StateActors/InCombat/Damaged" method="_on_damaged_state_entered"]
 [connection signal="timeout" from="StateActors/Searching/SearchTimer" to="StateActors/Searching" method="_on_search_timer_timeout"]
+[connection signal="timeout" from="StateActors/InCombat/Damaged/DamageTimer" to="StateActors/InCombat/Damaged" method="_on_damage_timer_timeout"]

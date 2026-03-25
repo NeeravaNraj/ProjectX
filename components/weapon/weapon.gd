@@ -1,12 +1,17 @@
 class_name Weapon extends Node
 
 @export_category("Weapon stats")
-@export var attack_damage: int = 10
-@export var attack_speed: float = 0.05
+@export var attack_damage: float = 10
+@export var attack_damage_modifier: float = 0
 
+@export var attack_speed: float = 0.05
+@export var attack_speed_modifier: float = 0.0
+
+@export var player: Player
 @export var attack_area: Area3D
-@export var element_selector: ElementSelector
 @export var attack_area_shape: CollisionShape3D
+
+var attack_direction = Vector3.ZERO
 
 signal attack()
 
@@ -26,19 +31,20 @@ func _attack():
 		
 		var packet = DamagePacket.new(
 			attack_damage,
-			element_selector.current_element
+			attack_damage_modifier,
+			1.0,
+			-player.get_forward(),
 		)
 		
 		if hurtbox:
 			hurtbox.damage(packet)
 			
-	attack.emit()
-	animate_attack()
+		attack.emit()
 	start_timer()
 	
 func start_timer():
 	_can_attack = false
-	await get_tree().create_timer(attack_speed).timeout
+	await get_tree().create_timer(attack_speed + attack_speed_modifier).timeout
 	_can_attack = true
 
 func animate_attack(): pass
