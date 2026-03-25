@@ -14,6 +14,9 @@ var raw_direction := Vector2.ZERO
 var move_velocity := Vector3.ZERO
 var last_moved_direction := Vector3.ZERO
 
+func get_speed():
+	return speed + speed_modifier
+
 func set_gravity_modifier(value: float):
 	gravity_modifier = value
 
@@ -47,7 +50,7 @@ func _physics_process(delta: float) -> void:
 	var current_velocity = Vector2(move_velocity.x, move_velocity.z)
 	var direction = (target.transform.basis * Vector3(raw_direction.x, 0, raw_direction.y)).normalized()
 	
-	var final_speed = speed + speed_modifier
+	var final_speed = get_speed()
 	var g_acceleration = acceleration_coef * delta
 	var a_acceleration = acceleration_coef * delta * 0.14
 	var deceleration = deceleration_coef * delta
