@@ -22,10 +22,10 @@
 [ext_resource type="Script" uid="uid://bupolwf85pte3" path="res://components/character/states/moving_state.gd" id="14_2ve8e"]
 [ext_resource type="Script" uid="uid://bmjsknduokcs5" path="res://components/character/states/sprinting_state.gd" id="16_lxhmo"]
 [ext_resource type="Script" uid="uid://pd7klsrgk65n" path="res://components/character/states/airborne.gd" id="18_5gql3"]
+[ext_resource type="Script" uid="uid://dcyb1prd6bewd" path="res://components/character/states/dashing_state.gd" id="19_raigf"]
 [ext_resource type="Script" uid="uid://64433uu4jg86" path="res://components/character/states/jumping.gd" id="20_mq1ei"]
 [ext_resource type="Script" uid="uid://drj4fdryh4j1l" path="res://components/character/states/falling.gd" id="21_ukpso"]
 [ext_resource type="Script" uid="uid://mjyk1l66mn35" path="res://components/character/states/grappling.gd" id="23_lbmrp"]
-[ext_resource type="PackedScene" uid="uid://ctn4ndv16n1wo" path="res://components/reactions/element_selector.tscn" id="25_6p5bk"]
 [ext_resource type="Script" uid="uid://c2gow5ht5uaxh" path="res://components/character/states/wall_run.gd" id="25_gof3c"]
 [ext_resource type="Script" uid="uid://72nbdu28o8fj" path="res://components/character/states/combat.gd" id="26_3lhvt"]
 [ext_resource type="Script" uid="uid://62pxrj7wpjoa" path="res://components/character/pickup_region.gd" id="26_qrg3i"]
@@ -34,6 +34,8 @@
 [ext_resource type="Script" uid="uid://boeog2x252egl" path="res://components/character/shuriken_ctrl.gd" id="28_jr262"]
 [ext_resource type="PackedScene" uid="uid://chf24tgxexqiw" path="res://components/shuriken/shuriken.tscn" id="28_t3sxj"]
 [ext_resource type="Script" uid="uid://7knbaw4wcwth" path="res://user_interface/reticle_draw.gd" id="33_aia5n"]
+[ext_resource type="Script" uid="uid://cldxsuoxleusl" path="res://components/character/ui/debug/debug_tracker.gd" id="34_1054b"]
+[ext_resource type="PackedScene" uid="uid://dj3yekexhr2dn" path="res://components/primitives/stat/stat.tscn" id="34_gof3c"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_gie0d"]
 radius = 0.225
@@ -47,13 +49,13 @@ height = 1.9
 radius = 0.3
 height = 1.9
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_gie0d"]
+
 [sub_resource type="SphereShape3D" id="SphereShape3D_ukpso"]
 radius = 2.0
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_bmx6v"]
 radius = 12.0
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_gie0d"]
 
 [node name="Player" type="CharacterBody3D" unique_id=1186516781]
 script = ExtResource("1_knl4b")
@@ -89,25 +91,30 @@ current = true
 transform = Transform3D(-1.5, 0, -1.3113416e-07, 0, 1.5, 0, 1.3113416e-07, 0, -1.5, 0, -0.045000017, 0.05)
 player = NodePath("../../..")
 
+[node name="HitBox" type="Area3D" parent="CameraPivot" unique_id=1832605776]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.46209884, -1.2278099)
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+
+[node name="AttackShape" type="CollisionShape3D" parent="CameraPivot/HitBox" unique_id=1166820792]
+shape = SubResource("BoxShape3D_gie0d")
+
 [node name="Weaponry" type="Node3D" parent="." unique_id=1708920944]
 script = ExtResource("5_2p11o")
 
-[node name="Katana" parent="Weaponry" unique_id=1156992332 node_paths=PackedStringArray("attack_area", "element_selector", "attack_area_shape") instance=ExtResource("2_gie0d")]
+[node name="Katana" parent="Weaponry" unique_id=1156992332 node_paths=PackedStringArray("player", "attack_area", "attack_area_shape") instance=ExtResource("2_gie0d")]
 transform = Transform3D(-0.09646627, -0.9636583, -0.2491126, 0.83487564, 0.0579276, -0.547382, 0.54191965, -0.2607819, 0.79894686, 0.6049503, 0.48512423, -0.98595005)
 visible = false
-attack_area = NodePath("../../Areas/HitBox")
-element_selector = NodePath("../../ElementSelector")
-attack_area_shape = NodePath("../../Areas/HitBox/AttackShape")
-
-[node name="Health" parent="." unique_id=1496712029 instance=ExtResource("5_6npmc")]
+player = NodePath("../..")
+attack_area = NodePath("../../CameraPivot/HitBox")
+attack_area_shape = NodePath("../../CameraPivot/HitBox/AttackShape")
 
 [node name="Velocity" parent="." unique_id=1034921754 instance=ExtResource("2_b1s2y")]
 unique_name_in_owner = true
 gravity = -35.0
 
 [node name="PlayerControl" parent="Velocity" unique_id=514334726 instance=ExtResource("3_eti3u")]
-
-[node name="ElementSelector" parent="." unique_id=562223786 instance=ExtResource("25_6p5bk")]
 
 [node name="States" type="Node" parent="." unique_id=156588293]
 
@@ -284,6 +291,10 @@ metadata/_custom_type_script = "uid://cytafq8i1y8qm"
 script = ExtResource("9_mfj52")
 metadata/_custom_type_script = "uid://cytafq8i1y8qm"
 
+[node name="Damaged" type="Node" parent="States/StateChart/Root/Combat" unique_id=637947101]
+script = ExtResource("9_mfj52")
+metadata/_custom_type_script = "uid://cytafq8i1y8qm"
+
 [node name="StateActors" type="Node" parent="States" unique_id=1782869980 node_paths=PackedStringArray("player")]
 unique_name_in_owner = true
 script = ExtResource("11_lxhmo")
@@ -302,6 +313,9 @@ script = ExtResource("14_2ve8e")
 
 [node name="SprintingState" type="Node" parent="States/StateActors/MovementState/GroundedState/MovingState" unique_id=1712382834]
 script = ExtResource("16_lxhmo")
+
+[node name="DashingState" type="Node" parent="States/StateActors/MovementState/GroundedState/MovingState" unique_id=1949617684]
+script = ExtResource("19_raigf")
 
 [node name="AirborneState" type="Node" parent="States/StateActors/MovementState" unique_id=1718041435]
 script = ExtResource("18_5gql3")
@@ -350,15 +364,6 @@ script = ExtResource("9_jqkmc")
 shape = SubResource("SphereShape3D_bmx6v")
 debug_fill = false
 
-[node name="HitBox" type="Area3D" parent="Areas" unique_id=1832605776]
-collision_layer = 0
-collision_mask = 2
-monitorable = false
-
-[node name="AttackShape" type="CollisionShape3D" parent="Areas/HitBox" unique_id=1166820792]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.32253122, -1.3072433)
-shape = SubResource("BoxShape3D_gie0d")
-
 [node name="ShurikenCtrl" type="Node3D" parent="." unique_id=818070391]
 script = ExtResource("28_jr262")
 
@@ -375,21 +380,21 @@ metadata/_custom_type_script = "uid://b56wb38xrpyi8"
 wait_time = 5.0
 one_shot = true
 
+[node name="Stats" type="Node" parent="." unique_id=1898973766]
+
+[node name="Health" parent="Stats" unique_id=1496712029 instance=ExtResource("5_6npmc")]
+
+[node name="Energy" parent="Stats" unique_id=1517392455 instance=ExtResource("34_gof3c")]
+max_value = 10.0
+auto_grow = true
+growth_tick_delay = 0.25
+growth_rate = 0.2
+
+[node name="Momentum" parent="Stats" unique_id=2110160468 instance=ExtResource("34_gof3c")]
+max_value = 5.0
+
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1160315500]
 layer = 2
-
-[node name="Reticle" type="CenterContainer" parent="CanvasLayer" unique_id=1038196225]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="ReticleDraw" type="Control" parent="CanvasLayer/Reticle" unique_id=2086269258]
-layout_mode = 2
-script = ExtResource("33_aia5n")
-radius = 0.5
-thickness = 2.0
 
 [node name="StateChartDebugger" parent="CanvasLayer" unique_id=874067376 instance=ExtResource("2_mk48o")]
 anchors_preset = 0
@@ -401,17 +406,48 @@ grow_horizontal = 1
 grow_vertical = 1
 size_flags_horizontal = 0
 size_flags_vertical = 0
+enabled = false
 initial_node_to_watch = NodePath("../../States/StateChart")
+
+[node name="Reticle" type="CenterContainer" parent="CanvasLayer" unique_id=1038196225]
+offset_right = 1600.0
+offset_bottom = 900.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ReticleDraw" type="Control" parent="CanvasLayer/Reticle" unique_id=2086269258]
+layout_mode = 2
+script = ExtResource("33_aia5n")
+radius = 0.5
+thickness = 2.0
+
+[node name="DebugTracker" type="PanelContainer" parent="CanvasLayer" unique_id=2142135378]
+unique_name_in_owner = true
+anchors_preset = -1
+anchor_right = 0.2395
+anchor_bottom = 0.37222221
+offset_right = -0.2000122
+grow_vertical = 2
+script = ExtResource("34_1054b")
+metadata/_edit_use_anchors_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/DebugTracker" unique_id=1615851665]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/DebugTracker/VBoxContainer" unique_id=1800018159]
+layout_mode = 2
 
 [connection signal="child_state_entered" from="States/StateChart/Root/Movement/Grounded" to="States/StateActors/MovementState/GroundedState" method="_on_grounded_child_state_entered"]
 [connection signal="state_physics_processing" from="States/StateChart/Root/Movement/Grounded" to="States/StateActors/MovementState/GroundedState" method="_on_grounded_state_physics_processing"]
 [connection signal="state_unhandled_input" from="States/StateChart/Root/Movement/Grounded" to="States/StateActors/MovementState/GroundedState" method="_on_grounded_state_unhandled_input"]
 [connection signal="state_entered" from="States/StateChart/Root/Movement/Grounded/Idle" to="States/StateActors/MovementState/GroundedState/IdleState" method="_on_idle_state_entered"]
 [connection signal="state_physics_processing" from="States/StateChart/Root/Movement/Grounded/Idle" to="States/StateActors/MovementState/GroundedState/IdleState" method="_on_idle_state_physics_processing"]
+[connection signal="state_entered" from="States/StateChart/Root/Movement/Grounded/Moving" to="States/StateActors/MovementState/GroundedState/MovingState" method="_on_moving_state_entered"]
 [connection signal="state_physics_processing" from="States/StateChart/Root/Movement/Grounded/Moving" to="States/StateActors/MovementState/GroundedState/MovingState" method="_on_moving_state_physics_processing"]
 [connection signal="state_unhandled_input" from="States/StateChart/Root/Movement/Grounded/Moving" to="States/StateActors/MovementState/GroundedState/MovingState" method="_on_moving_state_unhandled_input"]
 [connection signal="state_entered" from="States/StateChart/Root/Movement/Grounded/Moving/Sprinting" to="States/StateActors/MovementState/GroundedState/MovingState/SprintingState" method="_on_sprinting_state_entered"]
 [connection signal="state_physics_processing" from="States/StateChart/Root/Movement/Grounded/Moving/Sprinting" to="States/StateActors/MovementState/GroundedState/MovingState/SprintingState" method="_on_sprinting_state_physics_processing"]
+[connection signal="state_entered" from="States/StateChart/Root/Movement/Grounded/Moving/Dashing" to="States/StateActors/MovementState/GroundedState/MovingState/DashingState" method="_on_dashing_state_entered"]
 [connection signal="state_physics_processing" from="States/StateChart/Root/Movement/Airborne" to="States/StateActors/MovementState/AirborneState" method="_on_airborne_state_physics_processing"]
 [connection signal="state_entered" from="States/StateChart/Root/Movement/Airborne/Falling" to="States/StateActors/MovementState/AirborneState/Falling" method="_on_falling_state_entered"]
 [connection signal="state_entered" from="States/StateChart/Root/Movement/Airborne/Jumping" to="States/StateActors/MovementState/AirborneState/Jumping" method="_on_jumping_state_entered"]

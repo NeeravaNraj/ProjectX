@@ -10,6 +10,7 @@ func _on_wall_running_state_entered() -> void:
 	_reset_velocity()
 	player.camera_pivot.block_movement_tilt = true
 	player.fp_rig.transition_movement(PlayerFirstPersonRig.MovementStates.Running)
+	player.stat_energy.growth_rate = player.stat_energy.max_value * player.player_stats.wall_run_energy_growth_factor
 
 func _on_wall_running_state_exited() -> void:
 	player._velocity.set_gravity_modifier(0.0)

@@ -13,8 +13,11 @@ class_name Player extends CharacterBody3D
 @onready var state_chart: StateChart = %StateChart
 @onready var debug_gui = $CanvasLayer/StateChartDebugger
 @onready var shuriken_ctrl = $ShurikenCtrl
+@onready var stat_energy: Stat = $Stats/Energy
 
+@onready var debug_tracker := %DebugTracker
 @onready var _velocity: VelocityComponent = %Velocity
+
 
 var space_state: PhysicsDirectSpaceState3D
 var shuriken_scene = preload("res://components/shuriken/shuriken.tscn")
@@ -22,7 +25,7 @@ var shuriken_scene = preload("res://components/shuriken/shuriken.tscn")
 signal grappled()
 
 func sprint():
-	_velocity.set_speed_modifier(player_stats.move_speed)
+	_velocity.set_speed(player_stats.move_speed)
 
 func dash():
 	_velocity.add_impuse_in_move_direction(player_stats.move_speed_dash)
@@ -48,6 +51,14 @@ func _ready() -> void:
 	assert(player_stats, "Cannot instantiate Player without PlayerStats resource.")
 	space_state = get_world_3d().direct_space_state
 	_velocity.speed = player_stats.move_speed
+
+func _physics_process(_delta: float) -> void:
+	debug_tracker.track(&"Energy", stat_energy.value)
+	debug_tracker.track(&"Speed", _velocity.speed)
+	debug_tracker.track(&"Speed modifier", _velocity.speed_modifier)
+	debug_tracker.track(&"Decel", _velocity.deceleration_coef)
+	_velocity.set_speed_modifier(stat_energy.value * 0.5)
+	_velocity.deceleration_coef = _velocity.get_speed() * 2
 	
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed(&"left_click"):

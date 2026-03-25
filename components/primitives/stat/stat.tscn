@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://dj3yekexhr2dn"]
+
+[ext_resource type="Script" uid="uid://oog2sgexer0e" path="res://components/primitives/stat/stat.gd" id="1_nxrcq"]
+
+[node name="Stat" type="Node" unique_id=1517392455]
+script = ExtResource("1_nxrcq")
+
+[node name="GrowthDelay" type="Timer" parent="." unique_id=1347494368]
+one_shot = true
