@@ -41,11 +41,11 @@ func move_towards_target():
 	_velocity.set_velocity(direction * speed)
 
 func _on_health_damaged(amount: int) -> void:
-	print("Enemy DAMANGED ", amount)
+	print("Enemy DAMAGED ", amount)
 
 
 func _on_health_death() -> void:
-	print("Enemy DIEDED!")
+	queue_free()
 
 
 func _on_hurt_box_hit(packet: DamagePacket) -> void:
