@@ -1,8 +1,7 @@
+@tool
 class_name BaseLevel extends Node3D
 
-@export_category("PlayerInfo")
-@export var spawn_point: Node3D
-
-
-func _ready() -> void:
-	assert(spawn_point, "Level requires spawn_point to be set %s" % [str(get_path())])
+func replace_nodes_with_scene(node: Node3D, scene: PackedScene):
+	for child in node.get_children():
+		var object = scene.instantiate()
+		child.add_child(object)

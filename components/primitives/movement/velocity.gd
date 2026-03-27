@@ -7,10 +7,15 @@ class_name VelocityComponent extends Node
 var speed: float = 8.0
 var speed_modifier: float = 0.0
 
+var gravity_modifier := 0.0
+
 var target: CharacterBody3D
 var raw_direction := Vector2.ZERO
 var move_velocity := Vector3.ZERO
 var last_moved_direction := Vector3.ZERO
+
+func set_gravity_modifier(value: float):
+	gravity_modifier = value
 
 func set_velocity(velocity: Vector3):
 	target.velocity = velocity
@@ -37,8 +42,8 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	if not target.is_on_floor():
-		target.velocity.y += gravity * delta
-
+		target.velocity.y += (gravity + gravity_modifier) * delta
+	
 	var current_velocity = Vector2(move_velocity.x, move_velocity.z)
 	var direction = (target.transform.basis * Vector3(raw_direction.x, 0, raw_direction.y)).normalized()
 
@@ -58,4 +63,6 @@ func _physics_process(delta: float) -> void:
 	move_velocity = Vector3(current_velocity.x, target.velocity.y, current_velocity.y)
 	target.velocity = move_velocity
 
+	target.state_chart.set_expression_property("Velocity", target.velocity)
+	
 	target.move_and_slide()

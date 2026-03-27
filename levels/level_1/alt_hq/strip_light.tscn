@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://toif5ad2xk21"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kd5pj"]
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+emission_energy_multiplier = 2.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_dl1dq"]
+material = SubResource("StandardMaterial3D_kd5pj")
+size = Vector3(0.25, 0.1, 2.5)
+
+[node name="StripLight" type="Node3D" unique_id=1193338806]
+
+[node name="LightMesh" type="MeshInstance3D" parent="." unique_id=823882115]
+mesh = SubResource("BoxMesh_dl1dq")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=2086320574]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.1100874, 0)
+light_energy = 2.0
+shadow_enabled = true
+omni_range = 45.0
