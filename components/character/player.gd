@@ -14,6 +14,7 @@ class_name Player extends CharacterBody3D
 @onready var debug_gui = $CanvasLayer/StateChartDebugger
 @onready var shuriken_ctrl = $ShurikenCtrl
 @onready var stat_energy: Stat = $Stats/Energy
+@onready var stat_momentum: Stat = $Stats/Momentum
 
 @onready var debug_tracker := %DebugTracker
 @onready var _velocity: VelocityComponent = %Velocity
@@ -54,9 +55,9 @@ func _ready() -> void:
 
 func _physics_process(_delta: float) -> void:
 	debug_tracker.track(&"Energy", stat_energy.value)
-	debug_tracker.track(&"Speed", _velocity.speed)
-	debug_tracker.track(&"Speed modifier", _velocity.speed_modifier)
-	debug_tracker.track(&"Decel", _velocity.deceleration_coef)
+	debug_tracker.track(&"Latent momentum", stat_momentum.value)
+	debug_tracker.track(&"Speed mod", _velocity.speed_modifier)
+
 	_velocity.set_speed_modifier(stat_energy.value * 0.5)
 	_velocity.deceleration_coef = _velocity.get_speed() * 2
 	
@@ -72,6 +73,9 @@ func _unhandled_input(event: InputEvent) -> void:
 	
 	if event.is_action_pressed(&"interact"):
 		_try_grapple()
+	
+	if event.is_action_pressed(&"boost"):
+		enter_boost()
 
 func _try_grapple():
 	var override_max = 50
@@ -99,3 +103,15 @@ func _try_grapple():
 		await get_tree().create_timer(0.015).timeout
 		grappled.emit()
 		state_chart.send_event.call_deferred(&"onGrapple")
+
+func enter_boost():
+	stat_energy.growth_rate_modifier = stat_energy.max_value * player_stats.boost_enerygy_growth_factor
+	stat_momentum.growth_rate = stat_momentum.max_value * player_stats.boost_momentum_growth_factor
+	stat_momentum.allow_growth = true
+
+func exit_boost():
+	stat_energy.growth_rate_modifier = 0.0
+	stat_momentum.allow_growth = false
+
+func _on_momentum_reached_min(value: float) -> void:
+	exit_boost()

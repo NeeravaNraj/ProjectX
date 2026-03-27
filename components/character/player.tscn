@@ -106,6 +106,7 @@ script = ExtResource("5_2p11o")
 [node name="Katana" parent="Weaponry" unique_id=1156992332 node_paths=PackedStringArray("player", "attack_area", "attack_area_shape") instance=ExtResource("2_gie0d")]
 transform = Transform3D(-0.09646627, -0.9636583, -0.2491126, 0.83487564, 0.0579276, -0.547382, 0.54191965, -0.2607819, 0.79894686, 0.6049503, 0.48512423, -0.98595005)
 visible = false
+attack_damage = 40.0
 player = NodePath("../..")
 attack_area = NodePath("../../CameraPivot/HitBox")
 attack_area_shape = NodePath("../../CameraPivot/HitBox/AttackShape")
@@ -385,13 +386,15 @@ one_shot = true
 [node name="Health" parent="Stats" unique_id=1496712029 instance=ExtResource("5_6npmc")]
 
 [node name="Energy" parent="Stats" unique_id=1517392455 instance=ExtResource("34_gof3c")]
-max_value = 10.0
+max_value = 2.0
 auto_grow = true
 growth_tick_delay = 0.25
 growth_rate = 0.2
 
 [node name="Momentum" parent="Stats" unique_id=2110160468 instance=ExtResource("34_gof3c")]
 max_value = 5.0
+auto_grow = true
+growth_tick_delay = 0.15
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1160315500]
 layer = 2
@@ -441,6 +444,7 @@ layout_mode = 2
 [connection signal="state_physics_processing" from="States/StateChart/Root/Movement/Grounded" to="States/StateActors/MovementState/GroundedState" method="_on_grounded_state_physics_processing"]
 [connection signal="state_unhandled_input" from="States/StateChart/Root/Movement/Grounded" to="States/StateActors/MovementState/GroundedState" method="_on_grounded_state_unhandled_input"]
 [connection signal="state_entered" from="States/StateChart/Root/Movement/Grounded/Idle" to="States/StateActors/MovementState/GroundedState/IdleState" method="_on_idle_state_entered"]
+[connection signal="state_exited" from="States/StateChart/Root/Movement/Grounded/Idle" to="States/StateActors/MovementState/GroundedState/IdleState" method="_on_idle_state_exited"]
 [connection signal="state_physics_processing" from="States/StateChart/Root/Movement/Grounded/Idle" to="States/StateActors/MovementState/GroundedState/IdleState" method="_on_idle_state_physics_processing"]
 [connection signal="state_entered" from="States/StateChart/Root/Movement/Grounded/Moving" to="States/StateActors/MovementState/GroundedState/MovingState" method="_on_moving_state_entered"]
 [connection signal="state_physics_processing" from="States/StateChart/Root/Movement/Grounded/Moving" to="States/StateActors/MovementState/GroundedState/MovingState" method="_on_moving_state_physics_processing"]
@@ -468,5 +472,6 @@ layout_mode = 2
 [connection signal="area_exited" from="Areas/GrappleDetector" to="Areas/GrappleDetector" method="_on_area_exited"]
 [connection signal="body_entered" from="Areas/GrappleDetector" to="Areas/GrappleDetector" method="_on_body_entered"]
 [connection signal="body_exited" from="Areas/GrappleDetector" to="Areas/GrappleDetector" method="_on_body_exited"]
+[connection signal="reached_min" from="Stats/Momentum" to="." method="_on_momentum_reached_min"]
 
 [editable path="Weaponry/Katana"]

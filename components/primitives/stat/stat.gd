@@ -1,13 +1,16 @@
 class_name Stat extends Node
 
+@export_category("Config")
 @export var value: float = 0.0
 @export var max_value: float = 0.0
 @export var min_value: float = 0.0
 
+@export_category("Auto growth")
 @export var auto_grow: bool = false
 @export var growth_tick_delay: float = 0.1
 @export var growth_rate: float = 1.0
 @export var growth_rate_modifier: float = 0.0
+@export var allow_growth: bool = true
 
 @onready var growth_timer: Timer = $GrowthDelay
 
@@ -38,4 +41,5 @@ func _process(_delta: float) -> void:
 		growth_timer.start()
 	
 func _on_growth():
+	if not allow_growth: return
 	update_value(growth_rate + growth_rate_modifier)

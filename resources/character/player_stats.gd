@@ -25,3 +25,8 @@ class_name PlayerStats extends Resource
 @export var jump_energy_growth_factor: float = 0.06
 @export var wall_run_energy_growth_factor: float = 0.08
 @export var grapple_energy_growth_factor: float = 0.1
+@export var boost_enerygy_growth_factor: float = 0.15
+
+@export var idle_momentum_growth_factor: float = -0.1
+@export var boost_momentum_growth_factor: float = -0.1
+@export var attack_momentum_growth_factor: float = 0.2
