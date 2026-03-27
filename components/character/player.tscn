@@ -57,8 +57,6 @@ radius = 2.0
 [sub_resource type="SphereShape3D" id="SphereShape3D_bmx6v"]
 radius = 12.0
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_gie0d"]
-
 [node name="Player" type="CharacterBody3D" unique_id=1186516781 groups=["player"]]
 script = ExtResource("1_knl4b")
 player_stats = ExtResource("2_bmx6v")
@@ -415,10 +413,12 @@ enabled = false
 initial_node_to_watch = NodePath("../../States/StateChart")
 
 [node name="Reticle" type="CenterContainer" parent="CanvasLayer" unique_id=1038196225]
-offset_right = 1600.0
-offset_bottom = 900.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+metadata/_edit_use_anchors_ = true
 
 [node name="ReticleDraw" type="Control" parent="CanvasLayer/Reticle" unique_id=2086269258]
 layout_mode = 2
