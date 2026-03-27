@@ -44,14 +44,14 @@ func _on_body_entered(p_body: Node3D) -> void:
 	if p_body.is_in_group(&"enemy"):
 		attached_to = p_body
 		attached_location = p_body.to_local(body.global_position)
-	
+
 		illuminate(0)
 		grapple_sprite.global_position = body.global_position
 		grapple_sprite.visible = true
-		
+
 		body.add_to_group(&"grapple_points")
 		shuriken_hit.emit(p_body.global_position)
-	
+
 
 func _on_despawn_timer_timeout() -> void:
 	queue_free()

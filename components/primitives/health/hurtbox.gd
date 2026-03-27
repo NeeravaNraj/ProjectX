@@ -1,7 +1,6 @@
 class_name HurtBox extends Area3D
 
 @export var health_component: Health
-@export var reaction_handler: ReactionHandler
 
 signal hit(packet: DamagePacket)
  

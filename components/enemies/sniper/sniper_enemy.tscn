@@ -1,0 +1,191 @@
+[gd_scene format=3 uid="uid://2u2nxx2wm0wj"]
+
+[ext_resource type="Script" uid="uid://bfn8dvmbqvesb" path="res://components/enemies/sniper/sniper_enemy.gd" id="1_o4u82"]
+[ext_resource type="Script" uid="uid://bg2byk2cdcq71" path="res://components/enemies/sniper/sniper_stats.gd" id="2_784bc"]
+[ext_resource type="Script" uid="uid://bx4tjgr464fxd" path="res://components/primitives/health/hurtbox.gd" id="3_cto5j"]
+[ext_resource type="PackedScene" uid="uid://ca4b6im7akco5" path="res://components/enemies/sniper/laser_beam.tscn" id="3_gmg34"]
+[ext_resource type="Script" uid="uid://cmqhxkdolaasw" path="res://components/primitives/health/health.gd" id="4_sqjrg"]
+[ext_resource type="Script" uid="uid://couw105c3bde4" path="res://addons/godot_state_charts/state_chart.gd" id="5_3kovv"]
+[ext_resource type="PackedScene" uid="uid://n2v3i1umc6q8" path="res://components/primitives/health/health_bar.tscn" id="6_3dtiq"]
+[ext_resource type="Script" uid="uid://jk2jm1g6q853" path="res://addons/godot_state_charts/compound_state.gd" id="6_3efmf"]
+[ext_resource type="Script" uid="uid://cytafq8i1y8qm" path="res://addons/godot_state_charts/atomic_state.gd" id="7_hucxu"]
+[ext_resource type="Script" uid="uid://cf1nsco3w0mf6" path="res://addons/godot_state_charts/transition.gd" id="8_ea1do"]
+[ext_resource type="Script" uid="uid://devsh755wnxka" path="res://components/enemies/sniper/states/state_actor.gd" id="9_4jtqw"]
+[ext_resource type="Script" uid="uid://p4anfw6takgj" path="res://components/enemies/sniper/states/idle.gd" id="10_hh63w"]
+[ext_resource type="Script" uid="uid://4f8l8wh3jnpr" path="res://components/enemies/sniper/states/repositioning.gd" id="11_gmg34"]
+[ext_resource type="Script" uid="uid://s863oohqdey3" path="res://components/enemies/sniper/states/aggravated.gd" id="12_6fl41"]
+[ext_resource type="Script" uid="uid://drpuf38mdeqeq" path="res://components/enemies/sniper/states/aiming.gd" id="12_7kt4n"]
+[ext_resource type="Script" uid="uid://bhwo671rruhkl" path="res://components/enemies/sniper/states/shooting.gd" id="13_ykail"]
+
+[sub_resource type="Resource" id="Resource_3dtiq"]
+script = ExtResource("2_784bc")
+metadata/_custom_type_script = "uid://bg2byk2cdcq71"
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_y6ryl"]
+radius = 0.4
+height = 1.8
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hf46n"]
+albedo_color = Color(0.51228756, 0.24657705, 1, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_hf46n"]
+material = SubResource("StandardMaterial3D_hf46n")
+radius = 0.4
+height = 1.8
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_bev4u"]
+radius = 0.4
+height = 1.8
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_hf46n"]
+radius = 50.0
+
+[node name="SniperEnemy" type="CharacterBody3D" unique_id=597327788 groups=["enemy"]]
+collision_layer = 2
+script = ExtResource("1_o4u82")
+stats = SubResource("Resource_3dtiq")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=1057573504]
+
+[node name="PhysicsCollider" type="CollisionShape3D" parent="." unique_id=1638057920]
+shape = SubResource("CapsuleShape3D_y6ryl")
+
+[node name="VisualMesh" type="MeshInstance3D" parent="." unique_id=267729829]
+mesh = SubResource("CapsuleMesh_hf46n")
+
+[node name="HurtBox" type="Area3D" parent="." unique_id=1795298973 node_paths=PackedStringArray("health_component")]
+collision_layer = 2
+script = ExtResource("3_cto5j")
+health_component = NodePath("../Health")
+metadata/_custom_type_script = "uid://bx4tjgr464fxd"
+
+[node name="HurtboxCollider" type="CollisionShape3D" parent="HurtBox" unique_id=47547571]
+shape = SubResource("CapsuleShape3D_bev4u")
+
+[node name="PlayerDetectionArea" type="Area3D" parent="." unique_id=1815554461]
+collision_layer = 0
+monitorable = false
+
+[node name="PlayerDetectionShape" type="CollisionShape3D" parent="PlayerDetectionArea" unique_id=1834470356]
+shape = SubResource("SphereShape3D_hf46n")
+
+[node name="AimPointer" type="Node3D" parent="." unique_id=1871972680]
+
+[node name="LaserBeam" parent="AimPointer" unique_id=1958550099 instance=ExtResource("3_gmg34")]
+visible = false
+
+[node name="Health" type="Node" parent="." unique_id=1173554137]
+script = ExtResource("4_sqjrg")
+metadata/_custom_type_script = "uid://cmqhxkdolaasw"
+
+[node name="HealthBar" parent="." unique_id=1489255575 node_paths=PackedStringArray("health_component") instance=ExtResource("6_3dtiq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
+health_component = NodePath("../Health")
+
+[node name="StateChart" type="Node" parent="." unique_id=2028321784]
+unique_name_in_owner = true
+script = ExtResource("5_3kovv")
+metadata/_custom_type_script = "uid://couw105c3bde4"
+
+[node name="Root" type="Node" parent="StateChart" unique_id=833360526]
+script = ExtResource("6_3efmf")
+initial_state = NodePath("Idle")
+metadata/_custom_type_script = "uid://jk2jm1g6q853"
+
+[node name="Idle" type="Node" parent="StateChart/Root" unique_id=2044979495]
+script = ExtResource("7_hucxu")
+metadata/_custom_type_script = "uid://cytafq8i1y8qm"
+
+[node name="OnIdle" type="Node" parent="StateChart/Root" unique_id=1425041772]
+script = ExtResource("8_ea1do")
+to = NodePath("../Idle")
+event = &"onIdle"
+delay_in_seconds = "0.0"
+metadata/_custom_type_script = "uid://cf1nsco3w0mf6"
+
+[node name="OnAggravated" type="Node" parent="StateChart/Root" unique_id=1165384258]
+script = ExtResource("8_ea1do")
+to = NodePath("../Aggravated")
+event = &"onAggravated"
+delay_in_seconds = "0.0"
+metadata/_custom_type_script = "uid://cf1nsco3w0mf6"
+
+[node name="Aggravated" type="Node" parent="StateChart/Root" unique_id=36691880]
+script = ExtResource("6_3efmf")
+initial_state = NodePath("Aiming")
+metadata/_custom_type_script = "uid://jk2jm1g6q853"
+
+[node name="Aiming" type="Node" parent="StateChart/Root/Aggravated" unique_id=1636978895]
+script = ExtResource("7_hucxu")
+metadata/_custom_type_script = "uid://cytafq8i1y8qm"
+
+[node name="Shooting" type="Node" parent="StateChart/Root/Aggravated" unique_id=1198415343]
+script = ExtResource("7_hucxu")
+metadata/_custom_type_script = "uid://cytafq8i1y8qm"
+
+[node name="Repositioning" type="Node" parent="StateChart/Root/Aggravated" unique_id=2071179374]
+script = ExtResource("7_hucxu")
+metadata/_custom_type_script = "uid://cytafq8i1y8qm"
+
+[node name="OnAiming" type="Node" parent="StateChart/Root/Aggravated" unique_id=1883828364]
+script = ExtResource("8_ea1do")
+to = NodePath("../Aiming")
+event = &"onAiming"
+delay_in_seconds = "0.0"
+metadata/_custom_type_script = "uid://cf1nsco3w0mf6"
+
+[node name="OnShooting" type="Node" parent="StateChart/Root/Aggravated" unique_id=1268402715]
+script = ExtResource("8_ea1do")
+to = NodePath("../Shooting")
+event = &"onShooting"
+delay_in_seconds = "0.0"
+metadata/_custom_type_script = "uid://cf1nsco3w0mf6"
+
+[node name="OnRepositioning" type="Node" parent="StateChart/Root/Aggravated" unique_id=1171462810]
+script = ExtResource("8_ea1do")
+to = NodePath("../Repositioning")
+event = &"onRepositioning"
+delay_in_seconds = "0.0"
+metadata/_custom_type_script = "uid://cf1nsco3w0mf6"
+
+[node name="StateActors" type="Node" parent="." unique_id=1459447087 node_paths=PackedStringArray("sniper_enemy")]
+unique_name_in_owner = true
+script = ExtResource("9_4jtqw")
+sniper_enemy = NodePath("..")
+
+[node name="Idle" type="Node" parent="StateActors" unique_id=1950895088]
+script = ExtResource("10_hh63w")
+
+[node name="Aggravated" type="Node" parent="StateActors" unique_id=1683166852]
+script = ExtResource("12_6fl41")
+
+[node name="Aiming" type="Node" parent="StateActors/Aggravated" unique_id=1282832377]
+script = ExtResource("12_7kt4n")
+
+[node name="AimTimer" type="Timer" parent="StateActors/Aggravated/Aiming" unique_id=1538320166]
+wait_time = 3.0
+one_shot = true
+
+[node name="Shooting" type="Node" parent="StateActors/Aggravated" unique_id=913949075]
+script = ExtResource("13_ykail")
+
+[node name="Repositioning" type="Node" parent="StateActors/Aggravated" unique_id=485342660]
+script = ExtResource("11_gmg34")
+
+[node name="DummyTimer" type="Timer" parent="StateActors/Aggravated/Repositioning" unique_id=724805317]
+wait_time = 5.0
+one_shot = true
+
+[connection signal="death" from="Health" to="." method="_on_health_death"]
+[connection signal="state_physics_processing" from="StateChart/Root/Idle" to="StateActors/Idle" method="_on_idle_state_physics_processing"]
+[connection signal="state_physics_processing" from="StateChart/Root/Aggravated" to="StateActors/Aggravated" method="_on_aggravated_state_physics_processing"]
+[connection signal="state_entered" from="StateChart/Root/Aggravated/Aiming" to="StateActors/Aggravated/Aiming" method="_on_aiming_state_entered"]
+[connection signal="state_exited" from="StateChart/Root/Aggravated/Aiming" to="StateActors/Aggravated/Aiming" method="_on_aiming_state_exited"]
+[connection signal="state_physics_processing" from="StateChart/Root/Aggravated/Aiming" to="StateActors/Aggravated/Aiming" method="_on_aiming_state_physics_processing"]
+[connection signal="state_entered" from="StateChart/Root/Aggravated/Shooting" to="StateActors/Aggravated/Shooting" method="_on_shooting_state_entered"]
+[connection signal="state_physics_processing" from="StateChart/Root/Aggravated/Shooting" to="StateActors/Aggravated/Shooting" method="_on_shooting_state_physics_processing"]
+[connection signal="state_entered" from="StateChart/Root/Aggravated/Repositioning" to="StateActors/Aggravated/Repositioning" method="_on_repositioning_state_entered"]
+[connection signal="state_exited" from="StateChart/Root/Aggravated/Repositioning" to="StateActors/Aggravated/Repositioning" method="_on_repositioning_state_exited"]
+[connection signal="state_physics_processing" from="StateChart/Root/Aggravated/Repositioning" to="StateActors/Aggravated/Repositioning" method="_on_repositioning_state_physics_processing"]
+[connection signal="timeout" from="StateActors/Aggravated/Aiming/AimTimer" to="StateActors/Aggravated/Aiming" method="_on_aim_timer_timeout"]
+[connection signal="timeout" from="StateActors/Aggravated/Repositioning/DummyTimer" to="StateActors/Aggravated/Repositioning" method="_on_dummy_timer_timeout"]

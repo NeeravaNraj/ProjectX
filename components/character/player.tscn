@@ -57,7 +57,9 @@ radius = 2.0
 [sub_resource type="SphereShape3D" id="SphereShape3D_bmx6v"]
 radius = 12.0
 
-[node name="Player" type="CharacterBody3D" unique_id=1186516781]
+[sub_resource type="BoxShape3D" id="BoxShape3D_gie0d"]
+
+[node name="Player" type="CharacterBody3D" unique_id=1186516781 groups=["player"]]
 script = ExtResource("1_knl4b")
 player_stats = ExtResource("2_bmx6v")
 

@@ -1,11 +1,11 @@
-class_name Enemy extends CharacterBody3D
+class_name MeleeEnemy extends CharacterBody3D
 
 @export var enemy_stats: EnemyStats
 
 @onready var hurtbox: HurtBox = $HurtBox
 @onready var state_chart: StateChart = %StateChart
-@onready var detection_area: Area3D = $DetectionArea
-@onready var detection_shape: CollisionShape3D = $DetectionArea/CollisionShape3D
+@onready var player_detection_area: Area3D = $PlayerDetectionArea
+@onready var detection_shape: CollisionShape3D = $PlayerDetectionArea/PlayerDetectionShape
 @onready var navigation_agent: NavigationAgent3D = $NavigationAgent3D
 @onready var _velocity: VelocityComponent = $VelocityComponent
 
@@ -28,7 +28,6 @@ func get_player_distance():
 	return global_position.distance_to(player_position)
 
 func _ready() -> void:
-	add_to_group(&"enemy")
 	starting_position = global_position
 	state_chart.send_event(&"onIdle")
 

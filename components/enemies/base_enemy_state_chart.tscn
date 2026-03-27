@@ -1,0 +1,71 @@
+[gd_scene format=3 uid="uid://cbrpmnfg57moa"]
+
+[ext_resource type="Script" uid="uid://couw105c3bde4" path="res://addons/godot_state_charts/state_chart.gd" id="1_o5awm"]
+[ext_resource type="Script" uid="uid://jk2jm1g6q853" path="res://addons/godot_state_charts/compound_state.gd" id="2_8b275"]
+[ext_resource type="Script" uid="uid://cytafq8i1y8qm" path="res://addons/godot_state_charts/atomic_state.gd" id="3_yalca"]
+[ext_resource type="Script" uid="uid://cf1nsco3w0mf6" path="res://addons/godot_state_charts/transition.gd" id="4_lpvpt"]
+
+[node name="BaseEnemyStateChart" type="Node" unique_id=2028321784]
+script = ExtResource("1_o5awm")
+metadata/_custom_type_script = "uid://couw105c3bde4"
+
+[node name="Root" type="Node" parent="." unique_id=833360526]
+script = ExtResource("2_8b275")
+initial_state = NodePath("Idle")
+metadata/_custom_type_script = "uid://jk2jm1g6q853"
+
+[node name="Idle" type="Node" parent="Root" unique_id=2044979495]
+script = ExtResource("3_yalca")
+metadata/_custom_type_script = "uid://cytafq8i1y8qm"
+
+[node name="Searching" type="Node" parent="Root" unique_id=1820443932]
+script = ExtResource("3_yalca")
+metadata/_custom_type_script = "uid://cytafq8i1y8qm"
+
+[node name="OnAggravated" type="Node" parent="Root" unique_id=1127020799]
+script = ExtResource("4_lpvpt")
+to = NodePath("../InCombat/Aggravated")
+event = &"onAggravated"
+delay_in_seconds = "0.0"
+metadata/_custom_type_script = "uid://cf1nsco3w0mf6"
+
+[node name="OnIdle" type="Node" parent="Root" unique_id=18328487]
+script = ExtResource("4_lpvpt")
+to = NodePath("../Idle")
+event = &"onIdle"
+delay_in_seconds = "0.0"
+metadata/_custom_type_script = "uid://cf1nsco3w0mf6"
+
+[node name="InCombat" type="Node" parent="Root" unique_id=1055655555]
+script = ExtResource("2_8b275")
+initial_state = NodePath("Aggravated")
+metadata/_custom_type_script = "uid://jk2jm1g6q853"
+
+[node name="Aggravated" type="Node" parent="Root/InCombat" unique_id=615613644]
+script = ExtResource("3_yalca")
+metadata/_custom_type_script = "uid://cytafq8i1y8qm"
+
+[node name="Attacking" type="Node" parent="Root/InCombat" unique_id=1017335811]
+script = ExtResource("3_yalca")
+metadata/_custom_type_script = "uid://cytafq8i1y8qm"
+
+[node name="OnIdle" type="Node" parent="Root/InCombat" unique_id=843593195]
+script = ExtResource("4_lpvpt")
+to = NodePath("../../Idle")
+event = &"onIdle"
+delay_in_seconds = "0.0"
+metadata/_custom_type_script = "uid://cf1nsco3w0mf6"
+
+[node name="OnAttacking" type="Node" parent="Root/InCombat" unique_id=2103004280]
+script = ExtResource("4_lpvpt")
+to = NodePath("../Attacking")
+event = &"onAttacking"
+delay_in_seconds = "0.0"
+metadata/_custom_type_script = "uid://cf1nsco3w0mf6"
+
+[node name="OnSearching" type="Node" parent="Root/InCombat" unique_id=1720394961]
+script = ExtResource("4_lpvpt")
+to = NodePath("../../Searching")
+event = &"onSearching"
+delay_in_seconds = "0.0"
+metadata/_custom_type_script = "uid://cf1nsco3w0mf6"

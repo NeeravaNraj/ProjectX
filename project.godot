@@ -21,13 +21,16 @@ config/icon="uid://cyweugncmab2"
 
 [display]
 
-window/size/viewport_width=1600
-window/size/viewport_height=900
 window/vsync/vsync_mode=0
 
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/godot_state_charts/plugin.cfg")
+
+[global_group]
+
+enemy="any entity in the game that can be considered: smart, hostile towards the player and killable / damageable."
+player="the player group"
 
 [input]
 
@@ -106,6 +109,9 @@ boost={
 
 3d_render/layer_1="World"
 3d_render/layer_2="Render"
+3d_physics/layer_1="World (Static)"
+3d_physics/layer_2="World (Dynamic)"
+3d_physics/layer_3="Entity"
 
 [physics]
 
