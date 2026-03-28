@@ -1,9 +1,11 @@
 class_name HitBox extends Area3D
 
-signal hit(hurtbox: HurtBox, amount: float)
+signal hit(hurtbox: HurtBox, packet: DamagePacket)
 
-@export var damage_amount: int = 5
-
-func _on_hurtbox_entered(hurtbox: HurtBox):
-	hurtbox.damage(damage_amount)
-	hit.emit(hurtbox, damage_amount)
+func attack(packet: DamagePacket):
+	for body in get_overlapping_areas():
+		var hurtbox = body as HurtBox
+		
+		if hurtbox:
+			hurtbox.damage(packet)
+			hit.emit(hurtbox, packet)

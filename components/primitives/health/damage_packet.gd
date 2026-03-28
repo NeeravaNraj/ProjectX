@@ -15,7 +15,7 @@ var flat_damage_modifier: float = 0.0
 func _init(
 	p_flat_damage: float,
 	p_flat_damage_modifier: float = 0.0,
-	p_flat_damage_multiplier: float = 0.0,
+	p_flat_damage_multiplier: float = 1.0,
 	p_attack_direction: Vector3 = Vector3.ZERO,
 	p_knockback_modifier: float = 20.0,
 ) -> void:

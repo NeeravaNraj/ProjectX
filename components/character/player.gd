@@ -15,11 +15,13 @@ class_name Player extends CharacterBody3D
 @onready var shuriken_ctrl = $ShurikenCtrl
 @onready var stat_energy: Stat = $Stats/Energy
 @onready var stat_momentum: Stat = $Stats/Momentum
+@onready var hurt_box: HurtBox = $Areas/HurtBox
 
 @onready var debug_tracker := %DebugTracker
+@onready var _health: Health = $Stats/Health
 @onready var _velocity: VelocityComponent = %Velocity
 
-
+var spawn_point = Vector3.ZERO
 var space_state: PhysicsDirectSpaceState3D
 var shuriken_scene = preload("res://components/shuriken/shuriken.tscn")
 
@@ -52,6 +54,7 @@ func _ready() -> void:
 	assert(player_stats, "Cannot instantiate Player without PlayerStats resource.")
 	space_state = get_world_3d().direct_space_state
 	_velocity.speed = player_stats.move_speed
+	spawn_point = global_position
 
 func _physics_process(_delta: float) -> void:
 	debug_tracker.track(&"Energy", stat_energy.value)
@@ -115,3 +118,9 @@ func exit_boost():
 
 func _on_momentum_reached_min(value: float) -> void:
 	exit_boost()
+
+
+func _on_health_death() -> void:
+	global_position = spawn_point
+	_health.reset()
+	print("YOU DIED!")

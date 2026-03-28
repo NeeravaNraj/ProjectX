@@ -4,5 +4,3 @@
 
 [node name="HitBox" type="Area3D" unique_id=764278289]
 script = ExtResource("1_xyqpr")
-
-[connection signal="area_entered" from="." to="." method="_on_hurtbox_entered"]

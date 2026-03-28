@@ -9,5 +9,5 @@ func _on_idle_state_physics_processing(delta: float) -> void:
 			melee_enemy.player = body
 			melee_enemy.state_chart.send_event(&"onAggravated")
 
-	melee_enemy.speed = melee_enemy.enemy_stats.move_speed
+	melee_enemy.speed = melee_enemy.stats.move_speed
 	melee_enemy.move_towards_target()

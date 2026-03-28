@@ -31,5 +31,8 @@ func damage(amount: int):
 	health -= amount
 	changed.emit(health)
 
+func reset():
+	health = max_health
+
 func _is_dead():
 	return health <= 0

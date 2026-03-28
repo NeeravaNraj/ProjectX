@@ -163,7 +163,7 @@ script = ExtResource("12_6fl41")
 script = ExtResource("12_7kt4n")
 
 [node name="AimTimer" type="Timer" parent="StateActors/Aggravated/Aiming" unique_id=1538320166]
-wait_time = 3.0
+wait_time = 0.75
 one_shot = true
 
 [node name="Shooting" type="Node" parent="StateActors/Aggravated" unique_id=913949075]
@@ -173,7 +173,7 @@ script = ExtResource("13_ykail")
 script = ExtResource("11_gmg34")
 
 [node name="DummyTimer" type="Timer" parent="StateActors/Aggravated/Repositioning" unique_id=724805317]
-wait_time = 5.0
+wait_time = 2.5
 one_shot = true
 
 [connection signal="death" from="Health" to="." method="_on_health_death"]

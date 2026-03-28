@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dgm4u8srpwll1" path="res://components/weapon/katana/katana.tscn" id="2_gie0d"]
 [ext_resource type="PackedScene" uid="uid://bcwkugn6v3oy7" path="res://addons/godot_state_charts/utilities/state_chart_debugger.tscn" id="2_mk48o"]
 [ext_resource type="Script" uid="uid://bhs7nx5n8p50x" path="res://components/character/camera_pivot.gd" id="3_4akdr"]
+[ext_resource type="PackedScene" uid="uid://by4md02ke1buj" path="res://components/primitives/health/hurt_box.tscn" id="3_bhcnq"]
 [ext_resource type="PackedScene" uid="uid://id84t5a0ya2y" path="res://components/primitives/movement/player_control.tscn" id="3_eti3u"]
 [ext_resource type="PackedScene" uid="uid://gbwtsbjngig6" path="res://components/character/first_person_rig.tscn" id="4_6p5bk"]
 [ext_resource type="Script" uid="uid://ctrqgap4ctxuv" path="res://components/character/weaponary.gd" id="5_2p11o"]
@@ -36,20 +37,11 @@
 [ext_resource type="Script" uid="uid://7knbaw4wcwth" path="res://user_interface/reticle_draw.gd" id="33_aia5n"]
 [ext_resource type="Script" uid="uid://cldxsuoxleusl" path="res://components/character/ui/debug/debug_tracker.gd" id="34_1054b"]
 [ext_resource type="PackedScene" uid="uid://dj3yekexhr2dn" path="res://components/primitives/stat/stat.tscn" id="34_gof3c"]
+[ext_resource type="Script" uid="uid://pl7ifg52f63u" path="res://components/character/health_bar.gd" id="36_ipe2n"]
 
-[sub_resource type="SphereMesh" id="SphereMesh_gie0d"]
-radius = 0.225
-height = 0.375
-
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_knl4b"]
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_bhcnq"]
 radius = 0.3
 height = 1.9
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_pgqh4"]
-radius = 0.3
-height = 1.9
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_gie0d"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_ukpso"]
 radius = 2.0
@@ -57,65 +49,73 @@ radius = 2.0
 [sub_resource type="SphereShape3D" id="SphereShape3D_bmx6v"]
 radius = 12.0
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_raigf"]
+bg_color = Color(0.12941177, 0.12941177, 0.12941177, 0.54901963)
+skew = Vector2(0.725, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ipe2n"]
+bg_color = Color(0.31408536, 0.6963653, 0.35775128, 1)
+skew = Vector2(0.725, 0)
+border_width_left = 4
+border_width_top = 3
+border_color = Color(0.19615254, 0.44977546, 0.22399083, 1)
+border_blend = true
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_gie0d"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_pgqh4"]
+radius = 0.3
+height = 1.9
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_knl4b"]
+radius = 0.3
+height = 1.9
+
 [node name="Player" type="CharacterBody3D" unique_id=1186516781 groups=["player"]]
 script = ExtResource("1_knl4b")
 player_stats = ExtResource("2_bmx6v")
 
-[node name="CameraControlAnchor" type="Marker3D" parent="." unique_id=1135788692]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.60824907, 0.07481673)
+[node name="Areas" type="Node3D" parent="." unique_id=1172554725]
 
-[node name="ReferenceSphere" type="MeshInstance3D" parent="." unique_id=966743990]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -2)
-visible = false
-mesh = SubResource("SphereMesh_gie0d")
+[node name="HurtBox" parent="Areas" unique_id=1716786986 node_paths=PackedStringArray("health_component") instance=ExtResource("3_bhcnq")]
+collision_layer = 9
+collision_mask = 0
+health_component = NodePath("../../Stats/Health")
 
-[node name="Shape" type="CollisionShape3D" parent="." unique_id=1348553797]
-shape = SubResource("CapsuleShape3D_knl4b")
+[node name="HurtBoxShape" type="CollisionShape3D" parent="Areas/HurtBox" unique_id=1618941092]
+shape = SubResource("CapsuleShape3D_bhcnq")
 
-[node name="Model" type="Node3D" parent="." unique_id=247778809]
-visible = false
-
-[node name="Body" type="MeshInstance3D" parent="Model" unique_id=2057104036]
-mesh = SubResource("CapsuleMesh_pgqh4")
-
-[node name="CameraPivot" type="Node3D" parent="." unique_id=1361904912]
-unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
-script = ExtResource("3_4akdr")
-
-[node name="Camera" type="Camera3D" parent="CameraPivot" unique_id=777665774]
-unique_name_in_owner = true
-current = true
-
-[node name="FirstPersonRig" parent="CameraPivot/Camera" unique_id=85344706 node_paths=PackedStringArray("player") instance=ExtResource("4_6p5bk")]
-transform = Transform3D(-1.5, 0, -1.3113416e-07, 0, 1.5, 0, 1.3113416e-07, 0, -1.5, 0, -0.045000017, 0.05)
-player = NodePath("../../..")
-
-[node name="HitBox" type="Area3D" parent="CameraPivot" unique_id=1832605776]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.46209884, -1.2278099)
-collision_layer = 0
-collision_mask = 2
+[node name="PickupRegion" type="Area3D" parent="Areas" unique_id=954226779]
 monitorable = false
+script = ExtResource("26_qrg3i")
 
-[node name="AttackShape" type="CollisionShape3D" parent="CameraPivot/HitBox" unique_id=1166820792]
-shape = SubResource("BoxShape3D_gie0d")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Areas/PickupRegion" unique_id=1821587941]
+shape = SubResource("SphereShape3D_ukpso")
 
-[node name="Weaponry" type="Node3D" parent="." unique_id=1708920944]
-script = ExtResource("5_2p11o")
-
-[node name="Katana" parent="Weaponry" unique_id=1156992332 node_paths=PackedStringArray("player", "attack_area", "attack_area_shape") instance=ExtResource("2_gie0d")]
-transform = Transform3D(-0.09646627, -0.9636583, -0.2491126, 0.83487564, 0.0579276, -0.547382, 0.54191965, -0.2607819, 0.79894686, 0.6049503, 0.48512423, -0.98595005)
-visible = false
-attack_damage = 40.0
-player = NodePath("../..")
-attack_area = NodePath("../../CameraPivot/HitBox")
-attack_area_shape = NodePath("../../CameraPivot/HitBox/AttackShape")
-
-[node name="Velocity" parent="." unique_id=1034921754 instance=ExtResource("2_b1s2y")]
+[node name="GrappleDetector" type="Area3D" parent="Areas" unique_id=1849131499]
 unique_name_in_owner = true
-gravity = -35.0
+collision_mask = 4
+monitorable = false
+script = ExtResource("9_jqkmc")
 
-[node name="PlayerControl" parent="Velocity" unique_id=514334726 instance=ExtResource("3_eti3u")]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Areas/GrappleDetector" unique_id=242064432]
+shape = SubResource("SphereShape3D_bmx6v")
+debug_fill = false
+
+[node name="Stats" type="Node" parent="." unique_id=1898973766]
+
+[node name="Health" parent="Stats" unique_id=995793758 instance=ExtResource("5_6npmc")]
+
+[node name="Energy" parent="Stats" unique_id=1517392455 instance=ExtResource("34_gof3c")]
+max_value = 2.0
+auto_grow = true
+growth_tick_delay = 0.25
+growth_rate = 0.2
+
+[node name="Momentum" parent="Stats" unique_id=2110160468 instance=ExtResource("34_gof3c")]
+max_value = 5.0
+auto_grow = true
+growth_tick_delay = 0.15
 
 [node name="States" type="Node" parent="." unique_id=156588293]
 
@@ -346,24 +346,104 @@ script = ExtResource("26_3lhvt")
 [node name="Parrying" type="Node" parent="States/StateActors/Combat" unique_id=1694245225]
 script = ExtResource("27_vgukn")
 
-[node name="Areas" type="Node3D" parent="." unique_id=1172554725]
-
-[node name="PickupRegion" type="Area3D" parent="Areas" unique_id=954226779]
-monitorable = false
-script = ExtResource("26_qrg3i")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Areas/PickupRegion" unique_id=1821587941]
-shape = SubResource("SphereShape3D_ukpso")
-
-[node name="GrappleDetector" type="Area3D" parent="Areas" unique_id=1849131499]
+[node name="Velocity" parent="." unique_id=1034921754 instance=ExtResource("2_b1s2y")]
 unique_name_in_owner = true
-collision_mask = 4
-monitorable = false
-script = ExtResource("9_jqkmc")
+gravity = -35.0
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Areas/GrappleDetector" unique_id=242064432]
-shape = SubResource("SphereShape3D_bmx6v")
-debug_fill = false
+[node name="PlayerControl" parent="Velocity" unique_id=514334726 instance=ExtResource("3_eti3u")]
+
+[node name="UI" type="CanvasLayer" parent="." unique_id=1160315500]
+layer = 2
+
+[node name="StateChartDebugger" parent="UI" unique_id=874067376 instance=ExtResource("2_mk48o")]
+visible = false
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_right = 375.0
+offset_bottom = 330.0
+grow_horizontal = 1
+grow_vertical = 1
+size_flags_horizontal = 0
+size_flags_vertical = 0
+enabled = false
+initial_node_to_watch = NodePath("../../States/StateChart")
+
+[node name="Reticle" type="CenterContainer" parent="UI" unique_id=1038196225]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="ReticleDraw" type="Control" parent="UI/Reticle" unique_id=2086269258]
+layout_mode = 2
+script = ExtResource("33_aia5n")
+radius = 0.5
+thickness = 2.0
+
+[node name="HUD" type="Control" parent="UI" unique_id=1895161320]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="BottomHalf" type="Control" parent="UI/HUD" unique_id=1183442261]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -318.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_vertical = 8
+mouse_filter = 2
+
+[node name="HealthBar" type="ProgressBar" parent="UI/HUD/BottomHalf" unique_id=1703394608]
+custom_minimum_size = Vector2(400, 28)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.043
+anchor_top = 1.0
+anchor_right = 0.36800003
+anchor_bottom = 1.0
+offset_left = -0.5360031
+offset_top = -79.0
+offset_right = 0.063964844
+offset_bottom = -52.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_raigf")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ipe2n")
+step = 1.0
+value = 50.0
+script = ExtResource("36_ipe2n")
+metadata/_edit_use_anchors_ = true
+
+[node name="DebugTracker" type="PanelContainer" parent="UI" unique_id=2142135378]
+unique_name_in_owner = true
+anchors_preset = -1
+anchor_right = 0.2395
+anchor_bottom = 0.37222221
+offset_right = -0.2000122
+grow_vertical = 2
+script = ExtResource("34_1054b")
+metadata/_edit_use_anchors_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/DebugTracker" unique_id=1615851665]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/DebugTracker/VBoxContainer" unique_id=1800018159]
+layout_mode = 2
+
+[node name="CameraControlAnchor" type="Marker3D" parent="." unique_id=1135788692]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.60824907, 0.07481673)
 
 [node name="ShurikenCtrl" type="Node3D" parent="." unique_id=818070391]
 script = ExtResource("28_jr262")
@@ -381,67 +461,56 @@ metadata/_custom_type_script = "uid://b56wb38xrpyi8"
 wait_time = 5.0
 one_shot = true
 
-[node name="Stats" type="Node" parent="." unique_id=1898973766]
-
-[node name="Health" parent="Stats" unique_id=1496712029 instance=ExtResource("5_6npmc")]
-
-[node name="Energy" parent="Stats" unique_id=1517392455 instance=ExtResource("34_gof3c")]
-max_value = 2.0
-auto_grow = true
-growth_tick_delay = 0.25
-growth_rate = 0.2
-
-[node name="Momentum" parent="Stats" unique_id=2110160468 instance=ExtResource("34_gof3c")]
-max_value = 5.0
-auto_grow = true
-growth_tick_delay = 0.15
-
-[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1160315500]
-layer = 2
-
-[node name="StateChartDebugger" parent="CanvasLayer" unique_id=874067376 instance=ExtResource("2_mk48o")]
-anchors_preset = 0
-anchor_right = 0.0
-anchor_bottom = 0.0
-offset_right = 375.0
-offset_bottom = 330.0
-grow_horizontal = 1
-grow_vertical = 1
-size_flags_horizontal = 0
-size_flags_vertical = 0
-enabled = false
-initial_node_to_watch = NodePath("../../States/StateChart")
-
-[node name="Reticle" type="CenterContainer" parent="CanvasLayer" unique_id=1038196225]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-metadata/_edit_use_anchors_ = true
-
-[node name="ReticleDraw" type="Control" parent="CanvasLayer/Reticle" unique_id=2086269258]
-layout_mode = 2
-script = ExtResource("33_aia5n")
-radius = 0.5
-thickness = 2.0
-
-[node name="DebugTracker" type="PanelContainer" parent="CanvasLayer" unique_id=2142135378]
+[node name="CameraPivot" type="Node3D" parent="." unique_id=1361904912]
 unique_name_in_owner = true
-anchors_preset = -1
-anchor_right = 0.2395
-anchor_bottom = 0.37222221
-offset_right = -0.2000122
-grow_vertical = 2
-script = ExtResource("34_1054b")
-metadata/_edit_use_anchors_ = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
+script = ExtResource("3_4akdr")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/DebugTracker" unique_id=1615851665]
-layout_mode = 2
+[node name="Camera" type="Camera3D" parent="CameraPivot" unique_id=777665774]
+unique_name_in_owner = true
+current = true
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/DebugTracker/VBoxContainer" unique_id=1800018159]
-layout_mode = 2
+[node name="FirstPersonRig" parent="CameraPivot/Camera" unique_id=85344706 node_paths=PackedStringArray("player") instance=ExtResource("4_6p5bk")]
+transform = Transform3D(-1.5, 0, -1.3113416e-07, 0, 1.5, 0, 1.3113416e-07, 0, -1.5, 0, -0.045000017, 0.05)
+player = NodePath("../../..")
 
+[node name="HitBox" type="Area3D" parent="CameraPivot" unique_id=1832605776]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.46209884, -1.2278099)
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+
+[node name="AttackShape" type="CollisionShape3D" parent="CameraPivot/HitBox" unique_id=1166820792]
+shape = SubResource("BoxShape3D_gie0d")
+
+[node name="Weaponry" type="Node3D" parent="." unique_id=1708920944]
+script = ExtResource("5_2p11o")
+
+[node name="Katana" parent="Weaponry" unique_id=1156992332 node_paths=PackedStringArray("player", "attack_area", "attack_area_shape") instance=ExtResource("2_gie0d")]
+transform = Transform3D(-0.09646627, -0.9636583, -0.2491126, 0.83487564, 0.0579276, -0.547382, 0.54191965, -0.2607819, 0.79894686, 0.6049503, 0.48512423, -0.98595005)
+visible = false
+attack_damage = 40.0
+player = NodePath("../..")
+attack_area = NodePath("../../CameraPivot/HitBox")
+attack_area_shape = NodePath("../../CameraPivot/HitBox/AttackShape")
+
+[node name="Model" type="Node3D" parent="." unique_id=247778809]
+visible = false
+
+[node name="Body" type="MeshInstance3D" parent="Model" unique_id=2057104036]
+mesh = SubResource("CapsuleMesh_pgqh4")
+
+[node name="Shape" type="CollisionShape3D" parent="." unique_id=1348553797]
+shape = SubResource("CapsuleShape3D_knl4b")
+
+[connection signal="body_entered" from="Areas/PickupRegion" to="Areas/PickupRegion" method="_on_body_entered"]
+[connection signal="area_entered" from="Areas/GrappleDetector" to="Areas/GrappleDetector" method="_on_area_entered"]
+[connection signal="area_exited" from="Areas/GrappleDetector" to="Areas/GrappleDetector" method="_on_area_exited"]
+[connection signal="body_entered" from="Areas/GrappleDetector" to="Areas/GrappleDetector" method="_on_body_entered"]
+[connection signal="body_exited" from="Areas/GrappleDetector" to="Areas/GrappleDetector" method="_on_body_exited"]
+[connection signal="changed" from="Stats/Health" to="UI/HUD/BottomHalf/HealthBar" method="_on_health_changed"]
+[connection signal="death" from="Stats/Health" to="." method="_on_health_death"]
+[connection signal="reached_min" from="Stats/Momentum" to="." method="_on_momentum_reached_min"]
 [connection signal="child_state_entered" from="States/StateChart/Root/Movement/Grounded" to="States/StateActors/MovementState/GroundedState" method="_on_grounded_child_state_entered"]
 [connection signal="state_physics_processing" from="States/StateChart/Root/Movement/Grounded" to="States/StateActors/MovementState/GroundedState" method="_on_grounded_state_physics_processing"]
 [connection signal="state_unhandled_input" from="States/StateChart/Root/Movement/Grounded" to="States/StateActors/MovementState/GroundedState" method="_on_grounded_state_unhandled_input"]
@@ -469,11 +538,5 @@ layout_mode = 2
 [connection signal="state_exited" from="States/StateChart/Root/Combat/Parrying" to="States/StateActors/Combat/Parrying" method="_on_parrying_state_exited"]
 [connection signal="timeout" from="States/StateActors/MovementState/AirborneState/Jumping/JumpTimer" to="States/StateActors/MovementState/AirborneState/Jumping" method="_on_jump_timer_timeout"]
 [connection signal="timeout" from="States/StateActors/MovementState/AirborneState/Grappling/GrappleTimer" to="States/StateActors/MovementState/AirborneState/Grappling" method="_on_grapple_timer_timeout"]
-[connection signal="body_entered" from="Areas/PickupRegion" to="Areas/PickupRegion" method="_on_body_entered"]
-[connection signal="area_entered" from="Areas/GrappleDetector" to="Areas/GrappleDetector" method="_on_area_entered"]
-[connection signal="area_exited" from="Areas/GrappleDetector" to="Areas/GrappleDetector" method="_on_area_exited"]
-[connection signal="body_entered" from="Areas/GrappleDetector" to="Areas/GrappleDetector" method="_on_body_entered"]
-[connection signal="body_exited" from="Areas/GrappleDetector" to="Areas/GrappleDetector" method="_on_body_exited"]
-[connection signal="reached_min" from="Stats/Momentum" to="." method="_on_momentum_reached_min"]
 
 [editable path="Weaponry/Katana"]

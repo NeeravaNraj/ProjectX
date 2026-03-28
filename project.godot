@@ -19,6 +19,10 @@ run/main_scene="uid://c0awyk0mfv5ro"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="uid://cyweugncmab2"
 
+[autoload]
+
+utils="*uid://1i680wbddw5s"
+
 [display]
 
 window/size/viewport_width=1600
@@ -114,6 +118,7 @@ boost={
 3d_physics/layer_1="World (Static)"
 3d_physics/layer_2="World (Dynamic)"
 3d_physics/layer_3="Entity"
+3d_physics/layer_4="HurtBox"
 
 [physics]
 
