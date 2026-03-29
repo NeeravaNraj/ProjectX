@@ -37,7 +37,7 @@
 [ext_resource type="Script" uid="uid://7knbaw4wcwth" path="res://user_interface/reticle_draw.gd" id="33_aia5n"]
 [ext_resource type="Script" uid="uid://cldxsuoxleusl" path="res://components/character/ui/debug/debug_tracker.gd" id="34_1054b"]
 [ext_resource type="PackedScene" uid="uid://dj3yekexhr2dn" path="res://components/primitives/stat/stat.tscn" id="34_gof3c"]
-[ext_resource type="Script" path="res://components/character/health_bar.gd" id="36_ipe2n"]
+[ext_resource type="Script" uid="uid://pl7ifg52f63u" path="res://components/character/health_bar.gd" id="36_ipe2n"]
 [ext_resource type="PackedScene" uid="uid://etn615pvnkve" path="res://components/primitives/health/hit_box.tscn" id="37_662td"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_bhcnq"]
@@ -107,6 +107,12 @@ script = ExtResource("9_jqkmc")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Areas/GrappleDetector" unique_id=242064432]
 shape = SubResource("SphereShape3D_bmx6v")
 debug_fill = false
+
+[node name="Velocity" parent="." unique_id=1034921754 instance=ExtResource("2_b1s2y")]
+unique_name_in_owner = true
+gravity = -35.0
+
+[node name="PlayerControl" parent="Velocity" unique_id=514334726 instance=ExtResource("3_eti3u")]
 
 [node name="Stats" type="Node" parent="." unique_id=1898973766]
 
@@ -351,12 +357,6 @@ script = ExtResource("26_3lhvt")
 
 [node name="Parrying" type="Node" parent="States/StateActors/Combat" unique_id=1694245225]
 script = ExtResource("27_vgukn")
-
-[node name="Velocity" parent="." unique_id=1034921754 instance=ExtResource("2_b1s2y")]
-unique_name_in_owner = true
-gravity = -35.0
-
-[node name="PlayerControl" parent="Velocity" unique_id=514334726 instance=ExtResource("3_eti3u")]
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=1160315500]
 layer = 2
