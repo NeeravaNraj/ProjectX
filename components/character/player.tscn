@@ -38,6 +38,7 @@
 [ext_resource type="Script" uid="uid://cldxsuoxleusl" path="res://components/character/ui/debug/debug_tracker.gd" id="34_1054b"]
 [ext_resource type="PackedScene" uid="uid://dj3yekexhr2dn" path="res://components/primitives/stat/stat.tscn" id="34_gof3c"]
 [ext_resource type="Script" uid="uid://pl7ifg52f63u" path="res://components/character/health_bar.gd" id="36_ipe2n"]
+[ext_resource type="PackedScene" uid="uid://etn615pvnkve" path="res://components/primitives/health/hit_box.tscn" id="37_662td"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_bhcnq"]
 radius = 0.3
@@ -72,6 +73,8 @@ radius = 0.3
 height = 1.9
 
 [node name="Player" type="CharacterBody3D" unique_id=1186516781 groups=["player"]]
+collision_layer = 4
+collision_mask = 5
 script = ExtResource("1_knl4b")
 player_stats = ExtResource("2_bmx6v")
 
@@ -94,7 +97,8 @@ shape = SubResource("SphereShape3D_ukpso")
 
 [node name="GrappleDetector" type="Area3D" parent="Areas" unique_id=1849131499]
 unique_name_in_owner = true
-collision_mask = 4
+collision_layer = 0
+collision_mask = 2
 monitorable = false
 script = ExtResource("9_jqkmc")
 
@@ -474,24 +478,22 @@ current = true
 transform = Transform3D(-1.5, 0, -1.3113416e-07, 0, 1.5, 0, 1.3113416e-07, 0, -1.5, 0, -0.045000017, 0.05)
 player = NodePath("../../..")
 
-[node name="HitBox" type="Area3D" parent="CameraPivot" unique_id=1832605776]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.46209884, -1.2278099)
-collision_layer = 0
-collision_mask = 2
-monitorable = false
+[node name="HitBox" parent="CameraPivot" unique_id=764278289 node_paths=PackedStringArray("exclude") instance=ExtResource("37_662td")]
+collision_mask = 8
+exclude = [NodePath("../../Areas/HurtBox")]
 
 [node name="AttackShape" type="CollisionShape3D" parent="CameraPivot/HitBox" unique_id=1166820792]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, -2)
 shape = SubResource("BoxShape3D_gie0d")
 
-[node name="Weaponry" type="Node3D" parent="." unique_id=1708920944]
+[node name="Weaponry" type="Node3D" parent="." unique_id=1708920944 node_paths=PackedStringArray("hitbox")]
 script = ExtResource("5_2p11o")
+hitbox = NodePath("../CameraPivot/HitBox")
 
-[node name="Katana" parent="Weaponry" unique_id=1156992332 node_paths=PackedStringArray("player", "attack_area", "attack_area_shape") instance=ExtResource("2_gie0d")]
+[node name="Katana" parent="Weaponry" unique_id=1156992332 node_paths=PackedStringArray("attack_area_shape") instance=ExtResource("2_gie0d")]
 transform = Transform3D(-0.09646627, -0.9636583, -0.2491126, 0.83487564, 0.0579276, -0.547382, 0.54191965, -0.2607819, 0.79894686, 0.6049503, 0.48512423, -0.98595005)
 visible = false
 attack_damage = 40.0
-player = NodePath("../..")
-attack_area = NodePath("../../CameraPivot/HitBox")
 attack_area_shape = NodePath("../../CameraPivot/HitBox/AttackShape")
 
 [node name="Model" type="Node3D" parent="." unique_id=247778809]

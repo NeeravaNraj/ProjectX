@@ -16,6 +16,7 @@ class_name Player extends CharacterBody3D
 @onready var stat_energy: Stat = $Stats/Energy
 @onready var stat_momentum: Stat = $Stats/Momentum
 @onready var hurt_box: HurtBox = $Areas/HurtBox
+@onready var weaponry = $Weaponry
 
 @onready var debug_tracker := %DebugTracker
 @onready var _health: Health = $Stats/Health
@@ -59,7 +60,8 @@ func _ready() -> void:
 func _physics_process(_delta: float) -> void:
 	debug_tracker.track(&"Energy", stat_energy.value)
 	debug_tracker.track(&"Latent momentum", stat_momentum.value)
-	debug_tracker.track(&"Speed mod", _velocity.speed_modifier)
+	debug_tracker.track(&"Velocity", velocity)
+	debug_tracker.track(&"Deceleration", _velocity.deceleration_coef)
 
 	_velocity.set_speed_modifier(stat_energy.value * 0.5)
 	_velocity.deceleration_coef = _velocity.get_speed() * 2
@@ -79,6 +81,9 @@ func _unhandled_input(event: InputEvent) -> void:
 	
 	if event.is_action_pressed(&"boost"):
 		enter_boost()
+	
+	if event.is_action_pressed(&"left_click"):
+		weaponry.attack()
 
 func _try_grapple():
 	var override_max = 50
@@ -92,7 +97,7 @@ func _try_grapple():
 		override_min = player_stats.min_grapple_speed
 
 	if not data: return
-
+	
 	var direction = data[0]
 	var distance = data[1]
 	var speed = clampf(
@@ -118,7 +123,6 @@ func exit_boost():
 
 func _on_momentum_reached_min(value: float) -> void:
 	exit_boost()
-
 
 func _on_health_death() -> void:
 	global_position = spawn_point

@@ -1,6 +1,7 @@
 class_name MeleeEnemy extends CharacterBody3D
 
 @export var stats: EnemyStats
+@export var enabled: bool = true
 
 @onready var hurtbox: HurtBox = $HurtBox
 @onready var hitbox: HitBox = $Areas/HitBox

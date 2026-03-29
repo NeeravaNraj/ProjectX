@@ -3,6 +3,7 @@ class_name SniperEnemy extends CharacterBody3D
 
 @export var stats: SniperEnemyStats
 
+@export var enabled: bool = true
 @onready var hurtbox: HurtBox = $HurtBox
 @onready var state_chart: StateChart = %StateChart
 @onready var player_detection_area: Area3D = $PlayerDetectionArea

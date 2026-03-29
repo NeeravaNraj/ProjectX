@@ -115,8 +115,8 @@ boost={
 
 3d_render/layer_1="World"
 3d_render/layer_2="Render"
-3d_physics/layer_1="World (Static)"
-3d_physics/layer_2="World (Dynamic)"
+3d_physics/layer_1="World"
+3d_physics/layer_2="Interactable"
 3d_physics/layer_3="Entity"
 3d_physics/layer_4="HurtBox"
 

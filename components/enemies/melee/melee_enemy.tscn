@@ -47,7 +47,8 @@ height = 1.8
 [sub_resource type="CylinderMesh" id="CylinderMesh_goyg5"]
 
 [node name="MeleeEnemy" type="CharacterBody3D" unique_id=597327788 groups=["enemy"]]
-collision_layer = 2
+collision_layer = 4
+collision_mask = 5
 script = ExtResource("1_y6ryl")
 stats = SubResource("Resource_goyg5")
 
@@ -66,6 +67,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
 [node name="PlayerDetectionArea" type="Area3D" parent="Areas" unique_id=1815554461]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.2, 0)
 collision_layer = 0
+collision_mask = 4
 monitorable = false
 
 [node name="PlayerDetectionShape" type="CollisionShape3D" parent="Areas/PlayerDetectionArea" unique_id=1834470356]
@@ -73,7 +75,8 @@ shape = SubResource("SphereShape3D_hf46n")
 
 [node name="HurtBox" type="Area3D" parent="Areas" unique_id=1795298973 node_paths=PackedStringArray("health_component")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.2, 0)
-collision_layer = 2
+collision_layer = 8
+collision_mask = 0
 script = ExtResource("2_bev4u")
 health_component = NodePath("../../Health")
 metadata/_custom_type_script = "uid://bx4tjgr464fxd"
@@ -83,6 +86,7 @@ shape = SubResource("CapsuleShape3D_bev4u")
 
 [node name="HitBox" parent="Areas" unique_id=764278289 instance=ExtResource("4_goyg5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, -1)
+collision_mask = 9
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Areas/HitBox" unique_id=1546201437]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -0.5)

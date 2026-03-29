@@ -59,7 +59,8 @@ func _get_height_adjusted_direction(d: Node3D):
 	return (player.global_position - grapple_position).normalized()
 
 func _raycast_to_grapple(from: Vector3, to: Vector3):
-	var raycast_query = PhysicsRayQueryParameters3D.create(from, to)
+	var mask = Utils.get_collition_layer_by_name(&"interactable")
+	var raycast_query = PhysicsRayQueryParameters3D.create(from, to, mask)
 	raycast_query.collide_with_areas = true
 	
 	var result = player.space_state.intersect_ray(raycast_query)

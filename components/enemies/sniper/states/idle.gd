@@ -2,7 +2,7 @@ extends SniperEnemyState
 
 
 func _on_idle_state_physics_processing(delta: float) -> void:
-	if not sniper_enemy: return
+	if not (sniper_enemy or sniper_enemy.enabled): return
 
 	for body in sniper_enemy.player_detection_area.get_overlapping_bodies():
 		if body is Player:

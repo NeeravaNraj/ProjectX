@@ -37,7 +37,7 @@ func _on_aiming_state_physics_processing(delta: float) -> void:
 
 
 func _on_aim_timer_timeout() -> void:
-	sniper_enemy.state_chart.send_event("onShooting")
+	sniper_enemy.state_chart.send_event(&"onShooting")
 
 
 func _on_aiming_state_exited() -> void:

@@ -8,44 +8,4 @@ class_name Weapon extends Node
 @export var attack_speed: float = 0.05
 @export var attack_speed_modifier: float = 0.0
 
-@export var player: Player
-@export var attack_area: Area3D
 @export var attack_area_shape: CollisionShape3D
-
-var attack_direction = Vector3.ZERO
-
-signal attack()
-
-var _can_attack := true
-
-# TODO: temporary
-func _unhandled_input(event: InputEvent) -> void:
-	if Input.mouse_mode != Input.MOUSE_MODE_CAPTURED: return
-	if event.is_action_pressed("left_click"):
-		_attack()
-
-func _attack():
-	if not _can_attack: return
-
-	for body in attack_area.get_overlapping_bodies():
-		var hurtbox = body.get("hurtbox") as HurtBox
-
-		var packet = DamagePacket.new(
-			attack_damage,
-			attack_damage_modifier,
-			attack_damage_multiplier,
-			-player.get_forward(),
-		)
-
-		if hurtbox:
-			hurtbox.damage(packet)
-			
-		attack.emit()
-	start_timer()
-
-func start_timer():
-	_can_attack = false
-	await get_tree().create_timer(attack_speed + attack_speed_modifier).timeout
-	_can_attack = true
-
-func animate_attack(): pass

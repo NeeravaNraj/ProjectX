@@ -10,14 +10,15 @@ func _on_shooting_state_entered() -> void:
 
 func _on_shooting_state_physics_processing(delta: float) -> void:
 	var space_state = sniper_enemy.get_world_3d().direct_space_state
-
+	
+	var wall_collision_layer = Utils.get_collition_layer_by_name(&"world")
 	var hurt_box_collision_layer = Utils.get_collition_layer_by_name(&"hurtbox")
 	assert(hurt_box_collision_layer)
 
 	var query = PhysicsRayQueryParameters3D.create(
 		sniper_enemy.global_position,
 		sniper_enemy.global_position + sniper_enemy.aim_pointer.global_basis * Vector3(0.0, 0.0, -sniper_enemy.stats.aim_range),
-		hurt_box_collision_layer
+		wall_collision_layer | hurt_box_collision_layer
 	)
 	query.collide_with_areas = true
 	var result = space_state.intersect_ray(query)
