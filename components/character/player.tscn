@@ -23,7 +23,7 @@
 [ext_resource type="Script" uid="uid://bupolwf85pte3" path="res://components/character/states/moving_state.gd" id="14_2ve8e"]
 [ext_resource type="Script" uid="uid://bmjsknduokcs5" path="res://components/character/states/sprinting_state.gd" id="16_lxhmo"]
 [ext_resource type="Script" uid="uid://pd7klsrgk65n" path="res://components/character/states/airborne.gd" id="18_5gql3"]
-[ext_resource type="Script" uid="uid://dcyb1prd6bewd" path="res://components/character/states/dashing_state.gd" id="19_raigf"]
+[ext_resource type="Script" path="res://components/character/states/dashing_state.gd" id="19_raigf"]
 [ext_resource type="Script" uid="uid://64433uu4jg86" path="res://components/character/states/jumping.gd" id="20_mq1ei"]
 [ext_resource type="Script" uid="uid://drj4fdryh4j1l" path="res://components/character/states/falling.gd" id="21_ukpso"]
 [ext_resource type="Script" uid="uid://mjyk1l66mn35" path="res://components/character/states/grappling.gd" id="23_lbmrp"]
@@ -37,7 +37,7 @@
 [ext_resource type="Script" uid="uid://7knbaw4wcwth" path="res://user_interface/reticle_draw.gd" id="33_aia5n"]
 [ext_resource type="Script" uid="uid://cldxsuoxleusl" path="res://components/character/ui/debug/debug_tracker.gd" id="34_1054b"]
 [ext_resource type="PackedScene" uid="uid://dj3yekexhr2dn" path="res://components/primitives/stat/stat.tscn" id="34_gof3c"]
-[ext_resource type="Script" uid="uid://pl7ifg52f63u" path="res://components/character/health_bar.gd" id="36_ipe2n"]
+[ext_resource type="Script" path="res://components/character/health_bar.gd" id="36_ipe2n"]
 [ext_resource type="PackedScene" uid="uid://etn615pvnkve" path="res://components/primitives/health/hit_box.tscn" id="37_662td"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_bhcnq"]
@@ -81,7 +81,7 @@ player_stats = ExtResource("2_bmx6v")
 [node name="Areas" type="Node3D" parent="." unique_id=1172554725]
 
 [node name="HurtBox" parent="Areas" unique_id=1716786986 node_paths=PackedStringArray("health_component") instance=ExtResource("3_bhcnq")]
-collision_layer = 9
+collision_layer = 8
 collision_mask = 0
 health_component = NodePath("../../Stats/Health")
 
@@ -89,6 +89,8 @@ health_component = NodePath("../../Stats/Health")
 shape = SubResource("CapsuleShape3D_bhcnq")
 
 [node name="PickupRegion" type="Area3D" parent="Areas" unique_id=954226779]
+collision_layer = 0
+collision_mask = 2
 monitorable = false
 script = ExtResource("26_qrg3i")
 
@@ -479,6 +481,7 @@ transform = Transform3D(-1.5, 0, -1.3113416e-07, 0, 1.5, 0, 1.3113416e-07, 0, -1
 player = NodePath("../../..")
 
 [node name="HitBox" parent="CameraPivot" unique_id=764278289 node_paths=PackedStringArray("exclude") instance=ExtResource("37_662td")]
+collision_layer = 0
 collision_mask = 8
 exclude = [NodePath("../../Areas/HurtBox")]
 
