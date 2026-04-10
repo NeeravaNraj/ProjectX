@@ -11,7 +11,7 @@ class_name Player extends CharacterBody3D
 @onready var camera_anchor = $CameraControlAnchor
 @onready var fp_rig = $CameraPivot/Camera/FirstPersonRig
 @onready var state_chart: StateChart = %StateChart
-@onready var debug_gui = $CanvasLayer/StateChartDebugger
+@onready var debug_gui = $UI/StateChartDebugger
 @onready var shuriken_ctrl = $ShurikenCtrl
 @onready var stat_energy: Stat = $Stats/Energy
 @onready var stat_momentum: Stat = $Stats/Momentum
