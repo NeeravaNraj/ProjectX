@@ -56,11 +56,11 @@ target_desired_distance = 1.5
 shape = SubResource("CapsuleShape3D_y6ryl")
 
 [node name="MeleeEnemySkin" parent="." unique_id=1257729054 node_paths=PackedStringArray("parent_hurtbox") instance=ExtResource("3_xvm4v")]
-transform = Transform3D(-1.15, 0, 1.7364516e-07, 0, 1.15, 0, -1.7364516e-07, 0, -1.15, -0.04596758, -0.8924908, 0)
+transform = Transform3D(-1.25, 0, 1.8874475e-07, 0, 1.25, 0, -1.8874475e-07, 0, -1.25, -0.04596758, -0.8924908, 0)
 parent_hurtbox = NodePath("../Areas/HurtBox")
 
 [node name="HealthBar" parent="." unique_id=1489255575 node_paths=PackedStringArray("health_component") instance=ExtResource("5_6mpdf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0017858, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2026459, 0)
 health_component = NodePath("../Health")
 
 [node name="Areas" type="Node3D" parent="." unique_id=1538892790]
