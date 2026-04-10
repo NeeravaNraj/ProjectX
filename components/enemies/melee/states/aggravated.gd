@@ -4,7 +4,6 @@ extends MeleeEnemyState
 func _on_aggravated_state_entered() -> void:
 	if not melee_enemy or not melee_enemy.player: return
 	melee_enemy.alert.emit(melee_enemy.global_position, melee_enemy.player.global_position)
-	melee_enemy.navigation_agent.set_target_position(melee_enemy.player.global_position)
 
 
 func _on_aggravated_state_physics_processing(delta: float) -> void:
@@ -16,4 +15,5 @@ func _on_aggravated_state_physics_processing(delta: float) -> void:
 		melee_enemy.navigation_agent.set_target_position(melee_enemy.player.global_position)
 
 	melee_enemy.speed = melee_enemy.stats.move_speed
+	melee_enemy.navigation_agent.set_target_position(melee_enemy.player.global_position)
 	melee_enemy.move_towards_target()
