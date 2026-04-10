@@ -22,7 +22,7 @@
 [sub_resource type="Resource" id="Resource_goyg5"]
 script = ExtResource("2_hat2d")
 attack_range = 3.0
-vision_distance = 15.0
+vision_distance = 30.0
 metadata/_custom_type_script = "uid://bxhdwvc7scbta"
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_y6ryl"]
