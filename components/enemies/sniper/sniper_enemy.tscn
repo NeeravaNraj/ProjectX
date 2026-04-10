@@ -54,6 +54,19 @@ shape = SubResource("CapsuleShape3D_y6ryl")
 [node name="VisualMesh" type="MeshInstance3D" parent="." unique_id=267729829]
 mesh = SubResource("CapsuleMesh_hf46n")
 
+[node name="Health" type="Node" parent="." unique_id=1173554137]
+script = ExtResource("4_sqjrg")
+metadata/_custom_type_script = "uid://cmqhxkdolaasw"
+
+[node name="HealthBar" parent="." unique_id=1489255575 node_paths=PackedStringArray("health_component") instance=ExtResource("6_3dtiq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
+health_component = NodePath("../Health")
+
+[node name="AimPointer" type="Node3D" parent="." unique_id=1871972680]
+
+[node name="LaserBeam" parent="AimPointer" unique_id=1958550099 instance=ExtResource("3_gmg34")]
+visible = false
+
 [node name="HurtBox" type="Area3D" parent="." unique_id=1795298973 node_paths=PackedStringArray("health_component")]
 collision_layer = 8
 collision_mask = 0
@@ -71,19 +84,6 @@ monitorable = false
 
 [node name="PlayerDetectionShape" type="CollisionShape3D" parent="PlayerDetectionArea" unique_id=1834470356]
 shape = SubResource("SphereShape3D_hf46n")
-
-[node name="AimPointer" type="Node3D" parent="." unique_id=1871972680]
-
-[node name="LaserBeam" parent="AimPointer" unique_id=1958550099 instance=ExtResource("3_gmg34")]
-visible = false
-
-[node name="Health" type="Node" parent="." unique_id=1173554137]
-script = ExtResource("4_sqjrg")
-metadata/_custom_type_script = "uid://cmqhxkdolaasw"
-
-[node name="HealthBar" parent="." unique_id=1489255575 node_paths=PackedStringArray("health_component") instance=ExtResource("6_3dtiq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
-health_component = NodePath("../Health")
 
 [node name="StateChart" type="Node" parent="." unique_id=2028321784]
 unique_name_in_owner = true

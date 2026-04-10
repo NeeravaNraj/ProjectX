@@ -8,7 +8,6 @@ func _on_aiming_state_entered() -> void:
 	sniper_enemy.laser_beam.visible = true
 	self.aim_timer.start()
 
-
 func _on_aiming_state_physics_processing(delta: float) -> void:
 	if not sniper_enemy or not sniper_enemy.player: return
 
@@ -18,7 +17,7 @@ func _on_aiming_state_physics_processing(delta: float) -> void:
 	).basis.get_rotation_quaternion()
 
 	var new_aim = current_aim.slerp(
-		ideal_aim, delta * 10.0
+		ideal_aim, delta * 15.0
 	)
 
 	sniper_enemy.aim_pointer.global_basis = new_aim
@@ -35,10 +34,8 @@ func _on_aiming_state_physics_processing(delta: float) -> void:
 	else:
 		sniper_enemy.laser_beam.laser_length = sniper_enemy.stats.aim_range
 
-
 func _on_aim_timer_timeout() -> void:
 	sniper_enemy.state_chart.send_event(&"onShooting")
-
 
 func _on_aiming_state_exited() -> void:
 	sniper_enemy.laser_beam.visible = false
