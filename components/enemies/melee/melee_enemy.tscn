@@ -4,8 +4,8 @@
 [ext_resource type="Script" uid="uid://bx4tjgr464fxd" path="res://components/primitives/health/hurtbox.gd" id="2_bev4u"]
 [ext_resource type="Script" uid="uid://bxhdwvc7scbta" path="res://resources/character/enemy_stats.gd" id="2_hat2d"]
 [ext_resource type="Script" uid="uid://cmqhxkdolaasw" path="res://components/primitives/health/health.gd" id="3_dfup6"]
+[ext_resource type="PackedScene" uid="uid://gkw08tdyubg1" path="res://components/enemies/melee/melee_enemy_skin.tscn" id="3_xvm4v"]
 [ext_resource type="Script" uid="uid://couw105c3bde4" path="res://addons/godot_state_charts/state_chart.gd" id="4_fkggj"]
-[ext_resource type="PackedScene" uid="uid://etn615pvnkve" path="res://components/primitives/health/hit_box.tscn" id="4_goyg5"]
 [ext_resource type="PackedScene" uid="uid://n2v3i1umc6q8" path="res://components/primitives/health/health_bar.tscn" id="5_6mpdf"]
 [ext_resource type="Script" uid="uid://jk2jm1g6q853" path="res://addons/godot_state_charts/compound_state.gd" id="5_fg5ev"]
 [ext_resource type="Script" uid="uid://cytafq8i1y8qm" path="res://addons/godot_state_charts/atomic_state.gd" id="6_caay7"]
@@ -15,26 +15,23 @@
 [ext_resource type="Script" uid="uid://7xbymm0klxdq" path="res://components/enemies/melee/states/searching.gd" id="10_hat2d"]
 [ext_resource type="Script" uid="uid://cslbvlerg8thi" path="res://components/enemies/melee/states/in_combat.gd" id="11_6mpdf"]
 [ext_resource type="Script" uid="uid://bjwwy7stkqlrs" path="res://components/enemies/melee/states/aggravated.gd" id="12_8g4u5"]
+[ext_resource type="Script" uid="uid://d2mfufx767ftj" path="res://components/enemies/melee/states/returning.gd" id="12_xvm4v"]
 [ext_resource type="Script" uid="uid://wybduwehgkul" path="res://components/enemies/melee/states/attacking.gd" id="15_6mpdf"]
 [ext_resource type="PackedScene" uid="uid://dil3ijsq5pmlq" path="res://components/primitives/movement/velocity.tscn" id="16_8g4u5"]
 
 [sub_resource type="Resource" id="Resource_goyg5"]
 script = ExtResource("2_hat2d")
+attack_range = 3.0
+vision_distance = 15.0
 metadata/_custom_type_script = "uid://bxhdwvc7scbta"
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_y6ryl"]
 radius = 0.4
 height = 1.8
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_hf46n"]
-radius = 10.0
-
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_bev4u"]
 radius = 0.4
 height = 1.8
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_xvm4v"]
-size = Vector3(3, 2, 2)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hf46n"]
 albedo_color = Color(0.8473353, 0.045018718, 0.377861, 1)
@@ -53,25 +50,21 @@ script = ExtResource("1_y6ryl")
 stats = SubResource("Resource_goyg5")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=1292600841]
+target_desired_distance = 1.5
 
 [node name="PhysicsCollider" type="CollisionShape3D" parent="." unique_id=1638057920]
 shape = SubResource("CapsuleShape3D_y6ryl")
 
+[node name="MeleeEnemySkin" parent="." unique_id=1257729054 node_paths=PackedStringArray("parent_hurtbox") instance=ExtResource("3_xvm4v")]
+transform = Transform3D(-1.15, 0, 1.7364516e-07, 0, 1.15, 0, -1.7364516e-07, 0, -1.15, -0.04596758, -0.8924908, 0)
+parent_hurtbox = NodePath("../Areas/HurtBox")
+
 [node name="HealthBar" parent="." unique_id=1489255575 node_paths=PackedStringArray("health_component") instance=ExtResource("5_6mpdf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0017858, 0)
 health_component = NodePath("../Health")
 
 [node name="Areas" type="Node3D" parent="." unique_id=1538892790]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
-
-[node name="PlayerDetectionArea" type="Area3D" parent="Areas" unique_id=1815554461]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.2, 0)
-collision_layer = 0
-collision_mask = 4
-monitorable = false
-
-[node name="PlayerDetectionShape" type="CollisionShape3D" parent="Areas/PlayerDetectionArea" unique_id=1834470356]
-shape = SubResource("SphereShape3D_hf46n")
 
 [node name="HurtBox" type="Area3D" parent="Areas" unique_id=1795298973 node_paths=PackedStringArray("health_component")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.2, 0)
@@ -84,15 +77,8 @@ metadata/_custom_type_script = "uid://bx4tjgr464fxd"
 [node name="HurtboxCollider" type="CollisionShape3D" parent="Areas/HurtBox" unique_id=47547571]
 shape = SubResource("CapsuleShape3D_bev4u")
 
-[node name="HitBox" parent="Areas" unique_id=764278289 instance=ExtResource("4_goyg5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, -1)
-collision_mask = 9
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Areas/HitBox" unique_id=1546201437]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -0.5)
-shape = SubResource("BoxShape3D_xvm4v")
-
 [node name="VisualModel" type="Node3D" parent="." unique_id=638425967]
+visible = false
 
 [node name="VisualMesh" type="MeshInstance3D" parent="VisualModel" unique_id=267729829]
 mesh = SubResource("CapsuleMesh_hf46n")
@@ -117,9 +103,20 @@ metadata/_custom_type_script = "uid://jk2jm1g6q853"
 script = ExtResource("6_caay7")
 metadata/_custom_type_script = "uid://cytafq8i1y8qm"
 
+[node name="Returning" type="Node" parent="States/StateChart/Root" unique_id=2022009933]
+script = ExtResource("6_caay7")
+metadata/_custom_type_script = "uid://cytafq8i1y8qm"
+
 [node name="Searching" type="Node" parent="States/StateChart/Root" unique_id=1820443932]
 script = ExtResource("6_caay7")
 metadata/_custom_type_script = "uid://cytafq8i1y8qm"
+
+[node name="OnReturning" type="Node" parent="States/StateChart/Root" unique_id=1032949310]
+script = ExtResource("7_kp2sm")
+to = NodePath("../Returning")
+event = &"onReturning"
+delay_in_seconds = "0.0"
+metadata/_custom_type_script = "uid://cf1nsco3w0mf6"
 
 [node name="OnAggravated" type="Node" parent="States/StateChart/Root" unique_id=1127020799]
 script = ExtResource("7_kp2sm")
@@ -177,11 +174,18 @@ melee_enemy = NodePath("../..")
 [node name="Idle" type="Node" parent="States/StateActors" unique_id=1950895088]
 script = ExtResource("9_hf46n")
 
+[node name="Returning" type="Node" parent="States/StateActors" unique_id=1846992083]
+script = ExtResource("12_xvm4v")
+
 [node name="Searching" type="Node" parent="States/StateActors" unique_id=544935906]
 script = ExtResource("10_hat2d")
 
 [node name="SearchTimer" type="Timer" parent="States/StateActors/Searching" unique_id=936735279]
 wait_time = 5.0
+one_shot = true
+
+[node name="SearchAnimTimer" type="Timer" parent="States/StateActors/Searching" unique_id=338630892]
+wait_time = 0.75
 one_shot = true
 
 [node name="InCombat" type="Node" parent="States/StateActors" unique_id=1683166852]
@@ -194,7 +198,7 @@ script = ExtResource("12_8g4u5")
 script = ExtResource("15_6mpdf")
 
 [node name="AttackTimer" type="Timer" parent="States/StateActors/InCombat/Attacking" unique_id=1511223307]
-wait_time = 0.5
+wait_time = 1.1
 one_shot = true
 
 [node name="Health" type="Node" parent="." unique_id=1173554137]
@@ -203,13 +207,18 @@ metadata/_custom_type_script = "uid://cmqhxkdolaasw"
 
 [node name="VelocityComponent" parent="." unique_id=1034921754 instance=ExtResource("16_8g4u5")]
 
+[connection signal="attack_finished" from="MeleeEnemySkin" to="States/StateActors/InCombat/Attacking" method="_on_melee_enemy_skin_attack_finished"]
 [connection signal="state_physics_processing" from="States/StateChart/Root/Idle" to="States/StateActors/Idle" method="_on_idle_state_physics_processing"]
+[connection signal="state_entered" from="States/StateChart/Root/Returning" to="States/StateActors/Returning" method="_on_returning_state_entered"]
+[connection signal="state_exited" from="States/StateChart/Root/Returning" to="States/StateActors/Returning" method="_on_returning_state_exited"]
+[connection signal="state_physics_processing" from="States/StateChart/Root/Returning" to="States/StateActors/Returning" method="_on_returning_state_physics_processing"]
 [connection signal="state_entered" from="States/StateChart/Root/Searching" to="States/StateActors/Searching" method="_on_searching_state_entered"]
 [connection signal="state_exited" from="States/StateChart/Root/Searching" to="States/StateActors/Searching" method="_on_searching_state_exited"]
 [connection signal="state_physics_processing" from="States/StateChart/Root/Searching" to="States/StateActors/Searching" method="_on_searching_state_physics_processing"]
 [connection signal="state_physics_processing" from="States/StateChart/Root/InCombat" to="States/StateActors/InCombat" method="_on_in_combat_state_physics_processing"]
 [connection signal="state_entered" from="States/StateChart/Root/InCombat/Aggravated" to="States/StateActors/InCombat/Aggravated" method="_on_aggravated_state_entered"]
 [connection signal="state_physics_processing" from="States/StateChart/Root/InCombat/Aggravated" to="States/StateActors/InCombat/Aggravated" method="_on_aggravated_state_physics_processing"]
+[connection signal="state_entered" from="States/StateChart/Root/InCombat/Attacking" to="States/StateActors/InCombat/Attacking" method="_on_attacking_state_entered"]
 [connection signal="state_physics_processing" from="States/StateChart/Root/InCombat/Attacking" to="States/StateActors/InCombat/Attacking" method="_on_attacking_state_physics_processing"]
 [connection signal="timeout" from="States/StateActors/Searching/SearchTimer" to="States/StateActors/Searching" method="_on_search_timer_timeout"]
 [connection signal="death" from="Health" to="." method="_on_health_death"]
