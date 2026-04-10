@@ -12,7 +12,6 @@ signal damaged(amount: int)
 signal death()
 
 func heal(amount: int):
-	assert(amount > 0)
 	if _is_dead(): return
 
 	var old_health = health
@@ -22,7 +21,6 @@ func heal(amount: int):
 	changed.emit(health)
 
 func damage(amount: int):
-	assert(amount > 0)
 	if _is_dead(): return
 
 	if (health - amount) <= 0:
