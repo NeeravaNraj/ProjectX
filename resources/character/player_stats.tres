@@ -4,3 +4,5 @@
 
 [resource]
 script = ExtResource("1_2pmee")
+move_speed = 10.0
+wall_run_jump_velocity = 10.0
