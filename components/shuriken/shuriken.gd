@@ -13,6 +13,7 @@ var attached_location = Vector3.ZERO
 var direction = Vector3.ZERO
 
 signal shuriken_hit(location: Vector3)
+signal shuriken_despawn()
 
 func throw(p_direction: Vector3):
 	direction = p_direction
@@ -26,8 +27,13 @@ func illuminate(angle: float):
 	else:
 		tween.tween_property(grapple_sprite, "modulate", Color(1, 1, 1), 0.3)
 
+func _ready() -> void:
+	set_physics_process(false)
+
 func _physics_process(_delta: float) -> void:
-	if attached_to == null: return
+	if attached_to == null:
+		_despawn(); return
+	
 	global_position = attached_to.to_global(attached_location)
 	body.global_position = attached_to.to_global(attached_location)
 	grapple_sprite.global_position = attached_to.to_global(attached_location)
@@ -41,6 +47,9 @@ func _stop():
 
 func _on_body_entered(p_body: Node3D) -> void:
 	_stop()
+	body.collision_layer = Utils.get_collition_layer_by_name(&"interactable")
+	body.collision_mask = 0
+	
 	if p_body.is_in_group(&"enemy"):
 		attached_to = p_body
 		attached_location = p_body.to_local(body.global_position)
@@ -51,7 +60,15 @@ func _on_body_entered(p_body: Node3D) -> void:
 
 		body.add_to_group(&"grapple_points")
 		shuriken_hit.emit(p_body.global_position)
-
+		set_physics_process(true)
 
 func _on_despawn_timer_timeout() -> void:
+	_despawn()
+
+func _despawn():
+	grapple_sprite.visible = false
+	attached_to = null
+	set_physics_process(false)
+	shuriken_despawn.emit()
+	despawn_timer.stop()
 	queue_free()

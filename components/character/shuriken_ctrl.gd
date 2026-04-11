@@ -33,6 +33,9 @@ func throw_shuriken():
 	if not shuriken.shuriken_hit.is_connected(_on_shuriken_hit):
 		shuriken.shuriken_hit.connect(_on_shuriken_hit)
 	
+	if not shuriken.shuriken_despawn.is_connected(_on_shuriken_despawn):
+		shuriken.shuriken_despawn.connect(_on_shuriken_despawn)
+	
 	shuriken.visible = true
 	shuriken.top_level = true
 	shuriken.transform.origin = shuriken_spawn.global_position
@@ -64,3 +67,7 @@ func _get_height_adjusted_location():
 
 func _on_shuriken_hit(location: Vector3):
 	grapple_location = location
+
+func _on_shuriken_despawn():
+	grapple_location = null
+	current_shuriken = null
