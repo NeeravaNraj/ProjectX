@@ -48,6 +48,18 @@ func lookat_player():
 	if not player: return
 	lookat(player.global_position - global_position)
 
+func can_see_player():
+	if not player or get_player_distance() > get_vistion_radius(): return
+	var space_state = get_world_3d().direct_space_state
+	var query = PhysicsRayQueryParameters3D.create(
+		global_position,
+		player.global_position
+	)
+	var result = space_state.intersect_ray(query)
+	var collider = result.get(&"collider") as Player
+	
+	return collider
+
 func _on_health_damaged(amount: int) -> void:
 	print("Enemy DAMAGED ", amount)
 

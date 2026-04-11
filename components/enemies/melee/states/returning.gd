@@ -12,7 +12,7 @@ func _on_returning_state_entered() -> void:
 func _on_returning_state_physics_processing(_delta: float) -> void:
 	if not melee_enemy: return
 	
-	if melee_enemy.get_player_distance() < melee_enemy.get_vistion_radius():
+	if melee_enemy.can_see_player():
 		melee_enemy.state_chart.send_event(&"onAggravated")
 	
 	if melee_enemy.navigation_agent.is_navigation_finished():
