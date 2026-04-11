@@ -34,7 +34,6 @@ func _on_aiming_state_physics_processing(delta: float) -> void:
 		sniper_enemy.laser_beam.laser_length = sniper_enemy.stats.aim_range
 
 func _on_aim_timer_timeout() -> void:
-	return
 	sniper_enemy.state_chart.send_event(&"onShooting")
 
 func _on_aiming_state_exited() -> void:
