@@ -1,0 +1,261 @@
+[gd_resource type="BehaviorTree" format=3 uid="uid://dqm151dc23ud5"]
+
+[ext_resource type="Script" uid="uid://2elfftqoyiv5" path="res://ai/tasks/enemy/player_visible.gd" id="1_mlqlw"]
+[ext_resource type="Script" uid="uid://dbes8u32sy5l3" path="res://ai/tasks/enemy/can_attack_player.gd" id="2_pitpp"]
+[ext_resource type="Script" uid="uid://cb7p0ll2vs4wy" path="res://ai/tasks/utils/load_from_agent.gd" id="2_uji1f"]
+[ext_resource type="Script" uid="uid://isx8qm6jjo5h" path="res://ai/tasks/enemy/move_towards.gd" id="4_pitpp"]
+[ext_resource type="Script" uid="uid://clxne7nqjnhw4" path="res://ai/tasks/enemy/face_target.gd" id="5_plt0x"]
+[ext_resource type="Script" uid="uid://c168sueve0lho" path="res://ai/tasks/enemy/perform_attack.gd" id="6_6mf22"]
+[ext_resource type="Script" uid="uid://2bleciyvkc5g" path="res://ai/tasks/utils/copy_value.gd" id="7_6mf22"]
+[ext_resource type="Script" uid="uid://qrnlt6pu6rip" path="res://ai/tasks/enemy/face_movement_direction.gd" id="8_6mf22"]
+
+[sub_resource type="BlackboardPlan" id="BlackboardPlan_78w4u"]
+var/returning/name = &"returning"
+var/returning/type = 1
+var/returning/value = false
+var/returning/hint = 0
+var/returning/hint_string = ""
+var/spawn_position/name = &"spawn_position"
+var/spawn_position/type = 9
+var/spawn_position/value = Vector3(0, 0, 0)
+var/spawn_position/hint = 0
+var/spawn_position/hint_string = ""
+var/target_position/name = &"target_position"
+var/target_position/type = 0
+var/target_position/value = null
+var/target_position/hint = 0
+var/target_position/hint_string = ""
+var/was_in_combat/name = &"was_in_combat"
+var/was_in_combat/type = 1
+var/was_in_combat/value = false
+var/was_in_combat/hint = 0
+var/was_in_combat/hint_string = ""
+
+[sub_resource type="BTAction" id="BTAction_plt0x"]
+script = ExtResource("2_uji1f")
+property_path = "spawn_transform:origin"
+target_var_name = &"spawn_position"
+
+[sub_resource type="BTSequence" id="BTSequence_msyu5"]
+children = [SubResource("BTAction_plt0x")]
+
+[sub_resource type="BTRunLimit" id="BTRunLimit_yxqml"]
+custom_name = "Init"
+children = [SubResource("BTSequence_msyu5")]
+
+[sub_resource type="BTCondition" id="BTCondition_g0v2d"]
+script = ExtResource("1_mlqlw")
+
+[sub_resource type="BTCondition" id="BTCondition_ok5bf"]
+script = ExtResource("2_pitpp")
+invert = true
+
+[sub_resource type="BBVariant" id="BBVariant_plt0x"]
+type = 1
+saved_value = true
+resource_name = "true"
+
+[sub_resource type="BTSetVar" id="BTSetVar_6mf22"]
+variable = &"was_in_combat"
+value = SubResource("BBVariant_plt0x")
+
+[sub_resource type="BTAction" id="BTAction_pitpp"]
+script = ExtResource("2_uji1f")
+property_path = "player:global_position"
+target_var_name = &"target_position"
+load_on_tick = true
+
+[sub_resource type="BTAction" id="BTAction_8my52"]
+script = ExtResource("2_uji1f")
+property_path = "stats:move_speed"
+target_var_name = &"move_speed"
+
+[sub_resource type="BBNode" id="BBNode_8my52"]
+saved_value = NodePath("MeleeEnemySkin/AnimationPlayer")
+resource_name = "MeleeEnemySkin/AnimationPlayer"
+
+[sub_resource type="BTPlayAnimation" id="BTPlayAnimation_qcf87"]
+animation_player = SubResource("BBNode_8my52")
+animation_name = &"Running"
+blend = 0.3
+
+[sub_resource type="BTAction" id="BTAction_6mf22"]
+script = ExtResource("4_pitpp")
+
+[sub_resource type="BTDecorator" id="BTDecorator_msyu5"]
+children = [SubResource("BTAction_6mf22")]
+script = ExtResource("8_6mf22")
+
+[sub_resource type="BTDynamicSequence" id="BTDynamicSequence_qcf87"]
+custom_name = "Aggravated"
+children = [SubResource("BTCondition_g0v2d"), SubResource("BTCondition_ok5bf"), SubResource("BTSetVar_6mf22"), SubResource("BTAction_pitpp"), SubResource("BTAction_8my52"), SubResource("BTPlayAnimation_qcf87"), SubResource("BTDecorator_msyu5")]
+
+[sub_resource type="BTCondition" id="BTCondition_pjtjv"]
+script = ExtResource("2_pitpp")
+
+[sub_resource type="BBVariant" id="BBVariant_msyu5"]
+type = 1
+saved_value = true
+resource_name = "true"
+
+[sub_resource type="BTSetVar" id="BTSetVar_yxqml"]
+variable = &"was_in_combat"
+value = SubResource("BBVariant_msyu5")
+
+[sub_resource type="BBNode" id="BBNode_pitpp"]
+saved_value = NodePath("MeleeEnemySkin/AnimationPlayer")
+resource_name = "MeleeEnemySkin/AnimationPlayer"
+
+[sub_resource type="BTPlayAnimation" id="BTPlayAnimation_plt0x"]
+animation_player = SubResource("BBNode_pitpp")
+animation_name = &"Idle"
+blend = 0.2
+
+[sub_resource type="BTAction" id="BTAction_yxqml"]
+script = ExtResource("6_6mf22")
+
+[sub_resource type="BTDecorator" id="BTDecorator_yxqml"]
+children = [SubResource("BTAction_yxqml")]
+script = ExtResource("5_plt0x")
+
+[sub_resource type="BBNode" id="BBNode_msyu5"]
+saved_value = NodePath("MeleeEnemySkin/AnimationPlayer")
+resource_name = "MeleeEnemySkin/AnimationPlayer"
+
+[sub_resource type="BTPlayAnimation" id="BTPlayAnimation_yxqml"]
+await_completion = 1.0
+animation_player = SubResource("BBNode_msyu5")
+animation_name = &"Attack"
+blend = 0.3
+speed = 2.3
+
+[sub_resource type="BTSequence" id="BTSequence_8my52"]
+children = [SubResource("BTDecorator_yxqml"), SubResource("BTPlayAnimation_yxqml")]
+
+[sub_resource type="BTCooldown" id="BTCooldown_78w4u"]
+duration = 0.5
+children = [SubResource("BTSequence_8my52")]
+
+[sub_resource type="BTSequence" id="BTSequence_qcf87"]
+custom_name = "Attack"
+children = [SubResource("BTCondition_pjtjv"), SubResource("BTSetVar_yxqml"), SubResource("BTPlayAnimation_plt0x"), SubResource("BTCooldown_78w4u")]
+
+[sub_resource type="BTSelector" id="BTSelector_78w4u"]
+custom_name = "InCombat"
+children = [SubResource("BTDynamicSequence_qcf87"), SubResource("BTSequence_qcf87")]
+
+[sub_resource type="BTCheckTrigger" id="BTCheckTrigger_6mf22"]
+variable = &"was_in_combat"
+
+[sub_resource type="BTAction" id="BTAction_g0v2d"]
+script = ExtResource("4_pitpp")
+
+[sub_resource type="BTDecorator" id="BTDecorator_6mf22"]
+children = [SubResource("BTAction_g0v2d")]
+script = ExtResource("8_6mf22")
+
+[sub_resource type="BTCondition" id="BTCondition_amfuw"]
+script = ExtResource("1_mlqlw")
+invert = true
+
+[sub_resource type="BBNode" id="BBNode_3ke87"]
+saved_value = NodePath("MeleeEnemySkin/AnimationPlayer")
+resource_name = "MeleeEnemySkin/AnimationPlayer"
+
+[sub_resource type="BTPlayAnimation" id="BTPlayAnimation_qtgg3"]
+await_completion = 2.0
+animation_player = SubResource("BBNode_3ke87")
+animation_name = &"Searching"
+blend = 0.3
+
+[sub_resource type="BTRandomWait" id="BTRandomWait_u81in"]
+min_duration = 0.5
+max_duration = 1.0
+
+[sub_resource type="BTSequence" id="BTSequence_mlqlw"]
+children = [SubResource("BTCondition_amfuw"), SubResource("BTPlayAnimation_qtgg3"), SubResource("BTRandomWait_u81in")]
+
+[sub_resource type="BTRepeat" id="BTRepeat_11n5j"]
+abort_on_failure = true
+children = [SubResource("BTSequence_mlqlw")]
+
+[sub_resource type="BBVariant" id="BBVariant_mlqlw"]
+type = 1
+saved_value = true
+resource_name = "true"
+
+[sub_resource type="BTSetVar" id="BTSetVar_pitpp"]
+variable = &"returning"
+value = SubResource("BBVariant_mlqlw")
+
+[sub_resource type="BTSequence" id="BTSequence_uji1f"]
+custom_name = "Searching"
+children = [SubResource("BTCheckTrigger_6mf22"), SubResource("BTDecorator_6mf22"), SubResource("BTRepeat_11n5j"), SubResource("BTSetVar_pitpp")]
+
+[sub_resource type="BBVariant" id="BBVariant_pitpp"]
+type = 1
+saved_value = true
+resource_name = "true"
+
+[sub_resource type="BTCheckVar" id="BTCheckVar_plt0x"]
+variable = &"returning"
+value = SubResource("BBVariant_pitpp")
+
+[sub_resource type="BBVariant" id="BBVariant_6mf22"]
+type = 1
+saved_value = false
+resource_name = "false"
+
+[sub_resource type="BTSetVar" id="BTSetVar_msyu5"]
+variable = &"returning"
+value = SubResource("BBVariant_6mf22")
+
+[sub_resource type="BTAction" id="BTAction_ok5bf"]
+script = ExtResource("7_6mf22")
+source = &"spawn_position"
+target = &"target_position"
+
+[sub_resource type="BTAction" id="BTAction_pjtjv"]
+script = ExtResource("2_uji1f")
+property_path = "stats:search_speed"
+target_var_name = &"move_speed"
+
+[sub_resource type="BBNode" id="BBNode_amfuw"]
+saved_value = NodePath("MeleeEnemySkin/AnimationPlayer")
+resource_name = "MeleeEnemySkin/AnimationPlayer"
+
+[sub_resource type="BTPlayAnimation" id="BTPlayAnimation_3ke87"]
+animation_player = SubResource("BBNode_amfuw")
+animation_name = &"Running"
+blend = 0.3
+
+[sub_resource type="BTAction" id="BTAction_3ke87"]
+script = ExtResource("4_pitpp")
+
+[sub_resource type="BTDecorator" id="BTDecorator_g0v2d"]
+children = [SubResource("BTAction_3ke87")]
+script = ExtResource("8_6mf22")
+
+[sub_resource type="BTSequence" id="BTSequence_6mf22"]
+custom_name = "Returning"
+children = [SubResource("BTCheckVar_plt0x"), SubResource("BTSetVar_msyu5"), SubResource("BTAction_ok5bf"), SubResource("BTAction_pjtjv"), SubResource("BTPlayAnimation_3ke87"), SubResource("BTDecorator_g0v2d")]
+
+[sub_resource type="BBNode" id="BBNode_0ir6r"]
+saved_value = NodePath("MeleeEnemySkin/AnimationPlayer")
+resource_name = "MeleeEnemySkin/AnimationPlayer"
+
+[sub_resource type="BTPlayAnimation" id="BTPlayAnimation_8my52"]
+animation_player = SubResource("BBNode_0ir6r")
+animation_name = &"Idle"
+blend = 0.3
+
+[sub_resource type="BTSequence" id="BTSequence_78w4u"]
+custom_name = "Idle"
+children = [SubResource("BTPlayAnimation_8my52")]
+
+[sub_resource type="BTSelector" id="BTSelector_0ir6r"]
+children = [SubResource("BTRunLimit_yxqml"), SubResource("BTSelector_78w4u"), SubResource("BTSequence_uji1f"), SubResource("BTSequence_6mf22"), SubResource("BTSequence_78w4u")]
+
+[resource]
+blackboard_plan = SubResource("BlackboardPlan_78w4u")
+root_task = SubResource("BTSelector_0ir6r")
