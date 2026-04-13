@@ -32,7 +32,14 @@ func sprint():
 	_velocity.set_speed(player_stats.move_speed)
 
 func dash():
-	_velocity.add_impuse_in_move_direction(player_stats.move_speed_dash)
+	var raw_direction = _velocity.raw_direction
+	var direction = transform.basis * Vector3(raw_direction.x, 0.0, raw_direction.y)
+	
+	if is_on_floor():
+		var floor_normal = get_floor_normal()
+		direction = direction.slide(floor_normal).normalized()
+	
+	_velocity.set_velocity(direction * player_stats.move_speed_dash)
 
 func jump():
 	_velocity.add_impulse(Vector3.UP, player_stats.jump_velocity)
@@ -84,6 +91,10 @@ func _unhandled_input(event: InputEvent) -> void:
 	
 	if event.is_action_pressed(&"left_click"):
 		weaponry.attack()
+	
+	if event.is_action_pressed(&"dash"):
+		dash()
+		state_chart.send_event(&"onDashing")
 
 func _try_grapple():
 	var override_max = 50

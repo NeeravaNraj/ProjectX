@@ -6,7 +6,7 @@ class_name PlayerStats extends Resource
 @export var move_speed: float = 12.0:
 	get:
 		return move_speed + move_speed_modifier
-@export var move_speed_dash: float = 65.0
+@export var move_speed_dash: float = 35.0
 
 @export var jump_velocity_modifier: float = 0.0
 @export var jump_velocity: float = 12.0:

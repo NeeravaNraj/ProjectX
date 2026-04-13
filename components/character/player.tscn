@@ -23,7 +23,7 @@
 [ext_resource type="Script" uid="uid://bupolwf85pte3" path="res://components/character/states/moving_state.gd" id="14_2ve8e"]
 [ext_resource type="Script" uid="uid://bmjsknduokcs5" path="res://components/character/states/sprinting_state.gd" id="16_lxhmo"]
 [ext_resource type="Script" uid="uid://pd7klsrgk65n" path="res://components/character/states/airborne.gd" id="18_5gql3"]
-[ext_resource type="Script" path="res://components/character/states/dashing_state.gd" id="19_raigf"]
+[ext_resource type="Script" uid="uid://dcyb1prd6bewd" path="res://components/character/states/dashing_state.gd" id="19_raigf"]
 [ext_resource type="Script" uid="uid://64433uu4jg86" path="res://components/character/states/jumping.gd" id="20_mq1ei"]
 [ext_resource type="Script" uid="uid://drj4fdryh4j1l" path="res://components/character/states/falling.gd" id="21_ukpso"]
 [ext_resource type="Script" uid="uid://mjyk1l66mn35" path="res://components/character/states/grappling.gd" id="23_lbmrp"]
@@ -75,6 +75,7 @@ height = 1.9
 [node name="Player" type="CharacterBody3D" unique_id=1186516781 groups=["player"]]
 collision_layer = 4
 collision_mask = 5
+floor_stop_on_slope = false
 script = ExtResource("1_knl4b")
 player_stats = ExtResource("2_bmx6v")
 
@@ -140,10 +141,41 @@ metadata/_custom_type_script = "uid://couw105c3bde4"
 script = ExtResource("7_qb6gd")
 metadata/_custom_type_script = "uid://c1vp0ojjvaby1"
 
+[node name="Skills" type="Node" parent="States/StateChart/Root" unique_id=279262240]
+script = ExtResource("8_mk48o")
+initial_state = NodePath("Normal")
+metadata/_custom_type_script = "uid://jk2jm1g6q853"
+
+[node name="Normal" type="Node" parent="States/StateChart/Root/Skills" unique_id=237229586]
+script = ExtResource("9_mfj52")
+metadata/_custom_type_script = "uid://cytafq8i1y8qm"
+
+[node name="Dashing" type="Node" parent="States/StateChart/Root/Skills" unique_id=870877239]
+script = ExtResource("9_mfj52")
+metadata/_custom_type_script = "uid://cytafq8i1y8qm"
+
+[node name="WallRunning" type="Node" parent="States/StateChart/Root/Skills" unique_id=1734688554]
+script = ExtResource("9_mfj52")
+metadata/_custom_type_script = "uid://cytafq8i1y8qm"
+
+[node name="OnNormal" type="Node" parent="States/StateChart/Root/Skills" unique_id=1669389897]
+script = ExtResource("10_2ve8e")
+to = NodePath("../Normal")
+event = &"onNormal"
+delay_in_seconds = "0.0"
+metadata/_custom_type_script = "uid://cf1nsco3w0mf6"
+
 [node name="Movement" type="Node" parent="States/StateChart/Root" unique_id=241863195]
 script = ExtResource("8_mk48o")
 initial_state = NodePath("Grounded")
 metadata/_custom_type_script = "uid://jk2jm1g6q853"
+
+[node name="OnDashing" type="Node" parent="States/StateChart/Root/Movement" unique_id=2089068834]
+script = ExtResource("10_2ve8e")
+to = NodePath("../../Skills/Dashing")
+event = &"onDashing"
+delay_in_seconds = "0.0"
+metadata/_custom_type_script = "uid://cf1nsco3w0mf6"
 
 [node name="Grounded" type="Node" parent="States/StateChart/Root/Movement" unique_id=2072027960]
 script = ExtResource("8_mk48o")
@@ -178,13 +210,6 @@ event = &"onMoving"
 delay_in_seconds = "0.0"
 metadata/_custom_type_script = "uid://cf1nsco3w0mf6"
 
-[node name="OnDashing" type="Node" parent="States/StateChart/Root/Movement/Grounded" unique_id=2089068834]
-script = ExtResource("10_2ve8e")
-to = NodePath("../Moving/Dashing")
-event = &"onDashing"
-delay_in_seconds = "0.0"
-metadata/_custom_type_script = "uid://cf1nsco3w0mf6"
-
 [node name="Idle" type="Node" parent="States/StateChart/Root/Movement/Grounded" unique_id=98389378]
 script = ExtResource("9_mfj52")
 metadata/_custom_type_script = "uid://cytafq8i1y8qm"
@@ -195,10 +220,6 @@ initial_state = NodePath("Sprinting")
 metadata/_custom_type_script = "uid://jk2jm1g6q853"
 
 [node name="Sprinting" type="Node" parent="States/StateChart/Root/Movement/Grounded/Moving" unique_id=767903468]
-script = ExtResource("9_mfj52")
-metadata/_custom_type_script = "uid://cytafq8i1y8qm"
-
-[node name="Dashing" type="Node" parent="States/StateChart/Root/Movement/Grounded/Moving" unique_id=870877239]
 script = ExtResource("9_mfj52")
 metadata/_custom_type_script = "uid://cytafq8i1y8qm"
 
@@ -249,7 +270,7 @@ metadata/_custom_type_script = "uid://cf1nsco3w0mf6"
 
 [node name="OnWallrun" type="Node" parent="States/StateChart/Root/Movement/Airborne" unique_id=615899812]
 script = ExtResource("10_2ve8e")
-to = NodePath("../../Skills/WallRunning")
+to = NodePath("../../../Skills/WallRunning")
 event = &"onWallrun"
 delay_in_seconds = "0.0"
 metadata/_custom_type_script = "uid://cf1nsco3w0mf6"
@@ -258,22 +279,6 @@ metadata/_custom_type_script = "uid://cf1nsco3w0mf6"
 script = ExtResource("10_2ve8e")
 to = NodePath("../Grappling")
 event = &"onGrapple"
-delay_in_seconds = "0.0"
-metadata/_custom_type_script = "uid://cf1nsco3w0mf6"
-
-[node name="Skills" type="Node" parent="States/StateChart/Root/Movement" unique_id=279262240]
-script = ExtResource("8_mk48o")
-initial_state = NodePath("WallRunning")
-metadata/_custom_type_script = "uid://jk2jm1g6q853"
-
-[node name="WallRunning" type="Node" parent="States/StateChart/Root/Movement/Skills" unique_id=1734688554]
-script = ExtResource("9_mfj52")
-metadata/_custom_type_script = "uid://cytafq8i1y8qm"
-
-[node name="OnFalling" type="Node" parent="States/StateChart/Root/Movement/Skills" unique_id=1716746775]
-script = ExtResource("10_2ve8e")
-to = NodePath("../../Airborne/Falling")
-event = &"onFalling"
 delay_in_seconds = "0.0"
 metadata/_custom_type_script = "uid://cf1nsco3w0mf6"
 
@@ -327,9 +332,6 @@ script = ExtResource("14_2ve8e")
 [node name="SprintingState" type="Node" parent="States/StateActors/MovementState/GroundedState/MovingState" unique_id=1712382834]
 script = ExtResource("16_lxhmo")
 
-[node name="DashingState" type="Node" parent="States/StateActors/MovementState/GroundedState/MovingState" unique_id=1949617684]
-script = ExtResource("19_raigf")
-
 [node name="AirborneState" type="Node" parent="States/StateActors/MovementState" unique_id=1718041435]
 script = ExtResource("18_5gql3")
 
@@ -349,6 +351,13 @@ script = ExtResource("21_ukpso")
 
 [node name="Skills" type="Node" parent="States/StateActors/MovementState" unique_id=1762934945]
 
+[node name="DashingState" type="Node" parent="States/StateActors/MovementState/Skills" unique_id=1949617684]
+script = ExtResource("19_raigf")
+
+[node name="DashTimer" type="Timer" parent="States/StateActors/MovementState/Skills/DashingState" unique_id=1033789591]
+wait_time = 0.4
+one_shot = true
+
 [node name="WallRun" type="Node" parent="States/StateActors/MovementState/Skills" unique_id=1708548886]
 script = ExtResource("25_gof3c")
 
@@ -362,7 +371,6 @@ script = ExtResource("27_vgukn")
 layer = 2
 
 [node name="StateChartDebugger" parent="UI" unique_id=874067376 instance=ExtResource("2_mk48o")]
-visible = false
 anchors_preset = 0
 anchor_right = 0.0
 anchor_bottom = 0.0
@@ -516,6 +524,13 @@ shape = SubResource("CapsuleShape3D_knl4b")
 [connection signal="changed" from="Stats/Health" to="UI/HUD/BottomHalf/HealthBar" method="_on_health_changed"]
 [connection signal="death" from="Stats/Health" to="." method="_on_health_death"]
 [connection signal="reached_min" from="Stats/Momentum" to="." method="_on_momentum_reached_min"]
+[connection signal="state_entered" from="States/StateChart/Root/Skills/Dashing" to="States/StateActors/MovementState/Skills/DashingState" method="_on_dashing_state_entered"]
+[connection signal="state_exited" from="States/StateChart/Root/Skills/Dashing" to="States/StateActors/MovementState/Skills/DashingState" method="_on_dashing_state_exited"]
+[connection signal="state_physics_processing" from="States/StateChart/Root/Skills/Dashing" to="States/StateActors/MovementState/Skills/DashingState" method="_on_dashing_state_physics_processing"]
+[connection signal="state_entered" from="States/StateChart/Root/Skills/WallRunning" to="States/StateActors/MovementState/Skills/WallRun" method="_on_wall_running_state_entered"]
+[connection signal="state_exited" from="States/StateChart/Root/Skills/WallRunning" to="States/StateActors/MovementState/Skills/WallRun" method="_on_wall_running_state_exited"]
+[connection signal="state_physics_processing" from="States/StateChart/Root/Skills/WallRunning" to="States/StateActors/MovementState/Skills/WallRun" method="_on_wall_running_state_physics_processing"]
+[connection signal="state_unhandled_input" from="States/StateChart/Root/Skills/WallRunning" to="States/StateActors/MovementState/Skills/WallRun" method="_on_wall_running_state_unhandled_input"]
 [connection signal="child_state_entered" from="States/StateChart/Root/Movement/Grounded" to="States/StateActors/MovementState/GroundedState" method="_on_grounded_child_state_entered"]
 [connection signal="state_physics_processing" from="States/StateChart/Root/Movement/Grounded" to="States/StateActors/MovementState/GroundedState" method="_on_grounded_state_physics_processing"]
 [connection signal="state_unhandled_input" from="States/StateChart/Root/Movement/Grounded" to="States/StateActors/MovementState/GroundedState" method="_on_grounded_state_unhandled_input"]
@@ -527,21 +542,17 @@ shape = SubResource("CapsuleShape3D_knl4b")
 [connection signal="state_unhandled_input" from="States/StateChart/Root/Movement/Grounded/Moving" to="States/StateActors/MovementState/GroundedState/MovingState" method="_on_moving_state_unhandled_input"]
 [connection signal="state_entered" from="States/StateChart/Root/Movement/Grounded/Moving/Sprinting" to="States/StateActors/MovementState/GroundedState/MovingState/SprintingState" method="_on_sprinting_state_entered"]
 [connection signal="state_physics_processing" from="States/StateChart/Root/Movement/Grounded/Moving/Sprinting" to="States/StateActors/MovementState/GroundedState/MovingState/SprintingState" method="_on_sprinting_state_physics_processing"]
-[connection signal="state_entered" from="States/StateChart/Root/Movement/Grounded/Moving/Dashing" to="States/StateActors/MovementState/GroundedState/MovingState/DashingState" method="_on_dashing_state_entered"]
 [connection signal="state_physics_processing" from="States/StateChart/Root/Movement/Airborne" to="States/StateActors/MovementState/AirborneState" method="_on_airborne_state_physics_processing"]
 [connection signal="state_entered" from="States/StateChart/Root/Movement/Airborne/Falling" to="States/StateActors/MovementState/AirborneState/Falling" method="_on_falling_state_entered"]
 [connection signal="state_entered" from="States/StateChart/Root/Movement/Airborne/Jumping" to="States/StateActors/MovementState/AirborneState/Jumping" method="_on_jumping_state_entered"]
 [connection signal="state_exited" from="States/StateChart/Root/Movement/Airborne/Jumping" to="States/StateActors/MovementState/AirborneState/Jumping" method="_on_jumping_state_exited"]
 [connection signal="state_entered" from="States/StateChart/Root/Movement/Airborne/Grappling" to="States/StateActors/MovementState/AirborneState/Grappling" method="_on_grappling_state_entered"]
 [connection signal="state_exited" from="States/StateChart/Root/Movement/Airborne/Grappling" to="States/StateActors/MovementState/AirborneState/Grappling" method="_on_grappling_state_exited"]
-[connection signal="state_entered" from="States/StateChart/Root/Movement/Skills/WallRunning" to="States/StateActors/MovementState/Skills/WallRun" method="_on_wall_running_state_entered"]
-[connection signal="state_exited" from="States/StateChart/Root/Movement/Skills/WallRunning" to="States/StateActors/MovementState/Skills/WallRun" method="_on_wall_running_state_exited"]
-[connection signal="state_physics_processing" from="States/StateChart/Root/Movement/Skills/WallRunning" to="States/StateActors/MovementState/Skills/WallRun" method="_on_wall_running_state_physics_processing"]
-[connection signal="state_unhandled_input" from="States/StateChart/Root/Movement/Skills/WallRunning" to="States/StateActors/MovementState/Skills/WallRun" method="_on_wall_running_state_unhandled_input"]
 [connection signal="state_unhandled_input" from="States/StateChart/Root/Combat" to="States/StateActors/Combat" method="_on_combat_state_unhandled_input"]
 [connection signal="state_entered" from="States/StateChart/Root/Combat/Parrying" to="States/StateActors/Combat/Parrying" method="_on_parrying_state_entered"]
 [connection signal="state_exited" from="States/StateChart/Root/Combat/Parrying" to="States/StateActors/Combat/Parrying" method="_on_parrying_state_exited"]
 [connection signal="timeout" from="States/StateActors/MovementState/AirborneState/Jumping/JumpTimer" to="States/StateActors/MovementState/AirborneState/Jumping" method="_on_jump_timer_timeout"]
 [connection signal="timeout" from="States/StateActors/MovementState/AirborneState/Grappling/GrappleTimer" to="States/StateActors/MovementState/AirborneState/Grappling" method="_on_grapple_timer_timeout"]
+[connection signal="timeout" from="States/StateActors/MovementState/Skills/DashingState/DashTimer" to="States/StateActors/MovementState/Skills/DashingState" method="_on_dash_timer_timeout"]
 
 [editable path="Weaponry/Katana"]

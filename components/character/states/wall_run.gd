@@ -55,10 +55,10 @@ func _check_can_wall_run():
 	wall_run_perpendicular = forward.dot(wall_normal)
 	
 	if !(wall_run_perpendicular >= -0.7 and wall_run_perpendicular <= 0.6):
-		player.state_chart.send_event(&"onFalling")
+		player.state_chart.send_event(&"onNormal")
 	
 	if not player.is_on_wall():
-		player.state_chart.send_event(&"onFalling")
+		player.state_chart.send_event(&"onNormal")
 
 func _reset_velocity():
 	wall_normal = player.get_wall_normal()

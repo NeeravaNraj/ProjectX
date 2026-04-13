@@ -8,6 +8,12 @@ var speed: float = 8.0
 var speed_modifier: float = 0.0
 
 var gravity_modifier := 0.0
+var acceleration_modifer := 0.0
+var deceleration_modifer := 0.0
+var airborne_acceleration_factor := 0.14
+var airborne_acceleration_factor_modifier := 0.0
+
+var disable_interpolation = false
 
 var target: CharacterBody3D
 var raw_direction := Vector2.ZERO
@@ -51,21 +57,22 @@ func _physics_process(delta: float) -> void:
 	var direction = (target.transform.basis * Vector3(raw_direction.x, 0, raw_direction.y)).normalized()
 	
 	var final_speed = get_speed()
-	var g_acceleration = acceleration_coef * delta
-	var a_acceleration = acceleration_coef * delta * 0.14
+	var acceleration = acceleration_coef + acceleration_modifer
 	var deceleration = deceleration_coef * delta
+	
+	var g_acceleration = acceleration * delta
+	var a_acceleration = acceleration * delta * (airborne_acceleration_factor + airborne_acceleration_factor_modifier)
 
-	var acceleration = g_acceleration if target.is_on_floor() else a_acceleration
-
-	if direction:
-		var speed_scaled_direction = Vector2(direction.x, direction.z) * final_speed
-		current_velocity = lerp(current_velocity, speed_scaled_direction, acceleration)
-	else:
-		current_velocity = current_velocity.move_toward(Vector2.ZERO, deceleration)
+	acceleration = g_acceleration if target.is_on_floor() else a_acceleration
+	
+	if not disable_interpolation:
+		if direction:
+			var speed_scaled_direction = Vector2(direction.x, direction.z) * final_speed
+			current_velocity = lerp(current_velocity, speed_scaled_direction, acceleration)
+		else:
+			current_velocity = current_velocity.move_toward(Vector2.ZERO, deceleration)
 
 	move_velocity = Vector3(current_velocity.x, target.velocity.y, current_velocity.y)
 	target.velocity = move_velocity
-
-	target.state_chart.set_expression_property("Velocity", target.velocity)
 	
 	target.move_and_slide()
