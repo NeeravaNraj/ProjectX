@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://utut3tys1x0a"]
+
+[ext_resource type="Script" uid="uid://dn0pdrsdlbfg7" path="res://components/enemies/base_enemy/base_enemy.gd" id="1_kla3a"]
+[ext_resource type="Script" uid="uid://ctctxwt2fa2di" path="res://components/primitives/movement/velocity.gd" id="2_uvf2w"]
+
+[node name="BaseEnemy" type="CharacterBody3D" unique_id=967130570]
+script = ExtResource("1_kla3a")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=1850754561]
+
+[node name="VelocityComponent" type="Node" parent="." unique_id=744736568]
+script = ExtResource("2_uvf2w")
+metadata/_custom_type_script = "uid://ctctxwt2fa2di"

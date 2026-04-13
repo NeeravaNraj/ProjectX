@@ -14,16 +14,10 @@ enum MovementStates {
 signal attack_finished()
 signal search_finished()
 
-var packet = null
-
 func _ready():
 	assert(parent_hurtbox, "parent_hurtbox should be defined in [%s]" % [str(get_path())])
 	anim_tree.animation_finished.connect(_on_state_finished)
 	hitbox.exclude.append(parent_hurtbox)
-	
-func attack(p_packet: DamagePacket):
-	packet = p_packet
-	anim_playback.travel(&"Attack")
 
 func searching():
 	anim_playback.travel(&"Searching")
@@ -46,8 +40,3 @@ func _on_state_finished(name: StringName):
 			attack_finished.emit()
 		&"Searching":
 			search_finished.emit()
-
-
-func _on_hit_box_area_entered(area: Area3D) -> void:
-	if packet == null: return
-	hitbox.attack(packet)
