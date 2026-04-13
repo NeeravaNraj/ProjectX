@@ -1,0 +1,62 @@
+[gd_scene format=3 uid="uid://lnv77qww2qgy"]
+
+[ext_resource type="Script" uid="uid://o34utvg0cdqh" path="res://components/enemies/ranged_zoning/zoning_grenade.gd" id="1_x4x6x"]
+[ext_resource type="Script" uid="uid://bey1gqjrdoeo1" path="res://components/primitives/health/hitbox.gd" id="2_6p3ks"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_prb8t"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_prb8t"]
+albedo_color = Color(0.1584723, 0.15847233, 0.1584723, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_prb8t"]
+material = SubResource("StandardMaterial3D_prb8t")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x4x6x"]
+transparency = 1
+albedo_color = Color(0.84705883, 0.56078434, 0.29803923, 0.7294118)
+
+[sub_resource type="SphereMesh" id="SphereMesh_6p3ks"]
+material = SubResource("StandardMaterial3D_x4x6x")
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_x4x6x"]
+
+[node name="ZoningGrenade" type="Node3D" unique_id=1388094324]
+script = ExtResource("1_x4x6x")
+
+[node name="DespawnTimer" type="Timer" parent="." unique_id=1865096129]
+wait_time = 2.0
+one_shot = true
+
+[node name="HitTimer" type="Timer" parent="." unique_id=1873492010]
+wait_time = 0.5
+one_shot = true
+
+[node name="RigidBody3D" type="RigidBody3D" parent="." unique_id=1700014039]
+contact_monitor = true
+max_contacts_reported = 1
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D" unique_id=1506324368]
+shape = SubResource("SphereShape3D_prb8t")
+
+[node name="VisualBody" type="MeshInstance3D" parent="RigidBody3D" unique_id=2025039234]
+mesh = SubResource("SphereMesh_prb8t")
+
+[node name="Explosion" type="MeshInstance3D" parent="RigidBody3D" unique_id=1807794035]
+visible = false
+mesh = SubResource("SphereMesh_6p3ks")
+
+[node name="ExplosionArea" type="Area3D" parent="RigidBody3D" unique_id=2074463237]
+visible = false
+collision_layer = 0
+collision_mask = 8
+monitoring = false
+monitorable = false
+script = ExtResource("2_6p3ks")
+metadata/_custom_type_script = "uid://bey1gqjrdoeo1"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D/ExplosionArea" unique_id=147774989]
+shape = SubResource("SphereShape3D_x4x6x")
+
+[connection signal="timeout" from="DespawnTimer" to="." method="_on_despawn_timer_timeout"]
+[connection signal="body_entered" from="RigidBody3D" to="." method="_on_rigid_body_3d_body_entered"]
+[connection signal="area_entered" from="RigidBody3D/ExplosionArea" to="." method="_on_explosion_area_area_entered"]
