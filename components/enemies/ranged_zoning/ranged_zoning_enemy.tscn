@@ -16,6 +16,7 @@ attack_range = 40.0
 attack_speed = 2.5
 vision_distance = 75.0
 move_speed = 10.0
+avoidance_speed = 16.0
 aim_prediction_time = 0.75
 min_distance_from_target = 10.0
 metadata/_custom_type_script = "uid://bxhdwvc7scbta"

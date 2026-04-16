@@ -11,7 +11,6 @@ func _init(p_enemy: BaseEnemy) -> void:
 
 func init_avoidance():
 	original_target_desired_distance = enemy.navigation_agent.target_desired_distance
-	return
 
 func perform_avoidance():
 	var min_distance = enemy.stats.min_distance_from_target
@@ -45,7 +44,7 @@ func get_random_reachable_point_in_direction(direction: Vector3) -> Vector3:
 
 func _move():
 	enemy.navigation_agent.target_desired_distance = 0.5
-	enemy.speed = enemy.stats.move_speed * 2.0
+	enemy.speed = enemy.stats.avoidance_speed
 	var ret_val = enemy.move_towards_target()
 	enemy.navigation_agent.target_desired_distance = original_target_desired_distance
 	
