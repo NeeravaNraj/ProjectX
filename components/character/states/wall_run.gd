@@ -64,6 +64,8 @@ func _reset_velocity():
 	wall_normal = player.get_wall_normal()
 	player.velocity.y = 0.0
 	player.velocity = player.transform.basis.z * -player.player_stats.move_speed * 2
-	player.velocity = player.velocity.slide(wall_normal)
-	player.velocity += -wall_normal * (player.player_stats.move_speed / 2)
-	player._velocity.set_velocity(player.velocity)
+	
+	if wall_normal:
+		player.velocity = player.velocity.slide(wall_normal)
+		player.velocity += -wall_normal * (player.player_stats.move_speed / 2)
+		player._velocity.set_velocity(player.velocity)
