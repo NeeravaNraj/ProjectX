@@ -7,3 +7,6 @@ class_name EnemyStats extends Resource
 
 @export var move_speed: float = 8.0
 @export var search_speed: float = 6.0
+
+@export var aim_prediction_time: float = 0.0
+@export var min_distance_from_target: float = 0.0
