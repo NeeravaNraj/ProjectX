@@ -6,14 +6,22 @@
 [ext_resource type="Script" uid="uid://bxhdwvc7scbta" path="res://resources/character/enemy_stats.gd" id="2_glqmo"]
 [ext_resource type="Script" uid="uid://bx4tjgr464fxd" path="res://components/primitives/health/hurtbox.gd" id="3_lfga5"]
 [ext_resource type="PackedScene" uid="uid://n2v3i1umc6q8" path="res://components/primitives/health/health_bar.tscn" id="3_u0bhm"]
+[ext_resource type="Script" uid="uid://di1pgrojidj7t" path="res://components/enemies/ranged_zoning/grenade_launcher.gd" id="7_0fh5q"]
 [ext_resource type="BehaviorTree" uid="uid://i213qwegw3os" path="res://ai/trees/range_zoning_enemy.tres" id="7_yloe6"]
 
 [sub_resource type="Resource" id="Resource_u0bhm"]
 script = ExtResource("2_glqmo")
-attack_damage = 25.0
-attack_range = 50.0
+attack_damage = 15.0
+attack_range = 40.0
+attack_speed = 2.5
 vision_distance = 75.0
+move_speed = 10.0
+aim_prediction_time = 0.75
+min_distance_from_target = 10.0
 metadata/_custom_type_script = "uid://bxhdwvc7scbta"
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_bvlbw"]
+radius = 0.6
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bvlbw"]
 albedo_color = Color(0.60322654, 0.2621289, 0.07750789, 1)
@@ -31,8 +39,14 @@ top_radius = 0.12
 bottom_radius = 0.1
 height = 1.0
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_bvlbw"]
-radius = 0.6
+[sub_resource type="CylinderMesh" id="CylinderMesh_0fh5q"]
+top_radius = 0.15
+bottom_radius = 0.15
+height = 0.1
+
+[sub_resource type="SphereMesh" id="SphereMesh_0fh5q"]
+radius = 0.1
+height = 0.2
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_glqmo"]
 radius = 0.6
@@ -40,8 +54,22 @@ radius = 0.6
 [sub_resource type="BlackboardPlan" id="BlackboardPlan_u0bhm"]
 
 [node name="RangedZoningEnemy" type="CharacterBody3D" unique_id=210857368 groups=["enemy"]]
+collision_layer = 4
+collision_mask = 5
 script = ExtResource("1_lfga5")
 stats = SubResource("Resource_u0bhm")
+avoidance = true
+
+[node name="GrenadeLaunchCtrl" type="Node3D" parent="." unique_id=593617263]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.78319645, 0, -1.2374446)
+script = ExtResource("7_0fh5q")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=45805285]
+shape = SubResource("CapsuleShape3D_bvlbw")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=1997402812]
+height = 2.0
+radius = 5.0
 
 [node name="ViewModel" type="Node3D" parent="." unique_id=2027910317]
 
@@ -52,9 +80,35 @@ mesh = SubResource("CapsuleMesh_73l3o")
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0.78319645, 0, -0.5403805)
 mesh = SubResource("CylinderMesh_1hw3d")
 
-[node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=1997402812]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="ViewModel/Gun" unique_id=625810442]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4009413, 1.7525696e-08)
+mesh = SubResource("CylinderMesh_0fh5q")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=45805285]
+[node name="BulletSpawner" type="Marker3D" parent="ViewModel/Gun/MeshInstance3D" unique_id=1914801915]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0.5616787, 2.455176e-08)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="ViewModel/Gun/MeshInstance3D/BulletSpawner" unique_id=1649655408]
+visible = false
+mesh = SubResource("SphereMesh_0fh5q")
+
+[node name="Areas" type="Node3D" parent="." unique_id=1328918665]
+
+[node name="HurtBox" type="Area3D" parent="Areas" unique_id=1051469437 node_paths=PackedStringArray("health_component")]
+script = ExtResource("3_lfga5")
+health_component = NodePath("../../Health")
+metadata/_custom_type_script = "uid://bx4tjgr464fxd"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Areas/HurtBox" unique_id=944028326]
+shape = SubResource("CapsuleShape3D_glqmo")
+
+[node name="HurtBox" type="Area3D" parent="." unique_id=936255790 node_paths=PackedStringArray("health_component")]
+collision_layer = 8
+collision_mask = 0
+script = ExtResource("3_lfga5")
+health_component = NodePath("../Health")
+metadata/_custom_type_script = "uid://bx4tjgr464fxd"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HurtBox" unique_id=1703246133]
 shape = SubResource("CapsuleShape3D_bvlbw")
 
 [node name="HealthBar" parent="." unique_id=1489255575 node_paths=PackedStringArray("health_component") instance=ExtResource("3_u0bhm")]
@@ -70,16 +124,8 @@ script = ExtResource("2_1hw3d")
 max_health = 125
 metadata/_custom_type_script = "uid://cmqhxkdolaasw"
 
-[node name="Areas" type="Node3D" parent="." unique_id=1328918665]
-
-[node name="HurtBox" type="Area3D" parent="Areas" unique_id=1051469437 node_paths=PackedStringArray("health_component")]
-script = ExtResource("3_lfga5")
-health_component = NodePath("../../Health")
-metadata/_custom_type_script = "uid://bx4tjgr464fxd"
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Areas/HurtBox" unique_id=944028326]
-shape = SubResource("CapsuleShape3D_glqmo")
-
 [node name="BTPlayer" type="BTPlayer" parent="." unique_id=638488324]
 behavior_tree = ExtResource("7_yloe6")
 blackboard_plan = SubResource("BlackboardPlan_u0bhm")
+
+[connection signal="death" from="Health" to="." method="_on_health_death"]
