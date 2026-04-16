@@ -43,3 +43,40 @@ static func safe_equals(a, b):
 		if not is_instance_valid(a) or not is_instance_valid(b):
 			return false
 	return typeof(a) == typeof(b) and a == b
+	
+static func normalizef(v: float, min: float, max: float):
+	return (v - min) / (max - min)
+
+static func get_gravity() -> float:
+	return ProjectSettings.get_setting("physics/3d/default_gravity")
+
+static func get_gravity_vector() -> Vector3:
+	return ProjectSettings.get_setting("physics/3d/default_gravity_vector") * ProjectSettings.get_setting("physics/3d/default_gravity")
+
+static func get_in_range_from_group(origin: Node, group: String, radius: float) -> Array[Node]:
+	var in_range: Array[Node] = []
+	var closest_dist_sq := radius ** 2.0
+	
+	for node in origin.get_tree().get_nodes_in_group(group):
+		if node == origin: continue
+		var dist_sq = origin.global_position.distance_squared_to(node.global_position)
+		
+		if dist_sq < closest_dist_sq:
+			in_range.append(node)
+	
+	return in_range
+
+static func get_separation_direction(origin: Vector3, neighbors: Array[Vector3], desired_distance: float) -> Vector3:
+	var result := Vector3.ZERO
+	var desired_sq = desired_distance ** 2
+	
+	for n in neighbors:
+		var offset = origin - n
+		var dist_sq = offset.length_squared()
+		
+		if dist_sq == 0 or dist_sq > desired_sq:
+			continue
+		
+		result += offset.normalized() / dist_sq
+	
+	return result
