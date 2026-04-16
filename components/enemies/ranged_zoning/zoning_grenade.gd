@@ -35,12 +35,12 @@ func _grow_blast_area(radius: float):
 	var visual_shape = explosion_mesh.mesh as SphereMesh
 	var collision_shape = explosion_collision_shape.shape as SphereShape3D
 	
-	var increased_radius = radius + 2.5
-	var reduced_radius = radius - 3.5
+	#var increased_radius = radius + 2.5
+	var reduced_radius = radius
 	collision_shape.radius = radius
-	visual_shape.radius = reduced_radius
-	visual_shape.height = reduced_radius * 2
-	explosion_fog.size = Vector3.ONE * increased_radius
+	visual_shape.radius = radius
+	visual_shape.height = radius * 2
+	explosion_fog.size = Vector3.ONE * reduced_radius
 
 func _on_despawn_timer_timeout() -> void:
 	var tween = create_tween()
