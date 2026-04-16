@@ -7,20 +7,23 @@
 [ext_resource type="PackedScene" uid="uid://cjk8sauqxur5r" path="res://components/grapplepoint/grapple_point.tscn" id="5_dkjbd"]
 [ext_resource type="PackedScene" uid="uid://2u2nxx2wm0wj" path="res://components/enemies/sniper/sniper_enemy.tscn" id="5_rm5dk"]
 [ext_resource type="PackedScene" uid="uid://chnlwpgv4jjbn" path="res://components/character/player.tscn" id="6_mlcm4"]
+[ext_resource type="PackedScene" uid="uid://bnbsje8watuv6" path="res://components/enemies/ranged_zoning/ranged_zoning_enemy.tscn" id="8_0qmt2"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_g05yx"]
 panorama = ExtResource("2_rm5dk")
 energy_multiplier = 0.1
 
-[sub_resource type="Sky" id="Sky_xgefu"]
+[sub_resource type="Sky" id="Sky_dkjbd"]
 sky_material = SubResource("PanoramaSkyMaterial_g05yx")
 
 [sub_resource type="Environment" id="Environment_1mtom"]
 background_mode = 2
-sky = SubResource("Sky_xgefu")
+sky = SubResource("Sky_dkjbd")
 glow_enabled = true
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.0
 
-[sub_resource type="NavigationMesh" id="NavigationMesh_82110"]
+[sub_resource type="NavigationMesh" id="NavigationMesh_0qmt2"]
 vertices = PackedVector3Array(-5.750004, 0.26352882, -5.75, -5.750004, 0.26352882, 6, 5.999996, 0.26352882, 6, 5.999996, 0.26352882, -5.75, 20.749996, -3.7364712, 11.5, 20.749996, -3.7364712, 18.5, 23.249996, -4.486471, 18.75, 23.499996, -4.486471, 11.25, 23.999996, -4.736471, 19.75, 23.999996, -4.736471, 21, 35.999996, -4.736471, 21, 35.999996, -4.736471, 9.25, 23.999996, -4.736471, 9.25, 33.999996, 0.26352882, 9.25, 33.999996, 0.26352882, 21, 35.999996, 0.26352882, 21, 35.999996, 0.26352882, 9.25, -3.5000038, 0.26352882, 11.5, -3.5000038, 0.26352882, 18.5, 5.058819, 0.26352882, 18.5, 5.058819, 0.26352882, 11.5, -35.750004, -4.736471, 44.5, -26.500004, -4.736471, 44.75, -26.250004, -4.736471, 42.75, -25.000004, -4.736471, 42.25, -25.000004, -4.736471, 26.25, -35.750004, -4.736471, 26.25, -23.750004, -4.486471, 42.75, -23.500004, -3.9864712, 45, -16.250004, -3.9864712, 45, -16.000004, -4.486471, 42.75, -14.750004, -4.736471, 42.25, -14.750004, -4.736471, 26.25, 13.749996, -4.736471, 42.75, 14.999996, -4.736471, 42.25, 14.999996, -4.736471, 26.5, -13.500004, -4.736471, 42.75, 13.499996, -4.736471, 45, -13.250004, -4.736471, 45, 16.249996, -4.486471, 42.75, 16.499996, -3.9864712, 45, 23.749996, -3.9864712, 45, 23.999996, -4.486471, 42.75, 25.249996, -4.736471, 42.25, 25.249996, -4.736471, 26.5, 26.499996, -4.736471, 42.75, 26.749996, -4.736471, 44.75, 35.999996, -4.736471, 44.5, 35.999996, -4.736471, 26.5, -35.750004, -4.736471, 53.25, -26.500004, -4.736471, 53, 26.749996, -4.736471, 53, 35.999996, -4.736471, 53.25, -16.250004, 1.0135288, 63.75, -23.500004, 1.2635288, 64, -13.250004, -4.736471, 52.75, 13.499996, -4.736471, 52.75, 16.499996, 1.0135288, 63.75, 23.749996, 1.2635288, 64, -3.5000038, 1.2635288, 46.5, -3.5000038, 1.2635288, 53.5, 3.7499962, 1.2635288, 53.5, 3.7499962, 1.2635288, 46.5, 13.499996, -4.736471, 54.5, -13.250004, -4.736471, 54.5, -14.000004, -4.736471, 55.5, -14.000004, -4.736471, 73, 14.249996, -4.736471, 73, 14.249996, -4.736471, 55.5, -26.500004, -4.736471, 54.5, -25.250004, -4.736471, 55.75, -35.750004, -4.736471, 73, 26.749996, -4.736471, 54.5, 25.499996, -4.736471, 55.75, 35.999996, -4.736471, 73, -13.000004, 1.2635288, 73, -13.000004, 1.2635288, 66.5, -15.500004, 1.2635288, 66.25, -16.250004, 1.2635288, 65.25, -23.500004, 1.2635288, 73, 15.749996, 1.2635288, 66.25, 13.249996, 1.2635288, 66.5, 13.249996, 1.2635288, 73, 16.499996, 1.2635288, 65.25, 23.749996, 1.2635288, 73)
 polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1), PackedInt32Array(5, 4, 6), PackedInt32Array(6, 4, 7), PackedInt32Array(10, 9, 8), PackedInt32Array(6, 7, 8), PackedInt32Array(8, 7, 12), PackedInt32Array(8, 12, 11), PackedInt32Array(8, 11, 10), PackedInt32Array(16, 15, 13), PackedInt32Array(13, 15, 14), PackedInt32Array(18, 17, 19), PackedInt32Array(19, 17, 20), PackedInt32Array(19, 20, 4), PackedInt32Array(19, 4, 5), PackedInt32Array(23, 22, 21), PackedInt32Array(23, 21, 24), PackedInt32Array(24, 21, 25), PackedInt32Array(25, 21, 26), PackedInt32Array(28, 27, 29), PackedInt32Array(29, 27, 30), PackedInt32Array(27, 24, 30), PackedInt32Array(30, 24, 31), PackedInt32Array(31, 24, 25), PackedInt32Array(31, 25, 32), PackedInt32Array(35, 34, 33), PackedInt32Array(36, 31, 32), PackedInt32Array(33, 37, 35), PackedInt32Array(35, 37, 38), PackedInt32Array(35, 38, 36), PackedInt32Array(35, 36, 32), PackedInt32Array(40, 39, 41), PackedInt32Array(41, 39, 42), PackedInt32Array(39, 34, 42), PackedInt32Array(42, 34, 43), PackedInt32Array(43, 34, 35), PackedInt32Array(43, 35, 44), PackedInt32Array(47, 46, 45), PackedInt32Array(45, 43, 47), PackedInt32Array(47, 43, 44), PackedInt32Array(47, 44, 48), PackedInt32Array(50, 49, 22), PackedInt32Array(22, 49, 21), PackedInt32Array(46, 47, 51), PackedInt32Array(51, 47, 52), PackedInt32Array(29, 53, 28), PackedInt32Array(28, 53, 54), PackedInt32Array(38, 37, 55), PackedInt32Array(55, 37, 56), PackedInt32Array(40, 41, 57), PackedInt32Array(57, 41, 58), PackedInt32Array(62, 61, 59), PackedInt32Array(59, 61, 60), PackedInt32Array(68, 67, 63), PackedInt32Array(63, 67, 64), PackedInt32Array(64, 67, 65), PackedInt32Array(65, 67, 66), PackedInt32Array(64, 55, 63), PackedInt32Array(63, 55, 56), PackedInt32Array(49, 50, 69), PackedInt32Array(69, 70, 49), PackedInt32Array(49, 70, 71), PackedInt32Array(65, 66, 70), PackedInt32Array(70, 66, 71), PackedInt32Array(72, 51, 52), PackedInt32Array(72, 52, 73), PackedInt32Array(73, 52, 74), PackedInt32Array(68, 73, 67), PackedInt32Array(67, 73, 74), PackedInt32Array(75, 77, 76), PackedInt32Array(54, 53, 78), PackedInt32Array(77, 75, 78), PackedInt32Array(78, 75, 79), PackedInt32Array(78, 79, 54), PackedInt32Array(82, 81, 80), PackedInt32Array(83, 57, 58), PackedInt32Array(80, 83, 82), PackedInt32Array(82, 83, 84), PackedInt32Array(84, 83, 58), PackedInt32Array(76, 81, 75), PackedInt32Array(75, 81, 82)]
 agent_height = 1.8
@@ -52,6 +55,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 35, 0.9, 20)
 
 [node name="Enemy3" parent="Enemies" unique_id=537915013 instance=ExtResource("5_rm5dk")]
 transform = Transform3D(1.0000001, 0, 0, 0, 1, 0, 0, 0, 1.0000001, 0, 1.8999996, 50)
+enabled = false
 
 [node name="Enemy4" parent="Enemies" unique_id=1978500468 instance=ExtResource("4_82110")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 1.9, 70)
@@ -59,9 +63,15 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 1.9, 70)
 [node name="Enemy5" parent="Enemies" unique_id=2107820763 instance=ExtResource("4_82110")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 1.9, 70)
 
+[node name="Enemy6" parent="Enemies" unique_id=210857368 instance=ExtResource("8_0qmt2")]
+transform = Transform3D(0.70710677, 0, -0.70710677, 0, 1, 0, 0.70710677, 0, 0.70710677, -25.695044, -3.9992428, 36.61698)
+
+[node name="Enemy7" parent="Enemies" unique_id=1400407477 instance=ExtResource("8_0qmt2")]
+transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, 25.304956, -3.9992428, 36.61698)
+
 [node name="LevelNavigationRegion" type="NavigationRegion3D" parent="." unique_id=168509107]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.002439499, 0.0007572174, 0.0097846985)
-navigation_mesh = SubResource("NavigationMesh_82110")
+navigation_mesh = SubResource("NavigationMesh_0qmt2")
 
 [node name="LevelGeometry" type="Node3D" parent="LevelNavigationRegion" unique_id=1200559265]
 
@@ -214,14 +224,31 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 0.012858868, 15.063751)
 light_energy = 2.826
 omni_range = 12.0
 
+[node name="Room1 Omnilight2" type="OmniLight3D" parent="Lights" unique_id=348851872]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.85198593, 6.954189, 15.063751)
+light_energy = 2.826
+omni_range = 12.0
+
 [node name="Arena Light1" type="OmniLight3D" parent="Lights" unique_id=659049707]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 6, 69)
 light_color = Color(0.6424139, 0.43863684, 0.9296966, 1)
 light_energy = 3.0
 omni_range = 30.0
 
+[node name="Arena Light4" type="OmniLight3D" parent="Lights" unique_id=1459159592]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 6, 37)
+light_color = Color(0.6424139, 0.43863684, 0.9296966, 1)
+light_energy = 3.0
+omni_range = 30.0
+
 [node name="Arena Light2" type="OmniLight3D" parent="Lights" unique_id=1686997071]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 6, 69)
+light_color = Color(0.6424139, 0.43863684, 0.9296966, 1)
+light_energy = 3.0
+omni_range = 30.0
+
+[node name="Arena Light3" type="OmniLight3D" parent="Lights" unique_id=1301815199]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 6, 38)
 light_color = Color(0.6424139, 0.43863684, 0.9296966, 1)
 light_energy = 3.0
 omni_range = 30.0
