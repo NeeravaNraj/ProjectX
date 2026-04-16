@@ -22,7 +22,7 @@ material = SubResource("StandardMaterial3D_x4x6x")
 
 [sub_resource type="FogMaterial" id="FogMaterial_6p3ks"]
 albedo = Color(0.7764706, 0.3137255, 0.11372549, 1)
-emission = Color(0.8884663, 0.67046106, 0, 1)
+emission = Color(0.7472388, 0.560846, 0, 1)
 edge_fade = 0.3732128
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_x4x6x"]
