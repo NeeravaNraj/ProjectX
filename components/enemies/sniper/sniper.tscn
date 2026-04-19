@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://c4fl231cx3wi0"]
+
+[ext_resource type="Script" uid="uid://c7usdp07ghk1j" path="res://components/enemies/sniper/sniper.gd" id="1_w7nkw"]
+[ext_resource type="PackedScene" uid="uid://c5dkg152djtie" path="res://assets/Sniper.glb" id="1_yqrxg"]
+[ext_resource type="PackedScene" uid="uid://ca4b6im7akco5" path="res://components/enemies/sniper/laser_beam.tscn" id="2_ckc3k"]
+
+[node name="Sniper" type="Node3D" unique_id=1088767639]
+script = ExtResource("1_w7nkw")
+
+[node name="Mesh" parent="." unique_id=538557339 instance=ExtResource("1_yqrxg")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
+
+[node name="LaserOrigin" type="Marker3D" parent="." unique_id=337905467]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.066878915, 0.239537, 0.70077384)
+
+[node name="LaserBeam" parent="LaserOrigin" unique_id=1958550099 instance=ExtResource("2_ckc3k")]
+
+[node name="BulletOrigin" type="Marker3D" parent="." unique_id=1151680243]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.13381132, -2.2850733)

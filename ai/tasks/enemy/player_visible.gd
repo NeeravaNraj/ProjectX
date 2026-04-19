@@ -3,7 +3,9 @@ extends BTCondition
 
 @export var invert: bool = false
 
+
 func _tick(_delta: float) -> Status:
+	agent = agent as BaseEnemy
 	var player_visible = agent.can_see_player()
 	
 	if invert:

@@ -1,0 +1,149 @@
+[gd_resource type="BehaviorTree" format=3 uid="uid://u1ubgm1fhu0k"]
+
+[ext_resource type="Script" uid="uid://cb7p0ll2vs4wy" path="res://ai/tasks/utils/load_from_agent.gd" id="1_gro14"]
+[ext_resource type="Script" uid="uid://2elfftqoyiv5" path="res://ai/tasks/enemy/player_visible.gd" id="2_183e1"]
+[ext_resource type="Script" uid="uid://clxne7nqjnhw4" path="res://ai/tasks/enemy/face_target.gd" id="3_ggfyy"]
+[ext_resource type="Script" uid="uid://dbes8u32sy5l3" path="res://ai/tasks/enemy/can_attack_player.gd" id="4_r0ano"]
+[ext_resource type="Script" uid="uid://isx8qm6jjo5h" path="res://ai/tasks/enemy/move_towards.gd" id="5_td158"]
+[ext_resource type="Script" uid="uid://qrnlt6pu6rip" path="res://ai/tasks/enemy/face_movement_direction.gd" id="6_35otm"]
+[ext_resource type="Script" uid="uid://c168sueve0lho" path="res://ai/tasks/enemy/perform_attack.gd" id="7_ykfdl"]
+[ext_resource type="Script" uid="uid://dqa0s4rtbtdh1" path="res://ai/tasks/utils/cooldown_var.gd" id="8_pydk1"]
+
+[sub_resource type="BlackboardPlan" id="BlackboardPlan_yloe6"]
+var/move_speed/name = &"move_speed"
+var/move_speed/type = 3
+var/move_speed/value = 0.0
+var/move_speed/hint = 0
+var/move_speed/hint_string = ""
+var/target_position/name = &"target_position"
+var/target_position/type = 9
+var/target_position/value = Vector3(0, 0, 0)
+var/target_position/hint = 0
+var/target_position/hint_string = ""
+var/attack_speed/name = &"attack_speed"
+var/attack_speed/type = 3
+var/attack_speed/value = 0.0
+var/attack_speed/hint = 0
+var/attack_speed/hint_string = ""
+var/min_distance_from_target/name = &"min_distance_from_target"
+var/min_distance_from_target/type = 3
+var/min_distance_from_target/value = 0.0
+var/min_distance_from_target/hint = 0
+var/min_distance_from_target/hint_string = ""
+
+[sub_resource type="BTAction" id="BTAction_4vkph"]
+script = ExtResource("1_gro14")
+property_path = "stats:move_speed"
+target_var_name = &"move_speed"
+
+[sub_resource type="BTAction" id="BTAction_husr8"]
+script = ExtResource("1_gro14")
+property_path = "stats:attack_speed"
+target_var_name = &"attack_speed"
+
+[sub_resource type="BTAction" id="BTAction_xyemg"]
+script = ExtResource("1_gro14")
+property_path = "stats:min_distance_from_target"
+target_var_name = &"min_distance_from_target"
+
+[sub_resource type="BTSequence" id="BTSequence_4vkph"]
+children = [SubResource("BTAction_4vkph"), SubResource("BTAction_husr8"), SubResource("BTAction_xyemg")]
+
+[sub_resource type="BTAlwaysFail" id="BTAlwaysFail_5q1o7"]
+children = [SubResource("BTSequence_4vkph")]
+
+[sub_resource type="BTRunLimit" id="BTRunLimit_4g488"]
+count_policy = 1
+custom_name = "Init"
+children = [SubResource("BTAlwaysFail_5q1o7")]
+
+[sub_resource type="BTCondition" id="BTCondition_hni77"]
+script = ExtResource("2_183e1")
+
+[sub_resource type="BTAction" id="BTAction_invhn"]
+script = ExtResource("1_gro14")
+property_path = "player:global_position"
+target_var_name = &"target_position"
+load_on_tick = true
+
+[sub_resource type="BBNode" id="BBNode_m5d3e"]
+saved_value = NodePath(".")
+resource_name = "."
+
+[sub_resource type="BTCallMethod" id="BTCallMethod_4vkph"]
+node = SubResource("BBNode_m5d3e")
+method = &"get_player_distance"
+result_var = &"player_distance"
+
+[sub_resource type="BBNode" id="BBNode_0tvct"]
+saved_value = NodePath(".")
+resource_name = "."
+
+[sub_resource type="BTCallMethod" id="BTCallMethod_husr8"]
+node = SubResource("BBNode_0tvct")
+method = &"aim"
+
+[sub_resource type="BTSequence" id="BTSequence_5q1o7"]
+children = [SubResource("BTCallMethod_husr8")]
+
+[sub_resource type="BTDecorator" id="BTDecorator_xyemg"]
+children = [SubResource("BTSequence_5q1o7")]
+script = ExtResource("3_ggfyy")
+
+[sub_resource type="BBVariant" id="BBVariant_m5d3e"]
+value_source = 1
+variable = &"min_distance_from_target"
+resource_name = "$min_distance_from_target"
+
+[sub_resource type="BTCheckVar" id="BTCheckVar_4vkph"]
+variable = &"player_distance"
+check_type = 3
+value = SubResource("BBVariant_m5d3e")
+
+[sub_resource type="BTCondition" id="BTCondition_m5d3e"]
+script = ExtResource("4_r0ano")
+invert = true
+
+[sub_resource type="BTAction" id="BTAction_4g488"]
+script = ExtResource("5_td158")
+
+[sub_resource type="BTTimeLimit" id="BTTimeLimit_4vkph"]
+time_limit = 2.0
+children = [SubResource("BTAction_4g488")]
+
+[sub_resource type="BTDecorator" id="BTDecorator_4vkph"]
+children = [SubResource("BTTimeLimit_4vkph")]
+script = ExtResource("6_35otm")
+
+[sub_resource type="BTSequence" id="BTSequence_wxto5"]
+custom_name = "Pursue"
+children = [SubResource("BTCheckVar_4vkph"), SubResource("BTCondition_m5d3e"), SubResource("BTDecorator_4vkph")]
+
+[sub_resource type="BTCondition" id="BTCondition_4vkph"]
+script = ExtResource("4_r0ano")
+
+[sub_resource type="BTAction" id="BTAction_5q1o7"]
+script = ExtResource("7_ykfdl")
+
+[sub_resource type="BTDecorator" id="BTDecorator_m5d3e"]
+children = [SubResource("BTAction_5q1o7")]
+script = ExtResource("8_pydk1")
+duration_var = &"attack_speed"
+
+[sub_resource type="BTSequence" id="BTSequence_4g488"]
+custom_name = "Attack"
+children = [SubResource("BTCondition_4vkph"), SubResource("BTDecorator_m5d3e")]
+
+[sub_resource type="BTSelector" id="BTSelector_wxto5"]
+children = [SubResource("BTSequence_wxto5"), SubResource("BTSequence_4g488")]
+
+[sub_resource type="BTSequence" id="BTSequence_xyemg"]
+custom_name = "Combat"
+children = [SubResource("BTCondition_hni77"), SubResource("BTAction_invhn"), SubResource("BTCallMethod_4vkph"), SubResource("BTDecorator_xyemg"), SubResource("BTSelector_wxto5")]
+
+[sub_resource type="BTSelector" id="BTSelector_u0bhm"]
+children = [SubResource("BTRunLimit_4g488"), SubResource("BTSequence_xyemg")]
+
+[resource]
+blackboard_plan = SubResource("BlackboardPlan_yloe6")
+root_task = SubResource("BTSelector_u0bhm")

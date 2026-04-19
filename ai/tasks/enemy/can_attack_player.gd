@@ -4,6 +4,7 @@ extends BTCondition
 @export var invert: bool = false
 
 func _tick(_delta: float) -> Status:
+	agent = agent as BaseEnemy
 	var can_attack = agent.can_attack_player()
 	
 	if invert:

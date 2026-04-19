@@ -48,7 +48,7 @@ health_component = NodePath("../Health")
 transform = Transform3D(-1.25, 0, 1.8874475e-07, 0, 1.25, 0, -1.8874475e-07, 0, -1.25, -0.04596758, -0.8924908, 0)
 parent_hurtbox = NodePath("../Areas/HurtBox")
 
-[node name="Skeleton3D" parent="MeleeEnemySkin/Armature" parent_id_path=PackedInt32Array(1257729054, 1985242082) index="0" unique_id=846473371]
+[node name="Skeleton3D" parent="MeleeEnemySkin/Armature" parent_id_path=PackedInt32Array(1257729054, 978886586) index="0" unique_id=337389832]
 bones/0/position = Vector3(0.018543167, 0.7111927, -0.0113373995)
 bones/0/rotation = Quaternion(0.16450886, -0.4139233, 0.09902127, 0.889831)
 bones/2/rotation = Quaternion(0.066921555, 0.036333635, -0.052371457, 0.9957202)
