@@ -17,7 +17,7 @@ attack_speed = 2.5
 vision_distance = 75.0
 move_speed = 10.0
 avoidance_speed = 16.0
-aim_prediction_time = 0.1
+aim_prediction_time = 0.25
 min_distance_from_target = 10.0
 metadata/_custom_type_script = "uid://bxhdwvc7scbta"
 
@@ -44,7 +44,6 @@ collision_layer = 4
 collision_mask = 5
 script = ExtResource("1_o4u82")
 stats = SubResource("Resource_ppbfi")
-enabled = null
 avoidance = true
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=1057573504]

@@ -122,11 +122,38 @@ children = [SubResource("BTCheckVar_4vkph"), SubResource("BTCondition_m5d3e"), S
 [sub_resource type="BTCondition" id="BTCondition_4vkph"]
 script = ExtResource("4_r0ano")
 
+[sub_resource type="BBNode" id="BBNode_gro14"]
+saved_value = NodePath(".")
+resource_name = "."
+
+[sub_resource type="BTCallMethod" id="BTCallMethod_183e1"]
+node = SubResource("BBNode_gro14")
+method = &"stop_aiming"
+
 [sub_resource type="BTAction" id="BTAction_5q1o7"]
 script = ExtResource("7_ykfdl")
 
-[sub_resource type="BTDecorator" id="BTDecorator_m5d3e"]
+[sub_resource type="BTDelay" id="BTDelay_gro14"]
+seconds = 0.25
 children = [SubResource("BTAction_5q1o7")]
+
+[sub_resource type="BBNode" id="BBNode_183e1"]
+saved_value = NodePath(".")
+resource_name = "."
+
+[sub_resource type="BTCallMethod" id="BTCallMethod_ggfyy"]
+node = SubResource("BBNode_183e1")
+method = &"begin_aiming"
+
+[sub_resource type="BTDelay" id="BTDelay_183e1"]
+seconds = 0.5
+children = [SubResource("BTCallMethod_ggfyy")]
+
+[sub_resource type="BTSequence" id="BTSequence_gro14"]
+children = [SubResource("BTCallMethod_183e1"), SubResource("BTDelay_gro14"), SubResource("BTDelay_183e1")]
+
+[sub_resource type="BTDecorator" id="BTDecorator_m5d3e"]
+children = [SubResource("BTSequence_gro14")]
 script = ExtResource("8_pydk1")
 duration_var = &"attack_speed"
 
