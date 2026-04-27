@@ -80,3 +80,6 @@ static func get_separation_direction(origin: Vector3, neighbors: Array[Vector3],
 		result += offset.normalized() / dist_sq
 	
 	return result
+
+static func around(x: float, y: float, tolerance: float):
+	return in_range(x, y - tolerance, y + tolerance)
