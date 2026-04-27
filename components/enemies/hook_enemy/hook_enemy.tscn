@@ -1,0 +1,163 @@
+[gd_scene format=3 uid="uid://cvfqnmwehnbkc"]
+
+[ext_resource type="Script" uid="uid://whsuw2u4ckot" path="res://components/enemies/hook_enemy/hook_enemy.gd" id="1_smjpl"]
+[ext_resource type="Script" uid="uid://bxhdwvc7scbta" path="res://resources/character/enemy_stats.gd" id="2_6xumf"]
+[ext_resource type="Script" uid="uid://ei7yo3drbbg4" path="res://components/enemies/hook_enemy/hook_launcher.gd" id="3_2lajf"]
+[ext_resource type="Script" uid="uid://cmqhxkdolaasw" path="res://components/primitives/health/health.gd" id="3_8bca8"]
+[ext_resource type="Script" uid="uid://bx4tjgr464fxd" path="res://components/primitives/health/hurtbox.gd" id="4_mtsly"]
+[ext_resource type="PackedScene" uid="uid://n2v3i1umc6q8" path="res://components/primitives/health/health_bar.tscn" id="4_ux2h8"]
+[ext_resource type="Script" uid="uid://ctctxwt2fa2di" path="res://components/primitives/movement/velocity.gd" id="4_vmeb8"]
+[ext_resource type="PackedScene" uid="uid://cckq32da5c2j5" path="res://utils/line/line_3d.tscn" id="5_igq8d"]
+[ext_resource type="PackedScene" uid="uid://dyipyekr4q3yf" path="res://components/enemies/hook_enemy/hook.tscn" id="7_mtsly"]
+[ext_resource type="BehaviorTree" uid="uid://ce4e11d1rbrvo" path="res://ai/trees/hook_enemy.tres" id="8_ux2h8"]
+
+[sub_resource type="Resource" id="Resource_6yp78"]
+script = ExtResource("2_6xumf")
+attack_range = 20.0
+attack_speed = 2.0
+vision_distance = 35.0
+aim_prediction_time = 0.3
+min_distance_from_target = 3.0
+preferred_ally_distance = 25.0
+metadata/_custom_type_script = "uid://bxhdwvc7scbta"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b43uq"]
+albedo_color = Color(0.16924527, 0.1692453, 0.16924527, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_2lajf"]
+radius = 0.1
+height = 0.2
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ux2h8"]
+radius = 0.4
+height = 1.8
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ux2h8"]
+albedo_color = Color(0.072842635, 0.072842635, 0.072842635, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_2lajf"]
+material = SubResource("StandardMaterial3D_ux2h8")
+height = 0.125
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_igq8d"]
+material = SubResource("StandardMaterial3D_ux2h8")
+top_radius = 0.3
+bottom_radius = 0.3
+height = 0.4
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2lajf"]
+albedo_color = Color(0.8509804, 0.28235295, 0.29803923, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_b43uq"]
+material = SubResource("StandardMaterial3D_2lajf")
+top_radius = 0.32
+bottom_radius = 0.32
+height = 0.05
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mtsly"]
+albedo_color = Color(0.69803923, 0.4117647, 0.3019608, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_8bca8"]
+material = SubResource("StandardMaterial3D_mtsly")
+radius = 0.4
+height = 1.8
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_igq8d"]
+transparency = 1
+albedo_color = Color(0.26666668, 0.26666668, 0.26666668, 0.8784314)
+metallic = 0.8
+roughness = 0.3
+
+[sub_resource type="BoxMesh" id="BoxMesh_b43uq"]
+material = SubResource("StandardMaterial3D_igq8d")
+size = Vector3(0.595, 0.18, 0.06)
+
+[sub_resource type="BlackboardPlan" id="BlackboardPlan_2lajf"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wp7s6"]
+transparency = 1
+cull_mode = 2
+albedo_color = Color(1, 1, 1, 0.21176471)
+
+[sub_resource type="SphereMesh" id="SphereMesh_g5dy0"]
+material = SubResource("StandardMaterial3D_wp7s6")
+
+[node name="HookEnemy" type="CharacterBody3D" unique_id=1248221304 groups=["enemy"]]
+script = ExtResource("1_smjpl")
+stats = SubResource("Resource_6yp78")
+avoidance = true
+
+[node name="HookLauncher" type="Node3D" parent="." unique_id=748166952]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.63051206, 0, 0)
+script = ExtResource("3_2lajf")
+
+[node name="Hook" parent="HookLauncher" unique_id=1407104289 instance=ExtResource("7_mtsly")]
+transform = Transform3D(-0.8660254, -0.35355335, 0.35355335, 0, 0.70710677, 0.70710677, -0.49999994, 0.6123724, -0.6123724, 0, 0, 0)
+
+[node name="Chain" parent="HookLauncher" unique_id=268158185 instance=ExtResource("5_igq8d")]
+visible = false
+material = SubResource("StandardMaterial3D_b43uq")
+
+[node name="ReelInTimer" type="Timer" parent="HookLauncher" unique_id=930628246]
+wait_time = 0.25
+one_shot = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="HookLauncher" unique_id=333104938]
+mesh = SubResource("SphereMesh_2lajf")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=729890508]
+shape = SubResource("CapsuleShape3D_ux2h8")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=642581651]
+
+[node name="ViewModel" type="Node3D" parent="." unique_id=1632894616]
+
+[node name="Hat" type="MeshInstance3D" parent="ViewModel" unique_id=2066745074]
+transform = Transform3D(0.9927699, -0.120032884, 0, 0.120032884, 0.9927699, 0, 0, 0, 1, 0, 0.74192023, 0)
+mesh = SubResource("CylinderMesh_2lajf")
+
+[node name="HatTop" type="MeshInstance3D" parent="ViewModel/Hat" unique_id=762814786]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.21109164, 0)
+mesh = SubResource("CylinderMesh_igq8d")
+
+[node name="HatRim" type="MeshInstance3D" parent="ViewModel/Hat" unique_id=246821490]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.13275218, 0)
+mesh = SubResource("CylinderMesh_b43uq")
+
+[node name="Body" type="MeshInstance3D" parent="ViewModel" unique_id=768982738]
+mesh = SubResource("CapsuleMesh_8bca8")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="ViewModel" unique_id=2050055736]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.38487944, -0.37697542)
+mesh = SubResource("BoxMesh_b43uq")
+
+[node name="HurtBox" type="Area3D" parent="." unique_id=1404324468 node_paths=PackedStringArray("health_component")]
+collision_layer = 8
+collision_mask = 0
+script = ExtResource("4_mtsly")
+health_component = NodePath("../Health")
+metadata/_custom_type_script = "uid://bx4tjgr464fxd"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HurtBox" unique_id=659528751]
+shape = SubResource("CapsuleShape3D_ux2h8")
+
+[node name="HealthBar" parent="." unique_id=1489255575 node_paths=PackedStringArray("health_component") instance=ExtResource("4_ux2h8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3575401, 0)
+health_component = NodePath("../Health")
+
+[node name="Health" type="Node" parent="." unique_id=170933526]
+script = ExtResource("3_8bca8")
+metadata/_custom_type_script = "uid://cmqhxkdolaasw"
+
+[node name="VelocityComponent" type="Node" parent="." unique_id=895622708]
+script = ExtResource("4_vmeb8")
+metadata/_custom_type_script = "uid://ctctxwt2fa2di"
+
+[node name="BTPlayer" type="BTPlayer" parent="." unique_id=1476363840]
+behavior_tree = ExtResource("8_ux2h8")
+blackboard_plan = SubResource("BlackboardPlan_2lajf")
+
+[node name="AttackRange" type="MeshInstance3D" parent="." unique_id=420957994]
+mesh = SubResource("SphereMesh_g5dy0")
+
+[connection signal="timeout" from="HookLauncher/ReelInTimer" to="HookLauncher" method="_on_reel_in_timer_timeout"]

@@ -1,0 +1,95 @@
+[gd_scene format=3 uid="uid://dyipyekr4q3yf"]
+
+[ext_resource type="Script" uid="uid://ccm2u1lshcmai" path="res://components/enemies/hook_enemy/hook.gd" id="1_gkhii"]
+[ext_resource type="Script" uid="uid://bey1gqjrdoeo1" path="res://components/primitives/health/hitbox.gd" id="2_nasgn"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lvoe5"]
+albedo_color = Color(0.7058824, 0.22352941, 0.22352941, 1)
+metallic = 0.7
+roughness = 0.1
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_lvoe5"]
+material = SubResource("StandardMaterial3D_lvoe5")
+top_radius = 0.05
+bottom_radius = 0.05
+height = 0.25
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gkhii"]
+albedo_color = Color(0.2231029, 0.2231029, 0.22310287, 1)
+metallic = 0.7
+roughness = 0.1
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_gkhii"]
+material = SubResource("StandardMaterial3D_gkhii")
+top_radius = 0.05
+bottom_radius = 0.04
+height = 0.375
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nasgn"]
+albedo_color = Color(0.2231029, 0.2231029, 0.22310287, 1)
+metallic = 0.7
+roughness = 0.1
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_nasgn"]
+material = SubResource("StandardMaterial3D_nasgn")
+top_radius = 0.05
+bottom_radius = 0.025
+height = 0.375
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fpd8w"]
+albedo_color = Color(0.2231029, 0.2231029, 0.22310287, 1)
+metallic = 0.7
+roughness = 0.1
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_fpd8w"]
+material = SubResource("StandardMaterial3D_fpd8w")
+top_radius = 0.025
+bottom_radius = 0.05
+height = 0.375
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_lvoe5"]
+
+[node name="Hook" type="Node3D" unique_id=1407104289]
+script = ExtResource("1_gkhii")
+
+[node name="ViewModel" type="Node3D" parent="." unique_id=2121455694]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="HookArm" type="MeshInstance3D" parent="ViewModel" unique_id=2135976515]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
+mesh = SubResource("CylinderMesh_lvoe5")
+
+[node name="HookSegment1" type="MeshInstance3D" parent="ViewModel" unique_id=1813421555]
+transform = Transform3D(0.7473344, -0.6644481, 2.9043951e-08, 0, -4.371138e-08, -1, 0.6644481, 0.7473344, -3.2667025e-08, -0.11542085, 0, 0.2319364)
+mesh = SubResource("CylinderMesh_gkhii")
+
+[node name="HookSegment2" type="MeshInstance3D" parent="ViewModel" unique_id=657725304]
+transform = Transform3D(0.66444796, 0.7473342, -3.2667014e-08, 0, -4.371138e-08, -1, -0.7473342, 0.66444796, -2.9043955e-08, -0.13840668, 0, 0.46975774)
+mesh = SubResource("CylinderMesh_nasgn")
+
+[node name="HookSegment3" type="MeshInstance3D" parent="ViewModel" unique_id=1569111403]
+transform = Transform3D(-0.41693133, 0.90893817, -3.973094e-08, -1.768525e-15, -4.3711378e-08, -1, -0.90893817, -0.41693133, 1.8224638e-08, 0.12523499, 0, 0.5083418)
+mesh = SubResource("CylinderMesh_fpd8w")
+
+[node name="HookBox" type="Area3D" parent="." unique_id=593941840]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.25)
+collision_layer = 0
+collision_mask = 4
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HookBox" unique_id=1516276668]
+shape = SubResource("SphereShape3D_lvoe5")
+
+[node name="HitBox" type="Area3D" parent="." unique_id=812882026]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.25)
+collision_layer = 0
+collision_mask = 8
+monitorable = false
+script = ExtResource("2_nasgn")
+auto_hit = true
+metadata/_custom_type_script = "uid://bey1gqjrdoeo1"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HitBox" unique_id=399840695]
+shape = SubResource("SphereShape3D_lvoe5")
+
+[connection signal="body_entered" from="HookBox" to="." method="_on_hook_box_body_entered"]
