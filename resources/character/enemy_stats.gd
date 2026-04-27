@@ -12,3 +12,5 @@ class_name EnemyStats extends Resource
 
 @export var aim_prediction_time: float = 0.0
 @export var min_distance_from_target: float = 0.0
+
+@export var preferred_ally_distance: float = 0.0
