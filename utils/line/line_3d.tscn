@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://cckq32da5c2j5"]
+
+[ext_resource type="Script" uid="uid://dl4qc41fufpo7" path="res://utils/line/line_3d.gd" id="1_8trww"]
+
+[sub_resource type="ImmediateMesh" id="ImmediateMesh_6fv5l"]
+
+[node name="Line3D" type="Node3D" unique_id=268158185]
+script = ExtResource("1_8trww")
+thickness = 0.03
+segments = 12
+
+[node name="LineMesh" type="MeshInstance3D" parent="." unique_id=895394927]
+mesh = SubResource("ImmediateMesh_6fv5l")
