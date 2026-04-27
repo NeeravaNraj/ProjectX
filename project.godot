@@ -15,7 +15,7 @@ warnings/check_invalid_track_paths=false
 [application]
 
 config/name="ProjectX"
-run/main_scene="uid://c0awyk0mfv5ro"
+run/main_scene="uid://d3w3op1ca8scm"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="uid://cyweugncmab2"
 
