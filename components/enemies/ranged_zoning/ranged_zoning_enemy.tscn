@@ -52,7 +52,7 @@ height = 0.2
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_glqmo"]
 radius = 0.6
 
-[sub_resource type="BlackboardPlan" id="BlackboardPlan_u0bhm"]
+[sub_resource type="BlackboardPlan" id="BlackboardPlan_0fh5q"]
 
 [node name="RangedZoningEnemy" type="CharacterBody3D" unique_id=210857368 groups=["enemy"]]
 collision_layer = 4
@@ -127,6 +127,6 @@ metadata/_custom_type_script = "uid://cmqhxkdolaasw"
 
 [node name="BTPlayer" type="BTPlayer" parent="." unique_id=638488324]
 behavior_tree = ExtResource("7_yloe6")
-blackboard_plan = SubResource("BlackboardPlan_u0bhm")
+blackboard_plan = SubResource("BlackboardPlan_0fh5q")
 
 [connection signal="death" from="Health" to="." method="_on_health_death"]
