@@ -23,6 +23,8 @@ var nav_map_ready = false
 var collider: CollisionShape3D
 var avoidance_component: EnemyAvoidance
 
+var preferred_allies: Array
+
 func get_vistion_radius():
 	return stats.vision_distance
 
@@ -36,6 +38,23 @@ func get_forward():
 
 func get_movement_direction():
 	return velocity.normalized() * Vector3(1.0, 0, 1.0)
+
+func get_position_near_ally():
+	var best = null
+	var score = -INF
+	
+	for ally in Utils.get_in_range_from_group(self, &"enemy", stats.preferred_ally_distance):
+		if not _is_preferred_ally(ally): continue
+		var distance = global_position.distance_to(ally.global_position)
+		var player_distance = get_player_distance()
+		var ally_score = -distance + -player_distance * 0.5
+		
+		if ally_score > score:
+			score = ally_score
+			var direction = global_position.direction_to(ally.global_position)
+			best = direction * max(distance - stats.min_distance_from_target, 0.0)
+	
+	return best
 
 func predict_next_player_position(t: float):
 	return player.global_position + (player.velocity * t)
@@ -73,7 +92,6 @@ func move_towards_target():
 
 	velocity_component.set_velocity(direction * speed)
 	return true
-	
 
 func _physics_process(_delta: float) -> void:
 	if avoidance:
@@ -92,7 +110,17 @@ func init() -> void:
 	
 	if avoidance:
 		avoidance_component.init_avoidance()
+	
+	if not enabled:
+		process_mode = Node.PROCESS_MODE_DISABLED
+		
 	assert(player, "Expected player to be in 'player' group.")
 
 func _on_nav_ready(map_rid):
 	nav_map_ready = true
+
+func _is_preferred_ally(node: Node3D):
+	for t in preferred_allies:
+		if is_instance_of(node, t):
+			return true
+	return false

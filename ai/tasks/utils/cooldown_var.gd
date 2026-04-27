@@ -12,7 +12,7 @@ var duration: float
 var _running: bool = false
 
 func _enter() -> void:
-	duration = blackboard.get_var(duration_var, null, false)
+	duration = blackboard.get_var(duration_var, default_value, false)
 	if duration == null:
 		push_warning("Could not find blackboard variable '%s' setting default value '%f'" % [duration_var, default_value])
 	assert(typeof(duration) == TYPE_FLOAT)
