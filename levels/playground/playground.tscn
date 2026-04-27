@@ -2,7 +2,8 @@
 
 [ext_resource type="Texture2D" uid="uid://r2tuqss83luh" path="res://assets/Skyboxes/kloppenheim_02_puresky_2k.hdr" id="1_peklk"]
 [ext_resource type="PackedScene" uid="uid://chnlwpgv4jjbn" path="res://components/character/player.tscn" id="2_6txw3"]
-[ext_resource type="PackedScene" uid="uid://bnbsje8watuv6" path="res://components/enemies/ranged_zoning/ranged_zoning_enemy.tscn" id="2_43xo0"]
+[ext_resource type="PackedScene" uid="uid://cvfqnmwehnbkc" path="res://components/enemies/hook_enemy/hook_enemy.tscn" id="2_43xo0"]
+[ext_resource type="PackedScene" uid="uid://c7aau4proecem" path="res://components/enemies/melee/melee_enemy.tscn" id="3_k01ge"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_6txw3"]
 panorama = ExtResource("1_peklk")
@@ -70,9 +71,9 @@ use_collision = true
 size = Vector3(3, 10, 3)
 
 [node name="CSGBox3D8" type="CSGBox3D" parent="NavigationRegion3D/Platform" unique_id=873677432]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, -19)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, -19)
 use_collision = true
-size = Vector3(3, 10, 3)
+size = Vector3(3, 2, 3)
 
 [node name="CSGBox3D9" type="CSGBox3D" parent="NavigationRegion3D/Platform" unique_id=232350619]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 18)
@@ -106,23 +107,12 @@ size = Vector3(12, 1, 109)
 
 [node name="Enemies" type="Node3D" parent="." unique_id=1283212741]
 
-[node name="e1" parent="Enemies" unique_id=210857368 instance=ExtResource("2_43xo0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.53906, 1.5, 19.517073)
+[node name="e1" parent="Enemies" unique_id=1248221304 instance=ExtResource("2_43xo0")]
+transform = Transform3D(-1, 0, -5.9604645e-08, 0, 1, 0, 5.9604645e-08, 0, -1, 0, 1.4000001, 7.8973722)
 
-[node name="e3" parent="Enemies" unique_id=635142376 instance=ExtResource("2_43xo0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.53906, 1.5, 19.517073)
-
-[node name="e4" parent="Enemies" unique_id=720025198 instance=ExtResource("2_43xo0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.539061, 1.5, 16.517073)
-
-[node name="e5" parent="Enemies" unique_id=1262758589 instance=ExtResource("2_43xo0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.53906, 1.5, 16.517073)
-
-[node name="e6" parent="Enemies" unique_id=1779718655 instance=ExtResource("2_43xo0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.53906, 1.5, 14.517073)
-
-[node name="e2" parent="Enemies" unique_id=562173080 instance=ExtResource("2_43xo0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 1.5, 17)
+[node name="e2" parent="Enemies" unique_id=597327788 instance=ExtResource("3_k01ge")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.190482, 33.387848, -5.5363607)
+enabled = false
 
 [node name="Lights" type="Node3D" parent="." unique_id=1984218942]
 
@@ -135,4 +125,4 @@ omni_range = 15.0
 transform = Transform3D(0.08971137, 0.9888002, -0.119272724, 0, 0.1197556, 0.9928034, 0.9959678, -0.08906575, 0.010743439, 0, 27.269878, 0)
 
 [node name="Player" parent="." unique_id=1186516781 instance=ExtResource("2_6txw3")]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 2.0631256, 0)
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 2.0631256, -14.027725)
