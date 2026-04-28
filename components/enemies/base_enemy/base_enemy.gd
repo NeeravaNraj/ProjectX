@@ -46,8 +46,8 @@ func get_position_near_ally():
 	for ally in Utils.get_in_range_from_group(self, &"enemy", stats.preferred_ally_distance):
 		if not _is_preferred_ally(ally): continue
 		var distance = global_position.distance_to(ally.global_position)
-		var player_distance = get_player_distance()
-		var ally_score = -distance + -player_distance * 0.5
+		var player_distance = ally.global_position.distance_to(player.global_position)
+		var ally_score = -distance * 0.5 + -player_distance
 		
 		if ally_score > score:
 			score = ally_score
@@ -69,9 +69,9 @@ func can_see_player():
 		player.global_position
 	)
 	var result = space_state.intersect_ray(query)
-	var collider = result.get(&"collider") as Player
+	var _collider = result.get(&"collider") as Player
 	
-	return collider
+	return _collider
 
 func set_navigation_target_position(target: Vector3):
 	last_target_position = target
@@ -140,7 +140,7 @@ func init() -> void:
 		
 	assert(player, "Expected player to be in 'player' group.")
 
-func _on_nav_ready(map_rid):
+func _on_nav_ready(_map_rid):
 	nav_map_ready = true
 
 func _is_preferred_ally(node: Node3D):
