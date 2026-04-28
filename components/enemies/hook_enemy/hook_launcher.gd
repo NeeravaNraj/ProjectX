@@ -13,8 +13,8 @@ var target_location: Vector3 = Vector3.ZERO:
 var target_distance: float = 0.0
 var distance_to_target: float = 0.0
 var hook_speed: float = 0.5
-
 var can_reset = true
+
 var t: float = 0.0
 var hook_range: float
 var original_rotation: Vector3
