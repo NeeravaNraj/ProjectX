@@ -1,13 +1,11 @@
 @tool
 extends BTDecorator
-	
+@export var tween_duration: float = 0.1
 
 func _tick(delta: float) -> Status:
 	var target = blackboard.get_var(&"target_position")
 	if target == null: return FAILURE
-	var direction = (target - agent.global_position)
-	direction.y = 0.0
-	if direction.length() > 0.001:
-		agent.look_at(agent.global_position + direction, Vector3.UP)
+	
+	agent.look_at_target(target, tween_duration)
 	
 	return get_child(0).execute(delta)

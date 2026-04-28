@@ -93,6 +93,30 @@ func move_towards_target():
 	velocity_component.set_velocity(direction * speed)
 	return true
 
+func look_at_target(target_pos: Vector3, duration = 0.5):
+	var tween = create_tween()
+
+	var origin = global_transform.origin
+	var dir = target_pos - origin
+	dir.y = 0
+
+	if dir.length() == 0:
+		return
+
+	dir = dir.normalized()
+
+	var from = global_transform.basis.get_rotation_quaternion()
+
+	var target_basis = Basis.looking_at(dir, Vector3.UP)
+	var to = target_basis.get_rotation_quaternion()
+
+	tween.tween_method(
+		func(q): global_transform.basis = Basis(q),
+		from, to,
+		duration
+	)
+	return tween
+
 func _physics_process(_delta: float) -> void:
 	if avoidance:
 		avoidance_component.perform_avoidance()
