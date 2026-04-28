@@ -111,6 +111,7 @@ debug_fill = false
 
 [node name="Velocity" parent="." unique_id=1034921754 instance=ExtResource("2_b1s2y")]
 unique_name_in_owner = true
+acceleration_coef = 10.0
 gravity = -35.0
 
 [node name="PlayerControl" parent="Velocity" unique_id=514334726 instance=ExtResource("3_eti3u")]
@@ -489,8 +490,6 @@ transform = Transform3D(-1.5, 0, -1.3113416e-07, 0, 1.5, 0, 1.3113416e-07, 0, -1
 player = NodePath("../../..")
 
 [node name="HitBox" parent="CameraPivot" unique_id=764278289 node_paths=PackedStringArray("exclude") instance=ExtResource("37_662td")]
-collision_layer = 0
-collision_mask = 8
 exclude = [NodePath("../../Areas/HurtBox")]
 
 [node name="AttackShape" type="CollisionShape3D" parent="CameraPivot/HitBox" unique_id=1166820792]
