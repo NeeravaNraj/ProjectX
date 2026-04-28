@@ -76,21 +76,10 @@ property_path = "player:global_position"
 target_var_name = &"target_position"
 load_on_tick = true
 
-[sub_resource type="BBNode" id="BBNode_vjwge"]
-saved_value = NodePath(".")
-resource_name = "."
-
-[sub_resource type="BTCallMethod" id="BTCallMethod_r6q8u"]
-node = SubResource("BBNode_vjwge")
-method = &"aim"
-_enabled = false
-
-[sub_resource type="BTSequence" id="BTSequence_f8noq"]
-children = [SubResource("BTCallMethod_r6q8u")]
-
-[sub_resource type="BTDecorator" id="BTDecorator_2dm16"]
-children = [SubResource("BTSequence_f8noq")]
-script = ExtResource("3_4dcra")
+[sub_resource type="BTAction" id="BTAction_q2uvi"]
+script = ExtResource("1_x723u")
+property_path = "can_move"
+target_var_name = &"can_move"
 
 [sub_resource type="BBVariant" id="BBVariant_aq7pw"]
 type = 1
@@ -115,6 +104,16 @@ value = SubResource("BBVariant_sedhh")
 script = ExtResource("4_pyq1p")
 invert = true
 
+[sub_resource type="BTFail" id="BTFail_aq7pw"]
+
+[sub_resource type="BTAlwaysSucceed" id="BTAlwaysSucceed_4dcra"]
+children = [SubResource("BTFail_aq7pw")]
+
+[sub_resource type="BTDecorator" id="BTDecorator_2dm16"]
+children = [SubResource("BTAlwaysSucceed_4dcra")]
+script = ExtResource("3_4dcra")
+tween_duration = null
+
 [sub_resource type="BTAction" id="BTAction_4dcra"]
 script = ExtResource("5_aq7pw")
 
@@ -133,11 +132,17 @@ script = ExtResource("6_a45mi")
 custom_name = "GoNearAlly"
 children = [SubResource("BTAction_4dcra"), SubResource("BTDecorator_a45mi")]
 
+[sub_resource type="BTAction" id="BTAction_kx5fn"]
+script = ExtResource("1_x723u")
+property_path = "player:global_position"
+target_var_name = &"target_position"
+load_on_tick = true
+
 [sub_resource type="BTAction" id="BTAction_03kng"]
 script = ExtResource("5_q2uvi")
 
 [sub_resource type="BTTimeLimit" id="BTTimeLimit_yvwfd"]
-time_limit = 2.0
+time_limit = 1.0
 children = [SubResource("BTAction_03kng")]
 
 [sub_resource type="BTDecorator" id="BTDecorator_fm0w8"]
@@ -146,7 +151,7 @@ script = ExtResource("6_a45mi")
 
 [sub_resource type="BTSequence" id="BTSequence_kx5fn"]
 custom_name = "Pursue"
-children = [SubResource("BTDecorator_fm0w8")]
+children = [SubResource("BTAction_kx5fn"), SubResource("BTDecorator_fm0w8")]
 
 [sub_resource type="BTSelector" id="BTSelector_pyq1p"]
 custom_name = "Selector"
@@ -154,7 +159,7 @@ children = [SubResource("BTSequence_4dcra"), SubResource("BTSequence_kx5fn")]
 
 [sub_resource type="BTSequence" id="BTSequence_1ig3l"]
 custom_name = "Movement"
-children = [SubResource("BTCheckVar_4dcra"), SubResource("BTCheckVar_ncaw1"), SubResource("BTCondition_ak7hp"), SubResource("BTSelector_pyq1p")]
+children = [SubResource("BTAction_q2uvi"), SubResource("BTCheckVar_4dcra"), SubResource("BTCheckVar_ncaw1"), SubResource("BTCondition_ak7hp"), SubResource("BTDecorator_2dm16"), SubResource("BTSelector_pyq1p")]
 
 [sub_resource type="BTCondition" id="BTCondition_ypp1t"]
 script = ExtResource("4_pyq1p")
@@ -162,26 +167,29 @@ script = ExtResource("4_pyq1p")
 [sub_resource type="BTAction" id="BTAction_4qrh5"]
 script = ExtResource("7_03kng")
 
-[sub_resource type="BTAction" id="BTAction_q2uvi"]
-script = ExtResource("1_x723u")
-property_path = "can_move"
-target_var_name = &"can_move"
+[sub_resource type="BTSequence" id="BTSequence_pyq1p"]
+children = [SubResource("BTAction_4qrh5")]
 
 [sub_resource type="BTDecorator" id="BTDecorator_vh06a"]
-children = [SubResource("BTAction_4qrh5"), SubResource("BTAction_q2uvi")]
+children = [SubResource("BTSequence_pyq1p")]
 script = ExtResource("8_kx5fn")
 duration_var = &"attack_speed"
 
+[sub_resource type="BTDecorator" id="BTDecorator_aq7pw"]
+children = [SubResource("BTDecorator_vh06a")]
+script = ExtResource("3_4dcra")
+tween_duration = null
+
 [sub_resource type="BTSequence" id="BTSequence_n1gk1"]
 custom_name = "Attack"
-children = [SubResource("BTCondition_ypp1t"), SubResource("BTDecorator_vh06a")]
+children = [SubResource("BTCondition_ypp1t"), SubResource("BTDecorator_aq7pw")]
 
 [sub_resource type="BTSelector" id="BTSelector_e2yuq"]
 children = [SubResource("BTSequence_1ig3l"), SubResource("BTSequence_n1gk1")]
 
 [sub_resource type="BTSequence" id="BTSequence_i0ot6"]
 custom_name = "Combat"
-children = [SubResource("BTCondition_cw8pe"), SubResource("BTCallMethod_284eb"), SubResource("BTAction_aq7pw"), SubResource("BTDecorator_2dm16"), SubResource("BTSelector_e2yuq")]
+children = [SubResource("BTCondition_cw8pe"), SubResource("BTCallMethod_284eb"), SubResource("BTAction_aq7pw"), SubResource("BTSelector_e2yuq")]
 
 [sub_resource type="BTSelector" id="BTSelector_b6gxr"]
 children = [SubResource("BTRunLimit_5rep5"), SubResource("BTSequence_i0ot6")]
