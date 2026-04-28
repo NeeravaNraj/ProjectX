@@ -112,7 +112,6 @@ children = [SubResource("BTFail_aq7pw")]
 [sub_resource type="BTDecorator" id="BTDecorator_2dm16"]
 children = [SubResource("BTAlwaysSucceed_4dcra")]
 script = ExtResource("3_4dcra")
-tween_duration = null
 
 [sub_resource type="BTAction" id="BTAction_4dcra"]
 script = ExtResource("5_aq7pw")
@@ -178,7 +177,6 @@ duration_var = &"attack_speed"
 [sub_resource type="BTDecorator" id="BTDecorator_aq7pw"]
 children = [SubResource("BTDecorator_vh06a")]
 script = ExtResource("3_4dcra")
-tween_duration = null
 
 [sub_resource type="BTSequence" id="BTSequence_n1gk1"]
 custom_name = "Attack"

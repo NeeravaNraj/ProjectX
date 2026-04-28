@@ -117,7 +117,6 @@ script = ExtResource("6_6mf22")
 [sub_resource type="BTDecorator" id="BTDecorator_yxqml"]
 children = [SubResource("BTAction_yxqml")]
 script = ExtResource("5_plt0x")
-tween_duration = null
 
 [sub_resource type="BBNode" id="BBNode_msyu5"]
 saved_value = NodePath("MeleeEnemySkin/AnimationPlayer")
