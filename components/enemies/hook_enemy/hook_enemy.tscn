@@ -15,7 +15,7 @@
 script = ExtResource("2_6xumf")
 attack_range = 20.0
 attack_speed = 2.0
-vision_distance = 35.0
+move_speed = 10.0
 aim_prediction_time = 0.4
 min_distance_from_target = 3.0
 preferred_ally_distance = 25.0
@@ -150,3 +150,4 @@ behavior_tree = ExtResource("8_ux2h8")
 blackboard_plan = SubResource("BlackboardPlan_2lajf")
 
 [connection signal="timeout" from="HookLauncher/ReelInTimer" to="HookLauncher" method="_on_reel_in_timer_timeout"]
+[connection signal="death" from="Health" to="." method="_on_health_death"]

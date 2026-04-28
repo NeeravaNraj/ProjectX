@@ -11,3 +11,7 @@ func _ready() -> void:
 func attack():
 	var target = predict_next_player_position(stats.aim_prediction_time)
 	hook_launcher.shoot(target)
+
+
+func _on_health_death() -> void:
+	queue_free()
