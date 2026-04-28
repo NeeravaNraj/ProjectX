@@ -16,7 +16,7 @@ script = ExtResource("2_6xumf")
 attack_range = 20.0
 attack_speed = 2.0
 vision_distance = 35.0
-aim_prediction_time = 0.3
+aim_prediction_time = 0.4
 min_distance_from_target = 3.0
 preferred_ally_distance = 25.0
 metadata/_custom_type_script = "uid://bxhdwvc7scbta"
@@ -73,14 +73,6 @@ material = SubResource("StandardMaterial3D_igq8d")
 size = Vector3(0.595, 0.18, 0.06)
 
 [sub_resource type="BlackboardPlan" id="BlackboardPlan_2lajf"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wp7s6"]
-transparency = 1
-cull_mode = 2
-albedo_color = Color(1, 1, 1, 0.21176471)
-
-[sub_resource type="SphereMesh" id="SphereMesh_g5dy0"]
-material = SubResource("StandardMaterial3D_wp7s6")
 
 [node name="HookEnemy" type="CharacterBody3D" unique_id=1248221304 groups=["enemy"]]
 script = ExtResource("1_smjpl")
@@ -156,8 +148,5 @@ metadata/_custom_type_script = "uid://ctctxwt2fa2di"
 [node name="BTPlayer" type="BTPlayer" parent="." unique_id=1476363840]
 behavior_tree = ExtResource("8_ux2h8")
 blackboard_plan = SubResource("BlackboardPlan_2lajf")
-
-[node name="AttackRange" type="MeshInstance3D" parent="." unique_id=420957994]
-mesh = SubResource("SphereMesh_g5dy0")
 
 [connection signal="timeout" from="HookLauncher/ReelInTimer" to="HookLauncher" method="_on_reel_in_timer_timeout"]

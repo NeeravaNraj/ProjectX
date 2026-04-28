@@ -30,9 +30,10 @@ func _ready() -> void:
 
 func shoot(target: Vector3):
 	target_location = target
+	hook_enemy.can_move = false
+	hook_enemy.velocity_component.set_speed(0)
 	target_distance = _get_distance_to_target()
 	look_at_direction = (global_position - target_location).normalized()
-	hook_enemy.can_move = false
 
 func reel_in():
 	can_reset = true
@@ -80,6 +81,7 @@ func _release():
 func _reset():
 	if distance_to_target > 1: return
 	
+	t = 0
 	can_reset = false
 	chain.visible = false
 	hook_enemy.can_move = true
