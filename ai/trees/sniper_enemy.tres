@@ -89,6 +89,7 @@ children = [SubResource("BTCallMethod_husr8")]
 [sub_resource type="BTDecorator" id="BTDecorator_xyemg"]
 children = [SubResource("BTSequence_5q1o7")]
 script = ExtResource("3_ggfyy")
+tween_duration = null
 
 [sub_resource type="BBVariant" id="BBVariant_m5d3e"]
 value_source = 1

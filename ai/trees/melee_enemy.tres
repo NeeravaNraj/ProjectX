@@ -192,6 +192,7 @@ value = SubResource("BBVariant_mlqlw")
 [sub_resource type="BTSequence" id="BTSequence_uji1f"]
 custom_name = "Searching"
 children = [SubResource("BTCheckTrigger_6mf22"), SubResource("BTDecorator_6mf22"), SubResource("BTRepeat_11n5j"), SubResource("BTSetVar_pitpp")]
+_enabled = false
 
 [sub_resource type="BBVariant" id="BBVariant_pitpp"]
 type = 1
@@ -240,6 +241,7 @@ script = ExtResource("8_6mf22")
 [sub_resource type="BTSequence" id="BTSequence_6mf22"]
 custom_name = "Returning"
 children = [SubResource("BTCheckVar_plt0x"), SubResource("BTSetVar_msyu5"), SubResource("BTAction_ok5bf"), SubResource("BTAction_pjtjv"), SubResource("BTPlayAnimation_3ke87"), SubResource("BTDecorator_g0v2d")]
+_enabled = false
 
 [sub_resource type="BBNode" id="BBNode_0ir6r"]
 saved_value = NodePath("MeleeEnemySkin/AnimationPlayer")
