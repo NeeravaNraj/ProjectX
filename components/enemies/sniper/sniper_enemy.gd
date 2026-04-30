@@ -25,7 +25,7 @@ func aim():
 	var old_rot = self.aim_pointer.rotation
 	self.aim_pointer.look_at(target)
 	var new_rot = self.aim_pointer.rotation
-	var slerped = old_rot.slerp(new_rot, 0.75)
+	var slerped = old_rot.slerp(new_rot, 1.0)
 	self.aim_pointer.rotation = slerped
 
 

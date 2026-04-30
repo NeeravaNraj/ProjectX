@@ -134,7 +134,7 @@ method = &"stop_aiming"
 script = ExtResource("7_ykfdl")
 
 [sub_resource type="BTDelay" id="BTDelay_gro14"]
-seconds = 0.25
+seconds = 0.3
 children = [SubResource("BTAction_5q1o7")]
 
 [sub_resource type="BBNode" id="BBNode_183e1"]
