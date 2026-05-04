@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://cb7p0ll2vs4wy" path="res://ai/tasks/utils/load_from_agent.gd" id="1_gro14"]
 [ext_resource type="Script" uid="uid://2elfftqoyiv5" path="res://ai/tasks/enemy/player_visible.gd" id="2_183e1"]
-[ext_resource type="Script" uid="uid://clxne7nqjnhw4" path="res://ai/tasks/enemy/face_target.gd" id="3_ggfyy"]
 [ext_resource type="Script" uid="uid://dbes8u32sy5l3" path="res://ai/tasks/enemy/can_attack_player.gd" id="4_r0ano"]
 [ext_resource type="Script" uid="uid://isx8qm6jjo5h" path="res://ai/tasks/enemy/move_towards.gd" id="5_td158"]
 [ext_resource type="Script" uid="uid://qrnlt6pu6rip" path="res://ai/tasks/enemy/face_movement_direction.gd" id="6_35otm"]
@@ -83,13 +82,6 @@ resource_name = "."
 node = SubResource("BBNode_0tvct")
 method = &"aim"
 
-[sub_resource type="BTSequence" id="BTSequence_5q1o7"]
-children = [SubResource("BTCallMethod_husr8")]
-
-[sub_resource type="BTDecorator" id="BTDecorator_xyemg"]
-children = [SubResource("BTSequence_5q1o7")]
-script = ExtResource("3_ggfyy")
-
 [sub_resource type="BBVariant" id="BBVariant_m5d3e"]
 value_source = 1
 variable = &"min_distance_from_target"
@@ -134,7 +126,7 @@ method = &"stop_aiming"
 script = ExtResource("7_ykfdl")
 
 [sub_resource type="BTDelay" id="BTDelay_gro14"]
-seconds = 0.3
+seconds = 0.25
 children = [SubResource("BTAction_5q1o7")]
 
 [sub_resource type="BBNode" id="BBNode_183e1"]
@@ -166,7 +158,7 @@ children = [SubResource("BTSequence_wxto5"), SubResource("BTSequence_4g488")]
 
 [sub_resource type="BTSequence" id="BTSequence_xyemg"]
 custom_name = "Combat"
-children = [SubResource("BTCondition_hni77"), SubResource("BTAction_invhn"), SubResource("BTCallMethod_4vkph"), SubResource("BTDecorator_xyemg"), SubResource("BTSelector_wxto5")]
+children = [SubResource("BTCondition_hni77"), SubResource("BTAction_invhn"), SubResource("BTCallMethod_4vkph"), SubResource("BTCallMethod_husr8"), SubResource("BTSelector_wxto5")]
 
 [sub_resource type="BTSelector" id="BTSelector_u0bhm"]
 children = [SubResource("BTRunLimit_4g488"), SubResource("BTSequence_xyemg")]
