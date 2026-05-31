@@ -1,0 +1,42 @@
+[gd_scene format=3 uid="uid://c6hvakn1n8cak"]
+
+[ext_resource type="Script" uid="uid://cmapdxpdvx8c4" path="res://components/level/tiling/tiling.gd" id="1_refvk"]
+[ext_resource type="Texture2D" uid="uid://3hiu3pa1d2b7" path="res://assets/textures/tiling/albedo.png" id="2_refvk"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_eebw1"]
+noise_type = 2
+frequency = 0.5
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_refvk"]
+width = 128
+height = 128
+noise = SubResource("FastNoiseLite_eebw1")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_eebw1"]
+albedo_texture = ExtResource("2_refvk")
+roughness = 0.95
+normal_enabled = true
+normal_scale = 0.1
+normal_texture = SubResource("NoiseTexture2D_refvk")
+uv1_triplanar = true
+texture_filter = 0
+
+[sub_resource type="QuadMesh" id="QuadMesh_refvk"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_eebw1")
+orientation = 1
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_eebw1"]
+size = Vector3(1, 0.01, 1)
+
+[node name="Tiling" type="Node3D" unique_id=1427391974]
+script = ExtResource("1_refvk")
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=522531877]
+mesh = SubResource("QuadMesh_refvk")
+
+[node name="StaticBody" type="StaticBody3D" parent="." unique_id=672939476]
+visible = false
+
+[node name="Collider" type="CollisionShape3D" parent="StaticBody" unique_id=143402569]
+shape = SubResource("BoxShape3D_eebw1")
