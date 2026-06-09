@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://bqlqc64hfocdm"]
+
+[ext_resource type="Script" uid="uid://b2ee16gm2kmfb" path="res://levels/level_2/level_2.gd" id="1_kve4o"]
+[ext_resource type="Texture2D" uid="uid://r2tuqss83luh" path="res://assets/Skyboxes/kloppenheim_02_puresky_2k.hdr" id="2_6w2vp"]
+[ext_resource type="PackedScene" uid="uid://chnlwpgv4jjbn" path="res://components/character/player.tscn" id="3_xnh5l"]
+[ext_resource type="PackedScene" uid="uid://c6hvakn1n8cak" path="res://components/level/concrete_surface/concrete_surface.tscn" id="9_j7rr8"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_g05yx"]
+panorama = ExtResource("2_6w2vp")
+energy_multiplier = 0.1
+
+[sub_resource type="Sky" id="Sky_dkjbd"]
+sky_material = SubResource("PanoramaSkyMaterial_g05yx")
+
+[sub_resource type="Environment" id="Environment_1mtom"]
+background_mode = 2
+background_energy_multiplier = 0.5
+sky = SubResource("Sky_dkjbd")
+glow_enabled = true
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.0
+
+[node name="PrototypeLevel" type="Node3D" unique_id=379384066]
+script = ExtResource("1_kve4o")
+
+[node name="SpawnPoint" type="Node3D" parent="." unique_id=333766659]
+
+[node name="LevelEnvironment" type="WorldEnvironment" parent="." unique_id=592416932]
+environment = SubResource("Environment_1mtom")
+
+[node name="Player" parent="." unique_id=1186516781 instance=ExtResource("3_xnh5l")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0.95, 0)
+
+[node name="Lights" type="Node3D" parent="." unique_id=2023466760]
+
+[node name="Sun" type="DirectionalLight3D" parent="Lights" unique_id=554838910]
+transform = Transform3D(-0.86602545, -0.25000003, -0.4330126, 0, -0.8660254, 0.5000001, -0.49999994, 0.4330128, 0.75000006, 0, 7, 0)
+light_energy = 0.25
+shadow_enabled = true
+
+[node name="ConcreteSurface" parent="." unique_id=1427391974 instance=ExtResource("9_j7rr8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5)
+size = Vector2(10, 25)

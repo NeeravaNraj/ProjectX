@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://c6hvakn1n8cak"]
 
-[ext_resource type="Script" uid="uid://cmapdxpdvx8c4" path="res://components/level/tiling/tiling.gd" id="1_refvk"]
+[ext_resource type="Script" uid="uid://cmapdxpdvx8c4" path="res://components/level/concrete_surface/concrete_surface.gd" id="1_refvk"]
 [ext_resource type="Texture2D" uid="uid://3hiu3pa1d2b7" path="res://assets/textures/tiling/albedo.png" id="2_refvk"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_eebw1"]
@@ -27,9 +27,9 @@ material = SubResource("StandardMaterial3D_eebw1")
 orientation = 1
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_eebw1"]
-size = Vector3(1, 0.01, 1)
+size = Vector3(10, 0.01, 25)
 
-[node name="Tiling" type="Node3D" unique_id=1427391974]
+[node name="ConcreteSurface" type="Node3D" unique_id=1427391974]
 script = ExtResource("1_refvk")
 
 [node name="Mesh" type="MeshInstance3D" parent="." unique_id=522531877]
