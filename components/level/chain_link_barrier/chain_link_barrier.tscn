@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://bhse3pj4mju1p"]
+
+[ext_resource type="Script" uid="uid://dr8fipn3015cg" path="res://components/level/chain_link_barrier/chain_link_barrier.gd" id="1_0qrs8"]
+[ext_resource type="Texture2D" uid="uid://dguph2jla3wpf" path="res://assets/textures/chain_link/albedo.png" id="2_g3xo5"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_eebw1"]
+transparency = 1
+albedo_texture = ExtResource("2_g3xo5")
+roughness = 0.25
+uv1_triplanar = true
+texture_filter = 0
+
+[sub_resource type="QuadMesh" id="QuadMesh_refvk"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_eebw1")
+orientation = 1
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_eebw1"]
+size = Vector3(1, 0.01, 1)
+
+[node name="ChainLinkBarrier" type="Node3D" unique_id=1427391974]
+script = ExtResource("1_0qrs8")
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=522531877]
+mesh = SubResource("QuadMesh_refvk")
+
+[node name="StaticBody" type="StaticBody3D" parent="." unique_id=672939476]
+visible = false
+
+[node name="Collider" type="CollisionShape3D" parent="StaticBody" unique_id=143402569]
+shape = SubResource("BoxShape3D_eebw1")

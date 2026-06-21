@@ -3,6 +3,8 @@
 [ext_resource type="Script" uid="uid://b2ee16gm2kmfb" path="res://levels/level_2/level_2.gd" id="1_kve4o"]
 [ext_resource type="Texture2D" uid="uid://r2tuqss83luh" path="res://assets/Skyboxes/kloppenheim_02_puresky_2k.hdr" id="2_6w2vp"]
 [ext_resource type="PackedScene" uid="uid://chnlwpgv4jjbn" path="res://components/character/player.tscn" id="3_xnh5l"]
+[ext_resource type="PackedScene" uid="uid://bhse3pj4mju1p" path="res://components/level/chain_link_barrier/chain_link_barrier.tscn" id="5_4nbo2"]
+[ext_resource type="PackedScene" uid="uid://dq7onm5wd6l3j" path="res://components/level/storefront/storefront.tscn" id="6_8r3qo"]
 [ext_resource type="PackedScene" uid="uid://c6hvakn1n8cak" path="res://components/level/concrete_surface/concrete_surface.tscn" id="9_j7rr8"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_g05yx"]
@@ -16,9 +18,12 @@ sky_material = SubResource("PanoramaSkyMaterial_g05yx")
 background_mode = 2
 background_energy_multiplier = 0.5
 sky = SubResource("Sky_dkjbd")
+ssao_enabled = true
+ssao_radius = 5.3
+ssao_intensity = 5.6
 glow_enabled = true
 volumetric_fog_enabled = true
-volumetric_fog_density = 0.0
+volumetric_fog_density = 0.005
 
 [node name="PrototypeLevel" type="Node3D" unique_id=379384066]
 script = ExtResource("1_kve4o")
@@ -38,6 +43,44 @@ transform = Transform3D(-0.86602545, -0.25000003, -0.4330126, 0, -0.8660254, 0.5
 light_energy = 0.25
 shadow_enabled = true
 
+[node name="OmniLight3D" type="OmniLight3D" parent="Lights" unique_id=1725742248]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5396514, 3, -2)
+light_color = Color(1, 0.44996005, 0.3152336, 1)
+light_energy = 0.75
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="Lights" unique_id=1725976427]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5396514, 3, 6)
+light_color = Color(1, 0.44996005, 0.3152336, 1)
+light_energy = 0.75
+
 [node name="ConcreteSurface" parent="." unique_id=1427391974 instance=ExtResource("9_j7rr8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5)
 size = Vector2(10, 25)
+
+[node name="ChainLinkBarrier" parent="." unique_id=1693209547 instance=ExtResource("5_4nbo2")]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 1.5050001, -4)
+size = Vector2(6, 3)
+
+[node name="Storefront" parent="." unique_id=87491689 instance=ExtResource("6_8r3qo")]
+transform = Transform3D(-4.371139e-08, -1, 4.371139e-08, 0, -4.371139e-08, -1, 1, -4.371139e-08, 1.9106855e-15, 3, 1.5049999, -2)
+size = Vector2(4, 3)
+
+[node name="Storefront2" parent="." unique_id=1924851995 instance=ExtResource("6_8r3qo")]
+transform = Transform3D(-4.3711392e-08, 1.0000001, 0, 0, 0, -1.0000001, -1, -4.3711395e-08, 0, -3, 1.5050001, -2)
+size = Vector2(4, 3)
+
+[node name="Storefront3" parent="." unique_id=21232282 instance=ExtResource("6_8r3qo")]
+transform = Transform3D(-4.371139e-08, -1, 4.371139e-08, 0, -4.371139e-08, -1, 1, -4.371139e-08, 1.9106855e-15, 3, 1.5049999, 2)
+size = Vector2(4, 3)
+
+[node name="Storefront4" parent="." unique_id=1283658374 instance=ExtResource("6_8r3qo")]
+transform = Transform3D(-4.3711392e-08, 1.0000001, 0, 0, 0, -1.0000001, -1, -4.3711395e-08, 0, -3, 1.5050001, 2)
+size = Vector2(4, 3)
+
+[node name="Storefront5" parent="." unique_id=600357084 instance=ExtResource("6_8r3qo")]
+transform = Transform3D(-4.371139e-08, -1, 4.371139e-08, 0, -4.371139e-08, -1, 1, -4.371139e-08, 1.9106855e-15, 3, 1.5049999, 6)
+size = Vector2(4, 3)
+
+[node name="Storefront6" parent="." unique_id=275775172 instance=ExtResource("6_8r3qo")]
+transform = Transform3D(-4.3711392e-08, 1.0000001, 0, 0, 0, -1.0000001, -1, -4.3711395e-08, 0, -3, 1.5050001, 6)
+size = Vector2(4, 3)

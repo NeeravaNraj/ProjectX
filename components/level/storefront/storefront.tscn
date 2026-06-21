@@ -1,0 +1,34 @@
+[gd_scene format=3 uid="uid://dq7onm5wd6l3j"]
+
+[ext_resource type="Script" uid="uid://cesgyi5g4yq52" path="res://components/level/storefront/storefront.gd" id="1_anv0i"]
+[ext_resource type="Texture2D" uid="uid://606t6srr32pb" path="res://assets/textures/storefront/albedo.png" id="2_uvdjr"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_eebw1"]
+transparency = 1
+albedo_texture = ExtResource("2_uvdjr")
+roughness = 0.75
+uv1_scale = Vector3(0.315, 0.315, 0.315)
+uv1_offset = Vector3(0.5, 0, 0.485)
+uv1_triplanar = true
+texture_filter = 0
+
+[sub_resource type="QuadMesh" id="QuadMesh_refvk"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_eebw1")
+size = Vector2(4, 3)
+orientation = 1
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_eebw1"]
+size = Vector3(1, 0.01, 1)
+
+[node name="Storefront" type="Node3D" unique_id=1427391974]
+script = ExtResource("1_anv0i")
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=522531877]
+mesh = SubResource("QuadMesh_refvk")
+
+[node name="StaticBody" type="StaticBody3D" parent="." unique_id=672939476]
+visible = false
+
+[node name="Collider" type="CollisionShape3D" parent="StaticBody" unique_id=143402569]
+shape = SubResource("BoxShape3D_eebw1")
