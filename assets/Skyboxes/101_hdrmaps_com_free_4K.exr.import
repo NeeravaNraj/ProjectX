@@ -2,20 +2,21 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://xrw6xwt1c4vw"
-path="res://.godot/imported/color_palette.png-2ea42a639ce71e7f9fa14d381bda6277.ctex"
+uid="uid://b65cawgg7ae2p"
+path.bptc="res://.godot/imported/101_hdrmaps_com_free_4K.exr-c93b29129552a2126af05ecae5a6456e.bptc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
-source_file="res://assets/color_palette.png"
-dest_files=["res://.godot/imported/color_palette.png-2ea42a639ce71e7f9fa14d381bda6277.ctex"]
+source_file="res://assets/Skyboxes/101_hdrmaps_com_free_4K.exr"
+dest_files=["res://.godot/imported/101_hdrmaps_com_free_4K.exr-c93b29129552a2126af05ecae5a6456e.bptc.ctex"]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0
@@ -23,7 +24,7 @@ compress/rdo_quality_loss=0.0
 compress/hdr_compression=1
 compress/normal_map=0
 compress/channel_pack=0
-mipmaps/generate=false
+mipmaps/generate=true
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""
@@ -37,4 +38,4 @@ process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
-detect_3d/compress_to=1
+detect_3d/compress_to=0
