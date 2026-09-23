@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://bom6bb2bhqel5"]
+
+[ext_resource type="PackedScene" uid="uid://1o74ohavdton" path="res://creative/building_models/rectangle_housing_building.blend" id="1_jctf1"]
+[ext_resource type="Texture2D" uid="uid://buf0ow7d7m028" path="res://assets/models/50x80x40_generic_building/brick_albedo.png" id="2_o0g65"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o0g65"]
+albedo_texture = ExtResource("2_o0g65")
+uv1_scale = Vector3(0.5, 0.5, 0.5)
+uv1_triplanar = true
+
+[node name="rectangle_housing_building" unique_id=736312509 instance=ExtResource("1_jctf1")]
+
+[node name="Cube" parent="." index="0" unique_id=599098900]
+visible = false
+
+[node name="Cube_002" parent="." index="1" unique_id=575448583]
+material_override = SubResource("StandardMaterial3D_o0g65")

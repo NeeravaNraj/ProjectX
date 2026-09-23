@@ -1,15 +1,17 @@
 [gd_scene format=3 uid="uid://bqlqc64hfocdm"]
 
 [ext_resource type="Script" uid="uid://b2ee16gm2kmfb" path="res://levels/level_2/level_2.gd" id="1_kve4o"]
-[ext_resource type="Texture2D" uid="uid://r2tuqss83luh" path="res://assets/Skyboxes/kloppenheim_02_puresky_2k.hdr" id="2_6w2vp"]
+[ext_resource type="Texture2D" uid="uid://b65cawgg7ae2p" path="res://assets/Skyboxes/101_hdrmaps_com_free_4K.exr" id="2_8r3qo"]
 [ext_resource type="PackedScene" uid="uid://chnlwpgv4jjbn" path="res://components/character/player.tscn" id="3_xnh5l"]
 [ext_resource type="PackedScene" uid="uid://bhse3pj4mju1p" path="res://components/level/chain_link_barrier/chain_link_barrier.tscn" id="5_4nbo2"]
 [ext_resource type="PackedScene" uid="uid://b5bofk651r337" path="res://assets/models/50x80x40_generic_building/50x80x40_generic_building.blend" id="7_0butd"]
+[ext_resource type="PackedScene" uid="uid://bom6bb2bhqel5" path="res://creative/building_models/rectangle_housing_building.tscn" id="7_8y2in"]
+[ext_resource type="PackedScene" uid="uid://c0dyphuwsa4mg" path="res://creative/building_models/rounded_rectangle_housing_building.tscn" id="8_ubkp0"]
 [ext_resource type="PackedScene" uid="uid://c6hvakn1n8cak" path="res://components/level/concrete_surface/concrete_surface.tscn" id="9_j7rr8"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_g05yx"]
-panorama = ExtResource("2_6w2vp")
-energy_multiplier = 0.1
+panorama = ExtResource("2_8r3qo")
+energy_multiplier = 0.2
 
 [sub_resource type="Sky" id="Sky_dkjbd"]
 sky_material = SubResource("PanoramaSkyMaterial_g05yx")
@@ -18,6 +20,7 @@ sky_material = SubResource("PanoramaSkyMaterial_g05yx")
 background_mode = 2
 background_energy_multiplier = 0.25
 sky = SubResource("Sky_dkjbd")
+sky_rotation = Vector3(-0.17453292, -0.7853982, 0)
 ambient_light_source = 3
 ambient_light_color = Color(1, 1, 1, 1)
 ambient_light_sky_contribution = 0.9
@@ -28,7 +31,10 @@ ssao_enabled = true
 ssao_radius = 5.3
 ssao_intensity = 5.6
 glow_enabled = true
-volumetric_fog_enabled = true
+fog_enabled = true
+fog_light_color = Color(0.6298033, 0.52106756, 0.50348824, 1)
+fog_light_energy = 0.05
+fog_sky_affect = 0.75
 volumetric_fog_density = 0.005
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xyemg"]
@@ -60,8 +66,9 @@ transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0
 [node name="Lights" type="Node3D" parent="." unique_id=2023466760]
 
 [node name="Sun" type="DirectionalLight3D" parent="Lights" unique_id=554838910]
-transform = Transform3D(-0.86602545, -0.25000003, -0.4330126, 0, -0.8660254, 0.5000001, -0.49999994, 0.4330128, 0.75000006, 0, 7, 0)
-light_energy = 0.01
+transform = Transform3D(-0.7071068, -0.35355344, -0.6123723, 0, -0.8660254, 0.50000006, -0.7071067, 0.35355347, 0.6123725, 0, 27, 0)
+light_color = Color(0.99739736, 0.55074805, 0.41041902, 1)
+light_energy = 0.25
 shadow_enabled = true
 
 [node name="OmniLight3D" type="OmniLight3D" parent="Lights" unique_id=1725742248]
@@ -78,7 +85,7 @@ light_energy = 0.75
 
 [node name="Ground" parent="." unique_id=1427391974 instance=ExtResource("9_j7rr8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5)
-size = Vector2(75, 75)
+size = Vector2(150, 150)
 
 [node name="ChainLinkBarrier" parent="." unique_id=1693209547 instance=ExtResource("5_4nbo2")]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 1.5050001, -7)
@@ -96,29 +103,92 @@ transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 9.97
 [node name="50x80x40_generic_building2" parent="Buildings" unique_id=1710349841 instance=ExtResource("7_0butd")]
 transform = Transform3D(1, 0, -1.7484555e-07, 0, 1, 0, 1.7484555e-07, 0, 1, -10.027, 5, 2.864)
 
-[node name="50x80x40_generic_building3" parent="Buildings" unique_id=994023249 instance=ExtResource("7_0butd")]
-transform = Transform3D(-2.1855695e-07, 0, -1, 0, 1, 0, 1, 0, -2.1855695e-07, -0.027000427, 5, -23.136)
+[node name="rectangle_housing_building" parent="Buildings" unique_id=736312509 instance=ExtResource("7_8y2in")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 39.199337, 0.024658544, 22.71745)
 
-[node name="50x80x40_generic_building4" parent="Buildings" unique_id=823413582 instance=ExtResource("7_0butd")]
-transform = Transform3D(-2.1855695e-07, 0, -1, 0, 1, 0, 1, 0, -2.1855695e-07, 19.973, 5, -23.136)
+[node name="rounded_rectangle_housing_building" parent="Buildings" unique_id=1562802811 instance=ExtResource("8_ubkp0")]
+transform = Transform3D(0.70710677, 0, -0.70710677, 0, 1, 0, 0.70710677, 0, 0.70710677, -31.489456, 0.0049972534, 38.855175)
 
-[node name="50x80x40_generic_building5" parent="Buildings" unique_id=1888638833 instance=ExtResource("7_0butd")]
-transform = Transform3D(3.059797e-07, 0, 1, 0, 1, 0, -1, 0, 3.059797e-07, -26.027, 5, -1.1359997)
+[node name="rectangle_housing_building2" parent="Buildings" unique_id=1244904172 instance=ExtResource("7_8y2in")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.199337, 0.024658544, -18.28255)
 
-[node name="50x80x40_generic_building6" parent="Buildings" unique_id=816959844 instance=ExtResource("7_0butd")]
-transform = Transform3D(-2.1855695e-07, 0, -1, 0, 1, 0, 1, 0, -2.1855695e-07, -20.027, 5, -23.136)
+[node name="rounded_rectangle_housing_building2" parent="Buildings" unique_id=2070163594 instance=ExtResource("8_ubkp0")]
+transform = Transform3D(0, 0, -0.99999994, 0, 1, 0, 0.99999994, 0, 0, -10.489456, 0.0049972534, -17.144825)
 
-[node name="50x80x40_generic_building7" parent="Buildings" unique_id=923450615 instance=ExtResource("7_0butd")]
-transform = Transform3D(-1, 0, 2.6226834e-07, 0, 1, 0, -2.6226834e-07, 0, -1, 35.973, 5, -7.1359997)
+[node name="50x80x40_generic_building3" parent="Buildings" unique_id=1372313144 instance=ExtResource("7_0butd")]
+transform = Transform3D(1, 0, -1.7484555e-07, 0, 1, 0, 1.7484555e-07, 0, 1, -10.027, 5, 21.864)
 
-[node name="50x80x40_generic_building8" parent="Buildings" unique_id=1280874831 instance=ExtResource("7_0butd")]
-transform = Transform3D(1, 0, -1.7484555e-07, 0, 1, 0, 1.7484555e-07, 0, 1, -42.027, 5, -17.136)
+[node name="50x80x40_generic_building4" parent="Buildings" unique_id=1616556473 instance=ExtResource("7_0butd")]
+transform = Transform3D(1, 0, -1.7484555e-07, 0, 1, 0, 1.7484555e-07, 0, 1, -10.027, 15, 21.864)
 
-[node name="50x80x40_generic_building9" parent="Buildings" unique_id=1644711197 instance=ExtResource("7_0butd")]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 9.973, 5, 22.864)
+[node name="rectangle_housing_building3" parent="Buildings" unique_id=848202862 instance=ExtResource("7_8y2in")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.199337, 0.024658544, 37.71745)
 
-[node name="50x80x40_generic_building10" parent="Buildings" unique_id=224705753 instance=ExtResource("7_0butd")]
-transform = Transform3D(1, 0, -1.7484555e-07, 0, 1, 0, 1.7484555e-07, 0, 1, -10.027, 5, 22.864)
+[node name="Buildings2" type="Node3D" parent="." unique_id=459529722]
+transform = Transform3D(0.25881907, 0, -0.9659258, 0, 1, 0, 0.9659258, 0, 0.25881907, -29, 0, 80)
+
+[node name="50x80x40_generic_building" parent="Buildings2" unique_id=1624095064 instance=ExtResource("7_0butd")]
+transform = Transform3D(-0.9999998, 0, 8.940697e-08, 0, 1, 0, -8.940697e-08, 0, -0.9999998, 71.13092, 5, 87.57944)
+
+[node name="50x80x40_generic_building2" parent="Buildings2" unique_id=1668424438 instance=ExtResource("7_0butd")]
+transform = Transform3D(1, 0, -1.7484555e-07, 0, 1, 0, 1.7484555e-07, 0, 1, -10.027, 5, 2.864)
+
+[node name="rectangle_housing_building" parent="Buildings2" unique_id=1636272685 instance=ExtResource("7_8y2in")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 44.634537, 0.024658544, 2.4330063)
+
+[node name="rounded_rectangle_housing_building" parent="Buildings2" unique_id=1055820914 instance=ExtResource("8_ubkp0")]
+transform = Transform3D(0.7071065, 0, -0.70710635, 0, 1, 0, 0.70710635, 0, 0.7071065, 37.03434, 27.004997, 107.40869)
+
+[node name="rectangle_housing_building2" parent="Buildings2" unique_id=279912742 instance=ExtResource("7_8y2in")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.199337, 0.024658544, -18.28255)
+
+[node name="rounded_rectangle_housing_building2" parent="Buildings2" unique_id=180650833 instance=ExtResource("8_ubkp0")]
+transform = Transform3D(0, 0, -0.9999999, 0, 1, 0, 0.9999999, 0, 0, 11.555954, 0.0049972534, -29.87275)
+
+[node name="50x80x40_generic_building3" parent="Buildings2" unique_id=1410540104 instance=ExtResource("7_0butd")]
+transform = Transform3D(1, 0, -1.7881393e-07, 0, 1, 0, 1.7881393e-07, 0, 1, -25.241577, 5, 32.28112)
+
+[node name="50x80x40_generic_building4" parent="Buildings2" unique_id=721617774 instance=ExtResource("7_0butd")]
+transform = Transform3D(1, 0, -1.7881393e-07, 0, 1, 0, 1.7881393e-07, 0, 1, -25.241577, 15, 32.28112)
+
+[node name="rectangle_housing_building3" parent="Buildings2" unique_id=1019631319 instance=ExtResource("7_8y2in")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.78067, 0.024658544, 113.21695)
+
+[node name="50x80x40_generic_building5" parent="Buildings2" unique_id=2017398388 instance=ExtResource("7_0butd")]
+transform = Transform3D(0.96592575, 0, -0.25881922, 0, 1, 0, 0.25881922, 0, 0.96592575, -7.5403366, 5, -29.598557)
+
+[node name="rounded_rectangle_housing_building3" parent="Buildings2" unique_id=1790157254 instance=ExtResource("8_ubkp0")]
+transform = Transform3D(0.7071065, 0, -0.70710635, 0, 1, 0, 0.70710635, 0, 0.7071065, 37.03434, 55.004997, 107.40869)
+
+[node name="rounded_rectangle_housing_building4" parent="Buildings2" unique_id=1312106076 instance=ExtResource("8_ubkp0")]
+transform = Transform3D(0.7071065, 0, -0.70710635, 0, 1, 0, 0.70710635, 0, 0.7071065, 37.03434, 85.005, 107.40869)
+
+[node name="rounded_rectangle_housing_building5" parent="Buildings2" unique_id=164961497 instance=ExtResource("8_ubkp0")]
+transform = Transform3D(0.7071065, 0, -0.70710635, 0, 1, 0, 0.70710635, 0, 0.7071065, 96.61215, -4.9950027, 113.019745)
+
+[node name="rounded_rectangle_housing_building6" parent="Buildings2" unique_id=1164366610 instance=ExtResource("8_ubkp0")]
+transform = Transform3D(0.7071065, 0, -0.70710635, 0, 1, 0, 0.70710635, 0, 0.7071065, 96.61215, 23.004997, 113.019745)
+
+[node name="rounded_rectangle_housing_building7" parent="Buildings2" unique_id=53087227 instance=ExtResource("8_ubkp0")]
+transform = Transform3D(0.7071065, 0, -0.70710635, 0, 1, 0, 0.70710635, 0, 0.7071065, 96.61215, 53.004997, 113.019745)
+
+[node name="rounded_rectangle_housing_building8" parent="Buildings2" unique_id=1614432270 instance=ExtResource("8_ubkp0")]
+transform = Transform3D(-0.25881892, 0, -0.9659252, 0, 1, 0, 0.9659252, 0, -0.25881892, 154.53917, 38.004997, 260.0213)
+
+[node name="rounded_rectangle_housing_building9" parent="Buildings2" unique_id=428795836 instance=ExtResource("8_ubkp0")]
+transform = Transform3D(-0.25881892, 0, -0.9659252, 0, 1, 0, 0.9659252, 0, -0.25881892, 154.53917, 66.005, 260.0213)
+
+[node name="rounded_rectangle_housing_building10" parent="Buildings2" unique_id=168193257 instance=ExtResource("8_ubkp0")]
+transform = Transform3D(-0.25881892, 0, -0.9659252, 0, 1, 0, 0.9659252, 0, -0.25881892, 154.53917, 96.005, 260.0213)
+
+[node name="rectangle_housing_building4" parent="Buildings2" unique_id=455653367 instance=ExtResource("7_8y2in")]
+transform = Transform3D(0.7071068, 0, 0.7071067, 0, 1, 0, -0.7071067, 0, 0.7071068, 136.69713, 37.02466, 153.4047)
+
+[node name="rectangle_housing_building5" parent="Buildings2" unique_id=847068707 instance=ExtResource("7_8y2in")]
+transform = Transform3D(0.7071068, 0, 0.7071067, 0, 1, 0, -0.7071067, 0, 0.7071068, 136.69713, 62.02466, 153.40466)
+
+[node name="rectangle_housing_building6" parent="Buildings2" unique_id=1317512895 instance=ExtResource("7_8y2in")]
+transform = Transform3D(0.7071068, 0, 0.7071067, 0, 1, 0, -0.7071067, 0, 0.7071068, 136.69713, 88.02466, 153.40466)
 
 [node name="LightPole" type="MeshInstance3D" parent="." unique_id=934406644]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 3, 6)
