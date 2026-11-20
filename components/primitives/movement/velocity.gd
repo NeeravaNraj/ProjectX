@@ -9,9 +9,11 @@ var speed_modifier: float = 0.0
 
 var gravity_modifier := 0.0
 var acceleration_modifer := 0.0
-var deceleration_modifer := 0.0
 var airborne_acceleration_factor := 0.14
 var airborne_acceleration_factor_modifier := 0.0
+var deceleration_modifer := 0.0
+var airborne_deceleration_factor := 0.14
+var airborne_deceleration_factor_modifier := 0.0
 
 var disable_interpolation = false
 
@@ -58,13 +60,22 @@ func _physics_process(delta: float) -> void:
 	
 	var final_speed = get_speed()
 	var acceleration = acceleration_coef + acceleration_modifer
-	var deceleration = deceleration_coef * delta
+	var deceleration = deceleration_coef + deceleration_modifer
+	
 	
 	var g_acceleration = acceleration * delta
 	var a_acceleration = acceleration * delta * (airborne_acceleration_factor + airborne_acceleration_factor_modifier)
 
-	acceleration = g_acceleration if target.is_on_floor() else a_acceleration
+	var g_deceleration = deceleration * delta
+	var a_deceleration = deceleration * delta * (airborne_deceleration_factor * airborne_deceleration_factor_modifier)
 	
+	if target.is_on_floor():
+		acceleration = g_acceleration
+		deceleration = g_deceleration
+	else:
+		acceleration = a_acceleration
+		deceleration = a_deceleration
+
 	if not disable_interpolation:
 		if direction:
 			var speed_scaled_direction = Vector2(direction.x, direction.z) * final_speed
