@@ -4,3 +4,6 @@ local/
 .godot/
 /android/
 *.blend[0-9]*
+
+level_gen
+level_gen/.venv
