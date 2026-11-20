@@ -15,7 +15,6 @@ warnings/check_invalid_track_paths=false
 [application]
 
 config/name="ProjectX"
-run/main_scene="uid://cqkdv40k1wg62"
 config/features=PackedStringArray("4.7", "Forward Plus")
 config/icon="uid://cyweugncmab2"
 
@@ -131,3 +130,26 @@ common/physics_interpolation=true
 
 textures/canvas_textures/default_texture_filter=0
 rendering_device/driver.windows="d3d12"
+
+[shader_globals]
+
+specular_smoothness={
+"type": "float",
+"value": 0.05
+}
+fresnel_smoothness={
+"type": "float",
+"value": 0.05
+}
+outline_width={
+"type": "float",
+"value": 8.0
+}
+outline_color={
+"type": "color",
+"value": Color(0, 0, 0, 1)
+}
+diffuse_curve={
+"type": "sampler2D",
+"value": "res://resources/diffuse_curve.tres"
+}
