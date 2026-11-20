@@ -30,3 +30,11 @@ class_name PlayerStats extends Resource
 @export var idle_momentum_growth_factor: float = -0.1
 @export var boost_momentum_growth_factor: float = -0.1
 @export var attack_momentum_growth_factor: float = 0.2
+
+@export var damage: float = 0
+@export var crit_chance: float = 0
+@export var crit_damage: float = 0
+
+@export var damage_resistance: float = 10
+
+@export var air_jump_max: int = 0
