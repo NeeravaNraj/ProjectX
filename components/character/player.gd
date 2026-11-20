@@ -13,8 +13,8 @@ class_name Player extends CharacterBody3D
 @onready var state_chart: StateChart = %StateChart
 @onready var debug_gui = $UI/StateChartDebugger
 @onready var shuriken_ctrl = $ShurikenCtrl
-@onready var stat_energy: Stat = $Stats/Energy
-@onready var stat_momentum: Stat = $Stats/Momentum
+@onready var stat_energy: GrowingStatComponent = $Stats/Energy
+@onready var stat_momentum: GrowingStatComponent = $Stats/Momentum
 @onready var hurt_box: HurtBox = $Areas/HurtBox
 @onready var weaponry = $Weaponry
 

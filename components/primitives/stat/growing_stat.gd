@@ -1,4 +1,4 @@
-class_name Stat extends Node
+class_name GrowingStatComponent extends Node
 
 @export_category("Config")
 @export var value: float = 0.0
