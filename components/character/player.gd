@@ -21,6 +21,7 @@ class_name Player extends CharacterBody3D
 @onready var debug_tracker := %DebugTracker
 @onready var _health: Health = $Stats/Health
 @onready var _velocity: VelocityComponent = %Velocity
+@onready var velocity_component: VelocityComponent = _velocity
 
 var spawn_point = Vector3.ZERO
 var space_state: PhysicsDirectSpaceState3D
@@ -33,7 +34,9 @@ func sprint():
 
 func dash():
 	var raw_direction = _velocity.raw_direction
-	var direction = transform.basis * Vector3(raw_direction.x, 0.0, raw_direction.y)
+	var pitch = camera_pivot.current_rotation.x / 1.6
+	pitch = clamp(pitch, -0.2, 0.2)
+	var direction = transform.basis * Vector3(raw_direction.x, pitch, raw_direction.y)
 	
 	if is_on_floor():
 		var floor_normal = get_floor_normal()
