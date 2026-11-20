@@ -1,17 +1,217 @@
-[gd_scene format=3 uid="uid://df48r72bb0sup"]
+[gd_scene format=3 uid="uid://d2d56jlo050gs"]
 
-[ext_resource type="PackedScene" uid="uid://duucgfho23ric" path="res://levels/level_1/alt_hq/assets/level1.blend" id="1_jvd5w"]
-[ext_resource type="Script" path="res://levels/level_1/alt_hq/alt_hq_model.gd" id="2_23gi7"]
+[ext_resource type="PackedScene" uid="uid://bcmc3p6cqwf6s" path="res://level_gen/levels/layout_2/layout2.blend" id="1_7068t"]
+[ext_resource type="Texture2D" uid="uid://fwxoqbisuw6q" path="res://assets/kenney_prototype-textures/PNG/Dark/texture_13.png" id="2_23gi7"]
+[ext_resource type="Material" uid="uid://e62hjq541vhh" path="res://levels/assets/materials/dev_pillar.tres" id="2_d3516"]
+[ext_resource type="Material" uid="uid://bttykoj5cm70n" path="res://levels/assets/materials/dev_platform.tres" id="2_vo6s2"]
+[ext_resource type="Material" uid="uid://difyx76830i40" path="res://levels/assets/materials/dev_level_wall.tres" id="3_46vko"]
+[ext_resource type="Texture2D" uid="uid://ceemcjv03ex2i" path="res://assets/kenney_prototype-textures/PNG/Dark/texture_04.png" id="3_ylou5"]
+[ext_resource type="Material" uid="uid://r0ti7c4tjrun" path="res://levels/assets/materials/dev_obstacle.tres" id="5_d3516"]
+[ext_resource type="Material" uid="uid://31clocsh6xli" path="res://levels/assets/materials/dev_interactible.tres" id="8_krffi"]
 
-[node name="AltHqModel" unique_id=286963825 instance=ExtResource("1_jvd5w")]
-script = ExtResource("2_23gi7")
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d3516"]
+albedo_texture = ExtResource("3_ylou5")
+uv1_triplanar = true
+uv1_world_triplanar = true
 
-[node name="Room1_Platform_001" parent="Room1" parent_id_path=PackedInt32Array(1152512342) index="8" unique_id=1608276113]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.005154, 0.03881836, 110.96165)
-visible = false
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_23gi7"]
+albedo_texture = ExtResource("2_23gi7")
+uv1_triplanar = true
+uv1_world_triplanar = true
 
-[node name="Room1_Wall" parent="Room1" parent_id_path=PackedInt32Array(1152512342) index="11" unique_id=363731807]
-visible = false
+[node name="AltHq" unique_id=182571372 instance=ExtResource("1_7068t")]
 
-[node name="Room1_Wall_001" parent="Room1" parent_id_path=PackedInt32Array(1152512342) index="12" unique_id=1572473339]
-visible = false
+[node name="Pillar_008" parent="." index="8" unique_id=1987819236]
+material_override = ExtResource("2_d3516")
+
+[node name="Pillar_014" parent="." index="9" unique_id=530455221]
+material_override = ExtResource("2_d3516")
+
+[node name="Pillar_019" parent="." index="10" unique_id=719209010]
+material_override = ExtResource("3_46vko")
+
+[node name="Platform_001" parent="." index="11" unique_id=167790286]
+material_override = ExtResource("2_vo6s2")
+
+[node name="Platform_002" parent="." index="12" unique_id=112240221]
+material_override = ExtResource("3_46vko")
+
+[node name="Platform_003" parent="." index="13" unique_id=276419646]
+material_override = ExtResource("2_vo6s2")
+
+[node name="Platform_004" parent="." index="14" unique_id=760071979]
+material_override = ExtResource("2_vo6s2")
+
+[node name="Platform_005" parent="." index="15" unique_id=924955913]
+material_override = ExtResource("3_46vko")
+
+[node name="Platform_006" parent="." index="16" unique_id=926256470]
+material_override = ExtResource("2_vo6s2")
+
+[node name="Platform_007" parent="." index="17" unique_id=1488938163]
+material_override = ExtResource("2_vo6s2")
+
+[node name="Platform_008" parent="." index="18" unique_id=1509854237]
+material_override = ExtResource("2_vo6s2")
+
+[node name="Platform_009" parent="." index="19" unique_id=102733896]
+material_override = ExtResource("2_vo6s2")
+
+[node name="Platform_010" parent="." index="20" unique_id=228421292]
+material_override = ExtResource("3_46vko")
+
+[node name="Platform_011" parent="." index="21" unique_id=505656984]
+material_override = ExtResource("2_vo6s2")
+
+[node name="Platform_012" parent="." index="22" unique_id=57690486]
+material_override = ExtResource("2_vo6s2")
+
+[node name="Platform_013" parent="." index="23" unique_id=189721563]
+material_override = ExtResource("2_vo6s2")
+
+[node name="Platform_014" parent="." index="24" unique_id=431891342]
+material_override = ExtResource("3_46vko")
+
+[node name="Platform_015" parent="." index="25" unique_id=637660136]
+material_override = ExtResource("2_vo6s2")
+
+[node name="Platform_016" parent="." index="26" unique_id=1434342921]
+material_override = ExtResource("2_vo6s2")
+
+[node name="Platform_017" parent="." index="27" unique_id=2058435756]
+material_override = ExtResource("3_46vko")
+
+[node name="Platform_018" parent="." index="28" unique_id=301823260]
+material_override = ExtResource("2_vo6s2")
+
+[node name="Platform_019" parent="." index="29" unique_id=442503426]
+material_override = ExtResource("5_d3516")
+
+[node name="Platform_020" parent="." index="30" unique_id=1485429214]
+material_override = ExtResource("5_d3516")
+
+[node name="Platform_021" parent="." index="31" unique_id=381294587]
+material_override = ExtResource("5_d3516")
+
+[node name="Platform_022" parent="." index="32" unique_id=1494901719]
+material_override = ExtResource("2_vo6s2")
+
+[node name="Platform_023" parent="." index="33" unique_id=2085512164]
+material_override = ExtResource("2_vo6s2")
+
+[node name="Platform_024" parent="." index="34" unique_id=1323479861]
+material_override = ExtResource("2_vo6s2")
+
+[node name="Platform_025" parent="." index="35" unique_id=382912668]
+material_override = ExtResource("2_vo6s2")
+
+[node name="Platform_026" parent="." index="36" unique_id=1327137719]
+material_override = ExtResource("2_vo6s2")
+
+[node name="Platform_027" parent="." index="37" unique_id=247545171]
+material_override = ExtResource("2_vo6s2")
+
+[node name="Platform_028" parent="." index="38" unique_id=877419804]
+material_override = ExtResource("2_vo6s2")
+
+[node name="Platform_029" parent="." index="39" unique_id=611523704]
+material_override = ExtResource("5_d3516")
+
+[node name="Platform_030" parent="." index="40" unique_id=710612204]
+material_override = ExtResource("2_vo6s2")
+
+[node name="Platform_031" parent="." index="41" unique_id=1613738060]
+material_override = ExtResource("2_vo6s2")
+
+[node name="Platform_032" parent="." index="42" unique_id=1905981902]
+material_override = ExtResource("5_d3516")
+
+[node name="Platform_033" parent="." index="43" unique_id=751287951]
+material_override = ExtResource("5_d3516")
+
+[node name="Platform_034" parent="." index="44" unique_id=1175943888]
+material_override = ExtResource("5_d3516")
+
+[node name="Platform_035" parent="." index="45" unique_id=1179265858]
+material_override = ExtResource("5_d3516")
+
+[node name="Poi_001" parent="." index="46" unique_id=287537212]
+material_override = SubResource("StandardMaterial3D_d3516")
+
+[node name="Ramp_001" parent="." index="58" unique_id=1925641227]
+material_override = ExtResource("2_vo6s2")
+
+[node name="Ramp_002" parent="." index="59" unique_id=1401022233]
+transform = Transform3D(-5.9861994, 0, 0, 0, 1, 0, 0, 0, -5.9861994, 20, 0.9333334, 158.34714)
+material_override = ExtResource("2_vo6s2")
+
+[node name="Ramp_003" parent="." index="60" unique_id=1242554730]
+material_override = ExtResource("2_vo6s2")
+
+[node name="Ramp_004" parent="." index="61" unique_id=947946530]
+material_override = ExtResource("2_vo6s2")
+
+[node name="Ramp_005" parent="." index="62" unique_id=1580854097]
+material_override = ExtResource("2_vo6s2")
+
+[node name="Ramp_008" parent="." index="63" unique_id=2090938593]
+material_override = ExtResource("2_vo6s2")
+
+[node name="Ramp_014" parent="." index="64" unique_id=877854702]
+material_override = ExtResource("2_vo6s2")
+
+[node name="Ramp_023" parent="." index="65" unique_id=624871687]
+material_override = ExtResource("2_vo6s2")
+
+[node name="Wall_005" parent="." index="71" unique_id=2123763621]
+material_override = ExtResource("3_46vko")
+
+[node name="Wall_006" parent="." index="72" unique_id=63497462]
+material_override = SubResource("StandardMaterial3D_23gi7")
+
+[node name="Wall_007" parent="." index="73" unique_id=861062853]
+transform = Transform3D(3, 0, 0, 0, 1, 0, 0, 0, 0.42857146, -3.854517, 35.600002, 223.42238)
+material_override = ExtResource("3_46vko")
+
+[node name="Wall_008" parent="." index="74" unique_id=261589121]
+material_override = ExtResource("3_46vko")
+
+[node name="Wall_009" parent="." index="75" unique_id=1479466182]
+transform = Transform3D(3, 0, 0, 0, 1, 0, 0, 0, 0.42857146, 15.304283, 35.600006, 130.5)
+material_override = ExtResource("3_46vko")
+
+[node name="Wall_060" parent="." index="126" unique_id=364493166]
+material_override = ExtResource("3_46vko")
+
+[node name="Wall_061" parent="." index="127" unique_id=1086788647]
+material_override = ExtResource("3_46vko")
+
+[node name="Wall_062" parent="." index="128" unique_id=1956581712]
+material_override = ExtResource("3_46vko")
+
+[node name="Wall_063" parent="." index="129" unique_id=1827444398]
+material_override = ExtResource("3_46vko")
+
+[node name="Wall_064" parent="." index="130" unique_id=1090102136]
+material_override = ExtResource("3_46vko")
+
+[node name="Wall_065" parent="." index="131" unique_id=442031981]
+material_override = ExtResource("3_46vko")
+
+[node name="Wall_066" parent="." index="132" unique_id=2080675872]
+material_override = ExtResource("8_krffi")
+
+[node name="Wall_067" parent="." index="133" unique_id=1671729140]
+material_override = ExtResource("8_krffi")
+
+[node name="Wall_068" parent="." index="134" unique_id=1866431894]
+material_override = ExtResource("8_krffi")
+
+[node name="Wall_070" parent="." index="136" unique_id=1936928291]
+material_override = ExtResource("8_krffi")
+
+[node name="Wall_071" parent="." index="137" unique_id=115687300]
+material_override = ExtResource("8_krffi")
+
+[node name="Wall_072" parent="." index="138" unique_id=1909010604]
+material_override = ExtResource("8_krffi")

@@ -1,32 +1,41 @@
-[gd_scene format=3 uid="uid://buethsfp5i0br"]
+[gd_scene format=3 uid="uid://c3yspxrkmod5x"]
 
 [ext_resource type="Texture2D" uid="uid://r2tuqss83luh" path="res://assets/Skyboxes/kloppenheim_02_puresky_2k.hdr" id="1_7068t"]
 [ext_resource type="PackedScene" uid="uid://chnlwpgv4jjbn" path="res://components/character/player.tscn" id="3_5kpj0"]
-[ext_resource type="PackedScene" uid="uid://df48r72bb0sup" path="res://levels/level_1/alt_hq/alt_hq_model.tscn" id="3_e4p7v"]
+[ext_resource type="PackedScene" uid="uid://d2d56jlo050gs" path="res://levels/level_1/alt_hq/alt_hq_model.tscn" id="3_e4p7v"]
 
-[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_sul3t"]
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_7068t"]
 panorama = ExtResource("1_7068t")
-energy_multiplier = 0.05
+energy_multiplier = 0.1
 
-[sub_resource type="Sky" id="Sky_nhodu"]
-sky_material = SubResource("PanoramaSkyMaterial_sul3t")
+[sub_resource type="Sky" id="Sky_dkjbd"]
+sky_material = SubResource("PanoramaSkyMaterial_7068t")
 
-[sub_resource type="Environment" id="Environment_e4p7v"]
+[sub_resource type="Environment" id="Environment_sul3t"]
 background_mode = 2
-sky = SubResource("Sky_nhodu")
-ambient_light_color = Color(0.30323282, 0.30323282, 0.30323282, 1)
-fog_light_color = Color(0.14017183, 0.15623155, 0.18122098, 1)
+sky = SubResource("Sky_dkjbd")
+glow_enabled = true
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.0
 
-[node name="AtlHq" type="Node3D" unique_id=1257890428]
+[node name="AltHq" type="Node3D" unique_id=1019788196]
 
-[node name="AltHqEnvironment" type="WorldEnvironment" parent="." unique_id=670702848]
-environment = SubResource("Environment_e4p7v")
+[node name="LevelEnvironment" type="WorldEnvironment" parent="." unique_id=827565338]
+environment = SubResource("Environment_sul3t")
+
+[node name="LevelNavigationRegion" type="NavigationRegion3D" parent="." unique_id=1773489560]
+
+[node name="AltHq" parent="LevelNavigationRegion" unique_id=182571372 instance=ExtResource("3_e4p7v")]
 
 [node name="Player" parent="." unique_id=1186516781 instance=ExtResource("3_5kpj0")]
-transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 36.42732, 8.835726, -40.57137)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -47.048027, 67.81712, 144.106)
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=818159925]
-transform = Transform3D(1, 0, 0, 0, 0.107964605, 0.9941547, 0, -0.9941547, 0.107964605, 0, 106.32683, 0)
-light_energy = 0.5
+[node name="Lights" type="Node3D" parent="." unique_id=280189234]
 
-[node name="AltHqModel" parent="." unique_id=286963825 instance=ExtResource("3_e4p7v")]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Lights" unique_id=1759390406]
+transform = Transform3D(0.49485284, 0.86856127, -0.02687018, -0.07355984, 0.072680436, 0.99463886, 0.86585796, -0.49022335, 0.09985737, 0, 193.19226, 0)
+light_color = Color(0.5689727, 0.56897277, 0.5689727, 1)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Lights" unique_id=366182776]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -51.336746, 16.612907, 162.56683)
+omni_range = 13.348069

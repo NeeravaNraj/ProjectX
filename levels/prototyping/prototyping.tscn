@@ -10,17 +10,18 @@
 [ext_resource type="PackedScene" uid="uid://chnlwpgv4jjbn" path="res://components/character/player.tscn" id="6_mlcm4"]
 [ext_resource type="PackedScene" uid="uid://cvfqnmwehnbkc" path="res://components/enemies/hook_enemy/hook_enemy.tscn" id="7_yokfk"]
 [ext_resource type="PackedScene" uid="uid://bnbsje8watuv6" path="res://components/enemies/ranged_zoning/ranged_zoning_enemy.tscn" id="8_0qmt2"]
+[ext_resource type="PackedScene" uid="uid://byhfikvved7cc" path="res://levels/level_utils/jump_pad/jump_pad.tscn" id="10_dkjbd"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_g05yx"]
 panorama = ExtResource("2_rm5dk")
 energy_multiplier = 0.1
 
-[sub_resource type="Sky" id="Sky_dkjbd"]
+[sub_resource type="Sky" id="Sky_mlcm4"]
 sky_material = SubResource("PanoramaSkyMaterial_g05yx")
 
 [sub_resource type="Environment" id="Environment_1mtom"]
 background_mode = 2
-sky = SubResource("Sky_dkjbd")
+sky = SubResource("Sky_mlcm4")
 glow_enabled = true
 volumetric_fog_enabled = true
 volumetric_fog_density = 0.0
@@ -277,3 +278,6 @@ transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -13.269088, 1.3429024, 
 [node name="GrapplePoint3" parent="GrapplePoints" unique_id=1123671119 instance=ExtResource("5_dkjbd")]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -0.009254456, 6.463083, 26.492828)
 land_on_top = false
+
+[node name="JumpPad" parent="." unique_id=1023242266 instance=ExtResource("10_dkjbd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 15.192889)

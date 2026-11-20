@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://da4tq8ltehaa5"
-path.s3tc="res://.godot/imported/floor_map.png-9ed40bf3e6fed952efe55a576c88bbfb.s3tc.ctex"
+path.s3tc="res://.godot/imported/floor_map.png-32294e0ac26f18ee6aa43728552b3508.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://levels/level_1/alt_hq/assets/floor_map.png"
-dest_files=["res://.godot/imported/floor_map.png-9ed40bf3e6fed952efe55a576c88bbfb.s3tc.ctex"]
+source_file="res://levels/level_1/alt_hq/assets_old/floor_map.png"
+dest_files=["res://.godot/imported/floor_map.png-32294e0ac26f18ee6aa43728552b3508.s3tc.ctex"]
 
 [params]
 

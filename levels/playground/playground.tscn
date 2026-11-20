@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://chnlwpgv4jjbn" path="res://components/character/player.tscn" id="2_6txw3"]
 [ext_resource type="PackedScene" uid="uid://cvfqnmwehnbkc" path="res://components/enemies/hook_enemy/hook_enemy.tscn" id="2_43xo0"]
 [ext_resource type="PackedScene" uid="uid://c7aau4proecem" path="res://components/enemies/melee/melee_enemy.tscn" id="3_k01ge"]
+[ext_resource type="PackedScene" uid="uid://byhfikvved7cc" path="res://levels/level_utils/jump_pad/jump_pad.tscn" id="5_1fyqe"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_6txw3"]
 panorama = ExtResource("1_peklk")
@@ -109,12 +110,15 @@ size = Vector3(12, 1, 109)
 
 [node name="e1" parent="Enemies" unique_id=1248221304 instance=ExtResource("2_43xo0")]
 transform = Transform3D(-1, 0, -5.9604645e-08, 0, 1, 0, 5.9604645e-08, 0, -1, 0, 1.4000001, 7.8973722)
+enabled = false
 
 [node name="e2" parent="Enemies" unique_id=597327788 instance=ExtResource("3_k01ge")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.190482, 1.4000053, 0.58535576)
+enabled = false
 
 [node name="e3" parent="Enemies" unique_id=1190591452 instance=ExtResource("3_k01ge")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.322573, 1.4000053, 9.330442)
+enabled = false
 
 [node name="Lights" type="Node3D" parent="." unique_id=1984218942]
 
@@ -128,3 +132,15 @@ transform = Transform3D(0.08971137, 0.9888002, -0.119272724, 0, 0.1197556, 0.992
 
 [node name="Player" parent="." unique_id=1186516781 instance=ExtResource("2_6txw3")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 2.0631256, -14.027725)
+
+[node name="JumpPad" parent="." unique_id=1023242266 instance=ExtResource("5_1fyqe")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.54999995, 0)
+
+[node name="JumpPad4" parent="." unique_id=374646506 instance=ExtResource("5_1fyqe")]
+transform = Transform3D(0.9999952, 0.0030973915, -0.00021749169, 0.00020102249, 0.005318038, 0.9999858, 0.003098504, -0.99998105, 0.00531739, 0, 2.669484, 16.459675)
+
+[node name="JumpPad2" parent="." unique_id=1026534753 instance=ExtResource("5_1fyqe")]
+transform = Transform3D(0.7043439, -0.7098589, 0, 0.7098589, 0.7043439, 0, 0, 0, 1, 16.464699, 2.3085487, 0)
+
+[node name="JumpPad3" parent="." unique_id=794718224 instance=ExtResource("5_1fyqe")]
+transform = Transform3D(0.8679687, 0.496619, 0, -0.496619, 0.8679687, 0, 0, 0, 1, -14.453555, 1.4602869, 0)
