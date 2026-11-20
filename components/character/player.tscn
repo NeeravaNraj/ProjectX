@@ -356,7 +356,7 @@ script = ExtResource("21_ukpso")
 script = ExtResource("19_raigf")
 
 [node name="DashTimer" type="Timer" parent="States/StateActors/MovementState/Skills/DashingState" unique_id=1033789591]
-wait_time = 0.4
+wait_time = 0.25
 one_shot = true
 
 [node name="WallRun" type="Node" parent="States/StateActors/MovementState/Skills" unique_id=1708548886]
