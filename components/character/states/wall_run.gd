@@ -10,7 +10,8 @@ func _on_wall_running_state_entered() -> void:
 	_reset_velocity()
 	player.camera_pivot.block_movement_tilt = true
 	player.fp_rig.transition_movement(PlayerFirstPersonRig.MovementStates.Running)
-	player.stat_energy.growth_rate = player.stat_energy.max_value * player.player_stats.wall_run_energy_growth_factor
+	var wall_run_energy_growth_factor = stats.get_computed_stat(player.stat_ident.WallRunEnergyGrowthFactor)
+	player.stat_energy.growth_rate = player.stat_energy.max_value * wall_run_energy_growth_factor
 
 func _on_wall_running_state_exited() -> void:
 	player._velocity.set_gravity_modifier(0.0)
@@ -30,7 +31,8 @@ func _jump_from_wall_run():
 	var direction = -player.get_forward()
 	direction += player.get_wall_normal()
 	direction.y = clamp(player.camera_pivot.get_pitch() * 0.2, 0.25, 0.8)
-	direction *= player.player_stats.wall_run_jump_velocity
+	var wall_run_jump_velocity = stats.get_computed_stat(player.stat_ident.WallRunJumpVelocity)
+	direction *= wall_run_jump_velocity
 	
 	var original_decel = player._velocity.deceleration_coef
 	player._velocity.deceleration_coef = 0.01
@@ -61,11 +63,12 @@ func _check_can_wall_run():
 		player.state_chart.send_event(&"onNormal")
 
 func _reset_velocity():
+	var move_speed = stats.get_computed_stat(player.stat_ident.MoveSpeed)
 	wall_normal = player.get_wall_normal()
 	player.velocity.y = 0.0
-	player.velocity = player.transform.basis.z * -player.player_stats.move_speed * 2
+	player.velocity = player.transform.basis.z * move_speed * 2
 	
 	if wall_normal:
 		player.velocity = player.velocity.slide(wall_normal)
-		player.velocity += -wall_normal * (player.player_stats.move_speed / 2)
+		player.velocity += -wall_normal * (move_speed / 2)
 		player._velocity.set_velocity(player.velocity)

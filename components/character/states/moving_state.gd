@@ -12,4 +12,5 @@ func _on_moving_state_physics_processing(_delta: float) -> void:
 
 
 func _on_moving_state_entered() -> void:
-	player.stat_energy.growth_rate = player.stat_energy.max_value * player.player_stats.movement_energy_growth_factor
+	var movement_energy_growth_factor = stats.get_computed_stat(player.stat_ident.MovementEnergyGrowthFactor)
+	player.stat_energy.growth_rate = player.stat_energy.max_value * movement_energy_growth_factor

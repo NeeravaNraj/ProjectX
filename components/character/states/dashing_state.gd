@@ -4,12 +4,13 @@ extends PlayerState
 var acceleration: float
 
 func _on_dashing_state_entered() -> void:
+	var movement_energy_growth_factor = stats.get_computed_stat(player.stat_ident.MovementEnergyGrowthFactor)
 	player._velocity.disable_interpolation = true
 	acceleration = player._velocity.acceleration_coef
 	player._velocity.acceleration_modifer = -acceleration * 0.7
 	player._velocity.gravity_modifier = -player._velocity.gravity
 	player._velocity.airborne_acceleration_factor_modifier = 1 - player._velocity.airborne_acceleration_factor
-	player.stat_energy.growth_rate = player.stat_energy.max_value * player.player_stats.movement_energy_growth_factor
+	player.stat_energy.growth_rate = player.stat_energy.max_value * movement_energy_growth_factor
 	dash_timer.start()
 
 func _on_dashing_state_exited() -> void:
@@ -22,10 +23,11 @@ func _on_dashing_state_exited() -> void:
 	if horizontal.length_squared() < 0.01:
 		return
 	# Brake to walk speed in current direction (momentum carry)
+	var move_speed = stats.get_computed_stat(player.stat_ident.MoveSpeed)
 	var brake_target := Vector3(
-		horizontal.normalized().x * player.player_stats.move_speed,
+		horizontal.normalized().x * move_speed,
 		player.velocity.y,
-		horizontal.normalized().y * player.player_stats.move_speed,
+		horizontal.normalized().y * move_speed,
 	)
 	# Or brake to a full stop:
 	# var brake_target := Vector3(0.0, player.velocity.y, 0.0)

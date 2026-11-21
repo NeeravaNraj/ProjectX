@@ -1,5 +1,6 @@
 class_name Player extends CharacterBody3D
 
+
 @export var player_stats: PlayerStats
 
 @export_group("Camera")
@@ -16,12 +17,15 @@ class_name Player extends CharacterBody3D
 @onready var stat_energy: GrowingStatComponent = $Stats/Energy
 @onready var stat_momentum: GrowingStatComponent = $Stats/Momentum
 @onready var hurt_box: HurtBox = $Areas/HurtBox
-@onready var weaponry = $Weaponry
+@onready var weaponry = $WeaponCtrl
 
 @onready var debug_tracker := %DebugTracker
 @onready var _health: Health = $Stats/Health
 @onready var _velocity: VelocityComponent = %Velocity
+@onready var stats: StatsComponent = %StatsComponent
 @onready var velocity_component: VelocityComponent = _velocity
+
+const stat_ident = StatsComponent.StatIdent
 
 var spawn_point = Vector3.ZERO
 var space_state: PhysicsDirectSpaceState3D
@@ -30,7 +34,8 @@ var shuriken_scene = preload("res://components/shuriken/shuriken.tscn")
 signal grappled()
 
 func sprint():
-	_velocity.set_speed(player_stats.move_speed)
+	var value = stats.get_computed_stat(stat_ident.MoveSpeed)
+	_velocity.set_speed(value)
 
 func dash():
 	var raw_direction = _velocity.raw_direction
@@ -42,10 +47,12 @@ func dash():
 		var floor_normal = get_floor_normal()
 		direction = direction.slide(floor_normal).normalized()
 	
-	_velocity.set_velocity(direction * player_stats.move_speed_dash)
+	var value = stats.get_computed_stat(stat_ident.DashMoveSpeed)
+	_velocity.set_velocity(direction * value)
 
 func jump():
-	_velocity.add_impulse(Vector3.UP, player_stats.jump_velocity)
+	var value = stats.get_computed_stat(stat_ident.JumpVelocity)
+	_velocity.add_impulse(Vector3.UP, value)
 
 func grapple(direction: Vector3, speed: float):
 	velocity = Vector3.ZERO
@@ -64,8 +71,8 @@ func add_item(node: Node3D):
 func _ready() -> void:
 	assert(player_stats, "Cannot instantiate Player without PlayerStats resource.")
 	space_state = get_world_3d().direct_space_state
-	_velocity.speed = player_stats.move_speed
 	spawn_point = global_position
+	_velocity.speed = stats.get_computed_stat(stat_ident.MoveSpeed)
 
 func _physics_process(_delta: float) -> void:
 	debug_tracker.track(&"Energy", stat_energy.value)
@@ -107,15 +114,15 @@ func _try_grapple():
 
 	if not data:
 		data = grapple_detector.get_closest_grapple_point()
-		override_max = player_stats.max_grapple_speed
-		override_min = player_stats.min_grapple_speed
+		override_max = stats.get_base_value(stat_ident.MaxGrappleSpeed)
+		override_min = stats.get_base_value(stat_ident.MinGrappleSpeed)
 
 	if not data: return
 	
 	var direction = data[0]
 	var distance = data[1]
 	var speed = clampf(
-		distance / player_stats.grapple_time,
+		distance / stats.get_base_value(stat_ident.GrappleTime),
 		override_min,
 		override_max,
 	)
@@ -127,15 +134,18 @@ func _try_grapple():
 		state_chart.send_event.call_deferred(&"onGrapple")
 
 func enter_boost():
-	stat_energy.growth_rate_modifier = stat_energy.max_value * player_stats.boost_enerygy_growth_factor
-	stat_momentum.growth_rate = stat_momentum.max_value * player_stats.boost_momentum_growth_factor
+	var boost_energy_growth_factor = stats.get_computed_stat(stat_ident.BoostEnergyGrowthFactor)
+	var boost_momentum_growth_factor = stats.get_computed_stat(stat_ident.BoostMomentumGrowthFactor)
+
+	stat_energy.growth_rate_modifier = stat_energy.max_value * boost_energy_growth_factor
+	stat_momentum.growth_rate = stat_momentum.max_value * boost_momentum_growth_factor
 	stat_momentum.allow_growth = true
 
 func exit_boost():
 	stat_energy.growth_rate_modifier = 0.0
 	stat_momentum.allow_growth = false
 
-func _on_momentum_reached_min(value: float) -> void:
+func _on_momentum_reached_min(_value: float) -> void:
 	exit_boost()
 
 func _on_health_death() -> void:

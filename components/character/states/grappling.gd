@@ -8,7 +8,8 @@ func _on_grappling_state_entered() -> void:
 	grapple_timer.start()
 	player.fp_rig.transition_movement(PlayerFirstPersonRig.MovementStates.Falling)
 	player._velocity.gravity_modifier = 0.0
-	player.stat_energy.growth_rate = player.stat_energy.max_value * player.player_stats.grapple_energy_growth_factor
+	var grapple_energy_growth_factor = stats.get_computed_stat(player.stat_ident.GrappleEnergyGrowthFactor)
+	player.stat_energy.growth_rate = player.stat_energy.max_value * grapple_energy_growth_factor
 
 func _on_grapple_timer_timeout() -> void:
 	if not player: return

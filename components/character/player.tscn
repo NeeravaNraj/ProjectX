@@ -3,13 +3,12 @@
 [ext_resource type="Script" uid="uid://d1gc3n43os8em" path="res://components/character/player.gd" id="1_knl4b"]
 [ext_resource type="PackedScene" uid="uid://dil3ijsq5pmlq" path="res://components/primitives/movement/velocity.tscn" id="2_b1s2y"]
 [ext_resource type="Resource" uid="uid://by477s548hrfi" path="res://resources/character/player_stats.tres" id="2_bmx6v"]
-[ext_resource type="PackedScene" uid="uid://dgm4u8srpwll1" path="res://components/weapon/katana/katana.tscn" id="2_gie0d"]
 [ext_resource type="PackedScene" uid="uid://bcwkugn6v3oy7" path="res://addons/godot_state_charts/utilities/state_chart_debugger.tscn" id="2_mk48o"]
 [ext_resource type="Script" uid="uid://bhs7nx5n8p50x" path="res://components/character/camera_pivot.gd" id="3_4akdr"]
 [ext_resource type="PackedScene" uid="uid://by4md02ke1buj" path="res://components/primitives/health/hurt_box.tscn" id="3_bhcnq"]
 [ext_resource type="PackedScene" uid="uid://id84t5a0ya2y" path="res://components/primitives/movement/player_control.tscn" id="3_eti3u"]
 [ext_resource type="PackedScene" uid="uid://gbwtsbjngig6" path="res://components/character/first_person_rig.tscn" id="4_6p5bk"]
-[ext_resource type="Script" uid="uid://ctrqgap4ctxuv" path="res://components/character/weaponary.gd" id="5_2p11o"]
+[ext_resource type="Script" uid="uid://ctrqgap4ctxuv" path="res://components/character/weapon_ctrl.gd" id="5_2p11o"]
 [ext_resource type="PackedScene" uid="uid://b8xoyf57pebhr" path="res://components/primitives/health/health.tscn" id="5_6npmc"]
 [ext_resource type="Script" uid="uid://couw105c3bde4" path="res://addons/godot_state_charts/state_chart.gd" id="6_cgsss"]
 [ext_resource type="Script" uid="uid://c1vp0ojjvaby1" path="res://addons/godot_state_charts/parallel_state.gd" id="7_qb6gd"]
@@ -17,6 +16,7 @@
 [ext_resource type="Script" uid="uid://bv6jsy7s0fyxv" path="res://components/character/grapple_detector.gd" id="9_jqkmc"]
 [ext_resource type="Script" uid="uid://cytafq8i1y8qm" path="res://addons/godot_state_charts/atomic_state.gd" id="9_mfj52"]
 [ext_resource type="Script" uid="uid://cf1nsco3w0mf6" path="res://addons/godot_state_charts/transition.gd" id="10_2ve8e"]
+[ext_resource type="Script" uid="uid://cis6ls0q43r00" path="res://components/primitives/stat/stats.gd" id="10_bhcnq"]
 [ext_resource type="Script" uid="uid://cf87v0krvbqgd" path="res://components/character/states/state_actors.gd" id="11_lxhmo"]
 [ext_resource type="Script" uid="uid://bprfdfuxsvgcf" path="res://components/character/states/idle_state.gd" id="12_qb6gd"]
 [ext_resource type="Script" uid="uid://62je6vn55ygo" path="res://components/character/states/grounded_state.gd" id="13_0v6yc"]
@@ -35,10 +35,10 @@
 [ext_resource type="Script" uid="uid://boeog2x252egl" path="res://components/character/shuriken_ctrl.gd" id="28_jr262"]
 [ext_resource type="PackedScene" uid="uid://chf24tgxexqiw" path="res://components/shuriken/shuriken.tscn" id="28_t3sxj"]
 [ext_resource type="Script" uid="uid://7knbaw4wcwth" path="res://user_interface/reticle_draw.gd" id="33_aia5n"]
+[ext_resource type="Resource" uid="uid://bftvvrar4fg4g" path="res://components/weapons/katana/katana.tres" id="34_662td"]
 [ext_resource type="Script" uid="uid://cldxsuoxleusl" path="res://components/character/ui/debug/debug_tracker.gd" id="34_1054b"]
 [ext_resource type="PackedScene" uid="uid://dj3yekexhr2dn" path="res://components/primitives/stat/growing_stat.tscn" id="34_gof3c"]
 [ext_resource type="Script" uid="uid://pl7ifg52f63u" path="res://components/character/health_bar.gd" id="36_ipe2n"]
-[ext_resource type="PackedScene" uid="uid://etn615pvnkve" path="res://components/primitives/health/hit_box.tscn" id="37_662td"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_bhcnq"]
 radius = 0.3
@@ -62,8 +62,6 @@ border_width_top = 3
 border_color = Color(0.19615254, 0.44977546, 0.22399083, 1)
 border_blend = true
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_gie0d"]
-
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_pgqh4"]
 radius = 0.3
 height = 1.9
@@ -71,6 +69,8 @@ height = 1.9
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_knl4b"]
 radius = 0.3
 height = 1.9
+
+[sub_resource type="BoxMesh" id="BoxMesh_fcirr"]
 
 [node name="Player" type="CharacterBody3D" unique_id=1186516781 groups=["player"]]
 collision_layer = 20
@@ -130,6 +130,11 @@ growth_rate = 0.2
 max_value = 5.0
 auto_grow = true
 growth_tick_delay = 0.15
+
+[node name="StatsComponent" type="Node" parent="Stats" unique_id=431960314]
+unique_name_in_owner = true
+script = ExtResource("10_bhcnq")
+metadata/_custom_type_script = "uid://cis6ls0q43r00"
 
 [node name="States" type="Node" parent="." unique_id=156588293]
 
@@ -314,10 +319,11 @@ metadata/_custom_type_script = "uid://cytafq8i1y8qm"
 script = ExtResource("9_mfj52")
 metadata/_custom_type_script = "uid://cytafq8i1y8qm"
 
-[node name="StateActors" type="Node" parent="States" unique_id=1782869980 node_paths=PackedStringArray("player")]
+[node name="StateActors" type="Node" parent="States" unique_id=1782869980 node_paths=PackedStringArray("player", "stats")]
 unique_name_in_owner = true
 script = ExtResource("11_lxhmo")
 player = NodePath("../..")
+stats = NodePath("../../Stats/StatsComponent")
 
 [node name="MovementState" type="Node" parent="States/StateActors" unique_id=1411103208]
 
@@ -460,6 +466,10 @@ layout_mode = 2
 [node name="CameraControlAnchor" type="Marker3D" parent="." unique_id=1135788692]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.60824907, 0.07481673)
 
+[node name="WeaponCtrl" type="Node3D" parent="." unique_id=1708920944]
+script = ExtResource("5_2p11o")
+weapon = ExtResource("34_662td")
+
 [node name="ShurikenCtrl" type="Node3D" parent="." unique_id=818070391]
 script = ExtResource("28_jr262")
 
@@ -489,23 +499,6 @@ current = true
 transform = Transform3D(-1.5, 0, -1.3113416e-07, 0, 1.5, 0, 1.3113416e-07, 0, -1.5, 0, -0.045000017, 0.05)
 player = NodePath("../../..")
 
-[node name="HitBox" parent="CameraPivot" unique_id=764278289 node_paths=PackedStringArray("exclude") instance=ExtResource("37_662td")]
-exclude = [NodePath("../../Areas/HurtBox")]
-
-[node name="AttackShape" type="CollisionShape3D" parent="CameraPivot/HitBox" unique_id=1166820792]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, -2)
-shape = SubResource("BoxShape3D_gie0d")
-
-[node name="Weaponry" type="Node3D" parent="." unique_id=1708920944 node_paths=PackedStringArray("hitbox")]
-script = ExtResource("5_2p11o")
-hitbox = NodePath("../CameraPivot/HitBox")
-
-[node name="Katana" parent="Weaponry" unique_id=1156992332 node_paths=PackedStringArray("attack_area_shape") instance=ExtResource("2_gie0d")]
-transform = Transform3D(-0.09646627, -0.9636583, -0.2491126, 0.83487564, 0.0579276, -0.547382, 0.54191965, -0.2607819, 0.79894686, 0.6049503, 0.48512423, -0.98595005)
-visible = false
-attack_damage = 40.0
-attack_area_shape = NodePath("../../CameraPivot/HitBox/AttackShape")
-
 [node name="Model" type="Node3D" parent="." unique_id=247778809]
 visible = false
 
@@ -514,6 +507,11 @@ mesh = SubResource("CapsuleMesh_pgqh4")
 
 [node name="Shape" type="CollisionShape3D" parent="." unique_id=1348553797]
 shape = SubResource("CapsuleShape3D_knl4b")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1763230323]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.31612945, -1.3657677)
+visible = false
+mesh = SubResource("BoxMesh_fcirr")
 
 [connection signal="body_entered" from="Areas/PickupRegion" to="Areas/PickupRegion" method="_on_body_entered"]
 [connection signal="area_entered" from="Areas/GrappleDetector" to="Areas/GrappleDetector" method="_on_area_entered"]
@@ -553,5 +551,3 @@ shape = SubResource("CapsuleShape3D_knl4b")
 [connection signal="timeout" from="States/StateActors/MovementState/AirborneState/Jumping/JumpTimer" to="States/StateActors/MovementState/AirborneState/Jumping" method="_on_jump_timer_timeout"]
 [connection signal="timeout" from="States/StateActors/MovementState/AirborneState/Grappling/GrappleTimer" to="States/StateActors/MovementState/AirborneState/Grappling" method="_on_grapple_timer_timeout"]
 [connection signal="timeout" from="States/StateActors/MovementState/Skills/DashingState/DashTimer" to="States/StateActors/MovementState/Skills/DashingState" method="_on_dash_timer_timeout"]
-
-[editable path="Weaponry/Katana"]
