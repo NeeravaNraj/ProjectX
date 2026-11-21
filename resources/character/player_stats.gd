@@ -2,17 +2,11 @@ class_name PlayerStats extends Resource
 
 
 
-@export var move_speed_modifier: float = 0.0
-@export var move_speed: float = 12.0:
-	get:
-		return move_speed + move_speed_modifier
-@export var move_speed_dash: float = 35.0
+@export var move_speed: float = 12.0
+@export var dash_move_speed: float = 35.0
 
-@export var jump_velocity_modifier: float = 0.0
-@export var jump_velocity: float = 12.0:
-	get:
-		return jump_velocity + jump_velocity_modifier
-
+@export var air_jump_max: int = 0
+@export var jump_velocity: float = 12.0
 @export var wall_run_jump_velocity: float = 16.0
 
 @export var grapple_time: float = 0.32
@@ -30,11 +24,3 @@ class_name PlayerStats extends Resource
 @export var idle_momentum_growth_factor: float = -0.1
 @export var boost_momentum_growth_factor: float = -0.1
 @export var attack_momentum_growth_factor: float = 0.2
-
-@export var damage: float = 0
-@export var crit_chance: float = 0
-@export var crit_damage: float = 0
-
-@export var damage_resistance: float = 10
-
-@export var air_jump_max: int = 0
