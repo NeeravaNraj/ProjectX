@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://fc3g1j3u18fd"]
+
+[ext_resource type="Script" uid="uid://bx4tjgr464fxd" path="res://components/primitives/health/hurtbox.gd" id="1_nln6f"]
+[ext_resource type="Script" uid="uid://mqquptgrdwlg" path="res://components/enemies/target_dummy/target_dummy.gd" id="1_ub5rv"]
+[ext_resource type="Script" uid="uid://cmqhxkdolaasw" path="res://components/primitives/health/health.gd" id="3_ghpy3"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_0d0jn"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_0d0jn"]
+
+[node name="TargetDummy" type="Node3D" unique_id=108011109]
+script = ExtResource("1_ub5rv")
+
+[node name="HurtBox" type="Area3D" parent="." unique_id=302966079 node_paths=PackedStringArray("health_component")]
+collision_layer = 8
+collision_mask = 0
+script = ExtResource("1_nln6f")
+health_component = NodePath("../Health")
+metadata/_custom_type_script = "uid://bx4tjgr464fxd"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HurtBox" unique_id=1053157736]
+shape = SubResource("CapsuleShape3D_0d0jn")
+
+[node name="Body" type="MeshInstance3D" parent="HurtBox/CollisionShape3D" unique_id=744661985]
+mesh = SubResource("CapsuleMesh_0d0jn")
+
+[node name="Health" type="Node" parent="." unique_id=139441288]
+script = ExtResource("3_ghpy3")
+metadata/_custom_type_script = "uid://cmqhxkdolaasw"
+
+[connection signal="hit" from="HurtBox" to="." method="_on_hurt_box_hit"]
