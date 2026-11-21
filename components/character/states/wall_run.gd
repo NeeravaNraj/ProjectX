@@ -66,7 +66,7 @@ func _reset_velocity():
 	var move_speed = stats.get_computed_stat(player.stat_ident.MoveSpeed)
 	wall_normal = player.get_wall_normal()
 	player.velocity.y = 0.0
-	player.velocity = player.transform.basis.z * move_speed * 2
+	player.velocity = player.transform.basis.z * -move_speed * 2
 	
 	if wall_normal:
 		player.velocity = player.velocity.slide(wall_normal)
