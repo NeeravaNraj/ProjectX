@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="WeaponDefinition" format=3 uid="uid://bftvvrar4fg4g"]
+
+[ext_resource type="Script" uid="uid://djw5qxgxn2cfo" path="res://resources/weapon/weapon_def.gd" id="1_botv6"]
+[ext_resource type="PackedScene" uid="uid://07msekimmsd7" path="res://components/weapons/katana/katana_skin.tscn" id="2_4dlvk"]
+
+[resource]
+script = ExtResource("1_botv6")
+name = &"Katana"
+view_scene = ExtResource("2_4dlvk")
+melee_range = Vector3(5.5, 1.5, 2)
+metadata/_custom_type_script = "uid://djw5qxgxn2cfo"
