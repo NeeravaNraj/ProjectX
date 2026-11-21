@@ -25,6 +25,16 @@ func parry(value: bool):
 		animation_playback.travel(&"Parry")
 	else:
 		animation_playback.travel(&"Locomotion")
+	
+func attach_weapon(weapon: Node3D):
+	var weapon_socket = get_node("%WeaponSocket")
+	weapon_socket.add_child(weapon)
+	
+	var grip = weapon.get_node("%GripPoint") as Marker3D
+	assert(grip, "Cannot attach weapon without grip!")
+	
+	var correction = weapon_socket.global_transform * grip.global_transform.affine_inverse()
+	weapon.global_transform = correction * weapon.global_transform
 
 func _unhandled_input(event: InputEvent) -> void:
 	if Input.mouse_mode != Input.MOUSE_MODE_CAPTURED: return
