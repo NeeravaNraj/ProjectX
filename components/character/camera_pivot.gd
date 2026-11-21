@@ -26,7 +26,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		mouse_input += event.screen_relative * player.mouse_sens
 
 
-func  _physics_process(delta: float):
+func _physics_process(delta: float):
 	current_rotation.x = clamp(current_rotation.x - mouse_input.y, deg_to_rad(-80), deg_to_rad(90))
 	current_rotation.y -= mouse_input.x
 
