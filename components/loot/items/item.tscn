@@ -1,0 +1,42 @@
+[gd_scene format=3 uid="uid://drn5wuhhnrnuc"]
+
+[ext_resource type="Script" uid="uid://dp0ouyp7bdf77" path="res://components/loot/items/item.gd" id="1_1iboi"]
+[ext_resource type="Shader" uid="uid://bnasdtkikk6s0" path="res://assets/Shaders/Spatial/outline.gdshader" id="2_6pdkh"]
+[ext_resource type="Shader" uid="uid://bdvd6koghuc1k" path="res://assets/Shaders/Spatial/cel-shader-base.gdshader" id="3_3cu7i"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0d0jn"]
+size = Vector3(0.3, 0.3, 0.3)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_b0v18"]
+render_priority = 0
+shader = ExtResource("2_6pdkh")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_il573"]
+render_priority = 0
+next_pass = SubResource("ShaderMaterial_b0v18")
+shader = ExtResource("3_3cu7i")
+shader_parameter/color = Color(0.24575478, 0.511348, 0.61206305, 1)
+shader_parameter/specular = Color(0.3, 0.3, 0.3, 0.5)
+shader_parameter/fresnel = Color(0.2, 0.2, 0.2, 0.3)
+shader_parameter/uv_scale = Vector2(1, 1)
+shader_parameter/uv_offset = Vector2(0, 0)
+
+[sub_resource type="BoxMesh" id="BoxMesh_0d0jn"]
+material = SubResource("ShaderMaterial_il573")
+size = Vector3(0.3, 0.3, 0.3)
+
+[node name="Item" type="RigidBody3D" unique_id=430174246]
+collision_layer = 2
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+script = ExtResource("1_1iboi")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=147663700]
+shape = SubResource("BoxShape3D_0d0jn")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=91285513]
+mesh = SubResource("BoxMesh_0d0jn")
+
+[node name="GroundDetector" type="RayCast3D" parent="." unique_id=2119980087]
+target_position = Vector3(0, -0.25, 0)
