@@ -22,6 +22,7 @@ config/icon="uid://cyweugncmab2"
 [autoload]
 
 utils="*uid://1i680wbddw5s"
+Physics="*uid://dmji5k4v740rl"
 
 [display]
 
@@ -37,6 +38,7 @@ enabled=PackedStringArray("res://addons/godot_state_charts/plugin.cfg")
 
 enemy="any entity in the game that can be considered: smart, hostile towards the player and killable / damageable."
 player="the player group"
+loot_crate=""
 
 [input]
 
@@ -131,6 +133,8 @@ common/physics_interpolation=true
 
 textures/canvas_textures/default_texture_filter=0
 rendering_device/driver.windows="d3d12"
+anti_aliasing/quality/msaa_3d=1
+anti_aliasing/quality/use_taa=true
 
 [shader_globals]
 
