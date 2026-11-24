@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://drn5wuhhnrnuc"]
 
-[ext_resource type="Script" uid="uid://dp0ouyp7bdf77" path="res://components/loot/items/item.gd" id="1_1iboi"]
+[ext_resource type="Script" uid="uid://dp0ouyp7bdf77" path="res://components/loot/items/primitives/item.gd" id="1_1iboi"]
 [ext_resource type="Shader" uid="uid://bnasdtkikk6s0" path="res://assets/Shaders/Spatial/outline.gdshader" id="2_6pdkh"]
 [ext_resource type="Shader" uid="uid://bdvd6koghuc1k" path="res://assets/Shaders/Spatial/cel-shader-base.gdshader" id="3_3cu7i"]
 
