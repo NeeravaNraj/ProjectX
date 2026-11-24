@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://di3ugt2wmnqlq"]
+
+[ext_resource type="Script" uid="uid://6ijfajt3ko3d" path="res://components/loot/chest/loot_crate.gd" id="1_1t3ms"]
+[ext_resource type="PackedScene" uid="uid://bnurs3t263lmq" path="res://components/loot/chest/loot_crate_model.tscn" id="1_k8pbl"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0d0jn"]
+size = Vector3(0.5, 0.5, 1)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_0d0jn"]
+viewport_path = NodePath("SubViewport")
+
+[node name="LootCrate" type="StaticBody3D" unique_id=2090178946 groups=["loot_crate"]]
+collision_layer = 3
+collision_mask = 0
+script = ExtResource("1_1t3ms")
+
+[node name="Model" parent="." unique_id=348996395 instance=ExtResource("1_k8pbl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.328182)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1526008817]
+shape = SubResource("BoxShape3D_0d0jn")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=739057107]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.22830862, 0.21108752, -0.0029457808)
+omni_range = 2.0
+
+[node name="Sprite3D" type="Sprite3D" parent="." unique_id=1974365214]
+transform = Transform3D(-2.6226832e-09, 0, 0.06399999, 0, 0.048999995, 0, -0.06, 0, -2.7975282e-09, 0.40511054, 0.22608551, 0)
+visible = false
+billboard = 1
+texture = SubResource("ViewportTexture_0d0jn")
+
+[node name="SubViewport" type="SubViewport" parent="." unique_id=188580147]
+
+[editable path="Model"]
