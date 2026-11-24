@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="ItemDefinition" format=3 uid="uid://1vx5betvgouk"]
+
+[ext_resource type="Script" uid="uid://d2lya0mtjavlw" path="res://components/loot/items/primitives/item_def.gd" id="1_ctlwn"]
+[ext_resource type="Script" uid="uid://gy66vix6gqct" path="res://components/loot/items/primitives/item_stat.gd" id="2_xia0g"]
+
+[sub_resource type="Resource" id="Resource_b70j7"]
+script = ExtResource("2_xia0g")
+stat_id = 21
+value = 10.0
+metadata/_custom_type_script = "uid://gy66vix6gqct"
+
+[resource]
+script = ExtResource("1_ctlwn")
+name = "Flat AD"
+description = "Gain flat 10 AD"
+stats = Array[ExtResource("2_xia0g")]([SubResource("Resource_b70j7")])
+metadata/_custom_type_script = "uid://d2lya0mtjavlw"
