@@ -26,6 +26,7 @@ class_name Player extends CharacterBody3D
 @onready var velocity_component: VelocityComponent = _velocity
 
 const stat_ident = StatsComponent.StatIdent
+var INTERACTABLE_MASK = Utils.get_collition_layer_by_name("Interactable")
 
 var spawn_point = Vector3.ZERO
 var space_state: PhysicsDirectSpaceState3D
@@ -94,7 +95,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		shuriken_ctrl.throw_shuriken()
 
 	if event.is_action_pressed(&"interact"):
-		_try_grapple()
+		_interact()
 	
 	if event.is_action_pressed(&"boost"):
 		enter_boost()
@@ -105,6 +106,25 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed(&"dash"):
 		dash()
 		state_chart.send_event(&"onDashing")
+
+func _interact():
+	var size = Vector3(2.0, 1, 2.0)
+	var center = Vector3(0.0, 0.3, -(1.3 + size.z * 0.5))
+	var query_transform = camera_pivot.global_transform.translated_local(center)
+	var targets = PhysicsUtils.query_box_collision(space_state, query_transform, size, INTERACTABLE_MASK)
+	
+	for target in targets:
+		if target.is_in_group(&"loot_crate"):
+			_open_loot_crate(target as LootCrate)
+			return
+	
+	_try_grapple()
+
+
+func _open_loot_crate(target: LootCrate):
+	if target == null: return
+	target.open()
+
 
 func _try_grapple():
 	var override_max = 50
