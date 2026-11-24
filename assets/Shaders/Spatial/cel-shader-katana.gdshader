@@ -1,4 +1,5 @@
 shader_type spatial;
+render_mode cull_disabled;
 
 #define USE_ALPHA 0
 #define USE_ALPHA_CUTOFF 0
