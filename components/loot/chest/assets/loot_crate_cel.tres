@@ -1,0 +1,34 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://crg2hjh6xb1dp"]
+
+[ext_resource type="Shader" uid="uid://bnasdtkikk6s0" path="res://assets/Shaders/Spatial/outline.gdshader" id="1_pnq85"]
+[ext_resource type="Shader" uid="uid://dgc1gsd4y014p" path="res://assets/Shaders/Spatial/cel-shader-katana.gdshader" id="2_0rbd8"]
+[ext_resource type="Texture2D" uid="uid://ckoeom1mfyes4" path="res://components/loot/chest/assets/loot_crate_Metal009_1K-JPG_Color.jpg" id="3_asdly"]
+[ext_resource type="Texture2D" uid="uid://vwlkb8gwiyd4" path="res://components/loot/chest/assets/loot_crate_Color.jpg" id="4_5b5e5"]
+[ext_resource type="Texture2D" uid="uid://ck61cja8h5cki" path="res://components/loot/chest/assets/loot_crate_Emissions.jpg" id="5_vrgo5"]
+[ext_resource type="Texture2D" uid="uid://bykqifqkds18b" path="res://components/loot/chest/assets/loot_crate_Normals.jpg" id="6_no2yd"]
+[ext_resource type="Texture2D" uid="uid://ctb6yh77h3dee" path="res://components/loot/chest/assets/loot_crate_Metallic-Roughness.png" id="7_diln7"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_iyjjl"]
+render_priority = 0
+shader = ExtResource("1_pnq85")
+
+[resource]
+render_priority = 0
+next_pass = SubResource("ShaderMaterial_iyjjl")
+shader = ExtResource("2_0rbd8")
+shader_parameter/emission = Color(0, 0, 0, 1)
+shader_parameter/emission_energy = 1.0
+shader_parameter/emission_texture = ExtResource("5_vrgo5")
+shader_parameter/metallic = 0.0
+shader_parameter/roughness = 1.0
+shader_parameter/texture_surface = ExtResource("7_diln7")
+shader_parameter/normal_scale = 1.0
+shader_parameter/normal_map = ExtResource("6_no2yd")
+shader_parameter/ao_light_affect = 0.0
+shader_parameter/ao_map = ExtResource("3_asdly")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/base_texture = ExtResource("4_5b5e5")
+shader_parameter/specular = Color(0.3, 0.3, 0.3, 0.5)
+shader_parameter/fresnel = Color(0.2, 0.2, 0.2, 0.3)
+shader_parameter/uv_scale = Vector2(1, 1)
+shader_parameter/uv_offset = Vector2(0, 0)
