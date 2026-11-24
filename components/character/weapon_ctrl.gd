@@ -8,11 +8,9 @@ const StatIdent = StatsComponent.StatIdent
 @onready var camera_pivot: Node3D = $"../CameraPivot"
 @onready var fp_rig: PlayerFirstPersonRig = $"../CameraPivot/Camera/FirstPersonRig"
 
-
 @export var weapon: WeaponDefinition
 
 var attack_direction = Vector3.ZERO
-var hurtbox_mask: int = Utils.get_collition_layer_by_name("HurtBox")
 
 var _can_attack := true
 var _energy_damage_multiplier: StatModifier
@@ -34,7 +32,7 @@ func attack():
 	var center = Vector3(0.0, weapon.vertical_offset, -(weapon.near_offset + weapon.melee_range.z * 0.5))
 	var query_transform := camera_pivot.global_transform.translated_local(center)
 	
-	var targets: Array[HurtBox] = HitQuery3D.query_box(player.space_state, query_transform, weapon.melee_range, hurtbox_mask)
+	var targets: Array[HurtBox] = HitQuery3D.query_box(player.space_state, query_transform, weapon.melee_range)
 	
 	for target in targets:
 		target.damage(packet)

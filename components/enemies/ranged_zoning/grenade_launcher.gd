@@ -18,11 +18,7 @@ func launch(target: Vector3):
 	grenade.linear_velocity = get_launch_velocity(target)
 
 func get_launch_velocity(target: Vector3):
-	var gravity_vector = Utils.get_gravity_vector()
-	var starting_position = bullet_spawner.global_position
-	var displacement = target - global_position
-	
-	return (displacement - 0.5 * gravity_vector * time_to_reach ** 2) / time_to_reach
+	return PhysicsUtils.calculate_ballistic_launch_velocity(target, global_position, time_to_reach)
 
 func get_pitch(target: Vector3):
 	var shoot_velocity = get_launch_velocity(target)
